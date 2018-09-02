@@ -1,0 +1,7 @@
+{
+  "name": "sonub",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
