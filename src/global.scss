@@ -12,6 +12,8 @@
 
 @import './theme/bootstrap-custom.scss';
 
+$primary-color: #007bff;
+
 .no-header-shadow {
     &:after {
         display: none;
@@ -19,4 +21,22 @@
 }
 .bg-transparent {
     --background: transparent !important;
+}
+
+.list-menu {
+    ion-item {
+        cursor: pointer;
+    }
+    ion-icon {
+
+    }
+    ion-text {
+        margin-left: .5em;
+    }
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
