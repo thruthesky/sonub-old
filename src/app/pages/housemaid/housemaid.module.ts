@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { HousemaidPage } from './housemaid.page';
 import { HeaderComponentModule } from '../../components/header/header.component.module';
+import { JobListComponentModule } from '../../modules/components/forum/job-list/job-list.component.module';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    HeaderComponentModule
+    HeaderComponentModule,
+    JobListComponentModule
   ],
   declarations: [HousemaidPage]
 })
