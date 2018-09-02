@@ -3,22 +3,19 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-
 @import "~@ionic/angular/css/padding.css";
 @import "~@ionic/angular/css/float-elements.css";
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
-
 @import './theme/bootstrap-custom.scss';
-
 $primary-color: #007bff;
-
 .no-header-shadow {
     &:after {
         display: none;
     }
 }
+
 .bg-transparent {
     --background: transparent !important;
 }
@@ -27,9 +24,7 @@ $primary-color: #007bff;
     ion-item {
         cursor: pointer;
     }
-    ion-icon {
-
-    }
+    ion-icon {}
     ion-text {
         margin-left: .5em;
     }
@@ -39,4 +34,19 @@ $primary-color: #007bff;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+ion-toast {
+    &.error {
+        .toast-container {
+            background-color: rgb(141, 0, 0);
+        }
+    }
+}
+.submit-button {
+    color: white;
+    --height: 42px;
+    --box-shadow: 0 !important;
+    --ion-color-base: #007bff !important;
+    --ion-color-shade: #005abb !important;
 }

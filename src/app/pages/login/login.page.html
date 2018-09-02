@@ -9,5 +9,5 @@
     <h2 class="m-0 ml-4 fs-xl fw-light">Social Network Hub</h2>
   </div>
 
-  <app-login-component></app-login-component>
+  <app-login-component (login)=" onLogin() " (error)=" a.toast( $event ) "></app-login-component>
 </ion-content>
