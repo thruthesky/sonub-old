@@ -1,101 +1,37 @@
-<p>
-  FORUM > {{ philgo.forumName(forum?.post_id)}}
-</p>
-
-<ion-button (click)="onClickPost()">POST</ion-button>
-
-<ion-card *ngFor="let post of posts">
-
-  <ion-item>
-    <ion-avatar slot="start">
-      <img [src]="philgo.primaryPhotoUrl( post?.member?.idx_primary_photo )">
-    </ion-avatar>
-    <ion-list>
-      <ion-item style="height: 24px;" *ngIf=" post?.member ">
-        <ion-text>{{ post?.member?.nickname }}</ion-text>
-      </ion-item>
-      <ion-item>
-        <ion-text>No.: {{ post.idx }}</ion-text>
-        <ion-text class="ml-2">Date: {{ philgo.shortDate(post.stamp) }}</ion-text>
-      </ion-item>
-    </ion-list>
-    <ion-icon name="arrow-dropdown-circle" slot="end" (click)=" onClickMenu( $event, post ) "></ion-icon>
-  </ion-item>
-
-  <!-- {{ post | json }} -->
-  <ion-card-header (click)=" onView( post ) ">
-    <ion-card-title>{{ post.subject }}</ion-card-title>
-  </ion-card-header>
-
-  <ion-card-content *ngIf="post['showMore']">
-    <div [innerHTML]="post?.content"></div>
-  </ion-card-content>
+<app-forum-basic-view [post]=" postView " *ngIf=" postView?.idx " (onVote)=" onVote( $event[0], $event[1] ) "
+  (onReply)=" onReply( $event[0], $event[1] ) " (onClickMenu)=" onClickMenu( $event[0], $event[1] ) "></app-forum-basic-view>
 
 
-  <ion-item>
-    <ion-button (click)=" onView( post ) " *ngIf=" ! show( post ) ">View Content</ion-button>
-    <ion-button (click)=" onVote( post, 'good' ) ">Like{{ post.good == '0' ? '' : ' ' + post.good }}</ion-button>
-    <ion-button (click)=" onVote( post, 'bad' ) ">Dislike{{ post.bad == '0' ? '' : ' ' + post.bad }}</ion-button>
+<div class="d-flex align-items-stretch mb-2" *ngIf=" displayHeaderMenu ">
+  <div class="flex-center px-2 w-100 bg-light fs-80 text-muted">
+    <span>FORUM</span>
+    <ion-icon class="mx-1" name="play"></ion-icon>
+    <span>{{ philgo.forumName(forum?.post_id)}}</span>
+  </div>
+  <ion-button class="no-shadow ion-button-m-0" color="tertiary" (click)="onClickPost()">
+    <ion-icon slot="start" name="add"></ion-icon>
+    <ion-text>CREATE POST</ion-text>
+  </ion-button>
+</div>
 
+<ion-item class="m-3 p-5" *ngIf=" show.firstPageLoader ">
+  <ion-spinner></ion-spinner>
+  <ion-text class="ml-3">Loading ...</ion-text>
+</ion-item>
 
-    <ion-button (click)=" onEdit( post ) ">
-        <ion-icon name="quote"></ion-icon>
-        <ion-text class="pl-2">Edit</ion-text>
-      </ion-button>
-
-      
-    <ion-button (click)=" onReply( post, post ) ">
-      <ion-icon name="quote"></ion-icon>
-      <ion-text class="pl-2">Reply</ion-text>
-    </ion-button>
-
-    <ion-button (click)=" onDelete( post ) ">
-      <ion-icon name="trash"></ion-icon>
-      <ion-text class="pl-2">Delete</ion-text>
-    </ion-button>
-
-    <ion-button (click)=" onReport( post ) ">
-      <ion-icon name="warning"></ion-icon>
-      <ion-text class="pl-2">Report</ion-text>
-    </ion-button>
-
-  </ion-item>
+<ng-container *ngFor="let post of posts; even as isEven; odd as isOdd ">
+  <app-forum-basic-view [class.even]=" isEven " [class.odd]=" isOdd "
+  [post]=" post " (onView)=" onView( $event ) " (onVote)=" onVote( $event[0], $event[1] ) "
+    (onReply)=" onReply( $event[0], $event[1] ) " (onClickMenu)=" onClickMenu( $event[0], $event[1] ) "></app-forum-basic-view>
+</ng-container>
 
 
 
-  <ion-list class="comments comments-depth" *ngIf=" post?.comments?.length && show(post) ">
-    <ion-item class="comment" *ngFor=" let comment of post.comments " [attr.depth]=" comment.depth ">
-      <div>
-        No. {{ comment.idx }}
-        <div [innerHTML]="comment.content"></div>
-        <ion-buttons>
-          <ion-button (click)=" onVote( comment, 'good' ) ">Like{{ comment.good == '0' ? '' : ' ' + comment.good }}</ion-button>
-          <ion-button (click)=" onVote( comment, 'bad' ) ">Disike{{ comment.bad == '0' ? '' : ' ' + comment.bad }}</ion-button>
-<<<<<<< HEAD
-          <ion-button (click)=" onEdit( comment ) ">
-=======
-          <ion-button (click)=" onClickCommentEdit( comment ) ">
->>>>>>> e5e792c2c954f5f4d1c312578b64b3207b87304e
-            <ion-icon name="create"></ion-icon>
-            <ion-text>Edit</ion-text>
-          </ion-button>
-          <ion-button (click)=" onReply( comment, post ) ">
-            <ion-icon name="quote"></ion-icon>
-            <ion-text class="pl-2">Reply</ion-text>
-          </ion-button>
-          <ion-button (click)=" onDelete( comment ) ">
-            <ion-icon name="trash"></ion-icon>
-            <ion-text class="pl-2">Delete</ion-text>
-          </ion-button>
+<div class="text-center py-3 text-muted" *ngIf=" noMorePosts ">
+  {{ philgo.t({ en: 'There is no more posts.', ko: '더 이상 글이 없습니다.' })}}
+</div>
 
-          <ion-button (click)=" onReport( comment ) ">
-            <ion-icon name="warning"></ion-icon>
-            <ion-text class="pl-2">Report</ion-text>
-          </ion-button>
-
-        </ion-buttons>
-      </div>
-    </ion-item>
-  </ion-list>
-
-</ion-card>
+<ion-infinite-scroll class="mt-3" (ionInfinite)="loadPage($event)">
+  <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>

@@ -1,17 +1,33 @@
 import { NgModule } from '@angular/core';
-import { ForumJobListComponent } from './job-list.component';
+import { JobListComponent } from './job-list.component';
 import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { JobEditComponentModule } from '../edit/job-edit.component.module';
+import { JobViewComponent } from '../view/job.view.component';
+import { TooltipModule } from '../../../tooltip/tooltip.module';
+import { FormsModule } from '@angular/forms';
+// import { MenuPopoverComponent } from '../../basic/list/menu-popover/menu-popover.component';
 
 @NgModule({
     imports: [
-        IonicModule
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        JobEditComponentModule,
+        TooltipModule
     ],
     declarations: [
-        ForumJobListComponent
+        JobListComponent,
+        JobViewComponent,
+        // MenuPopoverComponent
+    ],
+    entryComponents: [
+        JobViewComponent,
+        // MenuPopoverComponent
     ],
     exports: [
-        ForumJobListComponent
+        JobListComponent
     ],
     providers: [],
 })
-export class ForumJobListComponentModule { }
+export class JobListComponentModule { }

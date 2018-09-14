@@ -1,0 +1,11 @@
+[ion-activable]{
+    &:focus{
+        outline: 0 !important;
+    }
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none!important;
+    color: #000;
+}

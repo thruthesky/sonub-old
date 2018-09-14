@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApiChatRoom, PhilGoApiService, ApiErrorResponse } from '../../../philgo-api/philgo-api.service';
 import { LanguageTranslate } from '../../../language-translate/language-translate';
 import { AngularLibrary } from '../../../angular-library/angular-library';
+import { AppService } from '../../../../providers/app.service';
 
 
 @Component({
@@ -25,10 +26,10 @@ export class ChatAllRoomsComponent implements OnInit, OnDestroy {
 
   isMobileWeb = AngularLibrary.isMobileWeb();
   constructor(
-    private ngZone: NgZone,
     private router: Router,
     public philgo: PhilGoApiService,
-    public tr: LanguageTranslate
+    public tr: LanguageTranslate,
+    public a: AppService
   ) {
     console.log('ChatAllRoomsComponent::constructor()');
     this.loadAllChatRoomList();
@@ -69,7 +70,7 @@ export class ChatAllRoomsComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSearch(value) {
+  onSearch(value: string) {
     // console.log('value: ', value);
     if (value === '' && this.roomsBackup.length) {
       this.onCancelSearch();
@@ -80,10 +81,10 @@ export class ChatAllRoomsComponent implements OnInit, OnDestroy {
     }
     this.rooms = this.roomsBackup;
     this.rooms = this.rooms.filter(room => {
-      if (room.name.indexOf(value) !== -1) {
+      if (room.name.toLowerCase().indexOf(value.toLocaleLowerCase()) !== -1) {
         return true;
       }
-      if (room.description.indexOf(value) !== -1) {
+      if (room.description.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) !== -1) {
         return true;
       }
     });
@@ -97,8 +98,18 @@ export class ChatAllRoomsComponent implements OnInit, OnDestroy {
   }
 
   onClickRoom(idx) {
-    this.onCancelSearch();
-    this.router.navigateByUrl('/room/' + idx);
+    if (this.philgo.isLoggedIn()) {
+      this.onCancelSearch();
+      this.router.navigateByUrl('/room/' + idx);
+    } else {
+      this.a.alert({
+        header: this.philgo.t({ en: 'Login', ko: '로그인' }),
+        message: this.philgo.t({
+          en: 'Please login first to enter chat room.',
+          ko: '회원 로그인을 하셔야 채팅방에 입장 할 수 있습니다.'
+        })
+      });
+    }
   }
 
 
