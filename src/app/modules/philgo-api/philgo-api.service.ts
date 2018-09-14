@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpResponse, HttpHeaderResponse, HttpEventType } from '@angular/common/http';
-import { Observable, throwError, Subject, of } from 'rxjs';
-import { map, catchError, filter } from 'rxjs/operators';
+import { Observable, throwError, Subject, of, BehaviorSubject } from 'rxjs';
+import { map, catchError, filter, tap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
+
+import postConfigs from './philgo-post-configs';
 
 
 
@@ -19,6 +21,13 @@ export const ERROR_CHAT_NOT_IN_THAT_ROOM = -530;
 export const ERROR_WRONG_SESSION_ID = -290;
 export const ERROR_WRONG_IDX_MEMBER = -280;
 export const ERROR_CHAT_ANONYMOUS_CANNOT_ENTER_ROOM = -640;
+export const ERROR_LOGIN_FIRST = -300;
+
+
+export const NO_FORUM_NAME = 'NO_FORUM_NAME';
+export const NO_CATEGORY_NAME = 'NO_CATEGORY_NAME';
+
+
 
 export const CACHE_CHAT_MY_ROOM = 'cache-chat-my-room';
 
@@ -167,13 +176,30 @@ export const ApiErrorEmptyPassword = -1110;
 
 
 
+/**
+ * before v4.
+ */
 export interface ApiFileUploadOptions {
     gid?: string;
-    login?: 'pass';
+    user_password?: string;
     finish?: '1';
     code?: string;
     module_name?: string;
 }
+
+
+/**
+ * Type for file upload.
+ *
+ * @since PhilGo API v4
+ */
+export interface ApiFileUpload {
+    gid: string;
+    finish?: '1';
+    code?: string;
+    module_name?: string;
+}
+
 
 export interface ApiNewFileServerUploadOptions {
     uid: string;
@@ -204,12 +230,40 @@ export interface ApiMember {
 }
 
 
-export interface ApiPhoto {
-    idx: number;
+/**
+ * Type for the return of file upload resopnse.
+ *
+ * @since 2018-09-04. The return format is same as the response of file upload.
+ */
+export interface ApiFile {
+    idx: string;
+    idx_member: string;
+    module: string;
+    gid: string;
+    code: string;
+    stamp: string;
+    path: string;
     name: string;
-    url?: string;
-    url_thumbnail?: string;
+    type: string;
+    size: string;
+    finished: string;
+    delete: string;
+    md5: string;
+    src: string;                    // url of original photo if the upload is a photo.
+    src_thumbnail: string;          // thumbnail url of the photo if the upload is a photo.
+    url_download: string;           // download url of the upload if the upload is not a photo or may be a photo.
+    info: string;                   // file name with size in KB.
 }
+
+/**
+ * Type of file delete response.
+ */
+export interface ApiFileDelete {
+    idx: string;
+    gid?: string;
+    user_password?: string;
+}
+
 
 export interface ApiForumPageRequest extends ApiOptionalRequest {
 
@@ -239,16 +293,19 @@ export interface ApiComment {
     idx_root?: string;
     int_10?: string;
     member?: ApiMember;
-    photos?: Array<ApiPhoto>;
+    file?: Array<ApiFile>;
     post_id?: string;
     stamp?: string;
     date?: string;
     user_name?: string;
+    files?: Array<ApiFile>;
 }
 
 
 
 /**
+ * Post data structure for v4.
+ *
  * Post data structure for list/create/update etc.
  *
  * @desc Do not use this. Use ApiPost
@@ -297,7 +354,7 @@ export interface ApiPostData {
     bad?: string;
     access_code?: string;
     region?: string;
-    photos?: Array<ApiPhoto>;
+    files?: Array<ApiFile>;
     int_1?: string;
     int_2?: string;
     int_3?: string;
@@ -354,6 +411,13 @@ export interface ApiPostData {
     comments: Array<ApiComment>;
     member?: ApiMember;
     config_subject: string; // forum name. 게시판 이름. 쿼리를 할 때, post_id 를 fields 에 기록해야 이 값을 얻을 수 있다.
+
+    /**
+     * To show or not to show.
+     * This is only available on clientend. If true, show the content of the post.
+     * This variable does not exist on Database nor coming from the server. It is only made in clientend.
+     */
+    show?: boolean;
 }
 
 /**
@@ -427,8 +491,10 @@ export interface ApiPostSearch {
 
     // Input conditions for searching.
     // These input will be returned as it was from server.
+    idx?: any;                  // 특정 글 하나만 검색한다.
     post_id?: string;           // post_id. it can be '', 'id1,id2,id3'
     category?: string;          // category.
+    // idx_member?: any;           // user idx to search posts of the user.
     fields?: string;            // fields to select.
     type?: string;              // post type.
     comment?: '' | '0';         // whether to get comments of posts or not. '0' mean don't get it.
@@ -436,13 +502,21 @@ export interface ApiPostSearch {
     limit_comment?: number;     // limit no of comments to get.
     page_no?: number;           // page no.
     limit?: number;             // limit no of posts.
-    uid?: string;               // user id, nickname, email. to search posts of the user.
+    uid?: string;               // user id/idx, nickname, email. to search posts of the user.
     order_by?: string;          // to order the result. default 'stamp DESC'.
+    deleted?: 0 | 1;            // 아무값도 지정하지 않으면, 모든 글. 0 을 지정하면 학제 안된 글. 1 을 지정하면 삭제된 글만 추출.
+
+    and?: string;               //
+
+    // 아래는 속성은 같지만, 요청 값과 응답 값이 서로 다른 값을 가진다.
+    // Properties below have different values from sending and receiving.
+    view?: any;    // post.idx 값으로, 게시판 목록 맨 위에 보여주고자 하는 글을 입력한다.
+    // 그러면 응답의 view 속성에는 ApiPost 가 들어온다.
 
 
 
     // Below are only available on server response.
-    forum_name?: string;        // forum name. @note only if one 'post_id' is given as input, this will be availble.
+    forum_name?: string;        // forum name. @note only if one 'post_id' is given as input, this will be available.
     posts?: Array<ApiPost>;
 
 }
@@ -602,6 +676,23 @@ export class PhilGoApiService {
 
 
     /**
+     * @see https://docs.google.com/document/d/1E_IxnMGDPkjOI0Fl3Hg07RbFwYRjHq89VlfBuESu3BI/edit#heading=h.odwylmdcu2i8
+     */
+    // app;
+    /**
+     * Post configurations. When app boots it statically loaded and you can update it dynamically.
+     * @see https://docs.google.com/document/d/1E_IxnMGDPkjOI0Fl3Hg07RbFwYRjHq89VlfBuESu3BI/edit#heading=h.42un1kwuv7s8
+     * [Forum Configurations]
+     */
+    // postConfigs = postConfigs;
+
+    /**
+     * @see https://docs.google.com/document/d/1E_IxnMGDPkjOI0Fl3Hg07RbFwYRjHq89VlfBuESu3BI/edit#heading=h.ay2ukor65xjf
+     */
+    config = {
+        postConfigs: postConfigs
+    }
+    /**
      * Api information. This is not an information of a one app. It is Api information.
      */
     info: ApiInfo = null;
@@ -672,6 +763,56 @@ export class PhilGoApiService {
     }
 
     /**
+     * 필요 한 부분만 merge 한다. 전체를 다 merge 하기 어렵다.
+     *
+     * @param config 서버로 부터 응답받은 config
+     *
+     * @desc Object.assgin() 은 deep clone 을 하지 않는다. 그래서 하위 property 를 따로 assign 한다.
+     */
+    mergeConfig(config) {
+        const back = Object.assign({}, this.config);
+        Object.assign(this.config, config);
+        this.config.postConfigs = Object.assign(back.postConfigs, config.postConfigs);
+    }
+
+    /**
+     * @see https://docs.google.com/document/d/1E_IxnMGDPkjOI0Fl3Hg07RbFwYRjHq89VlfBuESu3BI/edit#heading=h.ay2ukor65xjf
+     */
+    get pc() {
+        if (this.config && this.config.postConfigs) {
+            return this.config.postConfigs;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Returns the forum name or category name
+     *
+     * @param post_id post_id
+     * @param category category
+     */
+    forumName(post_id: string, category?: string): string {
+        if (this.pc && this.pc[post_id] !== void 0) {
+            if (category !== void 0) {
+                if (this.pc[post_id]['category'] !== void 0 && this.pc[post_id]['category'][category] !== void 0) {
+                    return this.t(this.pc[post_id]['category'][category]);
+                } else {
+                    return NO_CATEGORY_NAME;
+                }
+            } else {
+                if (this.pc[post_id]['subject'] !== void 0) {
+                    return this.t(this.pc[post_id]['subject']);
+                }
+            }
+        } else {
+            console.log("NO FORUM NAME FOR: ", post_id);
+            return NO_FORUM_NAME;
+        }
+    }
+
+
+    /**
      * Sets firebase app
      * @param firebaseApp firebase initialized app
      */
@@ -722,7 +863,7 @@ export class PhilGoApiService {
 
     private validatePost(data) {
         const q = this.httpBuildQuery(data);
-        console.log('PhilGoApiService::post() url: ', this.getServerUrl() + '?' + q);
+        // console.log('PhilGoApiService::post() url: ', this.getServerUrl() + '?' + q);
         if (!this.getServerUrl()) {
             // console.error(`Error. Server URL is not set.`);
         }
@@ -1144,46 +1285,132 @@ export class PhilGoApiService {
     }
 
     uploadPrimaryPhotoWeb(files: FileList) {
-        return this.fileUploadOnWeb(files, {
-            gid: this.getMemberId(),
+        return this.fileUpload(files, {
+            gid: this.myIdx(),
             code: 'primary_photo',
             finish: '1'
         });
     }
 
     /**
+     * @deprecated
      * 카메라 업로드가 아닌, HTML FORM 파일 선택을 통해서 파일 업로드를 한다.
      * @param files HTML FORM type='file' event.target.files
      * @param option Optoins for requesting file upload to the server
      */
-    fileUploadOnWeb(files: FileList, option: ApiFileUploadOptions = {}): Observable<ApiFileUploadResponse> {
+
+    // fileUploadOnWeb(files: FileList, option: ApiFileUploadOptions = {}): Observable<ApiFileUploadResponse> {
+    //     if (files === void 0 || !files.length || files[0] === void 0) {
+    //         return throwError(ApiErrorFileNotSelected);
+    //     }
+    //     const file = files[0];
+
+    //     const formData = new FormData();
+    //     formData.append('file', file, file.name);
+    //     formData.append('module', 'ajax');
+    //     formData.append('action', 'file_upload_submit');
+    //     // console.log('option: ', option);
+    //     if (option.gid) {
+    //         formData.append('gid', option.gid);
+    //     }
+    //     if (option.finish) {
+    //         formData.append('finish', option.finish);
+    //     }
+    //     if (option.login === 'pass') {
+    //         formData.append('login', option.login);
+    //     } else {
+    //         formData.append('idx_member', this.getIdxMember().toString());
+    //         formData.append('session_id', this.getSessionId());
+    //     }
+    //     if (option.module_name) {
+    //         formData.append('module_name', option.module_name);
+    //     }
+    //     if (option.code) {
+    //         formData.append('varname', option.code);
+    //     }
+
+    //     const req = new HttpRequest('POST', this.getFileServerUrl(), formData, {
+    //         reportProgress: true,
+    //         responseType: 'json'
+    //     });
+
+    //     console.log('file upload: ', this.getFileServerUrl());
+    //     return this.http.request(req).pipe(
+    //         map(e => {
+    //             // console.log('map: ', e);
+    //             if (e instanceof HttpResponse) { // success event.
+    //                 if (e.status === 200) {
+    //                     if (e.body) {
+    //                         // upload success now.
+    //                         console.log('success: ', e);
+    //                         console.log('e.body.data', e.body['data']);
+    //                         if (e.body['data']['result'] === 0) {
+    //                             return e.body['data'];
+    //                         } else {
+    //                             throw { code: ApiErrorFileUploadError, message: e.body['data']['error'] };
+    //                         }
+    //                     } else {
+    //                         return e.body; // Return Server error
+    //                     }
+    //                 }
+    //             } else if (e instanceof HttpHeaderResponse) { // header event
+    //                 return e;
+    //             } else if (e.type === HttpEventType.UploadProgress) { // progress event
+    //                 const precentage = Math.round(100 * e.loaded / e.total);
+    //                 if (isNaN(precentage)) {
+    //                     // console.log('file upload error. percentage is not number');
+    //                 } else {
+    //                     // console.log('upload percentage: ', precentage);
+    //                     return precentage;
+    //                 }
+    //             }
+    //             return e; // other events
+    //         }),
+    //         catchError(e => {
+    //             console.log('catchError : ', e);
+    //             // return of( e );
+    //             throw { code: ApiErrorJsonParse, message: e.body };
+    //         })
+    //     );
+
+    // }
+
+
+    /**
+     * Uploads a file using PhilGo Api v4
+     * @param files HTML FileList
+     * @param options Options to upload file
+     *
+     * @example README.md ## File Upload
+     */
+    fileUpload(files: FileList, options: ApiFileUploadOptions): Observable<ApiFile> {
         if (files === void 0 || !files.length || files[0] === void 0) {
             return throwError(ApiErrorFileNotSelected);
         }
         const file = files[0];
 
+
         const formData = new FormData();
         formData.append('file', file, file.name);
-        formData.append('module', 'ajax');
-        formData.append('action', 'file_upload_submit');
-        // console.log('option: ', option);
-        if (option.gid) {
-            formData.append('gid', option.gid);
+        formData.append('method', 'file.upload');
+        if (options.gid) {
+            formData.append('gid', options.gid);
         }
-        if (option.finish) {
-            formData.append('finish', option.finish);
+        if (options.user_password) {
+            formData.append('user_password', options.user_password);
         }
-        if (option.login === 'pass') {
-            formData.append('login', option.login);
-        } else {
-            formData.append('idx_member', this.getIdxMember().toString());
-            formData.append('session_id', this.getSessionId());
+        if (options.finish) {
+            formData.append('finish', options.finish);
         }
-        if (option.module_name) {
-            formData.append('module_name', option.module_name);
+
+        formData.append('idx_member', this.myIdx());
+        formData.append('session_id', this.getSessionId());
+
+        if (options.module_name) {
+            formData.append('module_name', options.module_name);
         }
-        if (option.code) {
-            formData.append('varname', option.code);
+        if (options.code) {
+            formData.append('code', options.code);
         }
 
         const req = new HttpRequest('POST', this.getFileServerUrl(), formData, {
@@ -1191,47 +1418,48 @@ export class PhilGoApiService {
             responseType: 'json'
         });
 
-        console.log('file upload: ', this.getFileServerUrl());
+        // console.log('file upload: ', this.getNewFileServerUrl());
         return this.http.request(req).pipe(
             map(e => {
-                // console.log('map: ', e);
-                if (e instanceof HttpResponse) { // success event.
-                    if (e.status === 200) {
-                        if (e.body) {
-                            // upload success now.
-                            console.log('success: ', e);
-                            console.log('e.body.data', e.body['data']);
-                            if (e.body['data']['result'] === 0) {
-                                return e.body['data'];
-                            } else {
-                                throw { code: ApiErrorFileUploadError, message: e.body['data']['error'] };
-                            }
+                if (e instanceof HttpResponse) { // success event. upload finished.
+                    if (e.body !== void 0 && e.body['code'] !== void 0) {
+                        if (e.body['code'] === 0) {
+                            // console.log('file upload success:', e);
+                            // e.body['data']['url'] = this.getNewFileServerUrl().replace('index.php', e.body['data']['path']);
+                            return e.body['data'];
                         } else {
-                            return e.body; // Return Server error
+                            throw { code: e.body['code'], message: e.body['message'] };
                         }
+                    } else {
+                        // may php error string?
+                        return e.body;
                     }
-                } else if (e instanceof HttpHeaderResponse) { // header event
-                    return e;
+                } else if (e instanceof HttpHeaderResponse) { // header event. It may be a header part from the server response.
+                    // don't return anything about header.
+                    // return e;
                 } else if (e.type === HttpEventType.UploadProgress) { // progress event
                     const precentage = Math.round(100 * e.loaded / e.total);
                     if (isNaN(precentage)) {
+                        // don't do here anything. this will never happens.
                         // console.log('file upload error. percentage is not number');
+                        return <any>0;
                     } else {
                         // console.log('upload percentage: ', precentage);
-                        return precentage;
+                        return <any>precentage;
                     }
+                } else {
+                    // don't return other events.
+                    // return e; // other events
                 }
-                return e; // other events
             }),
-            catchError(e => {
-                console.log('catchError : ', e);
-                // return of( e );
-                throw { code: ApiErrorJsonParse, message: e.body };
-            })
+            filter(e => e)
         );
 
     }
 
+    fileDelete(data: ApiFileDelete): Observable<ApiFileDelete> {
+        return this.query('file.delete', data);
+    }
 
     /**
      * New File Upload Method with New File Server.
@@ -1242,7 +1470,7 @@ export class PhilGoApiService {
      * @desc This upload file into a new server.
      *
      */
-    fileUpload(files: FileList, options: ApiNewFileServerUploadOptions): Observable<ApiNewFileServerUpload> {
+    newFileUpload(files: FileList, options: ApiNewFileServerUploadOptions): Observable<ApiNewFileServerUpload> {
         if (files === void 0 || !files.length || files[0] === void 0) {
             return throwError(ApiErrorFileNotSelected);
         }
@@ -1306,17 +1534,20 @@ export class PhilGoApiService {
 
     /**
      * Returns thumbnail URL of the photo
+     *
      * @param option options
+     *
      * @see sapcms_1_2/etc/resize_image.php for detail.
      * @example
-     *  <img src="{{ api.thumbnailUrl({ width: 100, height: 100, path: form.url_profile_photo }) }}" *ngIf=" form.url_profile_photo ">
-     *  <img src="{{ api.thumbnailUrl({ width: 100, height: 100, idx: 1234 }) }}" *ngIf=" form.data.idx ">
+     *  <img src="{{ philgo.thumbnailUrl({ width: 100, height: 100, path: form.url_profile_photo }) }}" *ngIf=" form.url_profile_photo ">
+     *  <img src="{{ philgo.thumbnailUrl({ width: 100, height: 100, idx: 1234 }) }}" *ngIf=" form.data.idx ">
      *
-     * @example
      *  this.thumbnailUrl({ idx: idx, width: 64, height: 64 });
      */
     thumbnailUrl(option: ApiThumbnailOption): string {
-        let url = this.getFileServerUrl().replace('index.php', '');
+        if ((option.idx === void 0 || !option.idx || option.idx === '0' ) && (option.path === void 0 || !option.path)) return '';
+
+        let url = this.getFileServerUrl().replace('api.php', '');
         let type = 'adaptive';
         if (option.type) {
             type = option.type;
@@ -1335,6 +1566,8 @@ export class PhilGoApiService {
         url += `etc/image_resize.php?${type}=1&w=${option.width}&h=${option.height}&path=${path}&qualty=${quality}`;
         return url;
     }
+
+    
 
     deleteFile(idx: number) {
         return this.queryVersion2({ action: 'data_delete_submit', idx: idx });
@@ -1395,9 +1628,13 @@ export class PhilGoApiService {
         return comment;
     }
 
-
-    urlForumView(idx: number | string): string {
-        return `/forum/view/${idx}`;
+    /**
+     * Returns 'Ymd' into 'Y-m-d'
+     * @param Ymd Ymd string
+     */
+    dateYmd(Ymd: string) {
+        if (!Ymd || !Ymd.length || Ymd.length !== 8) return '0000-00-00';
+        return Ymd.substr(0, 4) + '-' + Ymd.substr(4, 2) + '-' + Ymd.substr(6, 2);
     }
 
     /**
@@ -1620,25 +1857,37 @@ export class PhilGoApiService {
     }
 
     /**
-     * 내 방 목록을 하고,
+     *
      * chatMyRooms() 는 내 방 목록을 그냥 리턴하는데,
-     * chatDoMyRooms() 는 내 방 목록을 읽어, 정렬하고, 새로운 메시지 수를 세고,
+     * chatDoMyRooms() 는 내
+     *  방 목록을 읽어,
+     *  정렬하고,
+     *  새메시지 이벤트 listener 를 등록하고,
+     *  새로운 메시지 수를 세고,
+     * 
      * 등등 ... 필요한 작업을 하고, philgo api 객체에 저장을 한다.
      *
-     * @todo 여기서부터 chatMyRooms() 를 업데이트해서, 마지막 글 30개를 가져오도록 한다.
+     * @desc 이 함수는 여러고 곳에서 호출된다.
+     *      로그인 할 때,
+     *      방 입장 할 때 등,
+     *      내 방 목록 페이지에서 맨 처음 전체 방을 읽어서 목록 할 때 등
      */
-    chatLoadMyRooms(): Observable<ApiChatRooms> {
-        return this.chatMyRooms({
-            cacheCallback: res => {
-                console.log('cache callback; res: ', res);
+    chatLoadMyRooms(cache = true): Observable<ApiChatRooms> {
+        const options = {
+            cacheCallback: null
+        };
+        if (cache) {
+            options.cacheCallback = res => {
+                // console.log('PhilGoApiService::chatLoadMyRooms() ==> cache callback; res: ', res);
                 if (res) {
                     this.chatArrangeMyRooms(res);
                     return res;
                 }
-            }
-        }).pipe(
+            };
+        }
+        return this.chatMyRooms(options).pipe(
             map(res => {
-                console.log('chatLoadMyRooms() server data: ', res);
+                // console.log('PhilGoApiService::chatLoadMyRooms() ==>  server data: ', res);
                 this.chatArrangeMyRooms(res);
                 return res;
             })
@@ -1665,6 +1914,11 @@ export class PhilGoApiService {
             this.sortMyRooms();
             this.chatCountNoOfNewMessages();
             this.listenMyRooms(this.myRooms).then(() => { });
+        } else {
+            /**
+             * 방을 서버로 부터 로드했는데, 내 방목록이 없다면, 초기화.
+             */
+            this.myRooms = [];
         }
     }
 
@@ -1859,8 +2113,8 @@ export class PhilGoApiService {
      * @param idx_chat_room currentRoomNo
      * @param message chat message
      */
-    isMyCurrentChatRoomMessage(idx_chat_room, message: ApiChatMessage) {
-        return message && message.idx_chat_room && message.idx_chat_room === idx_chat_room;
+    isMyCurrentChatRoomMessage(message: ApiChatMessage) {
+        return message && message.idx_chat_room && message.idx_chat_room === this.currentRoom.idx;
     }
 
 
@@ -2007,13 +2261,14 @@ export class PhilGoApiService {
              * Don't toast if it's my message.
              */
             if (this.isMyChatMessage(message)) {
+                console.log('isMyChatMessage() ? => yes, I am in the chat room => just return')
                 return;
             }
             /**
              * Don't toast if I am in the same room of the message since it will be displayed on chat messgae box.
              */
-            if (this.currentRoom && this.isMyCurrentChatRoomMessage(this.currentRoom.idx, message)) {
-                // console.log('AppService::listenMyRooms():: got current room No. ', this.currentRoomNo, 'message. next()', message);
+            if (this.currentRoom && this.isMyCurrentChatRoomMessage(message)) {
+                console.log('AppService::listenMyRooms():: got current room No. ', this.currentRoom.idx, 'message. next()', message);
                 this.newMessageOnCurrentRoom.next(message);
                 return;
             }
@@ -2109,7 +2364,7 @@ export class PhilGoApiService {
      */
     updatePusTokenToServer(token) {
         this.pushToken = token; // Cordova 는 이미 값이 있지만, 웹에는 적용을 해 준다.
-        console.log('      updatePusTokenToServer(): ', token);
+        // console.log('      updatePusTokenToServer(): ', token);
         if (!token) {
             // console.log('token empty. return.');
             return;
@@ -2129,7 +2384,7 @@ export class PhilGoApiService {
      *  이 함수는 앱 처음 실행시 한번만 실행되어야 하며, 기본적으로 PhilGoApi::constructor() 에서 실행되므로 따로 신경 쓰지 않아도 된다.
      */
     updateWebPushToken() {
-        console.log('  ()updateWebPushToken ==>');
+        // console.log('  ()updateWebPushToken ==>');
         if (!AngularLibrary.isCordova() && AngularLibrary.isPushPermissionGranted()) {
             this.requestWebPushPermission();
         }
@@ -2139,7 +2394,7 @@ export class PhilGoApiService {
      * 이 함수는 물어보고 웹 푸시 토큰을 서버에 저장한다.
      */
     requestWebPushPermission() {
-        console.log('      ()requestWebPushPermission ==>');
+        // console.log('      ()requestWebPushPermission ==>');
         const messaging = firebase.messaging();
         // console.log('requestPushNotificationPermission()');
         messaging.requestPermission().then(() => {
@@ -2234,7 +2489,7 @@ export class PhilGoApiService {
             if (v) {
                 re.name = v.substr(0, v.lastIndexOf(' '));
                 re.size = AngularLibrary.humanFileSize(v.substr(v.lastIndexOf(' ') + 1));
-                console.log('info name: ', re);
+                // console.log('info name: ', re);
             }
         }
         return re;
@@ -2243,6 +2498,42 @@ export class PhilGoApiService {
     t(code: LanguageText, info?: any): string {
         return this.tr.t(code, info);
     }
+
+
+    ///
+    /// App methods
+    ///
+    /**
+     * Runs app method.
+     * @param appMethod app method like 'abc.name', 'abc.config'
+     * @param data data to pass to PHP
+     * @desc It can cache on localStorage if options.cache is set to true.
+     *  The subscribe will get two subscription by one call.
+     *  first, it will fire event with localStroage data with cache flag
+     *  second, it will fire event with server data.
+     */
+    app(appMethod: string, data = {}, options: { cache?: boolean } = {}): Observable<any> {
+        let key = appMethod;
+        data['appMethod'] = appMethod;
+        if (options.cache) {
+            const re = AngularLibrary.get(key);
+            if (re) {
+                re['cache'] = true;
+            }
+            const subject = new BehaviorSubject(re);
+            this.query('app.runAction', data).subscribe(data => {
+                AngularLibrary.set(key, data);
+                subject.next(data);
+            }, e => subject.error(e));
+            return subject;
+        }
+        else {
+            return this.query('app.runAction', data);
+        }
+    }
+
+
+
 
     ///
     ///
@@ -2255,6 +2546,10 @@ export class PhilGoApiService {
      */
     postSearch(data: ApiPostSearch = {}): Observable<ApiPostSearch> {
         return this.query('post.search', data);
+    }
+
+    postQuery(req: { fields?: string, where: string, orderby?: string, page_no?: number, limit?: number }): Observable<Array<ApiPost>> {
+        return this.query('post.query', req);
     }
 
     postCreate(post: ApiPost): Observable<ApiPost> {
@@ -2272,17 +2567,62 @@ export class PhilGoApiService {
     }
 
     postReport(idx: string): Observable<ApiReport> {
-        return this.query('post.report', {idx: idx});
+        return this.query('post.report', { idx: idx });
     }
 
+    postCheckPassword(req: { idx: string, user_password: string }): Observable<string> {
+        // return throwError('');
+        // return of('hello password');
+        return this.query('post.checkPassword', req);
+    }
 
-    forumName(post_id) {
-        switch (post_id) {
-            case 'freetalk': return this.tr.t({ en: 'Discussion', ko: 'Freetalk' });
-            case 'qna': return this.tr.t({ en: 'QnA', ko: '질문과답변' });
-            default: return '';
+    /**
+     * Return true if the post is belong to logged in user.
+     * For anonymous, it returns false.
+     * @param post post
+     */
+    isMyPost(post: ApiPost): boolean {
+        if (!post || !post.idx_member) {
+            return false;
         }
+        if (post.idx_member === '0') {
+            return false;
+        }
+        if (this.isLoggedOut()) {
+            return false;
+        }
+
+        return post.idx_member === this.myIdx();
     }
+    /**
+     * Returns true if the post is owned by anonymous.
+     * @param post post
+     */
+    isAnonymousPost(post: ApiPost) {
+        if (!post || post.idx_member === void 0) {
+            return false;
+        }
+        if (post.idx_member === '0') {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * @see https://docs.google.com/document/d/1E_IxnMGDPkjOI0Fl3Hg07RbFwYRjHq89VlfBuESu3BI/edit#heading=h.42un1kwuv7s8
+     */
+    loadPostConfigs() {
+        return this.query('post.configs').pipe(
+            tap(configs => {
+                this.config.postConfigs = configs;
+                // this.postConfigs = configs;
+                // console.log('confis: ', this.postConfigs);
+            })
+        );
+    }
+
+
     textDeleted() {
         return this.t({
             en: 'Deleted',
@@ -2307,7 +2647,7 @@ export class PhilGoApiService {
      * @param width width for resizing
      * @param height height for resizing
      */
-    profilePhotoUrl(idx_path, width = 64, height = 64) {
+    profilePhotoUrl(idx_path, width = 120, height = 120) {
         if (idx_path) {
             const data = { idx: idx_path, width: width, height: height };
             if (isNaN(idx_path)) {
@@ -2322,10 +2662,44 @@ export class PhilGoApiService {
 
 
     /**
-     *
+     * Returns src of anonymous Photo
      */
     get anonymousPhotoURL(): string {
         return this.getServerUrl().replace('api.php', '') + 'etc/img/anonymous.gif';
+    }
+
+
+    /**
+     * Returns a file of code from files array.
+     * @param files files array to search a file of the code
+     * @param code code of the file
+     */
+    getFile(files: Array<ApiFile>, code: string): ApiFile {
+        if (files && files.length) {
+            return files.find(v => v.code === code);
+        }
+    }
+
+    /**
+     * Returns src of the photo
+     * @param files files to search
+     * @param code code
+     */
+    getSrc(files: Array<ApiFile>, code: string): string {
+        if (files && files.length) {
+            const photo = this.getFile(files, code);
+            if (photo) {
+                return photo.src + '?name=' + photo.name;
+            }
+        }
+        return '';
+    }
+
+    provinces(): Observable<Array<string>> {
+        return <any>this.http.get(this.getServerUrl().replace('api.php', '') + 'etc/location/philippines/json.php');
+    }
+    cities(province: string): Observable<string[]> {
+        return <any>this.http.get(this.getServerUrl().replace('api.php', '') + 'etc/location/philippines/json.php?province=' + province);
     }
 
 
