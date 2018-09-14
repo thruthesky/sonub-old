@@ -82,9 +82,28 @@ export class AppModule {
     philgo.setServerUrl('http://192.168.0.254/sapcms_1_2/api.php');
     philgo.setFileServerUrl('http://192.168.0.254/sapcms_1_2/index.php');
     philgo.setNewFileServerUrl('http://192.168.0.254/file-server/index.php');
+    /**
+     * Call 'postConfigs()' to load post_config table configurations from server.
+     * @see https://docs.google.com/document/d/1E_IxnMGDPkjOI0Fl3Hg07RbFwYRjHq89VlfBuESu3BI/edit#heading=h.42un1kwuv7s8
+     */
+    philgo.postConfigs().subscribe(res => {});
   }
 }
 ````
+
+* Another example of initialization
+
+```` typescript
+  constructor(private philgo: PhilGoApiService) {
+    philgo.setServerUrl(environment.philgoServerUrl);
+    philgo.setFileServerUrl(environment.philgoFileServerUrl);
+    philgo.setNewFileServerUrl(environment.newFileServerUrl);
+    philgo.setFirebaseApp(firebase);
+    // philgo.loadPostConfigs().subscribe(res => { });
+    philgo.app('abc.config').subscribe( res => philgo.config = res );
+  }
+````
+
 
 ### Adding PhilGo Api Components
 
@@ -525,8 +544,146 @@ async toast(o: any) {
   const toast = await this.toastController.create(o);
   toast.present();
 }
-<<<<<<< HEAD
 ````
-=======
+
+
+## POST API
+
+### POST Search
+
+* `post.search` is very similiar to `post.query`. It accepts more sanitized input and output.
+
+```` typescript
+const and = [];
+if (this.form[N.gender]) {
+    and.push(`${N.gender}='${this.form[N.gender]}'`);
+}
+if (this.city) {
+    and.push(`${N.city}='${this.city}'`);
+}
+const req: ApiPostSearch = { post_id: this.post_id, category: this.category, page_no: this.page_no, limit: this.limit, deleted: 0 };
+req.and = and.join(' AND ');
+if (options.view) {
+    req.view = options.view;
+}
+this.philgo.postSearch(req).subscribe(search => {
 ````
->>>>>>> 8ea7a7a42ba453e9faf2cbc73402222f38c0f0c5
+
+### POST Query
+
+* 필고 데이터베이스에 서버에 게시글 질의를 바로 한다.
+
+아래의 예제는 `플러스친구` 카테고리의 소식만 가져오는 것이다.
+
+```` typescript
+this.philgo.postQuery({
+  where: `post_id='freetalk' AND category='플러스친구'`
+}).subscribe( res => {
+  console.log('postQuery: ', res);
+}, e => console.error(e));
+````
+
+* 활용) 특정 코드에 맞는 글만 가져오기.
+
+예를 들어 각 앱/웹의 메인에 표시해도 좋을 뉴스를 코드 `main-news-YYYYMMDDHH` 와 같이 표현을 한다면, 아래와 같이 `access_code` 쿼리를 해서, 가장 마지막 뉴스 코드를 하나 가져 올 수 있다.
+
+```` typescript
+this.philgo.postQuery({
+  where: `access_code LIKE 'main-news%'`,
+  orderby: `access_code DESC`,
+  limit: 1
+}).subscribe( res => {
+  console.log('postQuery: ', res);
+}, e => console.error(e));
+````
+
+* 하지만 일반적으로 메인 페이지에 정보를 가져오는 것이라면, 메인페이지에 필요한 모든 정보를 한번에 가져오는 것이 낳다.
+
+아래의 예제 처럼, front page 의 필요한 모든 정보를 한번에 가져와서 처리를 한다. 최근 글, 뉴스 글, 공지 글 등을 한번에 가져온다.
+
+```` typescript
+  philgo.app('philgo-chat.frontPage', { news: true }).subscribe(res => {
+    console.log('app: ', res);
+  }, e => console.error(e));
+````
+
+
+## File Upload
+
+```` typescript
+  onChangeFile(event: Event) {
+    if (AngularLibrary.isCordova()) {
+      return;
+    }
+    const files = event.target['files'];
+    if (files === void 0 || !files.length || files[0] === void 0) {
+      this.error = { code: -1, message: this.philgo.t({ en: 'Please select a file', ko: '업로드 할 파일을 선택해주세요.' }) };
+    }
+    this.philgo.fileUpload(files, { gid: this.form.gid }).subscribe(res => {
+      if (typeof res === 'number') {
+        console.log('percentage: ', res);
+      } else {
+        console.log('file success: ', res);
+      }
+    }, e => console.error(e));
+  }
+````
+
+
+## Tooltip, Popover Component
+
+* tooltip component is a helper component to display tooltip easily.
+
+```` html
+<ion-item (click)="tooltip.present( $event, {content: '아래의 광고 배너 중 정사각형 배너는 필수입니다. 그 외 두가지는 옵션이며, 광고 배너를 모두 올리면 광고가 더 많이 노출될 확율이 높습니다.'} )">
+  <ion-icon name="help"></ion-icon>
+</ion-item>
+````
+
+
+## URL & Paths
+
+
+### 게시판 목록 URL
+
+
+* 일반 게시판 목록은 `/forum/:post_id` 로 통일을 한다.
+
+* 때로는 `job`, `ads` 게시판 등은 URL 의 주소가 중요하므로 route 를 따로 만들수 있다. 예제) `/job/:category`, `/ads`
+
+* 하지만 URL 주소가 중요하지 않은 경우, 그냥 기본 URL 목록을 따른다.
+
+### 게시글 읽기 URL
+
+* 일반적으로 게시글은 게시판 목록 위에 보여준다. 즉, 게시글 읽기 페이지가 따로 존재하지 않는다.
+* 게시글 읽기를 하면, 게시판 목록의 제목 및에 글 내용을 보여주고, push state 만 바꾸어 주면 된다.
+* 만약, SEO 가 필요하면 PHP 단에서 적절히 처리를 하면 된다.
+
+글 읽기 URL 은 글 목록 맨 끝에 `:idx` 를 추가한다.
+예제)
+`/forum/freetalk/:idx`
+`<div routerLink="/forum/{{ post.post_id }}/{{ post.idx }}">`
+`/job/:category/:idx`
+`/ads/idx`
+
+
+
+If a post is clicked on post-list page, it will draw down the content and comments of the post instead of routing into a new page.
+Normally, there is no post view page. 
+When a route is being access to view a post, then the url of the route should be `.../:idx` to indicate that this needs to display post on top of the post list.
+
+
+
+
+## Provinces and Cities of Philippines
+
+```` typescript
+philgo.provinces().subscribe(res => {
+    console.log('provinces: ', res);
+    philgo.cities( res[1] ).subscribe( cities => {
+        console.log('cities: ', cities);
+    });
+});
+````
+
+
