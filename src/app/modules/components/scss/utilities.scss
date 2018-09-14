@@ -1,58 +1,5 @@
-@import './mixins';
-
-.size-32px {
-    @include size-px(32,32);
-}
-
-.size-120px {
-    @include size-px(120,120);
-}
-
-.transparent-cover {
-    @include transparent-cover();
-}
-
-.position-top-right {
-    @include position-top-right();
-}
-
-.photo-delete-icon {
-    padding: 1em 2em 0 0;
-    @include position-top-right();
-    @include size-px(32,32);
-    cursor: pointer;
-}
-
-.submit-button{
-    @include submit-button();
-}
-
-.flex-center {
-    @include flex-center();
-}
-
 .pointer {
     cursor: pointer;
-}
-
-.w-100px {
-    width: 100px!important;
-}
-
-.w-200px {
-    width: 200px !important;
-}
-
-.w-300px{
-    width: 300px!important;
-}
-
-.mw-200px {
-    max-width: 200px !important;
-}
-
-.mw-300px {
-    max-width: 300px !important;
 }
 
 .of-hidden {
@@ -61,51 +8,18 @@
 
 .no-shadow {
     --box-shadow: 0 !important;
+    box-shadow: none !important;
 }
 
 .border-radius-45px {
     border-radius: 45px
 }
 
-.fw-light {
-    font-weight: 200 !important;
-}
-
-.fs-xs {
-    font-size: .5rem!important;
-}
-
-.fs-sm {
-    font-size: .75rem!important;
-}
-
-.fs-md {
-    font-size: .95rem !important;
-}
-
-.fs-lg {
-    font-size: 1.2rem !important;
-}
-
-.fs-xl {
-    font-size: 2.2rem !important;
-}
-
-.icon-size {
-    width: 24px;
-    height: 24px;
-}
-
-.align-icon{
-    position: relative;
-    top: .125em;
-}
-
 .ion-btn-large {
     --height: 4em;
 }
 
-.ion-btn-normal{
+.ion-btn-normal {
     --height: 3em;
 }
 
@@ -116,11 +30,49 @@
     .mt-md-5 {
         margin-top: 3rem !important;
     }
+    .whitespace-md-prewrap {
+        white-space: pre-wrap !important;
+    }
 }
 
+.transparent-cover {
+    @include transparent-cover();
+}
+
+/**
+ *
+ * @example use
+    <div class="file position-relative mw-200px"....>
+        <img class="w-100" src="{{ file.src_thumbnail }}">
+        <ion-icon name="trash" class="photo-delete-icon bg-black white"></ion-icon>
+        <ion-icon class="photo-delete-icon bg-black white" name="close" ...>
+    </div>
+ *
+ */
+
+.photo-delete-icon {
+    margin: 0.5em 0.5em 0 0;
+    padding: .3em;
+    @include position-top-right();
+    @include size-px(32, 32);
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.submit-button {
+    @include submit-button();
+}
 
 .comments-depth {
     .comment {
+        &[depth='0'] {
+            margin-left: 0em;
+        }
+        &[depth='1'] {
+            margin-left: 0em;
+        }
         &[depth='2'] {
             margin-left: 1em;
         }
@@ -155,4 +107,25 @@
             margin-left: 7em;
         }
     }
+}
+
+.progress {
+    display: inline-block;
+    height: .9em;
+    overflow: hidden;
+    font-size: .75em;
+    background-color: #e9ecef;
+    border-radius: .25rem;
+    box-shadow: inset 0 .1rem .1rem rgba(#000, .1)
+}
+
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    white-space: nowrap;
+    background-color: blue;
+    transition: width .6s ease;
 }

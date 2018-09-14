@@ -1,8 +1,8 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
-import { PhilGoApiService, ApiPost, ApiForum } from '../../../../philgo-api/philgo-api.service';
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { PhilGoApiService, ApiPost, ApiForum, ApiPostSearch } from '../../../../philgo-api/philgo-api.service';
 import { EditService } from '../edit/edit.component.service';
 import { ActivatedRoute } from '@angular/router';
-import { PopoverController, AlertController } from '@ionic/angular';
+import { PopoverController, InfiniteScroll } from '@ionic/angular';
 import { MenuPopoverComponent } from './menu-popover/menu-popover.component';
 import { ComponentService } from '../../../service/component.service';
 
@@ -10,29 +10,52 @@ import { ComponentService } from '../../../service/component.service';
 @Component({
   selector: 'app-forum-basic-list-component',
   templateUrl: './basic-list.component.html',
-  styleUrls: ['../../../scss/index.scss']
+  styleUrls: ['../../../scss/index.scss', './basic-list.component.scss'],
+  // encapsulation: ViewEncapsulation.None
 })
 export class ForumBasicListComponent implements OnInit, AfterViewInit {
 
+  @Input() displayHeaderMenu = true;
   @Input() autoViewContent = false;
+
+  @Output() load = new EventEmitter<ApiPostSearch>();
+
   forum: ApiForum = null;
   posts: Array<ApiPost> = [];
+
+  /**
+   * Post view
+   */
+  postView: ApiPost;
+
+  /**
+   * Page navigation
+   */
+  post_id = '';
+  page_no = 1;
+  limit = 20;
+  noMorePosts = false;
+
+
+  /**
+   *
+   */
+  show = {
+    firstPageLoader: true
+  };
+  //
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly popoverController: PopoverController,
-    private readonly alertController: AlertController,
     public readonly philgo: PhilGoApiService,
     public readonly edit: EditService,
     private readonly componentService: ComponentService
   ) {
 
     this.activatedRoute.paramMap.subscribe(params => {
-      this.philgo.postSearch({ post_id: params.get('post_id'), page_no: 1, limit: 10 }).subscribe(search => {
-        console.log('search: ', search);
-        this.forum = search;
-        this.posts = search.posts;
-        // this.onClickPost();
-      });
+      this.post_id = params.get('post_id');
+      const idx = params.get('idx');
+      this.loadPage(null, { view: idx });
     });
 
   }
@@ -41,11 +64,59 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-
+    // window.setTimeout(() => this.onClickPost(), 200);
   }
+
+
+  loadPage(event?: Event, options: { view: string } = <any>{}) {
+    let infiniteScroll: InfiniteScroll;
+    if (event) {
+      infiniteScroll = <any>event.target;
+    }
+    const req: ApiPostSearch = { post_id: this.post_id, page_no: this.page_no, limit: this.limit };
+    if (options.view) {
+      req.view = options.view;
+    }
+    this.philgo.postSearch(req).subscribe(search => {
+      this.load.emit( search );
+      console.log('search: ', search);
+      this.show.firstPageLoader = false;
+      this.page_no++;
+      this.forum = search;
+      if (search && search.view && search.view.idx) {
+        this.postView = search.view;
+        this.postView.show = true;
+      }
+      if (!search.posts || !search.posts.length) {
+        if (event) {
+          infiniteScroll.disabled = true;
+        }
+        this.noMorePosts = true;
+        return;
+      }
+
+
+      if ( this.postView && this.postView.idx ) {
+          const pos = search.posts.findIndex(v => v.idx === this.postView.idx);
+          if (pos !== -1) {
+              search.posts.splice(pos, 1);
+          }
+      }
+
+      this.posts = this.posts.concat(search.posts);
+      if (event) {
+        infiniteScroll.complete();
+      }
+    }, e => {
+      this.show.firstPageLoader = false;
+      this.componentService.alert(e);
+    });
+  }
+
   async onClickPost() {
     this.forum['role'] = 'post-create';
     const res = await this.edit.present(this.forum);
+    this.forum['role'] = '';
     if (res.role === 'success') {
       this.posts.unshift(res.data);
     }
@@ -56,8 +127,8 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit {
     console.log('onReply()', post, rootPost);
     post['role'] = 'reply';
     const res = await this.edit.present(post);
+    post['role'] = '';
     if (res.role === 'success') {
-
       /**
        * Or post create?
        */
@@ -79,9 +150,6 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit {
           rootPost.comments.push(res.data);
         }
       }
-      // else {
-      //   rootPost.comments.push(res.data);
-      // }
     }
   }
 
@@ -90,7 +158,8 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       componentProps: {
-        controller: this.popoverController
+        controller: this.popoverController,
+        post: post
       },
       event: event,
       translucent: true
@@ -116,122 +185,68 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit {
   }
 
 
-  onView(post: ApiPost) {
-    post['showMore'] = true;
-  }
 
-
+  /**
+   * Opens an edit box.
+   * @param post post or comment to edit
+   */
   async onEdit(post: ApiPost) {
-    if ( post.idx_parent !== '0' ) {
+
+
+    if (this.philgo.isAnonymousPost(post)) {
+      const password = await this.componentService.checkPostUserPassword(post);
+      if (password) {
+        post.user_password = password;
+      } else {
+        console.log('onEdit() ==> philgo.isAnonymousPost() failed ==> return ');
+        return;
+      }
+    }
+    // console.log('daa: ', data);
+    if (post.idx_parent !== '0') {
       post['role'] = 'comment-edit';
     } else {
       post['role'] = 'post-edit';
     }
+
+
+    /**
+     * Make a copy from post. So, it will not be referenced.
+     */
     const data = Object.assign({}, post);
     const res = await this.edit.present(data);
+    post['role'] = '';
     if (res.role === 'success') {
+      /// Assign to main post's position( reference )
       Object.assign(post, res.data);
     }
   }
 
-  // async onClickCommentEdit(comment: ApiPost) {
-  //   comment['role'] = 'comment-edit';
-  //   const data = Object.assign({}, comment);
-  //   const res = await this.edit.present(data);
-  //   if (res.role === 'success') {
-  //     Object.assign(comment, res.data);
-  //   }
-  // }
 
 
 
   async onDelete(post: ApiPost) {
     console.log(post);
-    if (post.idx_member === '0') {
-      return this.onActionDeleteWithPassword(post);
+    let re;
+    if (this.philgo.parseNumber(post.idx_member) === 0) {
+      re = await this.componentService.deletePostWithPassword(post);
+    } else {
+      re = await this.componentService.deletePostWithMemberLogin(post);
     }
-    const alert = await this.alertController.create({
-      message: 'Are you sure you want to delete this post?',
-      buttons: [
-        {
-          text: 'Yes',
-          role: 'yes',
-          handler: () => {
-            console.log('going to delete:', post.idx);
-            this.philgo.postDelete({ idx: post.idx }).subscribe(res => {
-              console.log('delete success: ', res);
-              post.subject = this.philgo.textDeleted();
-              post.content = this.philgo.textDeleted();
-            }, async e => {
-              this.componentService.alert(e);
-            });
-          }
-        },
-        {
-          text: 'No',
-          role: 'no',
-          handler: () => {
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-
+    console.log('onDelete(): ', re);
   }
-  async onActionDeleteWithPassword(post: ApiPost) {
-    const alert = await this.alertController.create({
-      header: this.philgo.t({ en: 'Password', ko: '비밀번호' }),
-      inputs: [
-        {
-          name: 'user_password',
-          type: 'text',
-          placeholder: this.philgo.t({ en: 'Please input password!', ko: '비밀번호를 입력하세요.' })
-        }
-      ],
-      buttons: [
-        {
-          text: this.philgo.t({ en: 'Cancel', ko: '취소' }),
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: this.philgo.t({ en: 'Ok', ko: '확인' }),
-          handler: input => {
-            console.log('Confirm Ok', input);
-            this.philgo.postDelete({ idx: post.idx, user_password: input.user_password }).subscribe(res => {
-              console.log('delete success: ', res);
-              post.subject = this.philgo.textDeleted();
-              post.content = this.philgo.textDeleted();
-            }, async e => {
-              this.componentService.alert({
-                message: this.philgo.t({ en: `Failed to delete: #reason`, ko: '글 삭제 실패: #reason' }, { reason: e.message })
-              });
-            });
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
   onVote(post, mode: 'good' | 'bad') {
-
     this.philgo.postLike({ idx: post.idx, mode: mode }).subscribe(res => {
       console.log('res: ', res);
       post[mode] = res.result;
     }, e => {
       this.componentService.alert(e);
     });
-
   }
 
   onReport(post: ApiPost) {
 
-    this.philgo.postReport( post.idx ).subscribe(res => {
+    this.philgo.postReport(post.idx).subscribe(res => {
       console.log('res: ', res);
       this.componentService.alert({
         message: this.philgo.t({ en: 'This post has been reported.', ko: '본 글은 신고되었습니다.' })
@@ -242,9 +257,17 @@ export class ForumBasicListComponent implements OnInit, AfterViewInit {
 
   }
 
-  show(post) {
-    return post['showMore'] || this.autoViewContent;
-  }
-}
 
+
+  onView(post: ApiPost) {
+    if (this.postView && this.postView.idx && this.postView.idx === post.idx) {
+      return;
+    } else {
+        post.show = !post.show;
+        history.pushState({}, post.subject, `/forum/${post.post_id}/${post.idx}`);
+    }
+  }
+
+
+}
 

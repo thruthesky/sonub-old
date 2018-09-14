@@ -35,7 +35,7 @@ export class ChatRoomInputComponent implements OnInit {
         private domSanitizer: DomSanitizer,
         public philgo: PhilGoApiService,
     ) {
-        if ( AngularLibrary.isCordova() ) {
+        if (AngularLibrary.isCordova()) {
             this.platform = 'cordova';
         }
         this.resetForm();
@@ -68,7 +68,7 @@ export class ChatRoomInputComponent implements OnInit {
         /**
          * 새 방에 입장하는 경우, 초기화가 좀 느리다. 따라서 초기화 전에 들어가면 그냥 리턴.
          */
-        if ( ! this.philgo.currentRoom ) {
+        if (!this.philgo.currentRoom) {
             console.log('wait. you cannot type until room is initialized.');
             return false;
         }
@@ -80,10 +80,19 @@ export class ChatRoomInputComponent implements OnInit {
          * Assign to a new Object.
          */
         const m = Object.assign({}, this.form);
+        
+        /**
+         * 채팅을 보내고, 바로 idx 를 -1 로 해서, gif loader 가 표시되지 않도록 한다.
+         * 에러가 있으면 [x] 표시가 된다.
+         * 이 때문에, 괜히, 채팅 속도가 느리니 어쩌니 하는 말이 나온다.
+         */
+        m.idx = '-1';
+
+        /**
+         *
+         */
         this.send.emit(m);
-
         this.resetForm();
-
         this.philgo.chatSendMessage(m).subscribe(res => {
             /**
              * Update the new Object by reference.
@@ -106,15 +115,8 @@ export class ChatRoomInputComponent implements OnInit {
         // console.log('onChangeFile()');
         const files = event.target['files'];
         if (files === void 0 || !files.length || files[0] === void 0) {
-            return this.error.emit( this.philgo.error( -1, 'Please select a file') );
+            return this.error.emit(this.philgo.error(-1, 'Please select a file'));
         }
-
-        // const message: ApiChatMessage = <any>{
-        //   idx_member: this.philgo.myIdx(),
-        //   message: ''
-        // };
-        // message['percentage'] = 33;
-        // this.displayMessage(message);
 
         this.doFile(files);
     }
@@ -135,7 +137,7 @@ export class ChatRoomInputComponent implements OnInit {
         // console.log('url: ', url);
         const message: ApiChatMessage = <any>{ url: this.safeUrl(dataUrl), retvar: ++this.countMessageSent };
         this.displaySendingFile(message);
-        this.philgo.fileUpload(files, {
+        this.philgo.newFileUpload(files, {
             uid: this.philgo.myIdx(),
             secret: this.philgo.myIdx()
         }).subscribe(res => {
@@ -184,10 +186,10 @@ export class ChatRoomInputComponent implements OnInit {
 
         const alert = await this.alertController.create({
             header: this.philgo.t({ ko: '사진', en: 'Photo' }),
-            subHeader: this.philgo.t({ ko: '사진 전송을 합니다.', en: 'Sending a photo.' }),
+            subHeader: this.philgo.t({ ko: '사진 전송을 업로드합니다.', en: 'Uploading a photo.' }),
             message: this.philgo.t({
-                ko: '카메라로 사진을 찍어서 전송 할 수 있으며 갤러리에서 사진을 선택 할 수도 있습니다.',
-                en: 'You can take a picture from Camera or select a photo from gallery.'
+                ko: '카메라로 사진을 찍거나 갤러리에서 사진을 선택하세요.',
+                en: 'Please take a photo from Camera or choose one from Gallery.'
             }),
             buttons: [
                 { role: 'camera', text: this.philgo.t({ ko: '카메라로 사진 찍기', en: 'Take a photo using Camera' }) },
@@ -230,7 +232,7 @@ export class ChatRoomInputComponent implements OnInit {
             // console.log('No data path or base64. just return');
         }
         // console.log('path: ', data);
-        const blob = this.b64toBlob(base64);
+        const blob = AngularLibrary.base64toBlob(base64);
         /**
          * File 와 FileList 타입의 변수를 만든다.
          * 그리고 그냥 일반 HTML FORM <input type='file'> 에서 파일 정보를 받아 업로드하는 것과 똑 같이 하면 된다.
@@ -246,30 +248,9 @@ export class ChatRoomInputComponent implements OnInit {
     }
 
 
-    /**
-     *
-     * Base64 데이터를 바이너리로 변경해서 리턴한다.
-     *
-     */
-    b64toBlob(b64Data, contentType = 'image/jpeg', sliceSize = 512): Blob {
-        const byteCharacters = atob(b64Data);
-        const byteArrays = [];
-        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-            const slice = byteCharacters.slice(offset, offset + sliceSize);
-            const byteNumbers = new Array(slice.length);
-            for (let i = 0; i < slice.length; i++) {
-                byteNumbers[i] = slice.charCodeAt(i);
-            }
-            const byteArray = new Uint8Array(byteNumbers);
-            byteArrays.push(byteArray);
-        }
-        const blob = new Blob(byteArrays, { type: contentType });
-        return blob;
+
+    safeUrl(url) {
+        return this.domSanitizer.bypassSecurityTrustUrl(url);
     }
-
-
-  safeUrl(url) {
-    return this.domSanitizer.bypassSecurityTrustUrl(url);
-  }
 }
 
