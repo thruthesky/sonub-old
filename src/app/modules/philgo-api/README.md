@@ -115,6 +115,17 @@ ionic cordova plugin add cordova-plugin-camera
 npm install --save @ionic-native/camera
 ````
 
+* And you will need to include below into App Module.
+
+```` typescript
+import { Camera } from '@ionic-native/camera/ngx';
+@NgModule({
+  providers: [
+    Camera
+  ],
+})
+````
+
 
 
 ## TEST

@@ -36,6 +36,14 @@ $primary-color: #007bff;
     justify-content: center;
 }
 
+.md ion-button {
+    text-transform: none;
+}
+
+ion-toolbar {
+    --min-height: 10px;
+}
+
 ion-toast {
     &.error {
         .toast-container {
@@ -43,6 +51,7 @@ ion-toast {
         }
     }
 }
+
 .submit-button {
     color: white;
     --height: 42px;
@@ -50,3 +59,22 @@ ion-toast {
     --ion-color-base: #007bff !important;
     --ion-color-shade: #005abb !important;
 }
+
+.size-24px {
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.size-32px {
+    width: 32px !important;
+    height: 32px !important;
+}
+
+.h-20px {
+    height: 20px !important;
+}
+
+.border-box {
+    box-sizing: border-box !important;
+}
+

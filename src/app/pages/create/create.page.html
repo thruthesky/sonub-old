@@ -1,0 +1,81 @@
+<ion-header class="">
+  <app-header [title]=" 'Create' "></app-header>
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <ion-item>
+    <app-avatar></app-avatar>
+    <div class="ml-3 w-100">
+      <div>{{ a.user.name }}</div>
+    </div>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Post on</ion-label>
+    <ion-button mode="ios" size="small">My Blog</ion-button>
+    <ion-button class="ml-1" mode="ios" size="small" color="light">QnA</ion-button>
+    <ion-button class="ml-1" mode="ios" size="small" color="light">Jobs</ion-button>
+    <ion-select class="ml-1" [interfaceOptions]="{ subHeader: 'Post', message: 'Select where to post' }" interface="popover"
+      placeholder="More...">
+      <ion-select-option value="brown">My Blog</ion-select-option>
+      <ion-select-option value="blonde">QnA</ion-select-option>
+      <ion-select-option value="black">Buy & Sell</ion-select-option>
+      <ion-select-option value="red">Jobs</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  
+  
+    
+  <ion-item>
+    <ion-textarea placeholder="Enter more information here..."></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-buttons>
+      <ion-button>
+        <ion-icon name="square-outline"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon color="dark" name="square"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon color="light" name="square"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon color="primary" name="square"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon color="secondary" name="square"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon color="warning" name="square"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon color="tertiary" name="square"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon color="danger" name="square"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="image"></ion-icon>
+    <ion-text>Photo</ion-text>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="videocam"></ion-icon>
+    <ion-text>Video</ion-text>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="happy"></ion-icon>
+    <ion-text>Emoticons</ion-text>
+  </ion-item>
+
+  <ion-button expand="full">Post</ion-button>
+
+</ion-content>

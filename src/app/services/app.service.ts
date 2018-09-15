@@ -15,10 +15,20 @@ export class AppService {
     private philgo: PhilGoApiService,
     private tr: LanguageTranslate
   ) { }
+  
 
+  get user() {
+    return {
+      name: this.philgo.nickname()
+    }
+  }
+  
   open(path) {
     this.router.navigateByUrl(path);
   }
+
+
+
 
   /**
    * Toast on app.

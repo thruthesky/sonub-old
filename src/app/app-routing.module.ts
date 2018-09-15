@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'profile', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
+  { path: 'create', loadChildren: './pages/create/create.module#CreatePageModule' },
 ];
 
 @NgModule({
