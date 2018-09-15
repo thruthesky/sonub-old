@@ -9,6 +9,8 @@ import { CreatePage } from './create.page';
 import { HeaderComponentModule } from '../../components/header/header.component.module';
 import { AvatarComponentModule } from '../../components/avatar/avatar.component.module';
 
+import { NgSimpleEditorModule } from 'ng-simple-editor';
+
 const routes: Routes = [
   {
     path: '',
@@ -23,7 +25,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     HeaderComponentModule,
-    AvatarComponentModule
+    AvatarComponentModule,
+    NgSimpleEditorModule
   ],
   declarations: [CreatePage]
 })

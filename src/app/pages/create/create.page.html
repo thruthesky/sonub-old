@@ -5,7 +5,6 @@
 
 <ion-content padding>
 
-
   <ion-item>
     <app-avatar></app-avatar>
     <div class="ml-3 w-100">
@@ -13,25 +12,22 @@
     </div>
   </ion-item>
 
+
+
   <ion-item>
     <ion-label>Post on</ion-label>
-    <ion-button mode="ios" size="small">My Blog</ion-button>
-    <ion-button class="ml-1" mode="ios" size="small" color="light">QnA</ion-button>
-    <ion-button class="ml-1" mode="ios" size="small" color="light">Jobs</ion-button>
-    <ion-select class="ml-1" [interfaceOptions]="{ subHeader: 'Post', message: 'Select where to post' }" interface="popover"
-      placeholder="More...">
-      <ion-select-option value="brown">My Blog</ion-select-option>
-      <ion-select-option value="blonde">QnA</ion-select-option>
-      <ion-select-option value="black">Buy & Sell</ion-select-option>
-      <ion-select-option value="red">Jobs</ion-select-option>
+    <ion-text>{{ forums[postId] }}</ion-text>
+    <ion-button *ngIf=" !p " class="" size="small" color="light" (click)=" post='blog' ">My Blog</ion-button>
+    <ion-button *ngIf=" !u " class="ml-1" size="small" color="light" (click)=" p ='qna' ">QnA</ion-button>
+    <ion-select class="ml-1" selectedText="Choose" [(ngModel)]="postId" (ionChange)=" onChangeForum( $event ) "
+      [interfaceOptions]="{ subHeader: 'Post', message: 'Select where to post' }" interface="popover">
+      <ion-select-option *ngFor="let forum of forums | keyvalue" value="{{ forum.key }}">{{ forum.value }}</ion-select-option>
     </ion-select>
   </ion-item>
 
-  
-  
-    
+
   <ion-item>
-    <ion-textarea placeholder="Enter more information here..."></ion-textarea>
+    <ng-simple-editor></ng-simple-editor>
   </ion-item>
 
   <ion-item>
