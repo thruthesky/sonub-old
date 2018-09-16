@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppService } from '../../services/app.service';
 import { Select } from '@ionic/angular';
+import { NgSimpleEditorComponent } from 'ng-simple-editor';
+import { PhilGoApiService, ApiPost } from '../../modules/philgo-api/philgo-api.service';
 
 @Component({
     selector: 'app-create',
@@ -9,8 +11,10 @@ import { Select } from '@ionic/angular';
 })
 export class CreatePage implements OnInit {
 
-
-    postId;
+    @ViewChild('editor') editor: NgSimpleEditorComponent;
+    form: ApiPost = <ApiPost>{
+        post_id: 'blog'
+    };
     forums = {
         blog: 'My Blog',
         qna: 'QnA',
@@ -22,19 +26,35 @@ export class CreatePage implements OnInit {
         real_estate: 'Sell House'
     };
     constructor(
-        public a: AppService
+        public a: AppService,
+        public philgo: PhilGoApiService
     ) { }
 
     ngOnInit() {
 
-
     }
 
     onChangeForum(event: Event) {
-        this.postId = (<Select><any>event.target).value;
-        console.log('selectedPostId', this.postId);
+        this.form.post_id = (<Select><any>event.target).value;
     }
 
 
+    onSubmit() {
+
+        /**
+         * Create
+         */
+        if ( ! this.form.post_id ) {
+            // this.a.toast({code: -1, message: `Please choose where to 'post on'`});
+            // this.form.post_id = this.defaultPostId;
+        }
+        this.form.content = this.editor.content;
+        this.philgo.postCreate(this.form).subscribe(res => {
+            console.log('create res: ', res);
+            this.a.openHome();
+        }, e => {
+            this.a.toast(e);
+        });
+    }
 }
 

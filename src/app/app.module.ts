@@ -12,6 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { PhilGoApiService } from './modules/philgo-api/philgo-api.service';
 import { HttpClientModule } from '@angular/common/http';
 
+
+import { environment } from '../environments/environment';
+
 import * as firebase from 'firebase/app';
 const firebaseConfig = {
   apiKey: 'AIzaSyA1X3vpzSpUk_JHCbNjEwQe1-pduF0Enqs',
@@ -39,8 +42,11 @@ firebase.initializeApp(firebaseConfig);
 })
 export class AppModule {
   constructor(philgo: PhilGoApiService) {
-    philgo.setServerUrl('http://192.168.0.254/sapcms_1_2/api.php');
-    philgo.setFileServerUrl('http://192.168.0.254/sapcms_1_2/index.php');
-    philgo.setNewFileServerUrl('http://192.168.0.254/file-server/index.php');
+    philgo.domain = 'sonub';
+    philgo.setServerUrl(environment.philgoServerUrl);
+    philgo.setFileServerUrl(environment.philgoFileServerUrl);
+    philgo.setNewFileServerUrl(environment.newFileServerUrl);
+    philgo.setFirebaseApp(firebase);
+    philgo.app('sonub.config').subscribe( res => philgo.mergeConfig(res) );
   }
 }

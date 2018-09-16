@@ -6,10 +6,14 @@
 <ion-content padding>
 
   <ion-list class="list-menu">
-    <ion-item routerLink="/">
-      <ion-icon name="home"></ion-icon>
-      <ion-text>Home</ion-text>
-    </ion-item>
+      <ion-item routerLink="/">
+        <ion-icon name="home"></ion-icon>
+        <ion-text>Home</ion-text>
+      </ion-item>
+      <ion-item routerLink="/settings">
+        <ion-icon name="settings"></ion-icon>
+        <ion-text>Settings</ion-text>
+      </ion-item>
     <ion-item routerLink="/register" *ngIf=" philgo.isLoggedOut() ">
       <ion-icon name="person-add"></ion-icon>
       <ion-text>Register</ion-text>

@@ -11,6 +11,12 @@ const configs = {
             ko: '자유게시판'
         }
     },
+    freetalk_en: {
+        subject: {
+            en: 'Discussion',
+            ko: '자유게시판'
+        }
+    },
     news: {
         subject: {
             en: 'News',

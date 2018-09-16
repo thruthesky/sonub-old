@@ -21,7 +21,6 @@ import { AvatarComponentModule } from '../../components/avatar/avatar.component.
     ]),
     HeaderComponentModule,
     AvatarComponentModule
-    
   ],
   declarations: [
     HomePage

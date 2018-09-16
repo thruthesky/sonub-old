@@ -1,0 +1,31 @@
+<ion-header>
+  <app-header [title]=" a.t({en: 'Settings', ko: '설정'}) "></app-header>
+</ion-header>
+
+<ion-content padding>
+
+
+  <ion-list>
+
+    <a ion-activable class="d-block position-relative" routerLink="/settings/language">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-item>
+        <ion-label>
+          {{ a.t({ ko: '언어 선택', en: 'Language Selection', ch: '语言选择', jp: '言語選択'}) }}
+        </ion-label>
+      </ion-item>
+    </a>
+
+    <a ion-activable class="d-block position-relative" routerLink="/settings/dev-info">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-item>
+        <ion-label>
+          {{ a.t({ko: '소프트웨어 정보', en: 'Software Information', ch: '软件信息', jp: 'ソフトウェア情報' }) }}
+        </ion-label>
+      </ion-item>
+    </a>
+
+
+  </ion-list>
+
+</ion-content>

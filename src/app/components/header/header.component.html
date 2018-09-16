@@ -1,20 +1,39 @@
 <ion-toolbar class="">
-  <ion-buttons slot="start">
+
+  <ion-buttons slot="start" *ngIf=" page != 'home' ">
     <ion-back-button text=""></ion-back-button>
   </ion-buttons>
 
   <ion-title class="">
-    <img class="h-20px" src="/assets/img/sonub-logo.png">
+    <img class="h-20px" src="/assets/img/sonub-logo.png" *ngIf=" page == 'home' ">
     <ion-text class="pl-2">{{ title }}</ion-text>
   </ion-title>
 
+
   <ion-buttons slot="end">
-    <ion-button routerLink="/housemaid">
+    <ion-button routerLink="/">
+      <ion-icon name="home"></ion-icon>
+    </ion-button>
+
+    <ion-button routerLink="/forum/freetalk_en">
+      <ion-icon name="chatboxes"></ion-icon>
+    </ion-button>
+
+    <ion-button routerLink="/forum/qna_en">
+      <ion-icon name="help-circle"></ion-icon>
+    </ion-button>
+    
+    <ion-button routerLink="/forum/buyandsell_en">
+      <ion-icon name="cart"></ion-icon>
+    </ion-button>
+    <ion-button routerLink="/job">
       <ion-icon name="contact"></ion-icon>
     </ion-button>
-    <ion-button routerLink="/register">
+
+    <!-- <ion-button routerLink="/register">
       <ion-icon name="person-add"></ion-icon>
-    </ion-button>
+    </ion-button> -->
+
     <ion-button routerLink="/menu">
       <ion-icon name="menu"></ion-icon>
     </ion-button>

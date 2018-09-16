@@ -16,10 +16,10 @@
 
   <ion-item>
     <ion-label>Post on</ion-label>
-    <ion-text>{{ forums[postId] }}</ion-text>
-    <ion-button *ngIf=" !p " class="" size="small" color="light" (click)=" post='blog' ">My Blog</ion-button>
-    <ion-button *ngIf=" !u " class="ml-1" size="small" color="light" (click)=" p ='qna' ">QnA</ion-button>
-    <ion-select class="ml-1" selectedText="Choose" [(ngModel)]="postId" (ionChange)=" onChangeForum( $event ) "
+    <ion-text color="primary">{{ forums[form.post_id] }}</ion-text>
+    <!-- <ion-button *ngIf=" !form.post_id " class="" size="small" color="primary" (click)=" form.post_id = 'blog' ">My Blog</ion-button>
+    <ion-button *ngIf=" !form.post_id " class="ml-1" size="small" color="light" (click)=" form.post_id ='qna' ">QnA</ion-button> -->
+    <ion-select class="ml-1" selectedText="Or choose ..." [(ngModel)]="form.post_id" (ionChange)=" onChangeForum( $event ) "
       [interfaceOptions]="{ subHeader: 'Post', message: 'Select where to post' }" interface="popover">
       <ion-select-option *ngFor="let forum of forums | keyvalue" value="{{ forum.key }}">{{ forum.value }}</ion-select-option>
     </ion-select>
@@ -27,7 +27,7 @@
 
 
   <ion-item>
-    <ng-simple-editor></ng-simple-editor>
+    <ng-simple-editor #editor></ng-simple-editor>
   </ion-item>
 
   <ion-item>
@@ -72,6 +72,6 @@
     <ion-text>Emoticons</ion-text>
   </ion-item>
 
-  <ion-button expand="full">Post</ion-button>
+  <ion-button expand="full" (click)=" onSubmit() ">Post</ion-button>
 
 </ion-content>

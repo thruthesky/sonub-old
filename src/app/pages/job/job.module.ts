@@ -5,14 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HousemaidPage } from './housemaid.page';
+import { JobPage } from './job.page';
 import { HeaderComponentModule } from '../../components/header/header.component.module';
 import { JobListComponentModule } from '../../modules/components/forum/job/list/job-list.component.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: HousemaidPage
+    component: JobPage
   }
 ];
 
@@ -25,6 +25,6 @@ const routes: Routes = [
     HeaderComponentModule,
     JobListComponentModule
   ],
-  declarations: [HousemaidPage]
+  declarations: [JobPage]
 })
-export class HousemaidPageModule { }
+export class JobPageModule { }

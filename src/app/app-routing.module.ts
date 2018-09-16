@@ -4,12 +4,16 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
-  { path: 'housemaid', loadChildren: './pages/housemaid/housemaid.module#HousemaidPageModule' },
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'profile', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'create', loadChildren: './pages/create/create.module#CreatePageModule' },
+  { path: 'job', loadChildren: './pages/job/job.module#JobPageModule' },
+  { path: 'forum/:post_id', loadChildren: './pages/forum/forum.module#ForumPageModule' },
+  { path: 'settings', loadChildren: './pages/settings/settings-menu/settings-menu.module#SettingsMenuPageModule' },
+  { path: 'settings/language', loadChildren: './pages/settings/settings-language/settings-language.module#SettingsLanguagePageModule' },
+  { path: 'settings/dev-info', loadChildren: './pages/settings/settings-dev-info/settings-dev-info.module#SettingsDevInfoPageModule' },
 ];
 
 @NgModule({
