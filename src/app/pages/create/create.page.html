@@ -17,8 +17,6 @@
   <ion-item>
     <ion-label>Post on</ion-label>
     <ion-text color="primary">{{ forums[form.post_id] }}</ion-text>
-    <!-- <ion-button *ngIf=" !form.post_id " class="" size="small" color="primary" (click)=" form.post_id = 'blog' ">My Blog</ion-button>
-    <ion-button *ngIf=" !form.post_id " class="ml-1" size="small" color="light" (click)=" form.post_id ='qna' ">QnA</ion-button> -->
     <ion-select class="ml-1" selectedText="Or choose ..." [(ngModel)]="form.post_id" (ionChange)=" onChangeForum( $event ) "
       [interfaceOptions]="{ subHeader: 'Post', message: 'Select where to post' }" interface="popover">
       <ion-select-option *ngFor="let forum of forums | keyvalue" value="{{ forum.key }}">{{ forum.value }}</ion-select-option>
@@ -27,7 +25,7 @@
 
 
   <ion-item>
-    <ng-simple-editor #editor></ng-simple-editor>
+    <ng-simple-editor #editor [buttons]="['bold', 'italic', 'underline', 'fontsize', 'forecolor', 'backcolor', 'link', 'unink', 'table', 'formatblock', 'insertline', 'insertimage', 'orderedlist', 'unorderedlist', 'left', 'center', 'strike', 'big', 'normal']"></ng-simple-editor>
   </ion-item>
 
   <ion-item>

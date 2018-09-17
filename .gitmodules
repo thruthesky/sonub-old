@@ -1,0 +1,6 @@
+[submodule "src/app/modules/philgo-api"]
+	path = src/app/modules/philgo-api
+	url = https://github.com/thruthesky/philgo-api
+[submodule "src/app/modules/components"]
+	path = src/app/modules/components
+	url = https://github.com/thruthesky/components

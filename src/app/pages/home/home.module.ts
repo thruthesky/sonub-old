@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import { HeaderComponentModule } from '../../components/header/header.component.module';
 import { AvatarComponentModule } from '../../components/avatar/avatar.component.module';
+import { RequestPushNotificationComponent } from '../../components/request-push-notification/request-push-notification.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { AvatarComponentModule } from '../../components/avatar/avatar.component.
     AvatarComponentModule
   ],
   declarations: [
-    HomePage
+    HomePage,
+    RequestPushNotificationComponent
   ]
 })
 export class HomePageModule {}

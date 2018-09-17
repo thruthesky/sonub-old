@@ -27,6 +27,7 @@ declare let FCMPlugin;
 export class AppService {
 
 
+  _ = _;
   /**
    * Firebase
    */
@@ -51,7 +52,7 @@ export class AppService {
     private router: Router,
     private toastController: ToastController,
     private readonly alertController: AlertController,
-    private philgo: PhilGoApiService,
+    public philgo: PhilGoApiService,
     private platform: Platform
   ) {
     _.languageCode = _.getUserLanguage();
