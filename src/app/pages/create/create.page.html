@@ -32,7 +32,7 @@
 
   <ion-item>
     <ion-label>Title</ion-label>
-    <ion-input [(ngModel)]=" form.subject "></ion-input>
+    <ion-input [(ngModel)]=" form.subject " (keyup)="onSubjectKeyUp()"></ion-input>
   </ion-item>
 
 

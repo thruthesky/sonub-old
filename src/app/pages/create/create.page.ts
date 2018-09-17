@@ -15,6 +15,7 @@ export class CreatePage implements OnInit {
     form: ApiPost = <ApiPost>{
         post_id: 'blog'
     };
+
     forums = {
         blog: 'My Blog',
         qna: 'QnA',
@@ -25,6 +26,11 @@ export class CreatePage implements OnInit {
         hotel: 'Hotel/House',
         real_estate: 'Sell House'
     };
+
+    /**
+     * Subject will be updated from content only if it is not touched by user.
+     */
+    subjectChanged = false;
     constructor(
         public a: AppService,
         public philgo: PhilGoApiService
@@ -60,9 +66,16 @@ export class CreatePage implements OnInit {
 
 
     onChangeContent(event: Event) {
-        let str = this.a._.stripTags(this.editor.content);
-        str = this.a._.htmlDecode(str);
-        this.form.subject = str.substr(0, 30);
+        if (!this.subjectChanged) {
+            let str = this.a._.stripTags(this.editor.content);
+            str = this.a._.htmlDecode(str).trim();
+            this.form.subject = str.substr(0, 30);
+        }
+    }
+
+    onSubjectKeyUp() {
+        this.subjectChanged = true;
+        console.log('working?');
     }
 }
 

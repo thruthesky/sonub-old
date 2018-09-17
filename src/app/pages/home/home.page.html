@@ -20,7 +20,7 @@
       My new posts
       <div *ngFor="let post of a.frontPage.my_latest_blog_posts ">
         {{ post.subject }}
-        <div [innerHTML]="post.content"></div>
+        <div [innerHTML]=" a.safeHtml(post.content) "></div>
       </div>
     </div>
   </div>

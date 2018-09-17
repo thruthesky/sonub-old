@@ -8,6 +8,7 @@ import { SimpleLibrary as _ } from 'ng-simple-library';
 import { environment } from '../../environments/environment';
 import * as firebase from 'firebase/app';
 import 'firebase/messaging';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 interface Environment {
@@ -60,6 +61,7 @@ export class AppService {
   //
   constructor(
     private router: Router,
+    private domSanitizer: DomSanitizer,
     private toastController: ToastController,
     private readonly alertController: AlertController,
     public philgo: PhilGoApiService,
@@ -264,11 +266,15 @@ export class AppService {
    * @param post post
    */
   postContentOnMainPhoto(post: ApiPost) {
-    console.log(post);
+    // console.log(post);
     if (post.post_id === 'ads') {
       return post.varchar_3;
     } else {
       return post.content;
     }
+  }
+
+  safeHtml( html ) {
+    return this.domSanitizer.bypassSecurityTrustHtml( html );
   }
 }
