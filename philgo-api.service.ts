@@ -674,6 +674,12 @@ export class PhilGoApiService {
     firebaseApp: firebase.app.App;
     db: firebase.database.Reference;
 
+    /**
+     * 기본 영역. Push token 을 저장 할 때 사용하는 등의 영역 표시.
+     * 이 함수는 처음 초기화를 할 때, 수정 가능.
+     */
+    domain = 'chat';
+
 
     /**
      * @see https://docs.google.com/document/d/1E_IxnMGDPkjOI0Fl3Hg07RbFwYRjHq89VlfBuESu3BI/edit#heading=h.odwylmdcu2i8
@@ -690,8 +696,9 @@ export class PhilGoApiService {
      * @see https://docs.google.com/document/d/1E_IxnMGDPkjOI0Fl3Hg07RbFwYRjHq89VlfBuESu3BI/edit#heading=h.ay2ukor65xjf
      */
     config = {
+        version: '',
         postConfigs: postConfigs
-    }
+    };
     /**
      * Api information. This is not an information of a one app. It is Api information.
      */
@@ -746,6 +753,13 @@ export class PhilGoApiService {
 
 
 
+    /**
+     * If debug is set to true, it will console.log() debug informations.
+     * @example
+        philgo.debug = true;
+        philgo.app('sonub.frontPage').subscribe( res => { ... } )
+     */
+    debug = false;
 
     /**
      *
@@ -806,7 +820,7 @@ export class PhilGoApiService {
                 }
             }
         } else {
-            console.log("NO FORUM NAME FOR: ", post_id);
+            console.log('NO FORUM NAME FOR: ', post_id);
             return NO_FORUM_NAME;
         }
     }
@@ -862,10 +876,10 @@ export class PhilGoApiService {
     }
 
     private validatePost(data) {
-        const q = this.httpBuildQuery(data);
+        // const q = this.httpBuildQuery(data);
         // console.log('PhilGoApiService::post() url: ', this.getServerUrl() + '?' + q);
         if (!this.getServerUrl()) {
-            // console.error(`Error. Server URL is not set.`);
+            console.error(`Error. Server URL is not set.`);
         }
     }
 
@@ -894,6 +908,10 @@ export class PhilGoApiService {
      *      - 에러가 있으면 { code: number, message: string } 으로 Observable 이 리턴된다.
      */
     post(data): Observable<any> {
+        if (this.debug) {
+            const q = this.httpBuildQuery(data);
+            console.log('PhilGoApiService::post() url: ', this.getServerUrl() + '?' + q);
+        }
         this.validatePost(data);
         if (!this.getServerUrl()) {
             return throwError(this.error(ApiErrorUrlNotSet, 'Server url is not set. Set it on App Module constructor().'));
@@ -1545,7 +1563,9 @@ export class PhilGoApiService {
      *  this.thumbnailUrl({ idx: idx, width: 64, height: 64 });
      */
     thumbnailUrl(option: ApiThumbnailOption): string {
-        if ((option.idx === void 0 || !option.idx || option.idx === '0' ) && (option.path === void 0 || !option.path)) return '';
+        if ((option.idx === void 0 || !option.idx || option.idx === '0') && (option.path === void 0 || !option.path)) {
+            return '';
+        }
 
         let url = this.getFileServerUrl().replace('api.php', '');
         let type = 'adaptive';
@@ -1567,7 +1587,7 @@ export class PhilGoApiService {
         return url;
     }
 
-    
+
 
     deleteFile(idx: number) {
         return this.queryVersion2({ action: 'data_delete_submit', idx: idx });
@@ -1633,7 +1653,9 @@ export class PhilGoApiService {
      * @param Ymd Ymd string
      */
     dateYmd(Ymd: string) {
-        if (!Ymd || !Ymd.length || Ymd.length !== 8) return '0000-00-00';
+        if (!Ymd || !Ymd.length || Ymd.length !== 8) {
+            return '0000-00-00';
+        }
         return Ymd.substr(0, 4) + '-' + Ymd.substr(4, 2) + '-' + Ymd.substr(6, 2);
     }
 
@@ -1864,7 +1886,7 @@ export class PhilGoApiService {
      *  정렬하고,
      *  새메시지 이벤트 listener 를 등록하고,
      *  새로운 메시지 수를 세고,
-     * 
+     *
      * 등등 ... 필요한 작업을 하고, philgo api 객체에 저장을 한다.
      *
      * @desc 이 함수는 여러고 곳에서 호출된다.
@@ -2119,11 +2141,11 @@ export class PhilGoApiService {
 
 
     /**
-     * Save push token
+     * Save push token.
      * @param token token
      */
-    chatSaveToken(data: { token: string, domain?: string }) {
-        return this.query('chat.saveToken', data);
+    saveToken(data: { token: string, domain?: string }) {
+        return this.query('saveToken', data);
     }
 
     chatRoomUsers(idx_chat_room: any): Observable<ApiChatRoomUsers> {
@@ -2261,7 +2283,7 @@ export class PhilGoApiService {
              * Don't toast if it's my message.
              */
             if (this.isMyChatMessage(message)) {
-                console.log('isMyChatMessage() ? => yes, I am in the chat room => just return')
+                console.log('isMyChatMessage() ? => yes, I am in the chat room => just return');
                 return;
             }
             /**
@@ -2350,31 +2372,37 @@ export class PhilGoApiService {
 
     /**
      *
+     * @fix 기존 코드가 chat 기능에 맞추어져 있었는데, 일반적으로 사용 할 수 있도록 함.
+     *
      * 앱 또는 웹 토큰을 실제로 서버에 저장한다.
      *
-     * 앱이든 웹이든 반드시 실행을 하면 이 함수가 호출된다.
+     * 앱이든 웹이든 반드시 실행을 하면 이 함수가 호출된다. (또는 호출되어야 한다.)
      *
-     * 그냥 매우 간단하게 !!!! 접속 할 때 마다 항상 서버에 저장한다.
+     * 그리고 그냥 매우 간단하게 !!!! 접속 할 때 마다 항상 서버에 저장한다.
      *
      * 맨 처음 접속할 때, 로그인을 한 다음에 접속하는 것이 좋다.
      *
      * @param token push notification token
      *
-     * @todo domain 옵션을 수정 할 수 있도록 한다.
+     * @desc domain 옵션은 초기화 할 때, 수정 할 수 있다.
+     *
+     * @example
+         this.philgo.updatePusTokenToServer('token....').subscribe(res => {
+            console.log('saveToken', res);
+        }, e => {
+            console.log('Error on aveToken(): If the token exists, just ignore. It is not an error. ', e);
+        });
      */
-    updatePusTokenToServer(token) {
+    updatePusTokenToServer(token): Observable<any> {
         this.pushToken = token; // Cordova 는 이미 값이 있지만, 웹에는 적용을 해 준다.
         // console.log('      updatePusTokenToServer(): ', token);
         if (!token) {
             // console.log('token empty. return.');
             return;
         }
-        this.chatSaveToken({ token: token, domain: 'chat' }).subscribe(res => {
-            // console.log('chat.saveToken', res);
-        }, e => {
-            // console.log('Error on chat.saveToken(): If the token exists, just ignore. It is not an error. ', e);
-        });
+        return this.saveToken({ token: token, domain: this.domain });
     }
+
 
 
     /**
@@ -2513,7 +2541,7 @@ export class PhilGoApiService {
      *  second, it will fire event with server data.
      */
     app(appMethod: string, data = {}, options: { cache?: boolean } = {}): Observable<any> {
-        let key = appMethod;
+        const key = appMethod;
         data['appMethod'] = appMethod;
         if (options.cache) {
             const re = AngularLibrary.get(key);
@@ -2521,13 +2549,12 @@ export class PhilGoApiService {
                 re['cache'] = true;
             }
             const subject = new BehaviorSubject(re);
-            this.query('app.runAction', data).subscribe(data => {
-                AngularLibrary.set(key, data);
-                subject.next(data);
+            this.query('app.runAction', data).subscribe(res => {
+                AngularLibrary.set(key, res);
+                subject.next(res);
             }, e => subject.error(e));
             return subject;
-        }
-        else {
+        } else {
             return this.query('app.runAction', data);
         }
     }
