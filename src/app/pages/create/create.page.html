@@ -22,11 +22,19 @@
       <ion-select-option *ngFor="let forum of forums | keyvalue" value="{{ forum.key }}">{{ forum.value }}</ion-select-option>
     </ion-select>
   </ion-item>
-
+  
 
   <ion-item>
-    <ng-simple-editor #editor [buttons]="['bold', 'italic', 'underline', 'fontsize', 'forecolor', 'backcolor', 'link', 'unink', 'table', 'formatblock', 'insertline', 'insertimage', 'orderedlist', 'unorderedlist', 'left', 'center', 'strike', 'big', 'normal']"></ng-simple-editor>
+    <ng-simple-editor #editor [buttons]="['bold', 'italic', 'underline', 'fontsize', 'forecolor', 'backcolor', 'link', 'unink', 'table', 'formatblock', 'insertline', 'insertimage', 'orderedlist', 'unorderedlist', 'left', 'center', 'strike', 'big', 'normal']"
+    (change)=" onChangeContent( $event ) "
+    ></ng-simple-editor>
   </ion-item>
+
+  <ion-item>
+    <ion-label>Title</ion-label>
+    <ion-input [(ngModel)]=" form.subject "></ion-input>
+  </ion-item>
+
 
   <ion-item>
     <ion-buttons>

@@ -44,7 +44,7 @@ export class CreatePage implements OnInit {
         /**
          * Create
          */
-        if ( ! this.form.post_id ) {
+        if (!this.form.post_id) {
             // this.a.toast({code: -1, message: `Please choose where to 'post on'`});
             // this.form.post_id = this.defaultPostId;
         }
@@ -55,6 +55,13 @@ export class CreatePage implements OnInit {
         }, e => {
             this.a.toast(e);
         });
+    }
+
+
+    onChangeContent(event: Event) {
+        let str = this.a._.stripTags(this.editor.content);
+        str = this.a._.htmlDecode( str );
+        this.form.subject = str.substr(0, 30);
     }
 }
 
