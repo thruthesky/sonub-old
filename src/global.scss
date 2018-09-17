@@ -10,6 +10,10 @@
 @import "~@ionic/angular/css/flex-utils.css";
 @import './theme/bootstrap-custom.scss';
 $primary-color: #007bff;
+
+body, a, div, p {
+    font-family: Arial, Menlo, Monaco, "Courier New", monospace;
+}
 .no-header-shadow {
     &:after {
         display: none;

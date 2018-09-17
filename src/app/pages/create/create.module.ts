@@ -10,6 +10,7 @@ import { HeaderComponentModule } from '../../components/header/header.component.
 import { AvatarComponentModule } from '../../components/avatar/avatar.component.module';
 
 import { NgSimpleEditorModule } from 'ng-simple-editor';
+import { FilesComponentModule } from '../../modules/components/forum/files/files.module';
 
 const routes: Routes = [
   {
@@ -26,7 +27,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HeaderComponentModule,
     AvatarComponentModule,
-    NgSimpleEditorModule
+    NgSimpleEditorModule,
+    FilesComponentModule
   ],
   declarations: [CreatePage]
 })

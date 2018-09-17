@@ -65,14 +65,21 @@
     </ion-buttons>
   </ion-item>
 
+  <app-files-component class="d-block my-3" [edit]=" true " [post]=" form " [percentage]=" percentage "></app-files-component>
+
   <ion-item>
-    <ion-icon name="image"></ion-icon>
-    <ion-text>Photo</ion-text>
+    <ion-button  class="w-120px fs-sm"  expand="block"  *ngIf=" isWeb " color="light" fill="solid">
+      <ion-icon slot="start" name="attach"></ion-icon>
+      <ion-text>Photo or file upload</ion-text>
+      <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
+    </ion-button>
+
+    <ion-button  class="w-120px fs-sm"  expand="block" *ngIf=" isCordova " color="light" fill="solid" (click)=" onClickCordovaFileUploadButton() ">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      <ion-text>Photo or file upload</ion-text>
+    </ion-button>
   </ion-item>
-  <ion-item>
-    <ion-icon name="videocam"></ion-icon>
-    <ion-text>Video</ion-text>
-  </ion-item>
+  
   <ion-item>
     <ion-icon name="happy"></ion-icon>
     <ion-text>Emoticons</ion-text>
