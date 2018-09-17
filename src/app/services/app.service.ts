@@ -257,4 +257,18 @@ export class AppService {
       this.frontPage = res;
     }, e => this.toast(e));
   }
+
+  /**
+   * Returns content of post.
+   * Each post has differenct fields for showing on different palces.
+   * @param post post
+   */
+  postContentOnMainPhoto(post: ApiPost) {
+    console.log(post);
+    if (post.post_id === 'ads') {
+      return post.varchar_3;
+    } else {
+      return post.content;
+    }
+  }
 }

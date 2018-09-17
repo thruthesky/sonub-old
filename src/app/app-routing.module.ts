@@ -11,9 +11,12 @@ const routes: Routes = [
   { path: 'create', loadChildren: './pages/create/create.module#CreatePageModule' },
   { path: 'job', loadChildren: './pages/job/job.module#JobPageModule' },
   { path: 'forum/:post_id', loadChildren: './pages/forum/forum.module#ForumPageModule' },
+  { path: 'forum/:post_id/:idx', loadChildren: './pages/forum/forum.module#ForumPageModule' },
   { path: 'settings', loadChildren: './pages/settings/settings-menu/settings-menu.module#SettingsMenuPageModule' },
   { path: 'settings/language', loadChildren: './pages/settings/settings-language/settings-language.module#SettingsLanguagePageModule' },
   { path: 'settings/dev-info', loadChildren: './pages/settings/settings-dev-info/settings-dev-info.module#SettingsDevInfoPageModule' },
+  { path: 'ads', loadChildren: './pages/ads/ads.module#AdsPageModule' },
+  { path: 'ads/:idx', loadChildren: './pages/ads-view/ads-view.module#AdsViewPageModule' }
 ];
 
 @NgModule({
