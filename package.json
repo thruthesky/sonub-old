@@ -30,6 +30,7 @@
     "core-js": "^2.5.3",
     "firebase": "^5.5.0",
     "ng-simple-editor": "0.0.6",
+    "ng-simple-library": "0.0.2",
     "rxjs": "6.2.2",
     "zone.js": "^0.8.26"
   },

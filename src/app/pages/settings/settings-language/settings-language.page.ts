@@ -21,10 +21,10 @@ export class SettingsLanguagePage implements OnInit {
 
   onIonSelect(event: Event) {
     const radio: HTMLInputElement = <any>event.target;
-    this.a.tr.languageCode = radio.value;
+    this.a.languageCode = radio.value;
     this.philgo.setLanguage(radio.value).subscribe(res => {
       // console.log(res);
-      this.a.tr.languageCode = radio.value;
+      this.a.languageCode = radio.value;
     }, e => this.a.toast(e));
   }
 

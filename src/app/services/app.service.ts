@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { PhilGoApiService, ERROR_WRONG_SESSION_ID, ERROR_WRONG_IDX_MEMBER } from '../modules/philgo-api/philgo-api.service';
 import { ToastController, Platform, AlertController } from '@ionic/angular';
-import { LanguageTranslate } from '../modules/language-translate/language-translate';
-import { AngularLibrary } from '../modules/angular-library/angular-library';
+import { SimpleLibrary as _ } from 'ng-simple-library';
+
 
 import { environment } from '../../environments/environment';
 import * as firebase from 'firebase/app';
@@ -52,13 +52,16 @@ export class AppService {
     private toastController: ToastController,
     private readonly alertController: AlertController,
     private philgo: PhilGoApiService,
-    public tr: LanguageTranslate,
     private platform: Platform
   ) {
-    this.tr.languageCode = AngularLibrary.getUserLanguage();
+    _.languageCode = _.getUserLanguage();
     this.initFirebase();
     this.initBackButtonExit();
     this.initPushNotification();
+  }
+
+  set languageCode(ln) {
+    _.languageCode = ln;
   }
 
   initBackButtonExit() {
@@ -69,17 +72,17 @@ export class AppService {
         setTimeout(() => this.backButtonCounter = 0, 500);
       } else {
         const alert = await this.alertController.create({
-          header: this.tr.t({ ko: '채팅앱 종료', en: 'Exit App!', ch: '退出App！', jp: '終了アプリ！' }),
-          message: this.tr.t({ ko: '채팅앱을 종료하시겠습니까?', en: 'Do you want to exist App?', ch: '你想存在App吗？', jp: 'あなたはAppを存在させたいですか？' }),
+          header: _.t({ ko: '채팅앱 종료', en: 'Exit App!', ch: '退出App！', jp: '終了アプリ！' }),
+          message: _.t({ ko: '채팅앱을 종료하시겠습니까?', en: 'Do you want to exist App?', ch: '你想存在App吗？', jp: 'あなたはAppを存在させたいですか？' }),
           buttons: [
             {
-              text: this.tr.t({ ko: '아니오', en: 'No', ch: '没有', jp: 'いいえ' }),
+              text: _.t({ ko: '아니오', en: 'No', ch: '没有', jp: 'いいえ' }),
               role: 'cancel',
               cssClass: 'secondary',
               handler: (blah) => {
               }
             }, {
-              text: this.tr.t({ ko: '예', en: 'Yes', ch: '是', jp: 'はい' }),
+              text: _.t({ ko: '예', en: 'Yes', ch: '是', jp: 'はい' }),
               handler: () => {
                 navigator['app'].exitApp();
               }
@@ -144,7 +147,7 @@ export class AppService {
    *
    */
   getPlatform(): string {
-    if (AngularLibrary.isCordova) {
+    if (_.isCordova()) {
       return 'cordova';
     } else {
       return 'web';
@@ -179,7 +182,7 @@ export class AppService {
 
 
   t(code: any, info?) {
-    return this.tr.t(code, info);
+    return _.t(code, info);
   }
 
 
@@ -207,7 +210,7 @@ export class AppService {
       };
     }
     if (o.closeButtonText === void 0) {
-      o.closeButtonText = this.tr.t({ ko: '닫기', en: 'Close', jp: '閉じる', ch: '关' });
+      o.closeButtonText = _.t({ ko: '닫기', en: 'Close', jp: '閉じる', ch: '关' });
     }
     if (o.duration === void 0) {
       o.duration = 10000;

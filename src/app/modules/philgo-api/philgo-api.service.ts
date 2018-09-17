@@ -658,8 +658,9 @@ export interface ApiChatSearch {
 import * as firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/messaging';
-import { AngularLibrary } from '../angular-library/angular-library';
-import { LanguageTranslate, LanguageText } from '../language-translate/language-translate';
+import { SimpleLibrary as _ } from 'ng-simple-library';
+
+
 /**
  * PhilGoApiService
  */
@@ -748,7 +749,7 @@ export class PhilGoApiService {
      * 즉, 별도로 코딩은 필요하지 않고, philgo.setLanguage('ko').subscribe() 만 하면 된다.
      * 만약, LanguageTranslate 를 사용하면 LanguageTranslate.languageCode 을 업데이트하면 된다.
      */
-    ln = AngularLibrary.getUserLanguage();
+    ln = _.getUserLanguage();
 
 
 
@@ -768,8 +769,7 @@ export class PhilGoApiService {
      */
     constructor(
         private sanitizer: DomSanitizer,
-        public http: HttpClient,
-        public tr: LanguageTranslate
+        public http: HttpClient
     ) {
         // console.log('PhilGoApiService::constructor');
 
@@ -1865,13 +1865,13 @@ export class PhilGoApiService {
         let cache = false;
         if (options.cacheCallback) {
             cache = true;
-            options.cacheCallback(AngularLibrary.get(CACHE_CHAT_MY_ROOM));
+            options.cacheCallback(_.get(CACHE_CHAT_MY_ROOM));
         }
         return this.query<ApiChatRooms>('chat.myRooms').pipe(
             map(res => {
                 // this.info = res.info; // 이것은 arrangeMyRooms() 에서 됨.
                 if (cache) {
-                    AngularLibrary.set(CACHE_CHAT_MY_ROOM, res);
+                    _.set(CACHE_CHAT_MY_ROOM, res);
                 }
                 return res;
             })
@@ -2050,7 +2050,7 @@ export class PhilGoApiService {
         options: { cacheCallback: (res: ApiChatRoomEnter) => void } = <any>{}): Observable<ApiChatRoomEnter> {
 
         if (options.cacheCallback) {
-            const rooms: ApiChatRooms = AngularLibrary.get(CACHE_CHAT_MY_ROOM);
+            const rooms: ApiChatRooms = _.get(CACHE_CHAT_MY_ROOM);
             if (rooms && rooms.rooms.length) {
                 const res = rooms.rooms.find(room => room.idx_room === data.idx);
                 if (res) {
@@ -2168,7 +2168,7 @@ export class PhilGoApiService {
     chatResetMyRooms() {
         this.chatResetRoom();
         this.myRooms = [];
-        AngularLibrary.set(CACHE_CHAT_MY_ROOM, null);
+        _.set(CACHE_CHAT_MY_ROOM, null);
     }
 
     chatUpdateRoomSetting(form: ApiChatRoomUpdate): Observable<number> {
@@ -2413,7 +2413,7 @@ export class PhilGoApiService {
      */
     updateWebPushToken() {
         // console.log('  ()updateWebPushToken ==>');
-        if (!AngularLibrary.isCordova() && AngularLibrary.isPushPermissionGranted()) {
+        if (!_.isCordova() && _.isWebPushPermissionGranted()) {
             this.requestWebPushPermission();
         }
     }
@@ -2457,7 +2457,7 @@ export class PhilGoApiService {
     lastMessage(room: ApiChatRoom) {
         if (room && room.messages && room.messages.length) {
             const message = room.messages[0].message;
-            return AngularLibrary.stripTags(message);
+            return _.stripTags(message);
         }
     }
 
@@ -2467,7 +2467,7 @@ export class PhilGoApiService {
      * @param v value of number
      */
     parseNumber(v) {
-        return AngularLibrary.parseNumber(v);
+        return _.parseNumber(v);
     }
 
 
@@ -2485,7 +2485,7 @@ export class PhilGoApiService {
     setLanguage(ln) {
         return this.query('setLanguage', { ln: ln }).pipe(
             map(res => {
-                AngularLibrary.setUserLanguage(ln);
+                _.setUserLanguage(ln);
                 this.ln = ln;
                 return res;
             })
@@ -2498,7 +2498,7 @@ export class PhilGoApiService {
      * @param type Mime type
      */
     isImageType(type) {
-        return AngularLibrary.isImageType(type);
+        return _.isImageType(type);
     }
 
     /**
@@ -2516,15 +2516,15 @@ export class PhilGoApiService {
             const v = filename.substr(0, li);
             if (v) {
                 re.name = v.substr(0, v.lastIndexOf(' '));
-                re.size = AngularLibrary.humanFileSize(v.substr(v.lastIndexOf(' ') + 1));
+                re.size = _.humanFileSize(v.substr(v.lastIndexOf(' ') + 1));
                 // console.log('info name: ', re);
             }
         }
         return re;
     }
 
-    t(code: LanguageText, info?: any): string {
-        return this.tr.t(code, info);
+    t(code, info?: any): string {
+        return _.t(code, info);
     }
 
 
@@ -2544,13 +2544,13 @@ export class PhilGoApiService {
         const key = appMethod;
         data['appMethod'] = appMethod;
         if (options.cache) {
-            const re = AngularLibrary.get(key);
+            const re = _.get(key);
             if (re) {
                 re['cache'] = true;
             }
             const subject = new BehaviorSubject(re);
             this.query('app.runAction', data).subscribe(res => {
-                AngularLibrary.set(key, res);
+                _.set(key, res);
                 subject.next(res);
             }, e => subject.error(e));
             return subject;

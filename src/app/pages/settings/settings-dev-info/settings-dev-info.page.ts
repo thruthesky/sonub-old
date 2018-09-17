@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../../services/app.service';
 import { PhilGoApiService } from '../../../modules/philgo-api/philgo-api.service';
-import { AngularLibrary } from '../../../modules/angular-library/angular-library';
+import { SimpleLibrary as _ } from 'ng-simple-library';
+
 
 @Component({
   selector: 'app-settings-dev-info',
@@ -11,7 +12,7 @@ import { AngularLibrary } from '../../../modules/angular-library/angular-library
 export class SettingsDevInfoPage implements OnInit {
 
 
-  isCordova = AngularLibrary.isCordova();
+  isCordova = _.isCordova();
   protocol = location.protocol;
 
   constructor(
