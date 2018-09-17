@@ -10,15 +10,16 @@ import { AngularLibrary } from '../../modules/angular-library/angular-library';
 })
 export class HomePage {
 
+  res;
   _ = AngularLibrary;
   constructor(
     public a: AppService,
     public philgo: PhilGoApiService
   ) {
 
-    // philgo.debug = true;
     philgo.app('sonub.frontPage').subscribe(res => {
       console.log('sonub.frontPage()', res);
+      this.res = res;
     }, e => this.a.toast(e));
   }
 
