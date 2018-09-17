@@ -13,12 +13,12 @@
   </div>
 
 
-  <div *ngIf=" res ">
-      <div>Sonub Version: {{ res.info.version }}</div>
-      <div>My blog posts: {{ res.no_of_my_blog_posts }}</div>
+  <div *ngIf=" a.frontPage ">
+      <div>Sonub Version: {{ a.frontPage.info.version }}</div>
+      <div>My blog posts: {{ a.frontPage.no_of_my_blog_posts }}</div>
       <div>
         My new posts
-        <div *ngFor="let post of res.my_latest_blog_posts ">
+        <div *ngFor="let post of a.frontPage.my_latest_blog_posts ">
           {{ post.subject }}
           <div [innerHTML]="post.content"></div>
         </div>

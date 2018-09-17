@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { PhilGoApiService, ERROR_WRONG_SESSION_ID, ERROR_WRONG_IDX_MEMBER } from '../modules/philgo-api/philgo-api.service';
+import { PhilGoApiService, ERROR_WRONG_SESSION_ID, ERROR_WRONG_IDX_MEMBER, ApiPost } from '../modules/philgo-api/philgo-api.service';
 import { ToastController, Platform, AlertController } from '@ionic/angular';
 import { SimpleLibrary as _ } from 'ng-simple-library';
 
@@ -17,6 +17,15 @@ interface Environment {
   newFileServerUrl: string;
 }
 
+interface FrontPage {
+  communityPosts: Array<ApiPost>;
+  info: {
+    version: string;
+  };
+  my_latest_blog_posts: Array<ApiPost>;
+  no_of_my_blog_posts: number;
+}
+
 
 declare let FCMPlugin;
 
@@ -26,6 +35,7 @@ declare let FCMPlugin;
 })
 export class AppService {
 
+  frontPage: FrontPage = null;
 
   _ = _;
   /**
@@ -59,6 +69,7 @@ export class AppService {
     this.initFirebase();
     this.initBackButtonExit();
     this.initPushNotification();
+    this.updateFrontPage();
   }
 
   set languageCode(ln) {
@@ -230,4 +241,20 @@ export class AppService {
     toast.present();
   }
 
+
+  /**
+   * This method gets front page data of sonub.
+   * \
+   * @desc When it is being called
+   * - First app load
+   * - When front page information has changed like
+   *    -- User create a blog and needs to show the latest blog on this front page.
+   */
+  updateFrontPage() {
+
+    this.philgo.app('sonub.frontPage').subscribe(res => {
+      console.log('sonub.frontPage()', res);
+      this.frontPage = res;
+    }, e => this.toast(e));
+  }
 }

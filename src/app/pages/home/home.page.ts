@@ -10,17 +10,18 @@ import { SimpleLibrary as _ } from 'ng-simple-library';
 })
 export class HomePage {
 
-  res;
   _ = _;
   constructor(
     public a: AppService,
     public philgo: PhilGoApiService
   ) {
 
-    philgo.app('sonub.frontPage').subscribe(res => {
-      console.log('sonub.frontPage()', res);
-      this.res = res;
-    }, e => this.a.toast(e));
   }
+
+  ionViewDidEnter() {
+    console.log('HomePage::ionViewDidEnter()');
+  }
+
+
 
 }

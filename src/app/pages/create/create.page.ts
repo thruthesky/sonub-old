@@ -51,6 +51,7 @@ export class CreatePage implements OnInit {
         this.form.content = this.editor.content;
         this.philgo.postCreate(this.form).subscribe(res => {
             console.log('create res: ', res);
+            this.a.updateFrontPage();
             this.a.openHome();
         }, e => {
             this.a.toast(e);
@@ -60,7 +61,7 @@ export class CreatePage implements OnInit {
 
     onChangeContent(event: Event) {
         let str = this.a._.stripTags(this.editor.content);
-        str = this.a._.htmlDecode( str );
+        str = this.a._.htmlDecode(str);
         this.form.subject = str.substr(0, 30);
     }
 }
