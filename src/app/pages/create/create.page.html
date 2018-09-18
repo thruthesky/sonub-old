@@ -22,12 +22,10 @@
       <ion-select-option *ngFor="let forum of forums | keyvalue" value="{{ forum.key }}">{{ forum.value }}</ion-select-option>
     </ion-select>
   </ion-item>
-  
+
 
   <ion-item>
-    <ng-simple-editor #editor [buttons]="['bold', 'italic', 'underline', 'fontsize', 'forecolor', 'backcolor', 'link', 'unink', 'table', 'formatblock', 'insertline', 'insertimage', 'orderedlist', 'unorderedlist', 'left', 'center', 'strike', 'big', 'normal']"
-    (change)=" onChangeContent( $event ) "
-    ></ng-simple-editor>
+    <ng-simple-editor #editor [icons]="true" (change)=" onChangeContent( $event ) "></ng-simple-editor>
   </ion-item>
 
   <ion-item>
@@ -68,18 +66,18 @@
   <app-files-component class="d-block my-3" [edit]=" true " [post]=" form " [percentage]=" percentage "></app-files-component>
 
   <ion-item>
-    <ion-button  class="w-120px fs-sm"  expand="block"  *ngIf=" isWeb " color="light" fill="solid">
+    <ion-button class="w-120px fs-sm" expand="block" *ngIf=" isWeb " color="light" fill="solid">
       <ion-icon slot="start" name="attach"></ion-icon>
       <ion-text>Photo or file upload</ion-text>
       <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
     </ion-button>
 
-    <ion-button  class="w-120px fs-sm"  expand="block" *ngIf=" isCordova " color="light" fill="solid" (click)=" onClickCordovaFileUploadButton() ">
+    <ion-button class="w-120px fs-sm" expand="block" *ngIf=" isCordova " color="light" fill="solid" (click)=" onClickCordovaFileUploadButton() ">
       <ion-icon slot="start" name="camera"></ion-icon>
       <ion-text>Photo or file upload</ion-text>
     </ion-button>
   </ion-item>
-  
+
   <ion-item>
     <ion-icon name="happy"></ion-icon>
     <ion-text>Emoticons</ion-text>
