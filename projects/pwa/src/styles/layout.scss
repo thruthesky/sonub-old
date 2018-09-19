@@ -33,15 +33,28 @@
     color: white;
 
     &>div {
+      width: 200px;
       position: fixed;
     }
   }
 
+  #desktop-center {
+    &>div {
+      background-color: aliceblue;
+      padding: $padding;
+    }
+  }
 
-  #position-right {
+  #desktop-right {
     width: 220px;
     background-color: green;
     color: white;
+
+    &>div {
+      width: 200px;
+      position: fixed;
+      bottom: 0;
+    }
   }
 
 }
