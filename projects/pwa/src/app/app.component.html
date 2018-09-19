@@ -1,42 +1,37 @@
-
-
 <div id="mobile-layout" class="d-lg-none">
-  <div id="header">
-      <app-header></app-header>
+  <div id="mobile-header">
+    <app-header></app-header>
   </div>
-  <div id="content">
-      <router-outlet></router-outlet>
+  <div id="mobile-content">
+    <router-outlet></router-outlet>
   </div>
 </div>
 
 
 <div id="desktop-layout" class="d-none d-lg-block">
 
-    <app-desktop-header>
-    </app-desktop-header>
-    
-    <table class="content-layout">
-      <tr>
-        <td><app-desktop-left></app-desktop-left></td>
-        <td>
-          <div>
-            <h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>
-            <h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>
-            <h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>
-            <h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>
-            <h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>
-            <h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>
-            <h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>
-            <h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>
-            <h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>
-            <h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>
-            <h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>
-            <h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1><h1>Home</h1>
-          </div>
-        </td>
-        <td><app-desktop-right></app-desktop-right></td>
-      </tr>
-    </table>
-    
-    
+  <app-desktop-header>
+  </app-desktop-header>
+
+  <table id="content-table">
+    <tr>
+      <td id="desktop-left">
+        <div>
+          <app-desktop-left></app-desktop-left>
+        </div>
+      </td>
+      <td>
+        <div id="desktop-center">
+          <router-outlet></router-outlet>
+        </div>
+      </td>
+      <td>
+        <div id="desktop-right">
+          <app-desktop-right></app-desktop-right>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+
 </div>

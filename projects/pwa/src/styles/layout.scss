@@ -1,41 +1,47 @@
-
 #mobile-layout {
-    #header {
-        position: fixed;
-        z-index: 12345;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: $header-height;
+  #mobile-header {
+    position: fixed;
+    z-index: 12345;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $header-height;
 
-    }
-    #content {
-        margin-top: $header-height;
-        padding: $padding;
-    }
+  }
+
+  #mobile-content {
+    margin-top: $header-height;
+    padding: $padding;
+  }
 }
 
 
-.content-layout {
+#desktop-layout {
+  #content-table {
     margin: 0 auto;
     width: 100%;
     max-width: 1200px;
-}
 
-.content-layout td:first-child {
-    vertical-align: top;
+    tr {
+      vertical-align: top;
+    }
+  }
+
+  #desktop-left {
     width: 220px;
     background-color: blue;
     color: white;
-}
 
-.content-layout td:first-child > * {
-    position: fixed;
-}
+    &>div {
+      position: fixed;
+    }
+  }
 
-.content-layout td:last-child {
-    vertical-align: top;
+
+  #position-right {
     width: 220px;
     background-color: green;
     color: white;
+  }
+
 }
