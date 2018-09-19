@@ -1,3 +1,4 @@
+
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
@@ -37,3 +38,34 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+# ...
+
+*~
+*.sw[mnpcod]
+*.log
+*.tmp
+*.tmp.*
+log.txt
+
+tmp/
+temp/
+platforms/
+plugins/
+plugins/android.json
+plugins/ios.json
+$RECYCLE.BIN/
+
+.vscode/
+npm-debug.log*
+
+.idea/
+.ionic/
+.sourcemaps/
+.sass-cache/
+.tmp/
+.versions/
+coverage/
+www/
+
+*.sublime-project
+*.sublime-workspace
