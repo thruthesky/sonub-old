@@ -1,0 +1,11 @@
+@import '../../../styles/variables';
+.header {
+    box-sizing: border-box;
+    height: $header-height;
+    overflow: hidden;
+    background-color: #ddd;
+}
+
+.padding {
+    padding: $padding * 2;
+}
