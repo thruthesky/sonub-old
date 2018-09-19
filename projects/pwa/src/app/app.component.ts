@@ -16,12 +16,40 @@ export class AppComponent {
    */
   fix = false;
   scroll = new Subject();
+
+
+  /**
+   * For window resiznig
+   */
+  resize = new Subject();
+
   constructor(
     public a: AppService
   ) {
     console.log('AppComponent::constructor()');
     this.observeRightSidebarScroll();
+    this.observeWindowResize();
 
+  }
+  @HostListener('window:resize', ['$event']) onresize(event: Event) {
+    this.resize.next();
+  }
+  observeWindowResize() {
+    this.resize.pipe(
+      debounceTime(100)
+    ).subscribe(() => {
+
+      console.log('window resize. width: ', window.innerWidth);
+      if (this.a.isDesktop) {
+        if (window.innerWidth < 768) {
+          location.reload();
+        }
+      } else {
+        if (window.innerWidth > 768) {
+          location.reload();
+        }
+      }
+    });
   }
   @HostListener('window:scroll', ['$event']) onScroll(event: Event) {
     this.scroll.next();
@@ -33,7 +61,7 @@ export class AppComponent {
     ).subscribe(() => {
 
 
-      if (!this.a.md()) {
+      if (this.a.isMobile) {
         return;
       }
 
