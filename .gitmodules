@@ -4,3 +4,6 @@
 [submodule "src/app/modules/components"]
 	path = src/app/modules/components
 	url = https://github.com/thruthesky/components
+[submodule "share/philgo-api"]
+	path = share/philgo-api
+	url = https://github.com/thruthesky/philgo-api

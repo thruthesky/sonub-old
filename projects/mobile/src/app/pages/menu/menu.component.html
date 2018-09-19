@@ -4,12 +4,20 @@
     <i class="material-icons">home</i>
     <h4 matLine>Home</h4>
   </mat-list-item>
-  <mat-list-item routerLink="/login">
+
+  <mat-list-item routerLink="/login" *ngIf=" philgo.isLoggedOut() ">
     <i class="material-icons">
       arrow_forward_ios
     </i>
     <h4 matLine>Login</h4>
   </mat-list-item>
+  <mat-list-item (click)=" philgo.logout(); a.openHome() " *ngIf=" philgo.isLoggedIn() ">
+    <i class="material-icons">
+      arrow_forward_ios
+    </i>
+    <h4 matLine>Logout</h4>
+  </mat-list-item>
+
   <mat-list-item routerLink="/register">
     <i class="material-icons">
       arrow_forward_ios
