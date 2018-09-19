@@ -23,7 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -72,7 +72,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -142,7 +142,7 @@
               "projects/desktop/src/assets"
             ],
             "styles": [
-              "projects/desktop/src/styles.css"
+              "projects/desktop/src/styles.scss"
             ],
             "scripts": []
           },
@@ -191,7 +191,7 @@
             "tsConfig": "projects/desktop/tsconfig.spec.json",
             "karmaConfig": "projects/desktop/karma.conf.js",
             "styles": [
-              "projects/desktop/src/styles.css"
+              "projects/desktop/src/styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -261,7 +261,7 @@
               "projects/mobile/src/assets"
             ],
             "styles": [
-              "projects/mobile/src/styles.css"
+              "projects/mobile/src/styles.scss"
             ],
             "scripts": []
           },
@@ -310,7 +310,7 @@
             "tsConfig": "projects/mobile/tsconfig.spec.json",
             "karmaConfig": "projects/mobile/karma.conf.js",
             "styles": [
-              "projects/mobile/src/styles.css"
+              "projects/mobile/src/styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -361,5 +361,10 @@
       }
     }
   },
-  "defaultProject": "mainApp"
+  "defaultProject": "mainApp",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
