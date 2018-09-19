@@ -4,6 +4,8 @@
 
 * [Old Ionic Components](https://github.com/thruthesky/sonub/tree/4542202059203f4d274b1f1a6ebc3958b629adfe)
 
+* [Old PhilGoApi Components](https://github.com/thruthesky/components)
+
 ## RWD
 
 * When window `resize` event happens, app checks if `md` width changes.

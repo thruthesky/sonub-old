@@ -8,6 +8,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/messaging';
 import { environment } from '../environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 
 
@@ -61,6 +62,7 @@ export class AppService {
   ///
   constructor(
     private domSanitizer: DomSanitizer,
+    private snackBar: MatSnackBar,
     private router: Router,
     public philgo: PhilGoApiService
   ) {
@@ -97,6 +99,13 @@ export class AppService {
 
   openHome() {
     this.router.navigateByUrl('/');
+  }
+  openForum(post_id: string) {
+    if (post_id === 'blog') {
+      this.router.navigateByUrl('/blog');
+    } else {
+      this.router.navigateByUrl('/forum/' + post_id);
+    }
   }
 
   t(code, info?): string {
@@ -177,5 +186,15 @@ export class AppService {
     }
   }
 
+
+  toast(message, action?, config: MatSnackBarConfig = {}) {
+    if (action === void 0) {
+      action = 'Close';
+    }
+    if (config.duration === void 0) {
+      config.duration = 5000;
+    }
+    this.snackBar.open(message, action, config);
+  }
 
 }

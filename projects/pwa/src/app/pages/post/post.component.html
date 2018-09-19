@@ -1,7 +1,23 @@
+<app-avatar></app-avatar>
 
-<ng-simple-editor #editor [icons]="true"></ng-simple-editor>
+
+Posting on {{ form.post_id }}
+
+<ng-simple-editor #editor [icons]="true" (change)=" onChangeContent( $event ) "></ng-simple-editor>
 
 {{ editor.content }}
 
+<div class="mt-1">
 
-<button mat-button>{{ a.t({ en: 'SUBMIT', ko: '글 등록'}) }}</button>
+  <mat-form-field class="w-100">
+    <input class="w-100" matInput placeholder="Title" [(ngModel)]=" form.subject " (keyup)="onSubjectKeyUp()">
+    <mat-hint>Please input title</mat-hint>
+  </mat-form-field>
+
+</div>
+<div class="mt-1">
+
+  <button mat-flat-button (click)=" onSubmit() ">{{ a.t({ en: 'SUBMIT', ko: '글 등록'}) }}</button>
+
+
+</div>

@@ -1,0 +1,15 @@
+<p>
+  blog works!
+</p>
+<button mat-flat-button routerLink="/post/blog">Post on my blog</button>
+
+<div *ngIf=" res?.posts?.length ">
+  <mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let post of res.posts" (click)=" post.show = true ">
+
+      {{ post.subject }}
+
+      <div *ngIf=" post.show " [innerHTML]=" a.safeHtml( post.content ) "></div>
+    </mat-list-item>
+  </mat-list>
+</div>

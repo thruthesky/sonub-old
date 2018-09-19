@@ -16,7 +16,8 @@ import {
   MatListModule,
   MatFormFieldModule,
   MatInputModule,
-  MatCardModule
+  MatCardModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { HomeComponent } from './pages/home/home.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -41,6 +42,9 @@ import { AvatarComponent } from 'share/components/avatar/avatar.component';
 import { PostComponent } from './pages/post/post.component';
 
 import { NgSimpleEditorModule } from 'ng-simple-editor';
+import { ForumComponent } from './pages/forum/forum.component';
+import { BlogComponent } from './pages/blog/blog.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 
 const firebaseConfig = {
@@ -68,7 +72,10 @@ firebase.initializeApp(firebaseConfig);
     DesktopRightComponent,
     RequestPushNotificationComponent,
     AvatarComponent,
-    PostComponent
+    PostComponent,
+    ForumComponent,
+    BlogComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +85,7 @@ firebase.initializeApp(firebaseConfig);
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule, MatCheckboxModule, MatIconModule, MatListModule, MatInputModule, MatFormFieldModule,
-    MatCardModule,
+    MatCardModule, MatSnackBarModule,
     AppRoutingModule,
     NgSimpleEditorModule
   ],
