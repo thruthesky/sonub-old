@@ -1,4 +1,4 @@
-<div id="mobile-layout" *ngIf=" true ">
+<div id="mobile-layout" *ngIf=" ! a.md() ">
   <div id="mobile-header">
     <app-header></app-header>
   </div>
@@ -7,8 +7,7 @@
   </div>
 </div>
 
-
-<div id="desktop-layout" *ngIf=" false ">
+<div id="desktop-layout" *ngIf=" a.md() ">
 
   <app-desktop-header>
   </app-desktop-header>

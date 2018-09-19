@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { AppService } from '../services/app.service';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,26 @@ export class AppComponent {
    */
   fix = false;
   scroll = new Subject();
-  constructor() {
+  constructor(
+    public a: AppService
+  ) {
     console.log('AppComponent::constructor()');
+    this.observeRightSidebarScroll();
+
+  }
+  @HostListener('window:scroll', ['$event']) onScroll(event: Event) {
+    this.scroll.next();
+  }
+  observeRightSidebarScroll() {
+
     this.scroll.pipe(
       debounceTime(100)
     ).subscribe(() => {
+
+
+      if (!this.a.md()) {
+        return;
+      }
 
       /**
        * Get the height of right sidebar
@@ -54,9 +70,6 @@ export class AppComponent {
       }
 
     });
-  }
-  @HostListener('window:scroll', ['$event']) onScroll(event: Event) {
-    this.scroll.next();
   }
 
 }
