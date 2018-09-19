@@ -39,7 +39,7 @@ export class AppComponent {
       debounceTime(100)
     ).subscribe(() => {
 
-      console.log('window resize. width: ', window.innerWidth);
+      // console.log('window resize. width: ', window.innerWidth);
       if (this.a.isDesktop) {
         if (window.innerWidth < 768) {
           location.reload();
@@ -52,18 +52,16 @@ export class AppComponent {
     });
   }
   @HostListener('window:scroll', ['$event']) onScroll(event: Event) {
-    this.scroll.next();
+
+    if (this.a.isDesktop) {
+      this.scroll.next();
+    }
   }
   observeRightSidebarScroll() {
 
     this.scroll.pipe(
       debounceTime(100)
     ).subscribe(() => {
-
-
-      if (this.a.isMobile) {
-        return;
-      }
 
       /**
        * Get the height of right sidebar
@@ -90,10 +88,10 @@ export class AppComponent {
       const scrollPosition = window.scrollY - topSpace;
 
       if (scrollPosition > positionOfRightBottomMeetScreenBottom) {
-        console.log('fix right');
+        // console.log('fix right');
         this.fix = true;
       } else {
-        console.log('do not fix');
+        // console.log('do not fix');
         this.fix = false;
       }
 

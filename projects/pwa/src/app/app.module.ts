@@ -15,7 +15,8 @@ import {
   MatIconModule,
   MatListModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatCardModule
 } from '@angular/material';
 import { HomeComponent } from './pages/home/home.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -35,6 +36,12 @@ import { FormsModule } from '@angular/forms';
 import { DesktopHeaderComponent } from './components/desktop/header/header.component';
 import { DesktopLeftComponent } from './components/desktop/left/left.component';
 import { DesktopRightComponent } from './components/desktop/right/right.component';
+import { RequestPushNotificationComponent } from 'share/components/request-push-notification/request-push-notification.component';
+import { AvatarComponent } from 'share/components/avatar/avatar.component';
+import { PostComponent } from './pages/post/post.component';
+
+import { NgSimpleEditorModule } from 'ng-simple-editor';
+
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA1X3vpzSpUk_JHCbNjEwQe1-pduF0Enqs',
@@ -58,7 +65,10 @@ firebase.initializeApp(firebaseConfig);
     SettingsComponent,
     DesktopHeaderComponent,
     DesktopLeftComponent,
-    DesktopRightComponent
+    DesktopRightComponent,
+    RequestPushNotificationComponent,
+    AvatarComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +78,9 @@ firebase.initializeApp(firebaseConfig);
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule, MatCheckboxModule, MatIconModule, MatListModule, MatInputModule, MatFormFieldModule,
-    AppRoutingModule
+    MatCardModule,
+    AppRoutingModule,
+    NgSimpleEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -80,6 +92,9 @@ export class AppModule {
     philgo.setNewFileServerUrl(environment.newFileServerUrl);
     philgo.setFirebaseApp(firebase);
     // philgo.loadPostConfigs().subscribe(res => { });
-    philgo.app('philgo-chat.config').subscribe(res => philgo.mergeConfig(res));
+    philgo.app('sonub.config').subscribe(res => {
+      console.log('sonub config', res);
+      philgo.mergeConfig(res);
+    });
   }
 }

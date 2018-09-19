@@ -139,7 +139,8 @@
             "tsConfig": "projects/pwa/tsconfig.app.json",
             "assets": [
               "projects/pwa/src/favicon.ico",
-              "projects/pwa/src/assets"
+              "projects/pwa/src/assets",
+              "projects/pwa/src/firebase-messaging-sw.js"
             ],
             "styles": [
               "projects/pwa/src/styles.scss"
