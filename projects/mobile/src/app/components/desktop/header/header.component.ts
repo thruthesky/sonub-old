@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-header',
+  selector: 'app-desktop-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class DesktopHeaderComponent implements OnInit {
 
   constructor() { }
 
@@ -13,3 +13,4 @@ export class HeaderComponent implements OnInit {
   }
 
 }
+

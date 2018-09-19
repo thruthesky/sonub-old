@@ -32,6 +32,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { PhilGoApiService } from 'share/philgo-api/philgo-api.service';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { DesktopHeaderComponent } from './components/desktop/header/header.component';
+import { DesktopLeftComponent } from './components/desktop/left/left.component';
+import { DesktopRightComponent } from './components/desktop/right/right.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA1X3vpzSpUk_JHCbNjEwQe1-pduF0Enqs',
@@ -52,7 +55,10 @@ firebase.initializeApp(firebaseConfig);
     MenuComponent,
     LoginComponent,
     RegisterComponent,
-    SettingsComponent
+    SettingsComponent,
+    DesktopHeaderComponent,
+    DesktopLeftComponent,
+    DesktopRightComponent
   ],
   imports: [
     BrowserModule,
