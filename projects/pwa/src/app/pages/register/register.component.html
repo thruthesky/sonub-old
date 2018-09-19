@@ -1,24 +1,26 @@
-<h1>Register Page</h1>
+<section class="register">
 
+    <div class="form-title">
+      <i class="material-icons">assignment_ind</i>
+      <h1>Register</h1>
+    </div>
 
-<div *ngIf=" philgo.isLoggedIn(); else register ">
-You have logged in as {{ philgo.nickname() }}.
-</div>
+  <div *ngIf=" philgo.isLoggedIn(); else register ">You have logged in as {{ philgo.nickname() }}.</div>      
 
-
-<ng-template #register>
-
-    <form (ngSubmit)="onSubmit( $event )" class="form">
-        <mat-form-field class="full-width">
+  <ng-template #register>
+  
+      <form  class="form-content" (ngSubmit)="onSubmit( $event )">
+        <mat-form-field class="w-100">
           <input [(ngModel)]=" form.email " name="email" type="email" matInput placeholder="Email">
         </mat-form-field>
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
           <input [(ngModel)]=" form.password " name="password" type="password" matInput placeholder="Password">
         </mat-form-field>
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
           <input [(ngModel)]=" form.nickname " name="nickname" type="text" matInput placeholder="Nickname">
         </mat-form-field>
-        <button type="submit" mat-flat-button>SUBMIT</button>
+        <button class="w-100" type="submit" mat-flat-button>SUBMIT</button>
       </form>
-      
-</ng-template>
+        
+  </ng-template>
+</section>
