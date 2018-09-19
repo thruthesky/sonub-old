@@ -45,6 +45,7 @@ import { NgSimpleEditorModule } from 'ng-simple-editor';
 import { ForumComponent } from './pages/forum/forum.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { DisplayFilesModule } from 'share/philgo-api-components/display-files/display-files.module';
 
 
 const firebaseConfig = {
@@ -87,7 +88,8 @@ firebase.initializeApp(firebaseConfig);
     MatButtonModule, MatCheckboxModule, MatIconModule, MatListModule, MatInputModule, MatFormFieldModule,
     MatCardModule, MatSnackBarModule,
     AppRoutingModule,
-    NgSimpleEditorModule
+    NgSimpleEditorModule,
+    DisplayFilesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
