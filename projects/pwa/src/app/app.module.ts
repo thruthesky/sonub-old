@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/mobile/header/header.component';
+import { HeaderComponent } from './components/mobile/header/mobile-header.component';
 
 import {
   MatToolbarModule,
@@ -34,7 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PhilGoApiService } from 'share/philgo-api/philgo-api.service';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
-import { DesktopHeaderComponent } from './components/desktop/header/header.component';
+import { DesktopHeaderComponent } from './components/desktop/header/desktop-header.component';
 import { DesktopLeftComponent } from './components/desktop/left/left.component';
 import { DesktopRightComponent } from './components/desktop/right/right.component';
 import { RequestPushNotificationComponent } from 'share/components/request-push-notification/request-push-notification.component';

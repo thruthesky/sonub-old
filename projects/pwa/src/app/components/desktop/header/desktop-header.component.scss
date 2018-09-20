@@ -1,11 +1,11 @@
 @import '../../../../styles/variables';
 .header {
     box-sizing: border-box;
-    height: $header-height;
+    height: $desktop-header-height;
     overflow: hidden;
-    background-color: #ddd;
+    background-color: rgb(214, 144, 144);
 }
 
 .padding {
-    padding: $padding * 2;
+    padding: $padding;
 }

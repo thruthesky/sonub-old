@@ -1,7 +1,19 @@
+/**
+ * For mobile
+ */
 $header-height: 60px;
-$padding: 8px;
+
+/**
+ * For desktop
+ */
+$desktop-header-height: 42px;
 $max-width: 1200px;
 $sidebar-width: 220px;
+
+/**
+ * Shared vars
+ */
+$padding: 8px;
 
 
 .size-24px {

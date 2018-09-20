@@ -1,3 +1,10 @@
+@mixin sidebar-width () {
+  margin: 0;
+  padding: 0;
+  width: $sidebar-width;
+  box-sizing: border-box;
+}
+
 #mobile-layout {
   #mobile-header {
     position: fixed;
@@ -16,14 +23,18 @@
 }
 
 
-@mixin sidebar-width () {
-  margin: 0;
-  padding: 0;
-  width: $sidebar-width;
-  box-sizing: border-box;
-}
-
 #desktop-layout {
+  #desktop-header {
+    position: fixed;
+    z-index: 12345678;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $desktop-header-height;
+  }
+  #desktop-content {
+    margin-top: $desktop-header-height;
+  }
   #content-table {
     margin: 0 auto;
     width: 100%;
@@ -53,11 +64,13 @@
     max-width: $max-width - $sidebar-width * 2;
     overflow: hidden;
     box-sizing: border-box;
+
     &>div {
       box-sizing: border-box;
       background-color: aliceblue;
       padding: $padding;
     }
+
     img {
       max-width: 100%;
     }
