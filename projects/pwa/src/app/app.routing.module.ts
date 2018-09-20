@@ -10,6 +10,7 @@ import { PostComponent } from './pages/post/post.component';
 import { ForumComponent } from './pages/forum/forum.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { JobComponent } from './pages/job/job.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'post/:post_id', component: PostComponent },
     { path: 'forum/:post_id', component: ForumComponent },
     { path: 'blog', component: BlogComponent },
+    { path: 'job', component: JobComponent },
     { path: '**', component: PageNotFoundComponent },
 ];
 
