@@ -15,7 +15,9 @@ import {
   MatIconModule,
   MatListModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatCardModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { HomeComponent } from './pages/home/home.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -35,6 +37,16 @@ import { FormsModule } from '@angular/forms';
 import { DesktopHeaderComponent } from './components/desktop/header/header.component';
 import { DesktopLeftComponent } from './components/desktop/left/left.component';
 import { DesktopRightComponent } from './components/desktop/right/right.component';
+import { RequestPushNotificationComponent } from 'share/components/request-push-notification/request-push-notification.component';
+import { AvatarComponent } from 'share/components/avatar/avatar.component';
+import { PostComponent } from './pages/post/post.component';
+
+import { NgSimpleEditorModule } from 'ng-simple-editor';
+import { ForumComponent } from './pages/forum/forum.component';
+import { BlogComponent } from './pages/blog/blog.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { DisplayFilesModule } from 'share/philgo-api-components/display-files/display-files.module';
+
 
 /**
  * Shared Components
@@ -63,7 +75,13 @@ firebase.initializeApp(firebaseConfig);
     SettingsComponent,
     DesktopHeaderComponent,
     DesktopLeftComponent,
-    DesktopRightComponent
+    DesktopRightComponent,
+    RequestPushNotificationComponent,
+    AvatarComponent,
+    PostComponent,
+    ForumComponent,
+    BlogComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +92,11 @@ firebase.initializeApp(firebaseConfig);
     MatToolbarModule,
     MatButtonModule, MatCheckboxModule, MatIconModule, MatListModule, MatInputModule, MatFormFieldModule,
     AppRoutingModule,
-    LoginComponentModule
+    LoginComponentModule,
+    MatCardModule, MatSnackBarModule,
+    AppRoutingModule,
+    NgSimpleEditorModule,
+    DisplayFilesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -86,6 +108,9 @@ export class AppModule {
     philgo.setNewFileServerUrl(environment.newFileServerUrl);
     philgo.setFirebaseApp(firebase);
     // philgo.loadPostConfigs().subscribe(res => { });
-    philgo.app('philgo-chat.config').subscribe(res => philgo.mergeConfig(res));
+    philgo.app('sonub.config').subscribe(res => {
+      console.log('sonub config', res);
+      philgo.mergeConfig(res);
+    });
   }
 }

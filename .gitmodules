@@ -7,3 +7,6 @@
 [submodule "share/philgo-api"]
 	path = share/philgo-api
 	url = https://github.com/thruthesky/philgo-api
+[submodule "share/philgo-api-components"]
+	path = share/philgo-api-components
+	url = https://github.com/thruthesky/philgo-api-components

@@ -16,11 +16,19 @@
 }
 
 
+@mixin sidebar-width () {
+  margin: 0;
+  padding: 0;
+  width: $sidebar-width;
+  box-sizing: border-box;
+}
+
 #desktop-layout {
   #content-table {
     margin: 0 auto;
     width: 100%;
     max-width: 1200px;
+
 
     tr {
       vertical-align: top;
@@ -28,32 +36,41 @@
   }
 
   #desktop-left {
-    width: 220px;
+
     background-color: blue;
     color: white;
 
+    @include sidebar-width();
+
     &>div {
-      width: 200px;
+      @include sidebar-width();
       position: fixed;
     }
   }
 
   #desktop-center {
+    padding: 0;
+    box-sizing: border-box;
+
     &>div {
+      box-sizing: border-box;
       background-color: aliceblue;
       padding: $padding;
     }
   }
 
   #desktop-right {
-    width: 220px;
+    @include sidebar-width();
     background-color: green;
     color: white;
 
-    &>div {
-      width: 200px;
-      position: fixed;
-      bottom: 0;
+    .desktop-right-sidebar {
+      @include sidebar-width();
+
+      &.fix {
+        position: fixed;
+        bottom: 0;
+      }
     }
   }
 

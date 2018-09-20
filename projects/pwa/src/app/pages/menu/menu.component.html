@@ -5,6 +5,25 @@
     <h4 matLine>Home</h4>
   </mat-list-item>
 
+
+  <mat-list-item routerLink="/blog">
+    <i class="material-icons">
+      crop_original
+    </i>
+    <h4 matLine>My Blog</h4>
+  </mat-list-item>
+
+  <mat-list-item routerLink="/forum/freetalk_en">
+    <i class="material-icons">chat</i>
+    <h4 matLine>Discussion</h4>
+  </mat-list-item>
+
+  <mat-list-item routerLink="/forum/qna_en">
+    <i class="material-icons">help</i>
+    <h4 matLine>QnA</h4>
+  </mat-list-item>
+
+
   <mat-list-item routerLink="/login" *ngIf=" philgo.isLoggedOut() ">
     <i class="material-icons">
       arrow_forward_ios

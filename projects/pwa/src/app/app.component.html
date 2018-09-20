@@ -1,4 +1,4 @@
-<div id="mobile-layout" class="d-lg-none">
+<div id="mobile-layout" *ngIf=" a.isMobile ">
   <div id="mobile-header">
     <app-header></app-header>
   </div>
@@ -7,13 +7,12 @@
   </div>
 </div>
 
-
-<div id="desktop-layout" class="d-none d-lg-block">
+<div id="desktop-layout" *ngIf=" a.isDesktop ">
 
   <app-desktop-header>
   </app-desktop-header>
 
-  <table id="content-table">
+  <table id="content-table" cellpadding="0" cellspacing="0">
     <tr>
       <td id="desktop-left">
         <div>
@@ -21,12 +20,12 @@
         </div>
       </td>
       <td id="desktop-center">
-        <div>
+        <div class="desktop-center-content">
           <router-outlet></router-outlet>
         </div>
       </td>
       <td id="desktop-right">
-        <div class="desktop-right-side-bar">
+        <div class="desktop-right-sidebar" [class.fix]=" fix ">
           <app-desktop-right></app-desktop-right>
         </div>
       </td>

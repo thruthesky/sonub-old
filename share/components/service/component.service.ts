@@ -15,18 +15,18 @@ export class ComponentService {
   ) { }
 
 
-  async alert(options: AlertOptions) {
+  async alert(options: { header?: string, message: string , action?: string }) {
     if (!options) {
       return;
     }
-    const dialogRef = this.dialog.open(DialogComponent, {
-      header: 'Delete Post #' . post.idx,
-      message: 'Are you sure you want to delete this post?',
-      yes: this.philgo.t({ en: 'Yes', ko: '확인' }),
-      no: this.philgo.t({ en: 'Cancel', ko: '취소' }),
-      type: 'alert'
-    });
-    const re = await dialogRef.afterClosed().toPromise().then( result => result );
+    if (!options.action) {
+      options.action = this.philgo.t({ en: 'OK', ko: '확인' });
+    }
+
+    options['type'] = 'alert';
+
+    const dialogRef = this.dialog.open(DialogComponent, options);
+    await dialogRef.afterClosed().toPromise().then( result => result ).catch( e => console.error(e) );
   }
 
 
@@ -54,7 +54,7 @@ export class ComponentService {
         no: this.philgo.t({ en: 'Cancel', ko: '취소' })
     });
 
-    const re = await dialogRef.afterClosed().toPromise().then( result => result );
+    const re = await dialogRef.afterClosed().toPromise().then( result => result ).catch( e => this.alert(e));
     console.log('result: ', re, re.data, re.role);
     if (re.role && re.role === 'ok') {
       if ( re.role && re.input ) {
@@ -81,7 +81,7 @@ export class ComponentService {
         type: 'confirm'
     });
 
-    const re = await dialogRef.afterClosed().toPromise().then( result => result );
+    const re = await dialogRef.afterClosed().toPromise().then( result => result ).catch( e => this.alert(e));
 
     if (re.role === 'yes') {
       return await this.philgo.postDelete({ idx: post.idx }).toPromise().then(res => {
