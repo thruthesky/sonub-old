@@ -1,15 +1,17 @@
 @import '../../../../styles/variables';
+
 .header {
-    box-sizing: border-box;
-    height: $desktop-header-height;
-    overflow: hidden;
-    background-color: rgb(214, 144, 144);
-    .header-inner{
-        margin: auto;
-        max-width: $max-width;
-    }
+  box-sizing: border-box;
+  height: $desktop-header-height;
+  overflow: hidden;
+  background-color: rgb(214, 144, 144);
+
+  .header-inner {
+    margin: auto;
+    max-width: $max-width;
+  }
 }
 
 .padding {
-    padding: $padding;
+  padding: $padding;
 }

@@ -1,10 +1,9 @@
 
-{{ a.myName }}
 
 <mat-card>
   <mat-card-header>
-    <img mat-card-avatar class="size-32px rounded" src="https://material.angular.io/assets/img/examples/shiba1.jpg">
-    <mat-card-title>Shiba Inu</mat-card-title>
+    <img mat-card-avatar class="size-32px rounded" src="{{ a.myPhotoUrl }}">
+    <mat-card-title>{{ a.myName }}</mat-card-title>
     <mat-card-subtitle>Dog Breed</mat-card-subtitle>
   </mat-card-header>
 </mat-card>
