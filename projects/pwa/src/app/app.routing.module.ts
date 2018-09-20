@@ -22,8 +22,11 @@ const routes: Routes = [
     { path: 'settings', component: SettingsComponent },
     { path: 'post/:post_id', component: PostComponent },
     { path: 'forum/:post_id', component: ForumComponent },
+    { path: 'forum/:post_id/:idx', component: ForumComponent },
     { path: 'blog', component: BlogComponent },
     { path: 'job', component: JobComponent },
+    { path: 'job/:category', component: JobComponent },
+    { path: 'job/:category/:idx', component: JobComponent },
     { path: '**', component: PageNotFoundComponent },
 ];
 

@@ -55,6 +55,8 @@ import { ComponentServiceModule } from 'share/philgo-api-components/service/comp
 import { RegisterComponentModule } from 'share/philgo-api-components/user/register/register.module';
 import { LoginComponentModule } from 'share/philgo-api-components/user/login/login.component.module';
 import { JobComponent } from './pages/job/job.component';
+import { ForumBasicListModule } from 'share/philgo-api-components/forum/basic/forum-basic-list/forum-basic-list.module';
+import { JobListComponentModule } from 'share/philgo-api-components/forum/job/list/job-list.component.module';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA1X3vpzSpUk_JHCbNjEwQe1-pduF0Enqs',
@@ -102,7 +104,9 @@ firebase.initializeApp(firebaseConfig);
     DisplayFilesModule,
     ComponentServiceModule,
     RegisterComponentModule,
-    LoginComponentModule
+    LoginComponentModule,
+    ForumBasicListModule,
+    JobListComponentModule
   ],
   providers: [],
   bootstrap: [AppComponent]

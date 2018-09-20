@@ -1,9 +1,7 @@
-<p>
-  forum works!
-</p>
-
 <button mat-flat-button routerLink="/post/{{ post_id }}">Post</button>
-<div *ngIf=" res?.posts?.length ">
+
+
+<!-- <div *ngIf=" res?.posts?.length ">
   <mat-list role="list">
     <mat-list-item role="listitem" *ngFor="let post of res.posts" (click)=" post.show = true ">
       {{ post.subject }}
@@ -11,4 +9,9 @@
 
     </mat-list-item>
   </mat-list>
-</div>
+</div> -->
+
+
+
+<app-forum-basic-list></app-forum-basic-list>
+

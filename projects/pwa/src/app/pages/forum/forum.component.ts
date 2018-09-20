@@ -21,17 +21,17 @@ export class ForumComponent implements OnInit {
     activatedRoute.paramMap.subscribe(params => {
 
       this.post_id = params.get('post_id');
-      const options: ApiPostQueryOptions = {};
-      if (this.page_no === 1) {
-        options.cache = true;
-        options.cacheId = `cache-first-list-of-${this.post_id}`;
-      }
-      philgo.postSearch({ post_id: this.post_id }, options).subscribe(res => {
-        console.log('res: ', res);
-        this.res = res;
-      }, e => {
-        console.log(e);
-      });
+      //   const options: ApiPostQueryOptions = {};
+      //   if (this.page_no === 1) {
+      //     options.cache = true;
+      //     options.cacheId = `cache-first-list-of-${this.post_id}`;
+      //   }
+      //   philgo.postSearch({ post_id: this.post_id }, options).subscribe(res => {
+      //     console.log('res: ', res);
+      //     this.res = res;
+      //   }, e => {
+      //     console.log(e);
+      //   });
 
     });
   }
