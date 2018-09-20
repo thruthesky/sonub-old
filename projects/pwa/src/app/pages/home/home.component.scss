@@ -1,0 +1,15 @@
+*{
+    box-sizing: border-box;
+}
+
+.community-posts{
+    font-size: .85rem;
+    .row{
+        margin: 0 -.25em;
+        .text{
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+}
