@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../../../../services/app.service';
 
 @Component({
   selector: 'app-desktop-left',
@@ -7,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DesktopLeftComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public a: AppService
+  ) { }
 
   ngOnInit() {
   }
 
 }
+
 
