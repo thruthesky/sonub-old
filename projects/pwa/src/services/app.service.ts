@@ -60,6 +60,12 @@ export class AppService {
    */
   messaging: firebase.messaging.Messaging = null;
 
+  /**
+   * Post to edit
+   *
+   * Use 'openPostEdit()' method.
+   */
+  postToEdit: ApiPost;
 
   ///
   constructor(
@@ -109,6 +115,17 @@ export class AppService {
       this.router.navigateByUrl('/forum/' + post_id);
     }
   }
+
+  openPostView(post_id: string, idx: any) {
+    this.router.navigateByUrl('/forum/' + post_id + '/' + idx);
+  }
+
+  openPostEdit(post: ApiPost) {
+    this.postToEdit = post;
+    console.log('posttoEdit:', this.postToEdit);
+    this.router.navigateByUrl('/post/edit/' + this.postToEdit.idx);
+  }
+
 
   t(code, info?): string {
     return _.t(code, info);

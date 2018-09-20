@@ -21,6 +21,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'settings', component: SettingsComponent },
     { path: 'post/:post_id', component: PostComponent },
+    { path: 'post/edit/:idx', component: PostComponent },
     { path: 'forum/:post_id', component: ForumComponent },
     { path: 'forum/:post_id/:idx', component: ForumComponent },
     { path: 'blog', component: BlogComponent },
