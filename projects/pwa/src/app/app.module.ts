@@ -48,6 +48,11 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { DisplayFilesModule } from 'share/philgo-api-components/display-files/display-files.module';
 
 
+/**
+ * Shared Components
+ */
+import { LoginComponentModule } from '../../../../share/components/user/login/login.component.module';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyA1X3vpzSpUk_JHCbNjEwQe1-pduF0Enqs',
   authDomain: 'philgo-64b1a.firebaseapp.com',
@@ -86,6 +91,8 @@ firebase.initializeApp(firebaseConfig);
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule, MatCheckboxModule, MatIconModule, MatListModule, MatInputModule, MatFormFieldModule,
+    AppRoutingModule,
+    LoginComponentModule,
     MatCardModule, MatSnackBarModule,
     AppRoutingModule,
     NgSimpleEditorModule,
