@@ -1,11 +1,9 @@
 @import '../../../../styles/variables';
-.header {
-    box-sizing: border-box;
-    height: $header-height;
-    overflow: hidden;
-    background-color: #ddd;
-}
-
-.padding {
-    padding: $padding * 2;
+mat-toolbar{
+    justify-content: space-between;
+    a{
+        padding:  ($padding * 2) $padding;
+        line-height: 0;
+        color: inherit;
+    }
 }
