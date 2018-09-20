@@ -1,14 +1,17 @@
+
+<!--<app-login-component (login)=" onLogin() " (error)=" a.toast( $event ) "></app-login-component>-->
+
 <section class="login">
-  
+
   <div class="form-title">
-    <i class="material-icons">assignment_ind</i>
+    <img class="logo" src="../../../../../../src/assets/sonub-logo.webp">
     <h1>Login</h1>
   </div>
 
   <div *ngIf=" philgo.isLoggedIn(); else login ">You have logged in as {{ philgo.nickname() }}.</div>
 
   <ng-template #login>
-  
+
       <form class="form-content" (ngSubmit)="onSubmit( $event )">
           <mat-form-field class="w-100">
             <input [(ngModel)]=" form.uid " name="email" type="email" matInput placeholder="Email">
@@ -18,6 +21,7 @@
           </mat-form-field>
           <button class="w-100" type="submit" mat-flat-button>SUBMIT</button>
         </form>
-        
+
   </ng-template>
 </section>
+

@@ -45,7 +45,13 @@ import { NgSimpleEditorModule } from 'ng-simple-editor';
 import { ForumComponent } from './pages/forum/forum.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { DisplayFilesModule } from 'share/philgo-api-components/display-files/display-files.module';
 
+
+/**
+ * Shared Components
+ */
+import { LoginComponentModule } from '../../../../share/components/user/login/login.component.module';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA1X3vpzSpUk_JHCbNjEwQe1-pduF0Enqs',
@@ -85,9 +91,12 @@ firebase.initializeApp(firebaseConfig);
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule, MatCheckboxModule, MatIconModule, MatListModule, MatInputModule, MatFormFieldModule,
+    AppRoutingModule,
+    LoginComponentModule,
     MatCardModule, MatSnackBarModule,
     AppRoutingModule,
-    NgSimpleEditorModule
+    NgSimpleEditorModule,
+    DisplayFilesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

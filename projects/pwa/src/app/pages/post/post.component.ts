@@ -27,6 +27,13 @@ export class PostComponent implements OnInit {
    */
   subjectChanged = false;
 
+
+  /**
+   * File upload progress percentage
+   */
+  percentage = 0;
+
+  ///
   constructor(
     private activatedRoute: ActivatedRoute,
     public a: AppService,
@@ -54,7 +61,7 @@ export class PostComponent implements OnInit {
     this.philgo.postCreate(this.form).subscribe(res => {
       console.log('create res: ', res);
       // this.a.openHome();
-      this.a.openForum( this.form.post_id );
+      this.a.openForum(this.form.post_id);
     }, e => {
       this.a.toast(e);
     });
@@ -75,6 +82,40 @@ export class PostComponent implements OnInit {
     console.log('working?');
   }
 
+
+
+  onChangeFile(event: Event) {
+    this.uploadFile(<any>event.target['files']);
+  }
+
+  uploadFile(files: FileList) {
+
+    console.log('files: ', files);
+    if (files === void 0 || !files.length || files[0] === void 0) {
+      const e = { code: -1, message: this.philgo.t({ en: 'Please select a file', ko: '업로드 할 파일을 선택해주세요.' }) };
+      // this.componentService.alert(e);
+      return;
+    }
+
+    this.philgo.fileUpload(files, { gid: this.form.gid, user_password: this.form.user_password }).subscribe(res => {
+      if (typeof res === 'number') {
+        console.log('percentage: ', res);
+        this.percentage = res;
+      } else {
+        console.log('file upload success: ', res);
+        if (!this.form.files || !this.form.files.length) {
+          this.form.files = [];
+        }
+        this.form.files.push(res);
+        this.editor.insertImage(res.src, res.name, res.idx);
+        this.percentage = 0;
+      }
+    }, e => {
+      console.error(e);
+      this.percentage = 0;
+      this.a.toast(e);
+    });
+  }
 
 
 }
