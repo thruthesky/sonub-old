@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'projects/pwa/src/services/app.service';
 
 @Component({
   selector: 'app-avatar',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvatarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public a: AppService
+  ) { }
 
   ngOnInit() {
   }
