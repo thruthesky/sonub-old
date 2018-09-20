@@ -36,6 +36,11 @@ import { DesktopHeaderComponent } from './components/desktop/header/header.compo
 import { DesktopLeftComponent } from './components/desktop/left/left.component';
 import { DesktopRightComponent } from './components/desktop/right/right.component';
 
+/**
+ * Shared Components
+ */
+import { LoginComponentModule } from '../../../../share/components/user/login/login.component.module';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyA1X3vpzSpUk_JHCbNjEwQe1-pduF0Enqs',
   authDomain: 'philgo-64b1a.firebaseapp.com',
@@ -68,7 +73,8 @@ firebase.initializeApp(firebaseConfig);
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule, MatCheckboxModule, MatIconModule, MatListModule, MatInputModule, MatFormFieldModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LoginComponentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
