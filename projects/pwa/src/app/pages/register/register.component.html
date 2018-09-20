@@ -1,15 +1,13 @@
 <section class="register">
 
-    <div class="form-title">
-      <img class="logo" src="../../../../../../src/assets/sonub-logo.webp">
-      <h1>Register</h1>
-    </div>
+  <div class="form-title">
+    <img class="logo" src="../../../../../../src/assets/sonub-logo.webp">
+    <h1>Register</h1>
+  </div>
 
-  <div *ngIf=" philgo.isLoggedIn(); else register ">You have logged in as {{ philgo.nickname() }}.</div>      
 
-  <ng-template #register>
-  
+  <app-register-component></app-register-component>
 
-        
-  </ng-template>
+
+
 </section>

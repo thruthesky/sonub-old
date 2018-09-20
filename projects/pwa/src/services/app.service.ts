@@ -189,7 +189,18 @@ export class AppService {
   }
 
 
+  /**
+   * Display a toast at the bottoms of the screen.
+   * @param message message to display at the bottom the screen. It can be a string or an error object.
+   * @param action action to do ( close or dismiss )
+   * @param config configuration for Materai snackbar
+   */
   toast(message, action?, config: MatSnackBarConfig = {}) {
+    if (typeof message !== 'string') {
+      if (message.message !== void 0) {
+        message = message.message;
+      }
+    }
     if (action === void 0) {
       action = 'Close';
     }

@@ -27,7 +27,7 @@
   #content-table {
     margin: 0 auto;
     width: 100%;
-    max-width: 1200px;
+    max-width: $max-width;
 
 
     tr {
@@ -50,12 +50,16 @@
 
   #desktop-center {
     padding: 0;
+    max-width: $max-width - $sidebar-width * 2;
+    overflow: hidden;
     box-sizing: border-box;
-
     &>div {
       box-sizing: border-box;
       background-color: aliceblue;
       padding: $padding;
+    }
+    img {
+      max-width: 100%;
     }
   }
 

@@ -1,6 +1,3 @@
-
-<!--<app-login-component (login)=" onLogin() " (error)=" a.toast( $event ) "></app-login-component>-->
-
 <section class="login">
 
   <div class="form-title">
@@ -12,16 +9,7 @@
 
   <ng-template #login>
 
-      <form class="form-content" (ngSubmit)="onSubmit( $event )">
-          <mat-form-field class="w-100">
-            <input [(ngModel)]=" form.uid " name="email" type="email" matInput placeholder="Email">
-          </mat-form-field>
-          <mat-form-field class="w-100">
-            <input [(ngModel)]=" form.password " name="password" type="password" matInput placeholder="Password">
-          </mat-form-field>
-          <button class="w-100" type="submit" mat-flat-button>SUBMIT</button>
-        </form>
+    <app-login-component (login)=" onLogin() " (error)=" a.toast( $event ) "></app-login-component>
 
   </ng-template>
 </section>
-

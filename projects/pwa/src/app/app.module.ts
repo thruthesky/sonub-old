@@ -51,7 +51,9 @@ import { DisplayFilesModule } from 'share/philgo-api-components/display-files/di
 /**
  * Shared Components
  */
-import { LoginComponentModule } from '../../../../share/components/user/login/login.component.module';
+import { ComponentServiceModule } from 'share/philgo-api-components/service/component.service.module';
+import { RegisterComponentModule } from 'share/philgo-api-components/user/register/register.module';
+import { LoginComponentModule } from 'share/philgo-api-components/user/login/login.component.module';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA1X3vpzSpUk_JHCbNjEwQe1-pduF0Enqs',
@@ -92,11 +94,13 @@ firebase.initializeApp(firebaseConfig);
     MatToolbarModule,
     MatButtonModule, MatCheckboxModule, MatIconModule, MatListModule, MatInputModule, MatFormFieldModule,
     AppRoutingModule,
-    LoginComponentModule,
     MatCardModule, MatSnackBarModule,
     AppRoutingModule,
     NgSimpleEditorModule,
-    DisplayFilesModule
+    DisplayFilesModule,
+    ComponentServiceModule,
+    RegisterComponentModule,
+    LoginComponentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
