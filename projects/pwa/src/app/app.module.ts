@@ -19,10 +19,10 @@ import {
   MatCardModule,
   MatSnackBarModule
 } from '@angular/material';
-import { HomeComponent } from './pages/home/home.component';
+// import { HomeComponent } from './pages/home/home.component';
 import { AppRoutingModule } from './app.routing.module';
-import { HelpComponent } from './pages/help/help.component';
-import { MenuComponent } from './pages/menu/menu.component';
+// import { HelpComponent } from './pages/help/help.component';
+// import { MenuComponent } from './pages/menu/menu.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { SettingsComponent } from './pages/settings/settings.component';
@@ -79,9 +79,9 @@ firebase.initializeApp(firebaseConfig);
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
-    HelpComponent,
-    MenuComponent,
+    // HomeComponent,
+    // HelpComponent,
+    // MenuComponent,
     LoginComponent,
     RegisterComponent,
     SettingsComponent,
