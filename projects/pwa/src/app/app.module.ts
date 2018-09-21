@@ -41,7 +41,7 @@ import { RequestPushNotificationComponent } from 'share/components/request-push-
 import { AvatarComponent } from 'share/components/avatar/avatar.component';
 import { PostComponent } from './pages/post/post.component';
 
-import { NgSimpleEditorModule } from 'ng-simple-editor';
+
 import { ForumComponent } from './pages/forum/forum.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
@@ -57,7 +57,13 @@ import { LoginComponentModule } from 'share/philgo-api-components/user/login/log
 import { JobComponent } from './pages/job/job.component';
 import { ForumBasicListModule } from 'share/philgo-api-components/forum/basic/forum-basic-list/forum-basic-list.module';
 import { JobListComponentModule } from 'share/philgo-api-components/forum/job/list/job-list.component.module';
+import { NgSimpleEditorModule } from 'ng-simple-editor';
 
+
+
+/**
+ * Firebase
+ */
 const firebaseConfig = {
   apiKey: 'AIzaSyA1X3vpzSpUk_JHCbNjEwQe1-pduF0Enqs',
   authDomain: 'philgo-64b1a.firebaseapp.com',

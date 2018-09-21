@@ -5,7 +5,6 @@ import { NgSimpleEditorComponent } from 'ng-simple-editor';
 import { SimpleLibrary as _ } from 'ng-simple-library';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -14,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PostComponent implements OnInit, AfterViewInit {
 
   @ViewChild('editor') editor: NgSimpleEditorComponent;
+
 
 
   form: ApiPost = <any>{
@@ -45,9 +45,7 @@ export class PostComponent implements OnInit, AfterViewInit {
   ngOnInit() {
   }
   ngAfterViewInit() {
-
     setTimeout(() => this.initView(), 10);
-
   }
   initView() {
 
@@ -59,6 +57,7 @@ export class PostComponent implements OnInit, AfterViewInit {
         this.editor.putContent(this.form.content);
       }
     });
+
   }
 
   onSubmit() {
@@ -93,7 +92,6 @@ export class PostComponent implements OnInit, AfterViewInit {
   }
 
 
-
   onChangeContent(event: Event) {
     if (!this.subjectChanged) {
       let str = this.a._.stripTags(this.editor.content);
@@ -104,7 +102,7 @@ export class PostComponent implements OnInit, AfterViewInit {
 
   onSubjectKeyUp() {
     this.subjectChanged = true;
-    console.log('working?');
+    // console.log('working?');
   }
 
 

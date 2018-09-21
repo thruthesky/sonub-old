@@ -8,6 +8,12 @@
 
 * [Old PhilGoApi Components](https://github.com/thruthesky/components)
 
+## Dependencies
+
+* philgo-api
+* philgo-api-component
+* ng-simple-library
+
 ## RWD
 
 * When window `resize` event happens, app checks if `md` width changes.
