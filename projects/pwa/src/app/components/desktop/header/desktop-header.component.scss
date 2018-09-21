@@ -21,6 +21,7 @@
     .left{
       display: flex;
       align-items: center;
+
       .letter-logo{
         display: flex;
         align-items: center;
@@ -35,6 +36,7 @@
         color: rgb(214, 144, 144);
         font-size: 1.2rem;
       }
+
       .searchbar {
         position: relative;
         display: flex;
@@ -71,15 +73,20 @@
 
     .right{
       display: flex;
-      color: #8F3C3C;
-      font-size: .9rem;
+      font-size: .85rem;
       &>*{
         display: flex;
         align-items: center;
         height: 100%;
-        padding-left: .5rem;
-        padding-right: .5rem;
+        padding-left: .55rem;
+        padding-right: .55rem;
         cursor: pointer;
+      }
+      a{
+        color: rgba(#000,0.8);
+      }
+      .material-icons{
+        color: #8F3C3C!important;
       }
     }
   }
