@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { ERROR_WRONG_IDX_MEMBER, ERROR_WRONG_SESSION_ID } from '../../../../share/philgo-api/philgo-api.service';
 
@@ -36,6 +36,10 @@ export interface FrontPage {
 })
 export class AppService {
 
+  /**
+   * App Route
+   */
+  route = '';
   /**
    * Screen width
    */
@@ -79,6 +83,12 @@ export class AppService {
     this.initScreen();
     this.initPushNotification();
 
+
+    this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+        this.route = this.router.url;
+      }
+    });
 
   }
 
@@ -231,6 +241,7 @@ export class AppService {
     return this.philgo.myName();
   }
   get myPhotoUrl() {
-    return this.philgo.myProfilePhotoUrl();
+
+    return this.philgo.profilePhotoUrl(this.philgo.myProfilePhotoUrl().split('/').pop());
   }
 }
