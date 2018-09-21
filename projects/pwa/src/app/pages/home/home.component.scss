@@ -1,3 +1,4 @@
+@import './../../../styles/variables.scss';
 *{
     box-sizing: border-box;
 }
@@ -12,4 +13,23 @@
             text-overflow: ellipsis;
         }
     }
+}
+
+.text-editor{
+    display: flex;
+    align-items: center;
+    .editor{
+        flex:1;
+        padding: .5rem .5rem 1rem ;
+        // border: 1px solid #dddfe2;
+        border: 1px solid #d1d2d5;
+        background: #fff;
+        font-size: .85rem;
+    }
+}
+
+.stats{
+    display: flex;
+    justify-content: space-between;
+    font-size: .9rem;
 }
