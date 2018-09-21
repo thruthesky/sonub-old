@@ -5,9 +5,12 @@
   height: $desktop-header-height;
   overflow: hidden;
   background-color: rgb(214, 144, 144);
-
   .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin: auto;
+    height: 100%;
     max-width: $max-width;
   }
 }
@@ -16,7 +19,18 @@
   padding: $padding;
 }
 
-
+.letter-logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: .5rem;
+  height: 26px;
+  width: 26px;
+  border-radius: 2px;
+  background: #fff;
+  color: rgb(214, 144, 144);
+  font-size: 1.2rem;
+}
 .searchbar {
   position: relative;
   display: flex;
@@ -29,12 +43,11 @@
   border-radius: 3px;
   background: #fff;
   input{
-    flex: 1;
+    width: 100%;
     border: 0;
     outline: 0;
     font-size: .84rem;
   } 
-
   .searchbar-button{
     position: absolute;
     display: flex;
@@ -48,9 +61,4 @@
     font-size: 1.3rem;
     cursor: pointer;
   }
-
-
-
-
-
 }
