@@ -35,7 +35,7 @@
   }
   #desktop-content {
     margin-top: $desktop-header-height;
-    padding-top: $spacing;
+    padding-top: $spacing + 1px;
   }
   #content-table {
     margin: 0 auto;
