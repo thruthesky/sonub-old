@@ -10,22 +10,22 @@ import { HeaderComponent } from './components/mobile/header/mobile-header.compon
 
 import {
   MatToolbarModule,
-  MatButtonModule,
-  MatCheckboxModule,
-  MatIconModule,
-  MatListModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatCardModule,
+  // MatButtonModule,
+  // MatCheckboxModule,
+  // MatIconModule,
+  // MatListModule,
+  // MatFormFieldModule,
+  // MatInputModule,
+  // MatCardModule,
   MatSnackBarModule
 } from '@angular/material';
 // import { HomeComponent } from './pages/home/home.component';
-import { AppRoutingModule } from './app.routing.module';
+import { AppRoutingModule } from './app-routing.module';
 // import { HelpComponent } from './pages/help/help.component';
 // import { MenuComponent } from './pages/menu/menu.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { SettingsComponent } from './pages/settings/settings.component';
+// import { LoginComponent } from './pages/login/login.component';
+// import { RegisterComponent } from './pages/register/register.component';
+// import { SettingsComponent } from './pages/settings/settings.component';
 
 
 
@@ -33,32 +33,32 @@ import * as firebase from 'firebase/app';
 import { HttpClientModule } from '@angular/common/http';
 import { PhilGoApiService } from 'share/philgo-api/philgo-api.service';
 import { environment } from '../environments/environment';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 import { DesktopHeaderComponent } from './components/desktop/header/desktop-header.component';
 import { DesktopLeftComponent } from './components/desktop/left/left.component';
 import { DesktopRightComponent } from './components/desktop/right/right.component';
-import { RequestPushNotificationComponent } from 'share/components/request-push-notification/request-push-notification.component';
-import { AvatarComponent } from 'share/components/avatar/avatar.component';
-import { PostComponent } from './pages/post/post.component';
+// import { RequestPushNotificationComponent } from 'share/components/request-push-notification/request-push-notification.component';
+// import { AvatarComponent } from 'share/components/avatar/avatar.component';
+// import { PostComponent } from './pages/post/post.component';
 
 
-import { ForumComponent } from './pages/forum/forum.component';
-import { BlogComponent } from './pages/blog/blog.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { DisplayFilesModule } from 'share/philgo-api-components/display-files/display-files.module';
+// import { ForumComponent } from './pages/forum/forum.component';
+// import { BlogComponent } from './pages/blog/blog.component';
+// import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+// import { DisplayFilesModule } from 'share/philgo-api-components/display-files/display-files.module';
 
 
 /**
  * Shared Components
  */
-import { ComponentServiceModule } from 'share/philgo-api-components/service/component.service.module';
-import { RegisterComponentModule } from 'share/philgo-api-components/user/register/register.module';
-import { LoginComponentModule } from 'share/philgo-api-components/user/login/login.component.module';
-import { JobComponent } from './pages/job/job.component';
-import { ForumBasicListModule } from 'share/philgo-api-components/forum/basic/forum-basic-list/forum-basic-list.module';
-import { JobListComponentModule } from 'share/philgo-api-components/forum/job/list/job-list.component.module';
+// import { ComponentServiceModule } from 'share/philgo-api-components/service/component.service.module';
+// import { RegisterComponentModule } from 'share/philgo-api-components/user/register/register.module';
+// import { LoginComponentModule } from 'share/philgo-api-components/user/login/login.component.module';
+// import { JobComponent } from './pages/job/job.component';
+// import { ForumBasicListModule } from 'share/philgo-api-components/forum/basic/forum-basic-list/forum-basic-list.module';
+// import { JobListComponentModule } from 'share/philgo-api-components/forum/job/list/job-list.component.module';
 
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 
@@ -82,38 +82,40 @@ firebase.initializeApp(firebaseConfig);
     // HomeComponent,
     // HelpComponent,
     // MenuComponent,
-    LoginComponent,
-    RegisterComponent,
-    SettingsComponent,
+    // LoginComponent,
+    // RegisterComponent,
+    // SettingsComponent,
     DesktopHeaderComponent,
     DesktopLeftComponent,
     DesktopRightComponent,
-    RequestPushNotificationComponent,
-    AvatarComponent,
-    PostComponent,
-    ForumComponent,
-    BlogComponent,
-    PageNotFoundComponent,
-    JobComponent
+    // RequestPushNotificationComponent,
+    // AvatarComponent,
+    // PostComponent,
+    // ForumComponent,
+    // BlogComponent,
+    // PageNotFoundComponent,
+    // JobComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    // FormsModule,
     RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     MatToolbarModule,
-    MatButtonModule, MatCheckboxModule, MatIconModule, MatListModule, MatInputModule, MatFormFieldModule,
+    // MatCardModule,
+    MatSnackBarModule,
+    // MatButtonModule,
+    // MatCheckboxModule, MatIconModule, MatListModule, MatInputModule, MatFormFieldModule,
     AppRoutingModule,
-    MatCardModule, MatSnackBarModule,
-    AppRoutingModule,
-    DisplayFilesModule,
-    ComponentServiceModule,
-    RegisterComponentModule,
-    LoginComponentModule,
-    ForumBasicListModule,
-    JobListComponentModule,
-    CKEditorModule
+    // DisplayFilesModule,
+    // ComponentServiceModule,
+    // RegisterComponentModule,
+    // LoginComponentModule,
+    // ForumBasicListModule,
+    // JobListComponentModule,
+    // CKEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

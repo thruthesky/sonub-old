@@ -1,27 +1,27 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 
-import { MenuComponent } from './menu.component';
+import { BlogComponent } from './blog.component';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material';
+import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
     {
         path: '',
-        component: MenuComponent
+        component: BlogComponent
     }
 ];
+
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        RouterModule,
         MatListModule
     ],
     exports: [],
-    declarations: [MenuComponent],
+    declarations: [BlogComponent],
     providers: [],
 })
-export class MenuModule { }
+export class BlogModule { }

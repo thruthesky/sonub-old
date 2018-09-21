@@ -23,12 +23,13 @@ const routes: Routes = [
     { path: 'forum/:post_id', loadChildren: './pages/forum/forum.module#ForumModule' },
     { path: 'forum/:post_id/:idx', loadChildren: './pages/forum/forum.module#ForumModule' },
     { path: 'blog', loadChildren: './pages/blog/blog.module#BlogModule' },
-    { path: 'job', loadChildren: './pages/job/job.module#Module' },
-    { path: 'job/:category', loadChildren: './pages/job/job.module#Module' },
+    { path: 'job', loadChildren: './pages/job/job.module#JobModule' },
+    { path: 'job/:category', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job/:category/:idx', loadChildren: './pages/job/job.module#JobModule' },
     { path: '**', loadChildren: './pages/page-not-found/page-not-found.module#PageNotFoundModule' },
 ];
 
+// console.log('routes: ', routes);
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]

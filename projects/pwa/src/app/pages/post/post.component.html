@@ -8,7 +8,6 @@ Posting on {{ form.post_id }}
 <ckeditor [editor]="Editor" [(ngModel)]="editorContent"></ckeditor>
 
 
-
 <div class="mt-1">
 
   <mat-form-field class="w-100">
@@ -23,12 +22,12 @@ Posting on {{ form.post_id }}
 <div class="mt-1">
 
 
-  
-      <button mat-flat-button class="transparent-cover-wrapper">
-          <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
-          <div>Photo Upload</div>
-        </button>
-        
+
+  <button mat-flat-button class="transparent-cover-wrapper">
+    <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
+    <div>Photo Upload</div>
+  </button>
+
 
   <button mat-flat-button (click)=" onSubmit() ">{{ a.t({ en: 'SUBMIT', ko: '글 등록'}) }}</button>
 
