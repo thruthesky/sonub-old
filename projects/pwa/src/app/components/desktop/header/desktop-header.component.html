@@ -1,7 +1,7 @@
 <section class="header">
   <div class="header-inner">
 
-    <div class="d-flex">
+    <div class="left pl-1">
         <a class="letter-logo" routerLink="/">S</a>
         <div class="searchbar">
           <input placeholder="Search">
@@ -9,14 +9,15 @@
         </div>
     </div>
 
-    <div>
+    <div class="right">
       <a routerLink="/register">
-        <img class="size-32px" src="{{ philgo.myProfilePhotoUrl() }}">
-        {{ a.myName }}
+        <img class="size-24px circle" src="{{ philgo.myProfilePhotoUrl() }}">
+        {{ a.myName }} John
       </a>
 
       <a routerLink="/blog">My Blog</a>
       <a routerLink="/post/blog">Create</a>
+
       <i class="material-icons">
         chat
       </i>
@@ -24,7 +25,8 @@
         notifications
       </i>
       <i class="material-icons">help</i>
-      <a class="" routerLink="/menu"><i class="material-icons">menu</i></a>
+      <a routerLink="/menu"><i class="material-icons">menu</i></a>
     </div>
+
   </div>
 </section>
