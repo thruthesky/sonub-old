@@ -1,3 +1,24 @@
+@import './variables.scss';
 .h-36px {
     height: 36px !important;
+}
+
+.size-24px {
+    width: 24px;
+    height: 24px;
+}
+
+.img-thumbnail{
+    width: 24px;
+    height: 24px;
+    border-radius: 3px;
+    margin-right: .5rem;
+}
+
+.fw-bold{
+    font-weight: 600;
+}
+
+.mb-spacing{
+    margin-bottom: $spacing;
 }

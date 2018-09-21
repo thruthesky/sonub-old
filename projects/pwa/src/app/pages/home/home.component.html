@@ -2,15 +2,17 @@
 
 
 
-<div class="d-flex" routerLink="/post/blog">
-  <app-avatar></app-avatar>
-  <div class="ml-3 border w-100">&nbsp; What's on your mind?</div>
+<div class="text-editor" routerLink="/post/blog">
+  <app-avatar class="mr-2"></app-avatar>
+  <div class="editor">What's on your mind?</div>
 </div>
 
 
 <div *ngIf=" res ">
-  <div>Sonub Version: {{ res.info.version }}</div>
-  <div>My blog posts: {{ res.no_of_my_blog_posts }}</div>
+  <div class="stats py-2">
+      <div>Sonub Version: {{ res.info.version }}</div>
+      <div>My blog posts: {{ res.no_of_my_blog_posts }}</div>
+  </div>
   <div>
     My new posts
     <div *ngFor="let post of res.my_latest_blog_posts ">

@@ -24,6 +24,7 @@
 
 
 #desktop-layout {
+  background: #e9ebee;
   #desktop-header {
     position: fixed;
     z-index: 12345678;
@@ -33,7 +34,8 @@
     height: $desktop-header-height;
   }
   #desktop-content {
-    margin-top: $desktop-header-height + $spacing;
+    margin-top: $desktop-header-height;
+    padding-top: $spacing + 1px;
   }
   #content-table {
     margin: 0 auto;
@@ -67,8 +69,7 @@
 
     &>div {
       box-sizing: border-box;
-      background-color: aliceblue;
-      padding: $padding;
+      padding: 0 $spacing;
     }
 
     img {
