@@ -1,7 +1,8 @@
-<button mat-flat-button routerLink="/post/{{ post_id }}">Post</button>
 
-
-
+<a class="post-button" routerLink="/post/{{ post_id }}">
+    <i class="material-icons">add</i>
+    <span>New Post</span>
+</a>
 
 <app-forum-basic-list (edit)=" a.openPostEdit( $event ) "></app-forum-basic-list>
 
