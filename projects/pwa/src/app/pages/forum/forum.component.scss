@@ -1,0 +1,15 @@
+.post-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #dddfe2;
+    background: #fff;
+    box-sizing: border-box;
+    font-size: .8rem;
+    .material-icons{
+        margin-right: 5px;
+    }
+}
