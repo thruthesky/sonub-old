@@ -14,5 +14,9 @@
   * If the browser width becomes wider into `md`( from narrow width ), then it reload to display mobile design.
   * And if the browser width becomes narrower into `md` size ( from wide width ), then it reload to display desktop design.
 
+## Coding Guideline
 
-add again
+### Route atttribute
+
+* [route]=" a.route " is added on #layout. It is available everywhere.
+* Possible usage is to design on each route.
