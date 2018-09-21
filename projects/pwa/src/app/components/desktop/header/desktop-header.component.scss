@@ -11,7 +11,7 @@
   background-color: rgb(214, 144, 144);
   .header-inner {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
     margin: auto;
     height: 100%;
@@ -20,6 +20,7 @@
 
     .left{
       display: flex;
+      align-items: center;
       .letter-logo{
         display: flex;
         align-items: center;
@@ -70,10 +71,15 @@
 
     .right{
       display: flex;
-      align-items: center;
+      color: #8F3C3C;
+      font-size: .9rem;
       &>*{
+        display: flex;
+        align-items: center;
+        height: 100%;
         padding-left: .5rem;
         padding-right: .5rem;
+        cursor: pointer;
       }
     }
   }
