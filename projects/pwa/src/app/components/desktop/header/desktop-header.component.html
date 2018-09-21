@@ -10,7 +10,7 @@
     </div>
 
     <div class="right">
-      <a routerLink="/register">
+      <a *ngIf="a.myName" routerLink="/register">
         <img class="img-thumbnail" src="{{ a.myPhotoUrl}}">
         {{ a.myName }}
       </a>
