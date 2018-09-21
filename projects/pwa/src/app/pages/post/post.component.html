@@ -3,7 +3,10 @@
 
 Posting on {{ form.post_id }}
 
-<ng-simple-editor #editor [icons]="true" [init]="{ cursor: true }" (change)=" onChangeContent( $event ) "></ng-simple-editor>
+<!-- <ng-simple-editor #editor [icons]="true" [init]="{ cursor: true }" (change)=" onChangeContent( $event ) "></ng-simple-editor> -->
+
+<ckeditor [editor]="Editor" [(ngModel)]="editorContent"></ckeditor>
+
 
 
 <div class="mt-1">

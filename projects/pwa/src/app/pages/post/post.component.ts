@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { AppService } from '../../../services/app.service';
 import { ApiPost, PhilGoApiService } from 'share/philgo-api/philgo-api.service';
-import { NgSimpleEditorComponent } from 'ng-simple-editor';
+
 import { SimpleLibrary as _ } from 'ng-simple-library';
 import { ActivatedRoute } from '@angular/router';
+
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-post',
@@ -12,7 +14,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PostComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('editor') editor: NgSimpleEditorComponent;
+  public Editor = ClassicEditor;
+  public editorContent = '<p>Hello Editor!</p>';
 
 
 
@@ -54,7 +57,8 @@ export class PostComponent implements OnInit, AfterViewInit {
       const idx = params.get('idx');
       if (idx) {
         this.form = this.a.postToEdit;
-        this.editor.putContent(this.form.content);
+        // this.editor.putContent(this.form.content);
+        this.editorContent = this.form.content;
       }
     });
 
@@ -62,7 +66,8 @@ export class PostComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
 
-    this.form.content = this.editor.content;
+    // this.form.content = this.editor.content;
+    this.form.content = this.editorContent;
 
     /**
     * Edit
@@ -94,7 +99,8 @@ export class PostComponent implements OnInit, AfterViewInit {
 
   onChangeContent(event: Event) {
     if (!this.subjectChanged) {
-      let str = this.a._.stripTags(this.editor.content);
+      // let str = this.a._.stripTags(this.editor.content);
+      let str = this.a._.stripTags(this.editorContent);
       str = this.a._.htmlDecode(str).trim();
       this.form.subject = str.substr(0, 30);
     }
@@ -130,7 +136,8 @@ export class PostComponent implements OnInit, AfterViewInit {
           this.form.files = [];
         }
         this.form.files.push(res);
-        this.editor.insertImage(res.src, res.name, res.idx);
+        // this.editor.insertImage(res.src, res.name, res.idx);
+        alert('do something for file upload');
         this.percentage = 0;
       }
     }, e => {

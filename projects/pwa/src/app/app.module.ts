@@ -57,7 +57,8 @@ import { LoginComponentModule } from 'share/philgo-api-components/user/login/log
 import { JobComponent } from './pages/job/job.component';
 import { ForumBasicListModule } from 'share/philgo-api-components/forum/basic/forum-basic-list/forum-basic-list.module';
 import { JobListComponentModule } from 'share/philgo-api-components/forum/job/list/job-list.component.module';
-import { NgSimpleEditorModule } from 'ng-simple-editor';
+
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 
@@ -106,13 +107,13 @@ firebase.initializeApp(firebaseConfig);
     AppRoutingModule,
     MatCardModule, MatSnackBarModule,
     AppRoutingModule,
-    NgSimpleEditorModule,
     DisplayFilesModule,
     ComponentServiceModule,
     RegisterComponentModule,
     LoginComponentModule,
     ForumBasicListModule,
-    JobListComponentModule
+    JobListComponentModule,
+    CKEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
