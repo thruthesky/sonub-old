@@ -24,4 +24,20 @@ export class BlogSettingsComponent implements OnInit {
 
   }
 
+  onSubmit($event: Event) {
+    $event.preventDefault();
+
+    console.log('req: ', this.blog);
+    this.philgo.blogSaveSettings(this.blog).subscribe(res => {
+      console.log('blog saved: ', res);
+      this.a.toast(this.a.t({ en: 'Blog settings have successfully updated.', ko: '블로그 설정이 저장되었습니다.' }));
+      this.philgo.profile().subscribe(r => {
+        console.log('user local storage updated: ', r);
+      });
+    }, e => this.a.toast(e));
+
+
+    return false;
+  }
+
 }

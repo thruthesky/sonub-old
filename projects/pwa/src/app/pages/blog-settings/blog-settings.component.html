@@ -1,11 +1,38 @@
 <h1>Blog Settings</h1>
 
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    
-    https://<input matInput name="domain" [(ngModel)]=" blog.domain " placeholder="Your domain">.sonub.com
-  </mat-form-field>
+<form (ngSubmit)=" onSubmit( $event ) " class="blog-settings-form">
+
+    <div class="list-row">
+        <mat-form-field class="w-100">
+          <input matInput name="name" [(ngModel)]=" blog.name " placeholder="Your blog name">
+          <mat-hint>
+            Input your blog name.
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="list-row">
+        <mat-form-field class="w-100">
+          <textarea matInput name="description" [(ngModel)]=" blog.description " placeholder="Describe your blogs"></textarea>
+          <mat-hint>
+            Describe your blog in 255 letters.
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+  <div class="list-row">
+    https://
+    <mat-form-field>
+      <input matInput name="domain" [(ngModel)]=" blog.domain " placeholder="Your domain">
+    </mat-form-field>
+    .sonub.com
+    <div>
+      Becareful when you change your domain. you will loose all your backlinks.
+    </div>
+  </div>
+
+  <div class="list-row">
+    <button mat-flat-button type="submit">Submit</button>
+  </div>
 
 </form>
-
 
