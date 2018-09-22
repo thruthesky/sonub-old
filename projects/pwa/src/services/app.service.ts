@@ -71,6 +71,10 @@ export class AppService {
    */
   private postToEdit: ApiPost;
 
+
+  anonymousPhotoUrl = '/assets/img/anonymous.gif';
+
+
   ///
   constructor(
     private domSanitizer: DomSanitizer,
@@ -248,8 +252,12 @@ export class AppService {
     this.snackBar.open(message, action, config);
   }
 
-  get myName() {
-    return this.philgo.myName();
+  get myName(): string {
+    if (this.philgo.isLoggedIn()) {
+      return this.philgo.myName();
+    } else {
+      return this.t({ en: 'Anonymous', ko: '익명 사용자' });
+    }
   }
   get myPhotoUrl() {
 

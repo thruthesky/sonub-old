@@ -72,11 +72,25 @@ export class PostComponent implements OnInit, AfterViewInit {
 
   }
 
-  onSubmit() {
+  async onSubmit() {
 
-    // this.form.content = this.editor.content;
-    // this.form.content = this.editorContent;
-
+    if ( ! this.philgo.isLoggedIn() ) {
+      const re = await this.philgo.loginOrRegister(<any>this.form).toPromise()
+        .catch( e => {
+          if ( e.code === -270 ) {
+            e.message = this.a.t({
+              en: 'You have already registered with the email but the password is incorrect. Please input correct password.',
+              ko: '입력하신 메일 주소로 회원 가입이 되어져 있지만, 비밀번호가 틀립니다. 올바른 비밀번호를 입력해주세요.'
+            });
+          }
+          this.a.toast(e);
+          return e;
+        });
+        if ( this.philgo.isError(re) ) {
+          console.log('error on loginOrRegister()', re);
+          return;
+        }
+    }
     /**
     * Edit
     */
@@ -109,7 +123,7 @@ export class PostComponent implements OnInit, AfterViewInit {
     // const { editor: ckeditor }: { editor: any } = <any>event;
     // console.log(ckeditor, ckeditor.config);
 
-    console.log(this.form.content);
+    // console.log(this.form.content);
     if (this.form.subject === void 0) {
       this.form.subject = '';
     }
