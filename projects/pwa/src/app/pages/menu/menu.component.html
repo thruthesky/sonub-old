@@ -43,11 +43,19 @@
     <h4 matLine>Logout</h4>
   </mat-list-item>
 
-  <mat-list-item routerLink="/register">
+  <mat-list-item routerLink="/register" *ngIf=" philgo.isLoggedOut() ">
     <i class="material-icons">
       arrow_forward_ios
     </i>
-    <h4 matLine>Register</h4>
+    <h4 matLine>{{ a.t({ en: 'Register', ko: '회원가입'}) }}</h4>
   </mat-list-item>
+
+  <mat-list-item routerLink="/profile" *ngIf=" philgo.isLoggedIn() ">
+    <i class="material-icons">
+      arrow_forward_ios
+    </i>
+    <h4 matLine>{{ a.t({ en: 'Profile Update', ko: '회원 정보 수정'}) }}</h4>
+  </mat-list-item>
+
 </mat-list>
 

@@ -37,6 +37,7 @@ import { environment } from '../environments/environment';
 import { DesktopHeaderComponent } from './components/desktop/header/desktop-header.component';
 import { DesktopLeftComponent } from './components/desktop/left/left.component';
 import { DesktopRightComponent } from './components/desktop/right/right.component';
+import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
 // import { RequestPushNotificationComponent } from 'share/components/request-push-notification/request-push-notification.component';
 // import { AvatarComponent } from 'share/components/avatar/avatar.component';
 // import { PostComponent } from './pages/post/post.component';
@@ -116,6 +117,7 @@ firebase.initializeApp(firebaseConfig);
     // ForumBasicListModule,
     // JobListComponentModule,
     // CKEditorModule
+    PageNotFoundModule
   ],
   providers: [],
   bootstrap: [AppComponent]

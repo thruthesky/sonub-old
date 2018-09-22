@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { BlogComponent } from './blog.component';
 import { CommonModule } from '@angular/common';
-import { MatListModule } from '@angular/material';
+import { MatListModule, MatButtonModule } from '@angular/material';
 import { Routes, RouterModule } from '@angular/router';
 
 
@@ -18,7 +18,8 @@ const routes: Routes = [
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        MatListModule
+        MatListModule,
+        MatButtonModule
     ],
     exports: [],
     declarations: [BlogComponent],

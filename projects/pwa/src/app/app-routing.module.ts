@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 // import { LoginComponent } from './pages/login/login.component';
 // import { RegisterComponent } from './pages/register/register.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
     { path: 'menu', loadChildren: './pages/menu/menu.module#MenuModule' },
     { path: 'login', loadChildren: './pages/login/login.module#LoginModule' },
     { path: 'register', loadChildren: './pages/register/register.module#RegisterModule' },
+    { path: 'profile', loadChildren: './pages/register/register.module#RegisterModule' },
     { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsModule' },
     { path: 'post/:post_id', loadChildren: './pages/post/post.module#PostModule' },
     { path: 'post/edit/:idx', loadChildren: './pages/post/post.module#PostModule' },
@@ -26,7 +28,7 @@ const routes: Routes = [
     { path: 'job', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job/:category', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job/:category/:idx', loadChildren: './pages/job/job.module#JobModule' },
-    { path: '**', loadChildren: './pages/page-not-found/page-not-found.module#PageNotFoundModule' },
+    { path: '**', component: PageNotFoundComponent },
 ];
 
 // console.log('routes: ', routes);
