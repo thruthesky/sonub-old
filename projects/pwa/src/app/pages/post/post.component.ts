@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { AppService } from '../../../services/app.service';
 import { ApiPost, PhilGoApiService } from 'share/philgo-api/philgo-api.service';
 
@@ -10,17 +10,19 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss']
+  styleUrls: ['./post.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PostComponent implements OnInit, AfterViewInit {
 
   public Editor = ClassicEditor;
-  public editorContent = '<p>Hello Editor!</p>';
-
+  // public editorContent = '<p>Hello Editor!</p>';
 
 
   form: ApiPost = <any>{
     post_id: 'blog',
+    subject: '',
+    content: '',
     gid: _.randomString(19, this.philgo.myIdx())
   };
 
@@ -56,9 +58,15 @@ export class PostComponent implements OnInit, AfterViewInit {
       this.form.post_id = params.get('post_id');
       const idx = params.get('idx');
       if (idx) {
-        this.form = this.a.postToEdit;
-        // this.editor.putContent(this.form.content);
-        this.editorContent = this.form.content;
+        const post = this.a.getPostToEdit();
+        if ( post ) {
+          this.form = post;
+          // No post to edit? Maybe refreshed.
+          // Then load the post from server.
+        } else {
+          // this.editorContent = this.form.content;
+          this.philgo.postLoad( idx ).subscribe( p => this.form = p, e => this.a.toast(e) );
+        }
       }
     });
 
@@ -67,7 +75,7 @@ export class PostComponent implements OnInit, AfterViewInit {
   onSubmit() {
 
     // this.form.content = this.editor.content;
-    this.form.content = this.editorContent;
+    // this.form.content = this.editorContent;
 
     /**
     * Edit
@@ -98,9 +106,16 @@ export class PostComponent implements OnInit, AfterViewInit {
 
 
   onChangeContent(event: Event) {
+    // const { editor: ckeditor }: { editor: any } = <any>event;
+    // console.log(ckeditor, ckeditor.config);
+
+    console.log(this.form.content);
+    if (this.form.subject === void 0) {
+      this.form.subject = '';
+    }
     if (!this.subjectChanged) {
       // let str = this.a._.stripTags(this.editor.content);
-      let str = this.a._.stripTags(this.editorContent);
+      let str = this.a._.stripTags(this.form.content);
       str = this.a._.htmlDecode(str).trim();
       this.form.subject = str.substr(0, 30);
     }
@@ -113,39 +128,39 @@ export class PostComponent implements OnInit, AfterViewInit {
 
 
 
-  onChangeFile(event: Event) {
-    this.uploadFile(<any>event.target['files']);
-  }
+  // onChangeFile(event: Event) {
+  //   this.uploadFile(<any>event.target['files']);
+  // }
 
-  uploadFile(files: FileList) {
+  // uploadFile(files: FileList) {
 
-    console.log('files: ', files);
-    if (files === void 0 || !files.length || files[0] === void 0) {
-      const e = { code: -1, message: this.philgo.t({ en: 'Please select a file', ko: '업로드 할 파일을 선택해주세요.' }) };
-      // this.componentService.alert(e);
-      return;
-    }
+  //   console.log('files: ', files);
+  //   if (files === void 0 || !files.length || files[0] === void 0) {
+  //     const e = { code: -1, message: this.philgo.t({ en: 'Please select a file', ko: '업로드 할 파일을 선택해주세요.' }) };
+  //     // this.componentService.alert(e);
+  //     return;
+  //   }
 
-    this.philgo.fileUpload(files, { gid: this.form.gid, user_password: this.form.user_password }).subscribe(res => {
-      if (typeof res === 'number') {
-        console.log('percentage: ', res);
-        this.percentage = res;
-      } else {
-        console.log('file upload success: ', res);
-        if (!this.form.files || !this.form.files.length) {
-          this.form.files = [];
-        }
-        this.form.files.push(res);
-        // this.editor.insertImage(res.src, res.name, res.idx);
-        alert('do something for file upload');
-        this.percentage = 0;
-      }
-    }, e => {
-      console.error(e);
-      this.percentage = 0;
-      this.a.toast(e);
-    });
-  }
+  //   this.philgo.fileUpload(files, { gid: this.form.gid, user_password: this.form.user_password }).subscribe(res => {
+  //     if (typeof res === 'number') {
+  //       console.log('percentage: ', res);
+  //       this.percentage = res;
+  //     } else {
+  //       console.log('file upload success: ', res);
+  //       if (!this.form.files || !this.form.files.length) {
+  //         this.form.files = [];
+  //       }
+  //       this.form.files.push(res);
+  //       // this.editor.insertImage(res.src, res.name, res.idx);
+  //       alert('do something for file upload');
+  //       this.percentage = 0;
+  //     }
+  //   }, e => {
+  //     console.error(e);
+  //     this.percentage = 0;
+  //     this.a.toast(e);
+  //   });
+  // }
 
 
 }

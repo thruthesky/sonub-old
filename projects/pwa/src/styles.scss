@@ -11,3 +11,24 @@
 @import 'styles/module';
 @import 'styles/theme';
 @import './../../../share/philgo-api-components/scss/index';
+
+
+/**
+ * To adjust layout of CKEditor.
+ */
+.image-style-side {
+  max-width: 50%;
+  float: right;
+  margin-left: var(--ck-image-style-spacing);
+
+  img {
+    width: 100%;
+  }
+}
+.post-content .post-text-content {
+  &:after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+}

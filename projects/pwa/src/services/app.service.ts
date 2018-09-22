@@ -69,7 +69,7 @@ export class AppService {
    *
    * Use 'openPostEdit()' method.
    */
-  postToEdit: ApiPost;
+  private postToEdit: ApiPost;
 
   ///
   constructor(
@@ -134,6 +134,17 @@ export class AppService {
     this.postToEdit = post;
     console.log('posttoEdit:', this.postToEdit);
     this.router.navigateByUrl('/post/edit/' + this.postToEdit.idx);
+  }
+
+  /**
+   * Return post to edit.
+   * The post to edit is set by the 'edit button' click.
+   * So, if you refresh on edit page, this variable will return undefined.
+   * Then you need to load data by yourself from server.
+   * This may happen on refresh page.
+   */
+  getPostToEdit(): ApiPost {
+    return this.postToEdit;
   }
 
 

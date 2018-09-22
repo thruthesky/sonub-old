@@ -10,6 +10,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ForumComponent implements OnInit {
 
+  /**
+   * For post view on top of forum list
+   */
+  idx;
+  /**
+   * For forum list
+   */
   post_id;
   page_no = 1;
   res: ApiPostSearch;
@@ -21,6 +28,7 @@ export class ForumComponent implements OnInit {
     activatedRoute.paramMap.subscribe(params => {
 
       this.post_id = params.get('post_id');
+      this.idx = params.get('idx');
       //   const options: ApiPostQueryOptions = {};
       //   if (this.page_no === 1) {
       //     options.cache = true;

@@ -1,35 +1,39 @@
-<app-avatar></app-avatar>
+<section page="post">
+
+  <app-avatar></app-avatar>
 
 
-Posting on {{ form.post_id }}
+  Posting on {{ form.post_id }}
 
-<!-- <ng-simple-editor #editor [icons]="true" [init]="{ cursor: true }" (change)=" onChangeContent( $event ) "></ng-simple-editor> -->
+  <!-- <ng-simple-editor #editor [icons]="true" [init]="{ cursor: true }" (change)=" onChangeContent( $event ) "></ng-simple-editor> -->
+  <ckeditor class='ckeditor' [editor]="Editor" [(ngModel)]=" form.content " (change)="onChangeContent( $event )"
+  [config]="{
+    ckfinder: {uploadUrl: philgo.getServerRootUrl() + 'etc/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json' }
+  }"></ckeditor>
 
-<ckeditor [editor]="Editor" [(ngModel)]="editorContent"></ckeditor>
-
-
-<div class="mt-1">
-
-  <mat-form-field class="w-100">
-    <input class="w-100" matInput placeholder="Title" [(ngModel)]=" form.subject " (keyup)="onSubjectKeyUp()">
-    <mat-hint>Please input title</mat-hint>
-  </mat-form-field>
-
-</div>
-<div class="mt-1">
-  <app-display-files [edit]=" true " [post]=" form " [percentage]=" percentage "></app-display-files>
-</div>
-<div class="mt-1">
+  <div class="mt-1">
 
 
+    <mat-form-field class="w-100">
+      <input class="w-100" matInput placeholder="Title" name="subject" [(ngModel)]=" form.subject " (keyup)="onSubjectKeyUp()">
+      <mat-hint>Please input title</mat-hint>
+    </mat-form-field>
 
-  <button mat-flat-button class="transparent-cover-wrapper">
-    <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
-    <div>Photo Upload</div>
-  </button>
+  </div>
+  <!-- <div class="mt-1">
+    <app-display-files [edit]=" true " [post]=" form " [percentage]=" percentage "></app-display-files>
+  </div> -->
+
+  <div class="mt-1">
+
+    <!-- <button mat-flat-button class="transparent-cover-wrapper">
+      <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
+      <div>Photo Upload</div>
+    </button> -->
+
+    <button mat-flat-button (click)=" onSubmit() ">{{ a.t({ en: 'SUBMIT', ko: '글 등록'}) }}</button>
 
 
-  <button mat-flat-button (click)=" onSubmit() ">{{ a.t({ en: 'SUBMIT', ko: '글 등록'}) }}</button>
+  </div>
 
-
-</div>
+</section>
