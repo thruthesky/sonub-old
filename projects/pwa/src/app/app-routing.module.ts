@@ -24,6 +24,7 @@ const routes: Routes = [
     { path: 'post/edit/:idx', loadChildren: './pages/post/post.module#PostModule' },
     { path: 'forum/:post_id', loadChildren: './pages/forum/forum.module#ForumModule' },
     { path: 'forum/:post_id/:idx', loadChildren: './pages/forum/forum.module#ForumModule' },
+    { path: 'blog/settings', loadChildren: './pages/blog-settings/blog-settings.module#BlogSettingsModule' },
     { path: 'blog', loadChildren: './pages/blog/blog.module#BlogModule' },
     { path: 'job', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job/:category', loadChildren: './pages/job/job.module#JobModule' },
