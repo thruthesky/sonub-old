@@ -67,12 +67,17 @@ firebase.initializeApp(firebaseConfig);
 })
 export class AppModule {
   constructor(private philgo: PhilGoApiService) {
-    philgo.setServerUrl(environment.philgoServerUrl);
-    philgo.setFileServerUrl(environment.philgoFileServerUrl);
-    philgo.setNewFileServerUrl(environment.newFileServerUrl);
-    philgo.setFirebaseApp(firebase);
-    // philgo.loadPostConfigs().subscribe(res => { });
-    philgo.app('sonub.config').subscribe(res => {
+
+    philgo.setServerUrl(environment.philgoServerUrl);         // philgo api. 'api.php'
+    philgo.setFileServerUrl(environment.philgoFileServerUrl); // philgo file server. 'https://file.philgo.com/index.php'
+    philgo.setNewFileServerUrl(environment.newFileServerUrl); // new file server.
+
+    philgo.sessionStorage = 'cookie'; // How do you want to save login information. 'cookie' or 'localStorage'
+    philgo.cookieDomain = 'sonub.com'; // if cookie is chosen, put a root domain to share with its subdomains.
+
+    philgo.setFirebaseApp(firebase); // firebase
+
+    philgo.app('sonub.config').subscribe(res => { // get site(app) config from server.
       console.log('sonub config', res);
       philgo.mergeConfig(res);
     });
