@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 // import { ERROR_WRONG_IDX_MEMBER, ERROR_WRONG_SESSION_ID } from '../../../../share/philgo-api/philgo-api.service';
 
 import { SimpleLibrary as _ } from 'ng-simple-library';
-import { ApiPost, PhilGoApiService } from 'share/philgo-api/philgo-api.service';
+import { ApiPost, PhilGoApiService, IDX_MEMBER, USER_LOGIN_INFO } from 'share/philgo-api/philgo-api.service';
 
 
 import * as firebase from 'firebase/app';
@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { Subject } from 'rxjs';
+import { CookieService } from 'ngx-cookie';
 
 
 interface Environment {
@@ -100,26 +101,34 @@ export class AppService {
   anonymousPhotoUrl = '/assets/img/anonymous.gif';
 
 
-  ///
+  /**
+   * Initialize the app service.
+   *
+   * This App Service constructor must run only one time per app booting.
+   * If the app is being refreshed or page has been change with <a> tag may cause it to run again.
+   * Or when user changes 'subdomain', then the app will be reloaded and this will run again.
+   * In any way, this constructor must run only one time per app boot.
+   *
+   * @param domSanitizer .
+   * @param snackBar .
+   * @param router .
+   * @param cookie .
+   * @param philgo .
+   */
   constructor(
     private domSanitizer: DomSanitizer,
     private snackBar: MatSnackBar,
     private router: Router,
+    private cookie: CookieService,
     public philgo: PhilGoApiService
   ) {
     this.initLanguage();
     this.initFirebase();
     this.initScreen();
     this.initPushNotification();
-
-
-    this.router.events.subscribe((e: any) => {
-      if (e instanceof NavigationEnd) {
-        this.route = this.router.url;
-        this.routeChange.next(this.route);
-      }
-    });
-
+    this.initRouterEvent();
+    this.initUserInformationChangeEvent();
+    this.initCookieLogin();
   }
 
   initLanguage() {
@@ -143,6 +152,74 @@ export class AppService {
       this.isDesktop = false;
       this.isMobile = true;
     }
+  }
+
+  /**
+   * Listen page changes.
+   */
+  initRouterEvent() {
+    this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+        this.route = this.router.url;
+        this.routeChange.next(this.route);
+      }
+    });
+
+  }
+
+  /**
+   * Whenever user login(or profile) information changes, the event is fired.
+   *
+   * @desc it saves user login session on cookie, so when user changes 'subdomain',
+   *  the user still be logged in.
+   */
+  initUserInformationChangeEvent() {
+    this.philgo.userChange.subscribe(user => {
+      console.log(' ==> initUserInformationChangeEvent() user: ', user);
+      if (user) {
+        /// user is logged in
+        const d = new Date();
+        const cookieObjects = {
+          domain: APP_ROOT_DOMAIN,
+          expires: new Date(d.getFullYear() + 1, d.getMonth())
+        };
+        this.cookie.putObject(USER_LOGIN_INFO, user, cookieObjects);
+        console.log('Set user login information in cookie: ', cookieObjects);
+      } else {
+        /// user is logged out
+        console.log('Removing cookie login information');
+        const d = new Date();
+        const cookieObjects = {
+          domain: APP_ROOT_DOMAIN,
+          expires: new Date(d.getFullYear() - 1, d.getMonth())
+        };
+        this.cookie.putObject(USER_LOGIN_INFO, {}, cookieObjects);
+        this.cookie.remove(USER_LOGIN_INFO, cookieObjects);
+      }
+    });
+  }
+
+  /**
+   * Let the user logged in if
+   *  the user is not logged in by PhilGo Api Service( in localStorage )
+   *  the user has cookie login information
+   */
+  initCookieLogin() {
+    console.log('     => initCookieLogin() ');
+    if (this.philgo.isLoggedOut()) {
+      console.log('     => user is logged out by philgo api');
+      const info = this.cookie.getObject(USER_LOGIN_INFO);
+      if (info) {
+        console.log('       => user has login information on cookie. Going to login info on Philgo Api.');
+        info['loggedIn'] = 'cookie';
+        this.philgo.saveUserInformation(<any>info);
+      } else {
+        console.log('       => user does not have cookie login information :(. Cannot loggin.');
+      }
+    } else {
+      console.log('       => user is logged in already. just returen');
+    }
+
   }
 
   /**
