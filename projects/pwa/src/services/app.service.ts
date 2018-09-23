@@ -12,11 +12,13 @@ import 'firebase/messaging';
 import { environment } from '../environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
-
+import { Subject } from 'rxjs';
 
 
 interface Environment {
   production: boolean;
+  port: string;
+  blogIntroDomain: string;
   philgoServerUrl: string;
   philgoFileServerUrl: string;
   newFileServerUrl: string;
@@ -31,15 +33,38 @@ export interface FrontPage {
   no_of_my_blog_posts: number;
 }
 
+
+
+
+/**
+ * Site domain
+ */
+export const APP_PROTOCOL = 'https://';
+export const APP_ROOT_DOMAIN = 'sonub.com';
+export const APP_PORT = environment.port;
+export const BLOG_INTRO_DOMAIN = environment.blogIntroDomain;
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
 
+
   /**
-   * App Route
+   * App Route.
+   * When page changes, this.route changes and 'routeChange' event is fired.
+   * This value is being added on the #layout element of DOM in App Component template.
+   * So, it is available everywhere.
+   * Possible usage is to design on each route.
    */
   route = '';
+  /**
+   * You can subscribe this event to do something on page chagnes.
+   * @example
+   *  a.routeChange.subscribe( route => console.log('route:', route));
+   */
+  routeChange = new Subject<string>();
   /**
    * Screen width
    */
@@ -91,6 +116,7 @@ export class AppService {
     this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationEnd) {
         this.route = this.router.url;
+        this.routeChange.next(this.route);
       }
     });
 
@@ -119,6 +145,18 @@ export class AppService {
     }
   }
 
+  /**
+   * Returns true if the user is in home(main/front) page.
+   */
+  get inHome(): boolean {
+    return !this.route || this.route === '/';
+  }
+  /**
+   * Returns true if the user is in blog pages. like blog settings, blog categories.
+   */
+  get inBlog(): boolean {
+    return this.route.indexOf('/blog') === 0;
+  }
   openHome() {
     this.router.navigateByUrl('/');
   }
@@ -260,7 +298,23 @@ export class AppService {
     }
   }
   get myPhotoUrl() {
-
     return this.philgo.profilePhotoUrl(this.philgo.myProfilePhotoUrl().split('/').pop());
   }
+
+  /**
+   * returns login user's blog address.
+   */
+  get myBlogUrl(): string {
+    let url = '';
+    if (this.philgo.isLoggedIn()) {
+      url = APP_PROTOCOL + this.philgo.myBlogDomain() + '.' + APP_ROOT_DOMAIN;
+    } else {
+      url = APP_PROTOCOL + BLOG_INTRO_DOMAIN;
+    }
+    if (APP_PORT) {
+      url += ':' + APP_PORT;
+    }
+    return url;
+  }
+
 }

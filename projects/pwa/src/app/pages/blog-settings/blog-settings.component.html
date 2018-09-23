@@ -1,23 +1,28 @@
-<h1>Blog Settings</h1>
+<mat-toolbar>
+  <h1>Blog Settings</h1>
+  <span class="flex-grow-1"></span>
+  <button mat-button routerLink="/blog">My blog</button>
+</mat-toolbar>
+
 
 <form (ngSubmit)=" onSubmit( $event ) " class="blog-settings-form">
 
-    <div class="list-row">
-        <mat-form-field class="w-100">
-          <input matInput name="name" [(ngModel)]=" blog.name " placeholder="Your blog name">
-          <mat-hint>
-            Input your blog name.
-          </mat-hint>
-        </mat-form-field>
-      </div>
-      <div class="list-row">
-        <mat-form-field class="w-100">
-          <textarea matInput name="description" [(ngModel)]=" blog.description " placeholder="Describe your blogs"></textarea>
-          <mat-hint>
-            Describe your blog in 255 letters.
-          </mat-hint>
-        </mat-form-field>
-      </div>
+  <div class="list-row">
+    <mat-form-field class="w-100">
+      <input matInput name="name" [(ngModel)]=" blog.name " placeholder="Your blog name">
+      <mat-hint>
+        Input your blog name.
+      </mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="list-row">
+    <mat-form-field class="w-100">
+      <textarea matInput name="description" [(ngModel)]=" blog.description " placeholder="Describe your blogs"></textarea>
+      <mat-hint>
+        Describe your blog in 255 letters.
+      </mat-hint>
+    </mat-form-field>
+  </div>
 
   <div class="list-row">
     https://
@@ -32,7 +37,7 @@
 
   <div class="list-row">
     <button mat-flat-button type="submit">Submit</button>
+    <button mat-flat-button type="button" routerLink="/blog">Cancel</button>
   </div>
 
 </form>
-

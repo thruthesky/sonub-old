@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "s": "npm run pwa",
-    "pwa": "ng s pwa"
+    "pwa": "ng s pwa -o --host w.sonub.com --port 8443 --disable-host-check --ssl --ssl-key '/Users/jaehosong/apps/sonub/tmp/ssl/sonub-private.key' --ssl-cert '/Users/jaehosong/apps/sonub/tmp/ssl/sonub-certificate-ca-bundle.crt'"
   },
   "private": true,
   "dependencies": {
