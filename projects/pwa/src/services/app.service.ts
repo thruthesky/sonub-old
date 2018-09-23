@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 // import { ERROR_WRONG_IDX_MEMBER, ERROR_WRONG_SESSION_ID } from '../../../../share/philgo-api/philgo-api.service';
 
 import { SimpleLibrary as _ } from 'ng-simple-library';
-import { ApiPost, PhilGoApiService, IDX_MEMBER, USER_LOGIN_INFO } from 'share/philgo-api/philgo-api.service';
+import { ApiPost, PhilGoApiService, USER_LOGIN_SESSION_INFO } from 'share/philgo-api/philgo-api.service';
 
 
 import * as firebase from 'firebase/app';
@@ -176,26 +176,26 @@ export class AppService {
   initUserInformationChangeEvent() {
     this.philgo.userChange.subscribe(user => {
       console.log(' ==> initUserInformationChangeEvent() user: ', user);
-      if (user) {
-        /// user is logged in
-        const d = new Date();
-        const cookieObjects = {
-          domain: APP_ROOT_DOMAIN,
-          expires: new Date(d.getFullYear() + 1, d.getMonth())
-        };
-        this.cookie.putObject(USER_LOGIN_INFO, user, cookieObjects);
-        console.log('Set user login information in cookie: ', cookieObjects);
-      } else {
-        /// user is logged out
-        console.log('Removing cookie login information');
-        const d = new Date();
-        const cookieObjects = {
-          domain: APP_ROOT_DOMAIN,
-          expires: new Date(d.getFullYear() - 1, d.getMonth())
-        };
-        this.cookie.putObject(USER_LOGIN_INFO, {}, cookieObjects);
-        this.cookie.remove(USER_LOGIN_INFO, cookieObjects);
-      }
+      // if (user) {
+      //   /// user is logged in
+      //   const d = new Date();
+      //   const cookieObjects = {
+      //     domain: APP_ROOT_DOMAIN,
+      //     expires: new Date(d.getFullYear() + 1, d.getMonth())
+      //   };
+      //   this.cookie.putObject(USER_LOGIN_INFO, user, cookieObjects);
+      //   console.log('Set user login information in cookie: ', cookieObjects);
+      // } else {
+      //   /// user is logged out
+      //   console.log('Removing cookie login information');
+      //   const d = new Date();
+      //   const cookieObjects = {
+      //     domain: APP_ROOT_DOMAIN,
+      //     expires: new Date(d.getFullYear() - 1, d.getMonth())
+      //   };
+      //   this.cookie.putObject(USER_LOGIN_INFO, {}, cookieObjects);
+      //   this.cookie.remove(USER_LOGIN_INFO, cookieObjects);
+      // }
     });
   }
 
@@ -205,20 +205,25 @@ export class AppService {
    *  the user has cookie login information
    */
   initCookieLogin() {
-    console.log('     => initCookieLogin() ');
-    if (this.philgo.isLoggedOut()) {
-      console.log('     => user is logged out by philgo api');
-      const info = this.cookie.getObject(USER_LOGIN_INFO);
-      if (info) {
-        console.log('       => user has login information on cookie. Going to login info on Philgo Api.');
-        info['loggedIn'] = 'cookie';
-        this.philgo.saveUserInformation(<any>info);
-      } else {
-        console.log('       => user does not have cookie login information :(. Cannot loggin.');
-      }
-    } else {
-      console.log('       => user is logged in already. just returen');
-    }
+    console.log(' => initCookieLogin() cookie: ', this.cookie.getObject(USER_LOGIN_SESSION_INFO)
+      ,
+      'session storage: ',
+      this.philgo.sessionStorage,
+      this.philgo.cookieDomain
+    );
+    // if (this.philgo.isLoggedOut()) {
+    //   console.log('     => user is logged out by philgo api');
+    //   const info = this.cookie.getObject(USER_LOGIN_INFO);
+    //   if (info) {
+    //     console.log('       => user has login information on cookie. Going to login info on Philgo Api.');
+    //     info['loggedIn'] = 'cookie';
+    //     this.philgo.saveUserInformation(<any>info);
+    //   } else {
+    //     console.log('       => user does not have cookie login information :(. Cannot loggin.');
+    //   }
+    // } else {
+    //   console.log('       => user is logged in already. just returen');
+    // }
 
   }
 
