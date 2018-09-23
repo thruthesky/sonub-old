@@ -22,3 +22,21 @@
 .mb-spacing{
     margin-bottom: $spacing;
 }
+
+.top-left {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+}
+
+.top-right {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+}
+
+.overflow-hidden {
+    overflow: hidden !important;
+}

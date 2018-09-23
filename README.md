@@ -58,3 +58,12 @@
 ### Route atttribute
 
 * See [Coding Guide](https://docs.google.com/document/d/1u2PAHLDYx0-UUbaXQtMnNJsUiAdJkSbE2pzpSPM5_I8/edit#heading=h.ojq4plytxfhn)
+
+## Life Cycle
+
+### Blog site open
+
+* 3 api calls are made
+  * 1st call for `sonub config` in app module.
+  * 2nd call for sonub front apge in home component to get first page content inclding blog site's content.
+  * 3rd call for blog settings in app service.

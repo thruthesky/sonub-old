@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 // import { ERROR_WRONG_IDX_MEMBER, ERROR_WRONG_SESSION_ID } from '../../../../share/philgo-api/philgo-api.service';
 
 import { SimpleLibrary as _ } from 'ng-simple-library';
-import { ApiPost, PhilGoApiService, USER_LOGIN_SESSION_INFO } from 'share/philgo-api/philgo-api.service';
+import { ApiPost, PhilGoApiService, USER_LOGIN_SESSION_INFO, ApiBlogSettings } from 'share/philgo-api/philgo-api.service';
 
 
 import * as firebase from 'firebase/app';
@@ -101,6 +101,16 @@ export class AppService {
   anonymousPhotoUrl = '/assets/img/anonymous.gif';
 
 
+
+  // app root domain
+  appRootDomain = APP_ROOT_DOMAIN;
+
+
+  /**
+   * 현재 접속 중인 블로그의 정보를 가지고 있다.
+   */
+  blog: ApiBlogSettings = null;
+
   /**
    * Initialize the app service.
    *
@@ -129,7 +139,8 @@ export class AppService {
     this.initPushNotification();
     this.initRouterEvent();
     this.initUserInformationChangeEvent();
-    this.initCookieLogin();
+    // this.initCookieLogin();
+    this.initBlog();
   }
 
   initLanguage() {
@@ -204,27 +215,40 @@ export class AppService {
    *  the user is not logged in by PhilGo Api Service( in localStorage )
    *  the user has cookie login information
    */
-  initCookieLogin() {
-    console.log(' => initCookieLogin() cookie: ', this.cookie.getObject(USER_LOGIN_SESSION_INFO)
-      ,
-      'session storage: ',
-      this.philgo.sessionStorage,
-      this.philgo.cookieDomain
-    );
-    // if (this.philgo.isLoggedOut()) {
-    //   console.log('     => user is logged out by philgo api');
-    //   const info = this.cookie.getObject(USER_LOGIN_INFO);
-    //   if (info) {
-    //     console.log('       => user has login information on cookie. Going to login info on Philgo Api.');
-    //     info['loggedIn'] = 'cookie';
-    //     this.philgo.saveUserInformation(<any>info);
-    //   } else {
-    //     console.log('       => user does not have cookie login information :(. Cannot loggin.');
-    //   }
-    // } else {
-    //   console.log('       => user is logged in already. just returen');
-    // }
+  // initCookieLogin() {
+  // console.log(' => initCookieLogin() cookie: ', this.cookie.getObject(USER_LOGIN_SESSION_INFO)
+  //   ,
+  //   'session storage: ',
+  //   this.philgo.sessionStorage,
+  //   this.philgo.cookieDomain
+  // );
+  // if (this.philgo.isLoggedOut()) {
+  //   console.log('     => user is logged out by philgo api');
+  //   const info = this.cookie.getObject(USER_LOGIN_INFO);
+  //   if (info) {
+  //     console.log('       => user has login information on cookie. Going to login info on Philgo Api.');
+  //     info['loggedIn'] = 'cookie';
+  //     this.philgo.saveUserInformation(<any>info);
+  //   } else {
+  //     console.log('       => user does not have cookie login information :(. Cannot loggin.');
+  //   }
+  // } else {
+  //   console.log('       => user is logged in already. just returen');
+  // }
 
+  // }
+
+  /**
+   * When user visits a blog, load blog settings and initialize it.
+   * @desc when a user visits a blog, the browser must reload the site.
+   */
+  initBlog() {
+    if (this.inBlogSite) {
+      this.philgo.blogLoadSettings(this.currentBlogDomain).subscribe(blog => {
+        console.log('blog settings', blog);
+      }, e => this.toast(e));
+    }
+    this.philgo.blogChange.subscribe(blog => this.blog = blog);
   }
 
   /**
@@ -233,11 +257,61 @@ export class AppService {
   get inHome(): boolean {
     return !this.route || this.route === '/';
   }
+
   /**
-   * Returns true if the user is in blog pages. like blog settings, blog categories.
+   * Returns true if the user is in blog pages. Not in blog site.
+   *  - like blog settings, blog categories.
+   * @returns
+   *  true - if the user is in a blog page.
+   *  false - if the user is not in a blog page.
+   *    this will also return false if the user is in blog site but not in a blog page.
+   * @see inBlogSite()
    */
   get inBlog(): boolean {
     return this.route.indexOf('/blog') === 0;
+  }
+  /**
+   * Returns true if the user is in blog site.
+   * @return
+   *  true - if the user is in a blog site
+   *  false - if the user is in root domain or www domain.
+   *    this will also return false even if the user in blog page, but not in blog site.
+   *
+   */
+  get inBlogSite(): boolean {
+    return !this.inRootSite;
+  }
+  /**
+   * Return blog 2nd domain only of the current site address. Not from the login user's blog domain.
+   *
+   * @return
+   *    string of 2nd domain part. example) 'thruthesky' from 'thruthesky.sonub.com'
+   *    empty string - if it is not blog site.
+   */
+  get currentBlogDomain(): string {
+    if (this.inBlogSite) {
+      return location.hostname.replace('.' + this.appRootDomain, '');
+    } else {
+      return '';
+    }
+  }
+  get myBlogDomain(): string {
+    return this.philgo.myBlogDomain();
+  }
+
+  /**
+   * Returns true if the user is in sonub.com or www.sonub.com
+   */
+  get inRootSite(): boolean {
+    return location.hostname === this.appRootDomain || location.hostname === 'www.' + this.appRootDomain;
+  }
+
+  /**
+   * Returns true if the user is inside his blog space.
+   */
+  get inMyBlog(): boolean {
+    // console.log(location.hostname);
+    return this.myBlogUrl.indexOf(location.hostname) !== -1;
   }
   openHome() {
     this.router.navigateByUrl('/');
@@ -389,7 +463,7 @@ export class AppService {
   get myBlogUrl(): string {
     let url = '';
     if (this.philgo.isLoggedIn()) {
-      url = APP_PROTOCOL + this.philgo.myBlogDomain() + '.' + APP_ROOT_DOMAIN;
+      url = APP_PROTOCOL + this.philgo.myBlogDomain() + '.' + this.appRootDomain;
     } else {
       url = APP_PROTOCOL + BLOG_INTRO_DOMAIN;
     }
@@ -398,5 +472,6 @@ export class AppService {
     }
     return url;
   }
+
 
 }

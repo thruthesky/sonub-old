@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     public a: AppService,
     public philgo: PhilGoApiService
   ) {
-    philgo.app('sonub.frontPage').subscribe( res => {
+    philgo.app('sonub.frontPage', { blog: a.currentBlogDomain }).subscribe( res => {
       console.log('sonub fron page data', res);
       this.res = res;
     }, e => {

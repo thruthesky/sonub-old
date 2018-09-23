@@ -13,11 +13,21 @@ export class HeaderComponent implements OnInit {
   constructor(
     public a: AppService
   ) {
-    a.routeChange.subscribe( route => {
-      console.log('route:', route);
-      if ( a.inBlog ) {
+
+    /**
+     * When user changes page, update header title/icons.
+     */
+    a.routeChange.subscribe(route => {
+      // console.log('route:', route);
+      if (a.inBlog) {
         this.title = 'Blog';
       }
+    });
+
+
+    a.philgo.blogChange.subscribe(blog => {
+      // console.log('=========> blog settings', blog);
+      this.title = blog.name;
     });
   }
 

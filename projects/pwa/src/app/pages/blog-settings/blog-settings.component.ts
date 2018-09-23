@@ -14,7 +14,7 @@ export class BlogSettingsComponent implements OnInit {
     public a: AppService,
     public philgo: PhilGoApiService
   ) {
-    philgo.blogSettings().subscribe(res => {
+    philgo.blogLoadSettings( philgo.myBlogDomain() ).subscribe(res => {
       console.log('res: ', res);
       this.blog = res;
     }, e => this.a.toast(e));

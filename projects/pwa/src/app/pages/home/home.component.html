@@ -1,9 +1,14 @@
 <app-request-push-notification></app-request-push-notification>
 
-Your blog: <a class="link" href="{{ a.myBlogUrl }}">{{ a.myBlogUrl }}</a> (<a class="link" href="{{ a.myBlogUrl }}/blog/settings">change</a>)
+<div class="" *ngIf=" ! a.inMyBlog ">
+  Blog Owner: {{ a.blog?.owner }}
+  <a class="link" href="{{ a.myBlogUrl }}">My blog</a>
+  <!-- Your blog: <a class="link" href="{{ a.myBlogUrl }}">{{ a.myBlogUrl }}</a> (<a class="link" href="{{ a.myBlogUrl }}/blog/settings">change</a>) -->
+</div>
 
 
-<div class="text-editor" routerLink="/post/blog">
+
+<div class="text-editor mt-2" routerLink="/post/blog">
   <app-avatar class="mr-md-2"></app-avatar>
   <div class="editor">What's on your mind?</div>
 </div>
@@ -15,10 +20,10 @@ Your blog: <a class="link" href="{{ a.myBlogUrl }}">{{ a.myBlogUrl }}</a> (<a cl
       <div>My blog posts: {{ res.no_of_my_blog_posts }}</div>
   </div>
   <div>
-    My new posts
+    <hr>
     <div *ngFor="let post of res.my_latest_blog_posts ">
       {{ post.subject }}
-      <div [innerHTML]=" a.safeHtml(post.content) "></div>
+      <!-- <div [innerHTML]=" a.safeHtml(post.content) "></div> -->
     </div>
   </div>
 </div>
