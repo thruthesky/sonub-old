@@ -16,15 +16,42 @@
 
 ## Dependencies
 
+* `ngx-cookie` must be installed to enable philgo-api cookie login.
+* `ng-simple-library` is mandatory.
 * philgo-api
 * philgo-api-component
-* ng-simple-library
 
 ## RWD
 
 * When window `resize` event happens, app checks if `md` width changes.
   * If the browser width becomes wider into `md`( from narrow width ), then it reload to display mobile design.
   * And if the browser width becomes narrower into `md` size ( from wide width ), then it reload to display desktop design.
+
+## Work Environment
+
+### Serving with test domains and ssl
+
+* sample domains to test subdomains.
+
+```` text
+127.0.0.1 sonub.com
+127.0.0.1 www.sonub.com
+127.0.0.1 thruthesky.sonub.com
+127.0.0.1 w.sonub.com
+127.0.0.1 xxx.sonub.com
+127.0.0.1 new.sonub.com
+127.0.0.1 a.sonub.com
+127.0.0.1 abc.sonub.com
+127.0.0.1 apple.sonub.com
+127.0.0.1 b.sonub.com
+127.0.0.1 banaa.sonub.com
+127.0.0.1 c.sonub.com
+127.0.0.1 cherry.sonub.com
+````
+
+* ssl is under `tmp/ssl` folder.
+
+* `npm run pwa` to run pwa project. This will open `https://w.sonub.com:8443`.
 
 ## Coding Guideline
 

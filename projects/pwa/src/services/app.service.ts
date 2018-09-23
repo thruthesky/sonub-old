@@ -122,6 +122,7 @@ export class AppService {
     private cookie: CookieService,
     public philgo: PhilGoApiService
   ) {
+    window['a'] = this;
     this.initLanguage();
     this.initFirebase();
     this.initScreen();
@@ -164,7 +165,6 @@ export class AppService {
         this.routeChange.next(this.route);
       }
     });
-
   }
 
   /**

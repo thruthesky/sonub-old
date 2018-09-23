@@ -72,7 +72,7 @@ export class AppModule {
     philgo.setFileServerUrl(environment.philgoFileServerUrl); // philgo file server. 'https://file.philgo.com/index.php'
     philgo.setNewFileServerUrl(environment.newFileServerUrl); // new file server.
 
-    philgo.sessionStorage = 'cookie'; // How do you want to save login information. 'cookie' or 'localStorage'
+    philgo.sessionStorage = 'localStorage'; // How do you want to save login information. 'cookie' or 'localStorage'
     philgo.cookieDomain = 'sonub.com'; // if cookie is chosen, put a root domain to share with its subdomains.
 
     philgo.setFirebaseApp(firebase); // firebase
