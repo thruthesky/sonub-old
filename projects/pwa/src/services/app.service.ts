@@ -240,7 +240,10 @@ export class AppService {
 
   /**
    * When user visits a blog, load blog settings and initialize it.
-   * @desc when a user visits a blog, the browser must reload the site.
+   * @desc when a user visits a blog
+   *    - the browser may visite from outside. Meaning there is page reload.
+   *    - Or the broswer may visite from inside. Meaning there will be no page reload.
+   *      In this case, this method must be re-invoked.
    */
   initBlog() {
     if (this.inBlogSite) {
@@ -258,6 +261,10 @@ export class AppService {
     return !this.route || this.route === '/';
   }
 
+  get inFrontPage(): boolean {
+    return this.inHome;
+  }
+
   /**
    * Returns true if the user is in blog pages. Not in blog site.
    *  - like blog settings, blog categories.
@@ -267,7 +274,7 @@ export class AppService {
    *    this will also return false if the user is in blog site but not in a blog page.
    * @see inBlogSite()
    */
-  get inBlog(): boolean {
+  get inBlogPage(): boolean {
     return this.route.indexOf('/blog') === 0;
   }
   /**
@@ -303,7 +310,9 @@ export class AppService {
    * Returns true if the user is in sonub.com or www.sonub.com
    */
   get inRootSite(): boolean {
-    return location.hostname === this.appRootDomain || location.hostname === 'www.' + this.appRootDomain;
+    return location.hostname === this.appRootDomain
+    || location.hostname === 'www.' + this.appRootDomain
+    || location.hostname === 'dev.' + this.appRootDomain;
   }
 
 

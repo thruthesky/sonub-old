@@ -63,11 +63,21 @@
 
 ### Root site
 
-* Root site means `https://sonub.com`, `https://www.sonub.com`, `https://dev.sonub.com`.
+* `Root site` means `https://sonub.com`, `https://www.sonub.com`, `https://dev.sonub.com`.
 * When users access site to `https://www.sonub.com`, they are automatically redirect to `https://sonub.com` by backend.
 * `https://dev.sonub.com` is considered as root site on development site in local computer.
 
-### Blog site open
+### Blog main
+
+* `blog main` is on `/blog` route which is the main(index) page of all blogs.
+  * It is a place to display all user's blog information and posts.
+
+### Blog site
+
+* Blog sites are
+  * none `root site`
+  * `/blog/xxx` route under `root site`. Meaning `root site` can be a blog site under specific routes.
+  * Blog sites are different from `blog main page` which is considered to be part of `root site`.
 
 * 3 api calls are made
   * 1st call for `sonub config` in app module.

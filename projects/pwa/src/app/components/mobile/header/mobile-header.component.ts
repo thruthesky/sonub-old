@@ -18,9 +18,22 @@ export class HeaderComponent implements OnInit {
      * When user changes page, update header title/icons.
      */
     a.routeChange.subscribe(route => {
-      // console.log('route:', route);
-      if (a.inBlog) {
-        this.title = 'Blog';
+      // console.log('Mobile header: route check:', route);
+      if (a.inRootSite) {
+        if ( a.inFrontPage ) {
+          this.title = 'Front';
+        } else if ( a.inBlogPage ) {
+          this.title = 'Blog';
+        }
+
+      } else if (a.inBlogSite) {
+
+      } else {
+        if (a.inBlogPage) {
+          this.title = 'Blog';
+        } else {
+          this.title = '';
+        }
       }
     });
 
