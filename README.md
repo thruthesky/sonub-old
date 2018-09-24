@@ -61,6 +61,11 @@
 
 ## Life Cycle
 
+### Root site
+
+* Root site means `https://sonub.com` and `https://www.sonub.com`.
+* When users access site to `https://www.sonub.com`, they are automatically redirect to `https://sonub.com` by backend.
+
 ### Blog site open
 
 * 3 api calls are made

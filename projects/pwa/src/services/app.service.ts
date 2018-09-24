@@ -306,6 +306,7 @@ export class AppService {
     return location.hostname === this.appRootDomain || location.hostname === 'www.' + this.appRootDomain;
   }
 
+
   /**
    * Returns true if the user is inside his blog space.
    */
