@@ -34,19 +34,19 @@
 * sample domains to test subdomains.
 
 ```` text
-127.0.0.1 sonub.com
-127.0.0.1 www.sonub.com
-127.0.0.1 thruthesky.sonub.com
-127.0.0.1 w.sonub.com
-127.0.0.1 xxx.sonub.com
-127.0.0.1 new.sonub.com
-127.0.0.1 a.sonub.com
-127.0.0.1 abc.sonub.com
-127.0.0.1 apple.sonub.com
-127.0.0.1 b.sonub.com
-127.0.0.1 banaa.sonub.com
-127.0.0.1 c.sonub.com
-127.0.0.1 cherry.sonub.com
+127.0.0.1       sonub.com
+127.0.0.1       www.sonub.com
+127.0.0.1       thruthesky.sonub.com
+127.0.0.1       dev.sonub.com
+127.0.0.1       xxx.sonub.com
+127.0.0.1       new.sonub.com
+127.0.0.1       a.sonub.com
+127.0.0.1       abc.sonub.com
+127.0.0.1       apple.sonub.com
+127.0.0.1       b.sonub.com
+127.0.0.1       banaa.sonub.com
+127.0.0.1       c.sonub.com
+127.0.0.1       cherry.sonub.com
 ````
 
 * ssl is under `tmp/ssl` folder.
@@ -63,8 +63,9 @@
 
 ### Root site
 
-* Root site means `https://sonub.com` and `https://www.sonub.com`.
+* Root site means `https://sonub.com`, `https://www.sonub.com`, `https://dev.sonub.com`.
 * When users access site to `https://www.sonub.com`, they are automatically redirect to `https://sonub.com` by backend.
+* `https://dev.sonub.com` is considered as root site on development site in local computer.
 
 ### Blog site open
 
