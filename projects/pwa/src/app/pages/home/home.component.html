@@ -1,9 +1,8 @@
-<div *ngIf=" a.inBlogSite ">
+<div *ngIf=" a.inBlogSite && a.blog?.no_of_categories ">
   <div class="row fs-sm">
-    <div class="col py-2 bg-dark-1">Category 1</div>
-    <div class="col py-2 bg-dark-1">Category 2</div>
-    <div class="col py-2 bg-dark-1">Category 3</div>
-    <div class="col py-2 bg-dark-1">Category 4</div>
+    <div class="col py-2 bg-dark-1" *ngFor="let n of a.blog.categories">
+      <div>{{ n }}</div>
+    </div>
   </div>
 </div>
 
@@ -17,7 +16,7 @@
 
 
 
-<div class="text-editor mt-2" routerLink="/post/blog">
+<div class="text-editor mt-2" routerLink="/post/blog" *ngIf=" a.inRootSite ">
   <app-avatar class="mr-md-2"></app-avatar>
   <div class="editor">What's on your mind?</div>
 </div>

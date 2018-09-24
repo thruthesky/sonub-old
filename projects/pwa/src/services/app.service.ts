@@ -252,7 +252,19 @@ export class AppService {
         console.log('blog settings', blog);
       }, e => this.toast(e));
     }
-    this.philgo.blogChange.subscribe(blog => this.blog = blog);
+    this.philgo.blogChange.subscribe(blog => {
+      this.blog = blog;
+      /**
+       * Store categories in an array for easy use.
+       * 사용하기 편하게 블로그 이름을 배열로 만들어 넣는다.
+       */
+      this.blog.categories = [];
+      for (let i = 1; i <= 8; i++) {
+        if (this.blog['category' + i]) {
+          this.blog.categories.push(this.blog['category' + i]);
+        }
+      }
+    });
   }
 
   get loggedIn(): boolean {
@@ -331,7 +343,7 @@ export class AppService {
    */
   get inMyBlog(): boolean {
     // console.log(location.hostname);
-    if ( this.inRootSite ) {
+    if (this.inRootSite) {
       return false;
     }
     return this.myBlogUrl.indexOf(location.hostname) !== -1;

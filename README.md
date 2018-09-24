@@ -123,3 +123,7 @@
 * User can post without login.
   When user creates a post with email and passowrd, he will be automatically registered and blog will be created for him.
 * Or user can register and a blog will be automatically created.
+
+## How to use blog
+
+* [Sonub management - Blog settings](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.r3epipx47iam)

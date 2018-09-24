@@ -6,12 +6,18 @@
   </mat-list-item>
 
 
-  <mat-list-item (click)=" a.openMyBlog() ">
-    <i class="material-icons">
-      crop_original
-    </i>
-    <h4 matLine>My Blog</h4>
-  </mat-list-item>
+  <mat-list-item (click)=" a.openMyBlog() " *ngIf=" ! a.inMyBlog ">
+      <i class="material-icons">
+        crop_original
+      </i>
+      <h4 matLine>My Blog</h4>
+    </mat-list-item>
+    <mat-list-item  routerLink="/blog/settings" *ngIf=" a.inMyBlog ">
+      <i class="material-icons">
+        crop_original
+      </i>
+      <h4 matLine>My Blog Settings</h4>
+    </mat-list-item>
 
   <mat-list-item routerLink="/forum/freetalk_en">
     <i class="material-icons">chat</i>
@@ -24,7 +30,7 @@
   </mat-list-item>
 
   <mat-list-item routerLink="/forum/news_en">
-    <i class="material-icons">news</i>
+    <i class="material-icons">library_book</i>
     <h4 matLine>News</h4>
   </mat-list-item>
 
