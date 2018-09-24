@@ -325,10 +325,14 @@ export class AppService {
 
 
   /**
-   * Returns true if the user is inside his blog space.
+   * Returns true if the user is inside his blog site(domain).
+   * @desc If the user is under his blog domain, then it returns true.
    */
   get inMyBlog(): boolean {
     // console.log(location.hostname);
+    if ( this.inRootSite ) {
+      return false;
+    }
     return this.myBlogUrl.indexOf(location.hostname) !== -1;
   }
   openHome() {

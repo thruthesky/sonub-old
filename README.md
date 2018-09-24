@@ -55,6 +55,14 @@
 
 ## Coding Guideline
 
+### App Object References
+
+* `window['a']` has `AppService` reference.
+  * You can use this for debugging.
+  * You can do something like `a.version().subscibe(v => console.log(v))` on dev consle.
+
+* `window['ForumBasicListComponent']` has `ForumBasicListComponent` reference.
+
 ### Route atttribute
 
 * See [Coding Guide](https://docs.google.com/document/d/1u2PAHLDYx0-UUbaXQtMnNJsUiAdJkSbE2pzpSPM5_I8/edit#heading=h.ojq4plytxfhn)

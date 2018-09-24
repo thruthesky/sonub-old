@@ -30,7 +30,6 @@ import { LogoModule } from './components/logo/logo.module';
 import { FooterModule } from './components/footer/footer.module';
 
 
-
 /**
  * Firebase
  */

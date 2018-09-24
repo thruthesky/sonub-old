@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { AvatarModule } from 'share/components/avatar/avatar.module';
 import { RequestPushNotificationComponentModule } from 'share/components/request-push-notification/request-push-notification.module';
 import { BlogFeaturedPostsModule } from '../../components/blog-featured-posts/blog-featured-posts.module';
+import { PostLineModule } from '../../components/post-line/post-line.module';
+import { PostThumbnailWithTextModule } from '../../components/post-thumbnail-with-text/post-thumbnail-with-text.module';
 
 
 const routes: Routes = [
@@ -22,7 +24,9 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         AvatarModule,
         RequestPushNotificationComponentModule,
-        BlogFeaturedPostsModule
+        BlogFeaturedPostsModule,
+        PostLineModule,
+        PostThumbnailWithTextModule
     ],
     exports: [],
     declarations: [HomeComponent],
