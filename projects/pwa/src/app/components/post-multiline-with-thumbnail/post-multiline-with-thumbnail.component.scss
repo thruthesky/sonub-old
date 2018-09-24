@@ -1,0 +1,23 @@
+.post-multi-thumb {
+  height: 50px !important;
+
+  @media (min-width: 768px) {
+    height: 70px !important;
+  }
+}
+
+.thumbnail {
+  width: 100px !important;
+
+  @media (min-width: 768px) {
+    width: 140px !important;
+  }
+
+  img {
+    width: 100px !important;
+
+    @media (min-width: 768px) {
+      width: 140px !important;
+    }
+  }
+}

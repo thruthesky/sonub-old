@@ -9,6 +9,7 @@ import { RequestPushNotificationComponentModule } from 'share/components/request
 import { BlogFeaturedPostsModule } from '../../components/blog-featured-posts/blog-featured-posts.module';
 import { PostLineModule } from '../../components/post-line/post-line.module';
 import { PostThumbnailWithTextModule } from '../../components/post-thumbnail-with-text/post-thumbnail-with-text.module';
+import { PostMultilineWithThumbnailModule } from '../../components/post-multiline-with-thumbnail/post-multiline-with-thumbnail.module';
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
         RequestPushNotificationComponentModule,
         BlogFeaturedPostsModule,
         PostLineModule,
-        PostThumbnailWithTextModule
+        PostThumbnailWithTextModule,
+        PostMultilineWithThumbnailModule
     ],
     exports: [],
     declarations: [HomeComponent],

@@ -32,6 +32,7 @@ export interface FrontPage {
   };
   latest_blog_posts: Array<ApiPost>;
   no_of_blog_posts: number;
+  news: Array<ApiPost>;
 }
 
 

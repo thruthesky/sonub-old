@@ -52,16 +52,13 @@
   <!--/community-posts-->
 
 
-<div>
+
+  <div *ngIf=" res?.news?.length ">
     <h2>Sonub News</h2>
-    <h4>Display news ... with ... native advertisement</h4>
-    <h4>Display news ... with ... native advertisement</h4>
-    <h4>Display news ... with ... native advertisement</h4>
-    <h4>Display news ... with ... native advertisement</h4>
-    <h4>Display news ... with ... native advertisement</h4>
+    <app-post-multiline-with-thumbnail *ngFor="let post of res.news " [post]=" post "></app-post-multiline-with-thumbnail>
   </div>
 
-  
+
 </section>
 <!--/root site-->
 
@@ -111,5 +108,3 @@
   </div>
   <!--/community-posts-->
 </div>
-
-
