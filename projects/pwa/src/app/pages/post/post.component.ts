@@ -128,7 +128,7 @@ export class PostComponent implements OnInit, AfterViewInit {
     if (this.form.subject === void 0) {
       this.form.subject = '';
     }
-    if (!this.subjectChanged) {
+    if ( !this.form.idx && !this.subjectChanged) {
       // let str = this.a._.stripTags(this.editor.content);
       let str = this.a._.stripTags(this.form.content);
       str = this.a._.htmlDecode(str).trim();

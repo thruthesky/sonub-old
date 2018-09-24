@@ -116,3 +116,10 @@
 * The route format is `/b/:idx/:subject`. With this route format, we can easily unify to access blog site from `root site` or `blog site`. And subject is for SEO.
 
 * blog post view page displays the post with easy access menus.
+
+### User blog creation
+
+* User visits site.
+* User can post without login.
+  When user creates a post with email and passowrd, he will be automatically registered and blog will be created for him.
+* Or user can register and a blog will be automatically created.
