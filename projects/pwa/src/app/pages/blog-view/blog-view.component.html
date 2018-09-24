@@ -1,0 +1,99 @@
+<main class="blog-view">
+
+  <section class="blog-post" *ngIf=" post ">
+
+    <div class="post-header">
+      <div class="thumbnail">
+        <img [src]="philgo.primaryPhotoUrl( post?.member?.idx_primary_photo )">
+      </div>
+      <div class="post-header-text">
+        <h2>
+          {{ post.subject }} <span *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span>
+        </h2>
+        <div class="fs-sm">
+          <span class="mr-3 darkgreen" *ngIf=" post?.member "> {{ post?.member?.nickname }}</span>
+          <span>Date: {{ philgo.shortDate(post.stamp ) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-content">
+      <div>
+        <div class="post-text-content" [innerHTML]=" a.safeHtml( post?.content ) "></div>
+      </div>
+
+      <div class="buttons">
+        <button [attr.color]=" post.good == '0' ? 'medium' : 'primary'" (click)=" onVote(post, 'good') ">
+          <i class="material-icons">thumb_up</i>
+          <span> {{ post.good == '0' ? '' : ' ' + post.good }}</span>
+        </button>
+        <button color="medium" (click)=" onVote(post, 'bad') ">
+          <i class="material-icons">thumb_down</i>
+          <span> {{ post.bad == '0' ? '' : ' ' + post.bad }}</span>
+        </button>
+        <button (click)=" onEdit(post) ">Edit</button>
+        <button (click)=" onDelete( post ) ">Delete</button>
+        <button (click)=" onReport( post ) ">Report</button>
+      </div>
+    </div>
+
+
+    <div>
+      <app-blog-reply [root]=" post " [post]=" post "></app-blog-reply>
+
+      <div class="comments comments-depth bg-light pt-2" *ngIf=" post?.comments?.length ">
+        <div class="comment" *ngFor=" let comment of post.comments " [attr.depth]=" comment.depth ">
+
+          <div class="ml-1 w-100">
+
+            <div class="d-flex">
+              <div class="thumbnail">
+                <img [src]="philgo.primaryPhotoUrl( comment?.member?.idx_primary_photo )">
+              </div>
+              <div class="ml-2">
+                <div class="fs-sm mb-1">{{ comment.member?.nickname }}</div>
+                <div class="d-flex align-items-center">
+                  <div class="fs-sm">No. {{ comment.idx }}</div>
+                  <div class="ml-2 fs-sm">Date: {{ philgo.shortDate(post.stamp ) }}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pl-3 pt-1" *ngIf=" ! comment['edit'] ">
+              <div [innerHTML]="comment.content"></div>
+              <app-display-files *ngIf="comment.files.length" class="d-block pt-2 pb-1" [post]=" comment "
+                [showWhenContentHasNoImage]=" true "></app-display-files>
+            </div>
+            <div class="buttons" *ngIf=" ! comment['edit'] ">
+              <button [attr.color]=" comment.good == '0' ? 'medium' : 'primary'" (click)=" onVote(comment, 'good') ">
+                <i class="material-icons">thumb_up</i>
+                <i>{{ comment.good == '0' ? '' : ' ' + comment.good }}</i>
+              </button>
+              <button color="medium" (click)=" onVote(comment, 'bad') ">
+                <i class="material-icons">thumb_down</i>
+                <i> {{ comment.bad == '0' ? '' : ' ' + comment.bad }}</i>
+              </button>
+              <button color="medium" (click)=" comment['reply'] = true ">
+                <i class="material-icons">reply</i>
+                <span>Reply</span>
+              </button>
+              <button (click)=" comment['edit'] = true ">Edit</button>
+              <button (click)=" onDelete( comment ) ">Delete</button>
+              <button (click)=" onReport( comment ) ">Report</button>
+
+            </div>
+
+            <app-blog-reply [root]=" post " [post]=" comment " *ngIf=" comment['edit'] == true || comment['reply'] == true "></app-blog-reply>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!--/.blog-post-->
+
+
+
+  <app-blog-featured-posts></app-blog-featured-posts>
+
+</main>

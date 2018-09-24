@@ -12,13 +12,14 @@
     top: 0;
     left: 0;
     right: 0;
-    height: $header-height;
+    height: $header-height !important; // <-- important
+    overflow: hidden !important; // <-- important
 
   }
 
   #mobile-content {
     margin-top: $header-height;
-    padding: $padding;
+    // padding: $padding;
   }
 }
 

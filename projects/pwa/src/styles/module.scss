@@ -11,3 +11,14 @@
     color: blue !important;
     text-decoration: underline !important;
 }
+
+
+.link-list {
+    display: block;
+    padding: .5em;
+    cursor: pointer;
+    &:hover {
+        background-color: rgb(236, 236, 236);
+        color: #222;
+    }
+}

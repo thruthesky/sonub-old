@@ -17,6 +17,7 @@ const routes: Routes = [
     { path: 'forum/:post_id/:idx', loadChildren: './pages/forum/forum.module#ForumModule' },
     { path: 'blog/settings', loadChildren: './pages/blog-settings/blog-settings.module#BlogSettingsModule' },
     { path: 'blog/:blog_domain', loadChildren: './pages/blog/blog.module#BlogModule' },
+    { path: 'b/:idx/:subject', loadChildren: './pages/blog-view/blog-view.module#BlogViewModule' },
     { path: 'blog', loadChildren: './pages/blog-main/blog-main.module#BlogMainModule' },
     { path: 'job', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job/:category', loadChildren: './pages/job/job.module#JobModule' },

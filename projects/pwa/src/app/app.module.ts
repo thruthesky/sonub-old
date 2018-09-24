@@ -26,6 +26,8 @@ import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module
 
 
 import { CookieModule } from 'ngx-cookie';
+import { LogoModule } from './components/logo/logo.module';
+import { FooterModule } from './components/footer/footer.module';
 
 
 
@@ -60,7 +62,9 @@ firebase.initializeApp(firebaseConfig);
     MatSnackBarModule,
     CookieModule.forRoot(),
     AppRoutingModule,
-    PageNotFoundModule
+    PageNotFoundModule,
+    LogoModule,
+    FooterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

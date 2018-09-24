@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 // import { ERROR_WRONG_IDX_MEMBER, ERROR_WRONG_SESSION_ID } from '../../../../share/philgo-api/philgo-api.service';
 
 import { SimpleLibrary as _ } from 'ng-simple-library';
-import { ApiPost, PhilGoApiService, USER_LOGIN_SESSION_INFO, ApiBlogSettings } from 'share/philgo-api/philgo-api.service';
+import { ApiPost, PhilGoApiService, USER_LOGIN_SESSION_INFO, ApiBlogSettings, ApiError } from 'share/philgo-api/philgo-api.service';
 
 
 import * as firebase from 'firebase/app';
@@ -30,8 +30,8 @@ export interface FrontPage {
   info: {
     version: string;
   };
-  my_latest_blog_posts: Array<ApiPost>;
-  no_of_my_blog_posts: number;
+  latest_blog_posts: Array<ApiPost>;
+  no_of_blog_posts: number;
 }
 
 
@@ -254,6 +254,14 @@ export class AppService {
     this.philgo.blogChange.subscribe(blog => this.blog = blog);
   }
 
+  get loggedIn(): boolean {
+    return this.philgo.isLoggedIn();
+  }
+
+  get loggedOut(): boolean {
+    return this.philgo.isLoggedOut();
+  }
+
   /**
    * Returns true if the user is in home(main/front) page.
    */
@@ -311,8 +319,8 @@ export class AppService {
    */
   get inRootSite(): boolean {
     return location.hostname === this.appRootDomain
-    || location.hostname === 'www.' + this.appRootDomain
-    || location.hostname === 'dev.' + this.appRootDomain;
+      || location.hostname === 'www.' + this.appRootDomain
+      || location.hostname === 'dev.' + this.appRootDomain;
   }
 
 
@@ -325,6 +333,16 @@ export class AppService {
   }
   openHome() {
     this.router.navigateByUrl('/');
+  }
+  openHomeInNewWindow() {
+    window.open(this.rootSiteUrl, '_blank');
+  }
+  openMyBlog() {
+    if (this.inMyBlog) {
+      this.router.navigateByUrl('/');
+    } else {
+      window.location.href = this.myBlogUrl;
+    }
   }
   openForum(post_id: string) {
     if (post_id === 'blog') {
@@ -456,6 +474,14 @@ export class AppService {
     this.snackBar.open(message, action, config);
   }
 
+  /**
+   *
+   * @param e Error Object
+   */
+  error(e: ApiError) {
+    this.toast(e, 'Close', { panelClass: `error error-${e.code}` });
+  }
+
   get myName(): string {
     if (this.philgo.isLoggedIn()) {
       return this.philgo.myName();
@@ -482,6 +508,17 @@ export class AppService {
     }
     return url;
   }
+
+  get rootSiteUrl(): string {
+    let url = APP_PROTOCOL + this.appRootDomain;
+
+    if (APP_PORT) {
+      url += ':' + APP_PORT;
+    }
+
+    return url;
+  }
+
 
 
 }

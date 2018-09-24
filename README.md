@@ -59,7 +59,15 @@
 
 * See [Coding Guide](https://docs.google.com/document/d/1u2PAHLDYx0-UUbaXQtMnNJsUiAdJkSbE2pzpSPM5_I8/edit#heading=h.ojq4plytxfhn)
 
-## Life Cycle
+## Life Cycle of Site
+
+### Terms
+
+* `login user blog content` is posts and other contents posted in currently logged in user's blog.
+
+### Don't show a post twice
+
+* On main page or blog site page, Don't show same post more than one.
 
 ### Root site
 
@@ -67,10 +75,21 @@
 * When users access site to `https://www.sonub.com`, they are automatically redirect to `https://sonub.com` by backend.
 * `https://dev.sonub.com` is considered as root site on development site in local computer.
 
+### Main page
+
+* `main page` means the front page of `root site` which is on `/` route.
+* In `main page`, app displays the sonub front page content plus `login user blog content` of the login user.
+  If the user is not logged in, `login user blog content` will not be shown.
+
 ### Blog main
 
 * `blog main` is on `/blog` route which is the main(index) page of all blogs.
   * It is a place to display all user's blog information and posts.
+
+### Blog domain
+
+* `blog domain` is a site that a visitor visits user's blog site with `blog domain`.
+  * This is different from visiting a blog inside `root site`.
 
 ### Blog site
 
@@ -79,7 +98,13 @@
   * `/blog/xxx` route under `root site`. Meaning `root site` can be a blog site under specific routes.
   * Blog sites are different from `blog main page` which is considered to be part of `root site`.
 
-* 3 api calls are made
-  * 1st call for `sonub config` in app module.
+* 3 api calls are made when visiting blog site.
+  * 1st call for `sonub config` in app module. ( this may not be called when user does not load blog domain. )
   * 2nd call for sonub front apge in home component to get first page content inclding blog site's content.
   * 3rd call for blog settings in app service.
+
+### Blog post view
+
+* The route format is `/b/:idx/:subject`. With this route format, we can easily unify to access blog site from `root site` or `blog site`. And subject is for SEO.
+
+* blog post view page displays the post with easy access menus.

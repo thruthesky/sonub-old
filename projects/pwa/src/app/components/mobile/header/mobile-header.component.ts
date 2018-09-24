@@ -3,7 +3,7 @@ import { AppService } from '../../../../services/app.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-header',
+  selector: 'app-mobile-header',
   templateUrl: './mobile-header.component.html',
   styleUrls: ['./mobile-header.component.scss']
 })

@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { CommonModule } from '@angular/common';
 import { AvatarModule } from 'share/components/avatar/avatar.module';
 import { RequestPushNotificationComponentModule } from 'share/components/request-push-notification/request-push-notification.module';
+import { BlogFeaturedPostsModule } from '../../components/blog-featured-posts/blog-featured-posts.module';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         AvatarModule,
-        RequestPushNotificationComponentModule
+        RequestPushNotificationComponentModule,
+        BlogFeaturedPostsModule
     ],
     exports: [],
     declarations: [HomeComponent],

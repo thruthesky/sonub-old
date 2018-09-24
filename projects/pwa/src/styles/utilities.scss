@@ -23,6 +23,10 @@
     margin-bottom: $spacing;
 }
 
+.relative {
+    position: relative;
+}
+
 .top-left {
     position: absolute;
     display: block;
@@ -36,7 +40,54 @@
     top: 0;
     right: 0;
 }
+.bottom-left {
+    position: absolute;
+    display: block;
+    left: 0;
+    bottom: 0;
+}
 
 .overflow-hidden {
     overflow: hidden !important;
+}
+
+.bg-grey {
+    background-color: grey !important;
+}
+.bg-green {
+    background-color: green !important;
+}
+.bg-gold {
+    background-color: gold !important;
+}
+
+.bg-dark-1 {
+    background-color: rgb(220, 220, 220) !important;
+}
+
+.bg-dark-2 {
+    background-color: rgb(205, 205, 205) !important;
+}
+
+
+.border-box {
+    box-sizing: border-box;
+}
+
+
+.border-1 {
+    border: 1px solid grey;
+}
+
+
+
+.box {
+    padding: $padding;
+    background-color: #eee;
+}
+
+.d-flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
