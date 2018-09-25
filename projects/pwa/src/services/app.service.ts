@@ -391,27 +391,56 @@ export class AppService {
     }
     this.setPostInMemory(post);
     if (post.post_id === 'blog') {
-      this.router.navigateByUrl(this.getBlogPostViewUrl(post));
+      this.router.navigateByUrl(this.getUrlBlogViewList(post));
     } else {
       this.router.navigateByUrl('/forum/' + post.post_id + '/' + post.idx);
     }
     return false;
   }
-  openBlogPostView(post: ApiPost, event?: Event) {
+  /**
+   * open blog list page with a post-on-top.
+   * @param post blog post
+   * @param event click event (optional)
+   */
+  openBlogViewList(post: ApiPost, event?: Event) {
     return this.openPostView(post, event);
   }
 
-  getBlogPostViewUrl(post) {
+  /**
+   * Returns url of blog post with a post-on-top
+   * @param post blog post
+   */
+  getUrlBlogViewList(post): string {
     if (!post.post_id) {
       post.post_id = 'blog';
     }
-    if ( post['blog'] === void 0 ) {
+    if (post['blog'] === void 0) {
       console.error('blog is not set');
     }
-    console.log('post', post);
+    // console.log('post', post);
     return `/b/${post['blog']}/${post.idx}/${post.subject}`;
   }
 
+  /**
+   * Returns url of blog view. ( single post view )
+   * @param post blog post
+   */
+  getUrlBlogView(post: ApiPost): string {
+    this.setPostInMemory( post );
+    return `/bv/${post.idx}/${post.subject}`;
+  }
+
+  /**
+   * Open blog post view page ( single post ivew )
+   * @param post blog post
+   */
+  openBlogView(post: ApiPost) {
+    this.router.navigateByUrl(this.getUrlBlogView(post));
+  }
+
+  getBlogCategoryUrl(name) {
+    return `/blog/${ this.currentBlogDomain }/${ name}`;
+  }
 
   setPostInMemory(post: ApiPost) {
     this._$_cachePostInMemory = post;

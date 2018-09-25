@@ -1,0 +1,7 @@
+<div *ngIf=" a.inBlogSite && a.blog?.no_of_categories ">
+  <div class="row fs-sm">
+    <a class="col py-2 bg-dark-1" *ngFor="let n of a.blog.categories" routerLink="{{ a.getBlogCategoryUrl(n) }}">
+      {{ n }}
+    </a>
+  </div>
+</div>

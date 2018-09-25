@@ -25,6 +25,9 @@ const routes: Routes = [
     // blog post view on top and list at bottom. Domain is required for listing from root site.
     { path: 'b/:blog_domain/:idx/:subject', loadChildren: './pages/blog-list/blog-list.module#BlogListModule' },
 
+    // blog post view. Single post view only. a.getUrlBlogView()
+    { path: 'bv/:idx/:subject', loadChildren: './pages/blog-view/blog-view.module#BlogViewPageModule' },
+
 
 
     // no use

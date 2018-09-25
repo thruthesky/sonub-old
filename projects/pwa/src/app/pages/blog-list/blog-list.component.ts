@@ -52,8 +52,10 @@ export class BlogListComponent implements OnInit, AfterViewInit, OnDestroy {
     public philgo: PhilGoApiService,
     private scroll: InfiniteScrollService
   ) {
+    console.log('BlogListComponent::constructor()');
     philgo.blogChange.subscribe((blog: ApiBlogSettings) => {
       if (blog) {
+        console.log('blogChange.subscribe()');
         this.initBlogPageLoad();
       }
     });
