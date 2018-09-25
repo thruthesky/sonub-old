@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 
 // import { ERROR_WRONG_IDX_MEMBER, ERROR_WRONG_SESSION_ID } from '../../../../share/philgo-api/philgo-api.service';
 
@@ -190,6 +190,27 @@ export class AppService {
         this.routeChange.next(this.route);
       }
     });
+
+
+
+    this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationStart) {
+        if (this.router.url === e.url) {
+          this.router.navigate(['/redirect'], { queryParams: { url: e.url } });
+        }
+      } else if (e instanceof NavigationEnd) {
+        this.route = this.router.url;
+      }
+      /**
+       * Scroll the page to the top after transitioning into another page.
+       * 페이지 이동 후 맨위로 가기
+       */
+      if (e instanceof NavigationEnd) {
+        this._.scrollToTop();
+      }
+    });
+
+
   }
 
   /**
@@ -426,7 +447,7 @@ export class AppService {
    * @param post blog post
    */
   getUrlBlogView(post: ApiPost): string {
-    this.setPostInMemory( post );
+    this.setPostInMemory(post);
     return `/bv/${post.idx}/${post.subject}`;
   }
 
@@ -439,7 +460,7 @@ export class AppService {
   }
 
   getBlogCategoryUrl(name) {
-    return `/blog/${ this.currentBlogDomain }/${ name}`;
+    return `/blog/${this.currentBlogDomain}/${name}`;
   }
 
   setPostInMemory(post: ApiPost) {

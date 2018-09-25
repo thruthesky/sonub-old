@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { RedirectComponent } from './pages/redirect/redirect.component';
 
 
 const routes: Routes = [
@@ -44,12 +45,16 @@ const routes: Routes = [
     { path: 'job', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job/:category', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job/:category/:idx', loadChildren: './pages/job/job.module#JobModule' },
+    { path: 'redirect', component: RedirectComponent },
     { path: '**', component: PageNotFoundComponent },
 ];
 
 // console.log('routes: ', routes);
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, {
+        onSameUrlNavigation: 'reload',
+        enableTracing: false
+    })],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

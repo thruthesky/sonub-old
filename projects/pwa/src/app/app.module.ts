@@ -28,6 +28,7 @@ import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module
 import { CookieModule } from 'ngx-cookie';
 import { LogoModule } from './components/logo/logo.module';
 import { FooterModule } from './components/footer/footer.module';
+import { RedirectComponent } from './pages/redirect/redirect.component';
 
 
 /**
@@ -49,7 +50,8 @@ firebase.initializeApp(firebaseConfig);
     HeaderComponent,
     DesktopHeaderComponent,
     DesktopLeftComponent,
-    DesktopRightComponent
+    DesktopRightComponent,
+    RedirectComponent
   ],
   imports: [
     BrowserModule,
