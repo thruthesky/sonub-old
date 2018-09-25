@@ -26,6 +26,7 @@ const routes: Routes = [
     { path: 'b/:blog_domain/:idx/:subject', loadChildren: './pages/blog-list/blog-list.module#BlogListModule' },
 
 
+
     // no use
     // { path: 'blog/:blog_domain', loadChildren: './pages/blog/blog.module#BlogModule' },
 

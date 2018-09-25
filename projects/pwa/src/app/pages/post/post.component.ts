@@ -132,6 +132,7 @@ export class PostComponent implements OnInit, AfterViewInit {
         if ( this.isForumPostCreate ) {
           this.a.openForum(this.form.post_id);
         } else if ( this.isBlogPostCreate ) {
+          res['blog'] = this.a.myBlogDomain;
           this.a.openBlogPostView(res);
         }
       }, e => {

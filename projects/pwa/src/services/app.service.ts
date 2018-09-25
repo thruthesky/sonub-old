@@ -405,6 +405,9 @@ export class AppService {
     if (!post.post_id) {
       post.post_id = 'blog';
     }
+    if ( post['blog'] === void 0 ) {
+      console.error('blog is not set');
+    }
     console.log('post', post);
     return `/b/${post['blog']}/${post.idx}/${post.subject}`;
   }
