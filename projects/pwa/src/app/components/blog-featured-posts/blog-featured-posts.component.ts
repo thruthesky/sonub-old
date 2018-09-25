@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FrontPage } from '../../../services/app.service';
 
 @Component({
   selector: 'app-blog-featured-posts',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogFeaturedPostsComponent implements OnInit {
 
+  @Input() frontPage: FrontPage;
   constructor() { }
 
   ngOnInit() {

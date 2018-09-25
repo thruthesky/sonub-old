@@ -11,6 +11,7 @@ import { PostLineModule } from '../../components/post-line/post-line.module';
 import { PostThumbnailWithTextModule } from '../../components/post-thumbnail-with-text/post-thumbnail-with-text.module';
 import { PostMultilineWithThumbnailModule } from '../../components/post-multiline-with-thumbnail/post-multiline-with-thumbnail.module';
 import { BlogMobileCategoryMenuModule } from '../../components/blog-mobile-category-menu/blog-mobile-category-menu.module';
+import { BlogFeaturedWidePostModule } from '../../components/blog-featured-wide-post/blog-featured-wide-post.module';
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
         PostLineModule,
         PostThumbnailWithTextModule,
         PostMultilineWithThumbnailModule,
-        BlogMobileCategoryMenuModule
+        BlogMobileCategoryMenuModule,
+        BlogFeaturedWidePostModule
     ],
     exports: [],
     declarations: [HomeComponent],

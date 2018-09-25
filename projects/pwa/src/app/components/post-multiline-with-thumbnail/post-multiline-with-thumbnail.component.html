@@ -1,4 +1,4 @@
-<a class="post-multi-thumb d-flex mt-2" *ngIf="post" href="{{ a.urlPostView(post) }}" (click)="a.onClickPost( $event, post )">
+<a class="post-multi-thumb d-flex mt-2" *ngIf="post" href="{{ a.getUrlPostView(post) }}" (click)="a.onClickPost( $event, post )">
   <div class="thumbnail">
     <img src="{{ philgo.thumbnailUrl({ width: 140, height: 70, path: post.path_of_first_image }) }}">
   </div>

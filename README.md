@@ -60,6 +60,14 @@
 
 ## Coding Guideline
 
+### SEO URL link
+
+* `<a href='...'>` or `routerLink` are for hueman only.
+* Robots can not understand DOM rendered by Angular renderer.
+* It is perfectly fine to navigate with click event like `(click)=" a.openHome() "` since it does not matter whether `<a href='....'>` exists or not.
+* But put `href` on `<a>` as much as possible since hueman want to copy the link also.
+* SEO will be done by backend side.
+
 ### App Object References
 
 * `window['a']` has `AppService` reference.

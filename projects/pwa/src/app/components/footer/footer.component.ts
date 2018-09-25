@@ -18,10 +18,11 @@ export class FooterComponent implements OnInit {
 
   onClickSonub( event: Event ) {
     event.preventDefault();
+    this.a.openRootSite();
     if ( this.a.inRootSite ) {
       this.a.openHome();
     } else {
-      this.a.openHomeInNewWindow();
+      this.a.openRootSite();
     }
     return false;
   }

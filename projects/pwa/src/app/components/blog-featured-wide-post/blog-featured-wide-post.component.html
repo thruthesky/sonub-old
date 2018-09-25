@@ -1,0 +1,10 @@
+<a *ngIf=" post " class="blog-featured-wide-post d-block" routerLink="{{ a.getUrlBlogViewList( post ) }}">
+
+  <div class="relative mt-2 bg-black white">
+    <div>
+      <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 740, height: 200, path: post.path_of_first_image }) }}">
+    </div>
+    <div class="title p-3 left-bottom">{{ post.subject }}</div>
+  </div>
+
+</a>

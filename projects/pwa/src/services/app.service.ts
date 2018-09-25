@@ -197,7 +197,7 @@ export class AppService {
          * Reloads(Redirects) only if the current url is clicked again.
          * It does not reloads if when different url is clicked but component is the same.
          */
-        if (this.router.url === e.url ) {
+        if (this.router.url === e.url) {
           this.router.navigate(['/redirect'], { queryParams: { url: e.url } });
         }
       } else if (e instanceof NavigationEnd) {
@@ -391,8 +391,11 @@ export class AppService {
   openHome() {
     this.router.navigateByUrl('/');
   }
-  openHomeInNewWindow() {
-    window.open(this.rootSiteUrl, '_blank');
+  openRootSiteHomeInNewWindow() {
+    window.open(this.urlRootSite, '_blank');
+  }
+  openRootSite() {
+    window.location.href = this.urlRootSite;
   }
   openMyBlog() {
     if (this.inMyBlog) {
@@ -406,6 +409,24 @@ export class AppService {
       this.router.navigateByUrl('/blog');
     } else {
       this.router.navigateByUrl('/forum/' + post_id);
+    }
+  }
+
+
+  getUrlPostView(post: ApiPost): string {
+    if (!post) {
+      return '';
+    }
+    if (post.post_id === 'ads') {
+      if (post.link && post.link.trim()) {
+        return post.link.trim();
+      } else {
+        return `/${post.post_id}/${post.idx}`;
+      }
+    } if (post.post_id === 'blog') {
+      return this.getUrlBlogViewList(post);
+    } else {
+      return `/forum/${post.post_id}/${post.idx}`;
     }
   }
 
@@ -520,20 +541,6 @@ export class AppService {
     return this.domSanitizer.bypassSecurityTrustHtml(html);
   }
 
-  urlPostView(post: ApiPost): string {
-    if (!post) {
-      return '';
-    }
-    if (post.post_id === 'ads') {
-      if (post.link && post.link.trim()) {
-        return post.link.trim();
-      } else {
-        return `/${post.post_id}/${post.idx}`;
-      }
-    } else {
-      return `/forum/${post.post_id}/${post.idx}`;
-    }
-  }
 
   urlPostTarget(post: ApiPost): string {
 
@@ -549,9 +556,9 @@ export class AppService {
     event.preventDefault();
     event.stopPropagation();
     if (this.urlPostTarget(post) === '_blank') {
-      window.open(this.urlPostView(post));
+      window.open(this.getUrlPostView(post));
     } else {
-      this.router.navigateByUrl(this.urlPostView(post));
+      this.router.navigateByUrl(this.getUrlPostView(post));
     }
   }
 
@@ -627,7 +634,7 @@ export class AppService {
     return url;
   }
 
-  get rootSiteUrl(): string {
+  get urlRootSite(): string {
     let url = APP_PROTOCOL + this.appRootDomain;
 
     if (APP_PORT) {
