@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiPost } from 'share/philgo-api/philgo-api.service';
+import { AppService } from '../../../services/app.service';
 
 @Component({
   selector: 'app-post-line',
@@ -9,7 +10,9 @@ import { ApiPost } from 'share/philgo-api/philgo-api.service';
 export class PostLineComponent implements OnInit {
 
   @Input() post: ApiPost;
-  constructor() { }
+  constructor(
+    public a: AppService
+  ) { }
 
   ngOnInit() {
   }

@@ -16,6 +16,7 @@ import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie';
 
 
+
 interface Environment {
   production: boolean;
   port: string;
@@ -46,6 +47,8 @@ export const APP_ROOT_DOMAIN = 'sonub.com';
 export const APP_PORT = environment.port;
 export const BLOG_INTRO_DOMAIN = environment.blogIntroDomain;
 
+
+export const F_BLOG_DOMAIN = 'varchar_1';
 
 @Injectable({
   providedIn: 'root'
@@ -91,12 +94,22 @@ export class AppService {
    */
   messaging: firebase.messaging.Messaging = null;
 
+
   /**
-   * Post to edit
+   * Post for view/edit
    *
-   * Use 'openPostEdit()' method.
+   * Pass post data to view or edit page.
+   * So the app can use the post data immediately on next page instead of getting it from server.
+   * If there is no post data in this variable, the app must get it from sever.
+   *
+   * You may check post.idx for sure.
+   *
+   * 게시판/블로그 등에서 특정 글을 보여 주어거나 수정해야하는 경우,
+   * 그 글의 정보를 미리 다 가지고 있다면, 이 변수에 저장하고, 다음 페이지로 넘어가서, 원하는 글을 빠르게 보여주거나 수정할 수 있다.
+   * 만약, 이 변수에 값이 없다면, 당연히 서버로 부터 로드를 해야한다.
    */
-  private postToEdit: ApiPost;
+  private _$_cachePostInMemory: ApiPost;
+
 
 
   anonymousPhotoUrl = '/assets/img/anonymous.gif';
@@ -253,6 +266,9 @@ export class AppService {
       }, e => this.toast(e));
     }
     this.philgo.blogChange.subscribe(blog => {
+      if (!blog) {
+        return;
+      }
       this.blog = blog;
       /**
        * Store categories in an array for easy use.
@@ -369,27 +385,50 @@ export class AppService {
     }
   }
 
-  openPostView(post_id: string, idx: any) {
-    this.router.navigateByUrl('/forum/' + post_id + '/' + idx);
+  openPostView(post: ApiPost, event?: Event) {
+    if (event) {
+      event.preventDefault();
+    }
+    this.setPostInMemory(post);
+    if (post.post_id === 'blog') {
+      this.router.navigateByUrl(this.getBlogPostViewUrl(post));
+    } else {
+      this.router.navigateByUrl('/forum/' + post.post_id + '/' + post.idx);
+    }
+    return false;
+  }
+  openBlogPostView(post: ApiPost, event?: Event) {
+    return this.openPostView(post, event);
   }
 
-  openPostEdit(post: ApiPost) {
-    this.postToEdit = post;
-    console.log('posttoEdit:', this.postToEdit);
-    this.router.navigateByUrl('/post/edit/' + this.postToEdit.idx);
+  getBlogPostViewUrl(post) {
+    if (!post.post_id) {
+      post.post_id = 'blog';
+    }
+    console.log('post', post);
+    return `/b/${post['blog']}/${post.idx}/${post.subject}`;
+  }
+
+
+  setPostInMemory(post: ApiPost) {
+    this._$_cachePostInMemory = post;
   }
 
   /**
-   * Return post to edit.
-   * The post to edit is set by the 'edit button' click.
-   * So, if you refresh on edit page, this variable will return undefined.
-   * Then you need to load data by yourself from server.
-   * This may happen on refresh page.
+   * Return the cached post in memory.
+   *
    */
-  getPostToEdit(): ApiPost {
-    return this.postToEdit;
+  get postInMemory(): ApiPost {
+    const post = this._$_cachePostInMemory;
+    return post;
   }
 
+
+
+  openPostEdit(post: ApiPost) {
+    this.setPostInMemory(post);
+    this.router.navigateByUrl('/post/edit/' + post.idx);
+  }
 
   t(code, info?): string {
     return _.t(code, info);

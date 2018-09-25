@@ -1,0 +1,25 @@
+<section class='blog-list'>
+
+  <button routerLink="/blog-post/{{ category }}">
+    Post on {{ category }} category
+  </button>
+
+  <app-blog-view [post]=" postView "></app-blog-view>
+
+
+
+  <ng-container *ngFor="let post of posts ">
+    <app-blog-view [post]=" post "></app-blog-view>
+  </ng-container>
+
+
+
+  <div class="text-center py-3 text-muted" *ngIf=" noMorePosts ">
+    {{ a.t({ en: 'There is no more posts.', ko: '더 이상 글이 없습니다.' })}}
+  </div>
+
+  <p class="m-3 p-5" *ngIf=" loading ">
+    <b class="ml-3">Loading ...</b>
+  </p>
+
+</section>

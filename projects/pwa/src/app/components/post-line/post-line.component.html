@@ -1,3 +1,3 @@
-<a *ngIf=" post " class="post blog-post link-list" routerLink="/b/{{ post.idx }}/{{ post.subject }}">
+<a *ngIf=" post " class="post blog-post link-list"  (click)=" a.openBlogPostView( post, $event ) " href="{{ a.getBlogPostViewUrl( post ) }}">
   {{ post.subject }}
 </a>

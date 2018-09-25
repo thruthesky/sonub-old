@@ -69,7 +69,11 @@ firebase.initializeApp(firebaseConfig);
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private philgo: PhilGoApiService) {
+  constructor(
+    // router: Router,
+    private philgo: PhilGoApiService
+  ) {
+    // console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
 
     philgo.setServerUrl(environment.philgoServerUrl);         // philgo api. 'api.php'
     philgo.setFileServerUrl(environment.philgoFileServerUrl); // philgo file server. 'https://file.philgo.com/index.php'

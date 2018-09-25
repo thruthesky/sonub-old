@@ -38,13 +38,17 @@ export class PostComponent implements OnInit, AfterViewInit {
    */
   percentage = 0;
 
+
+  isForumPostCreate = false;
+  isBlogPostCreate = false;
+  isPostEdit = false;
   ///
   constructor(
     private activatedRoute: ActivatedRoute,
     public a: AppService,
     public philgo: PhilGoApiService
   ) {
-
+    window['comp'] = this;
   }
 
   ngOnInit() {
@@ -55,30 +59,43 @@ export class PostComponent implements OnInit, AfterViewInit {
   initView() {
 
     this.activatedRoute.paramMap.subscribe(params => {
-      this.form.post_id = params.get('post_id');
-      const idx = params.get('idx');
-      if (idx) {
-        const post = this.a.getPostToEdit();
-        if ( post ) {
+
+      if (params.get('post_id')) {
+        this.isForumPostCreate = true;
+        this.form.post_id = params.get('post_id');
+      }
+
+      if (params.get('blog_category')) {
+        this.isBlogPostCreate = true;
+        this.form.post_id = 'blog';
+        this.form.category = params.get('blog_category');
+      }
+
+
+      if (params.get('idx')) {
+        this.isPostEdit = true;
+        const idx = params.get('idx');
+        const post = this.a.postInMemory;
+        if (post) {
+          console.log(`Got post from memory`);
           this.form = post;
-          // No post to edit? Maybe refreshed.
-          // Then load the post from server.
         } else {
-          // this.editorContent = this.form.content;
-          this.philgo.postLoad( idx ).subscribe( p => this.form = p, e => this.a.toast(e) );
+          console.log('No post in memory. Going to get it from server');
+          this.philgo.postLoad(idx).subscribe(p => this.form = p, e => this.a.toast(e));
         }
       }
     });
 
   }
 
+
   async onSubmit() {
 
     this.philgo.debug = true;
-    if ( ! this.philgo.isLoggedIn() ) {
+    if (!this.philgo.isLoggedIn()) {
       const re = await this.philgo.loginOrRegister(<any>this.form).toPromise()
-        .catch( e => {
-          if ( e.code === -270 ) {
+        .catch(e => {
+          if (e.code === -270) {
             e.message = this.a.t({
               en: 'You have already registered with the email but the password is incorrect. Please input correct password.',
               ko: '입력하신 메일 주소로 회원 가입이 되어져 있지만, 비밀번호가 틀립니다. 올바른 비밀번호를 입력해주세요.'
@@ -87,10 +104,10 @@ export class PostComponent implements OnInit, AfterViewInit {
           this.a.toast(e);
           return e;
         });
-        if ( this.philgo.isError(re) ) {
-          console.log('error on loginOrRegister()', re);
-          return;
-        }
+      if (this.philgo.isError(re)) {
+        console.log('error on loginOrRegister()', re);
+        return;
+      }
     }
     /**
     * Edit
@@ -98,7 +115,7 @@ export class PostComponent implements OnInit, AfterViewInit {
     if (this.form.idx) {
       this.philgo.postEdit(this.form).subscribe(res => {
         console.log('post view? load?', res);
-        this.a.openPostView(this.form.post_id, this.form.idx);
+        this.a.openPostView(res);
       }, e => {
         this.a.toast(e);
       });
@@ -112,7 +129,11 @@ export class PostComponent implements OnInit, AfterViewInit {
       this.philgo.postCreate(this.form).subscribe(res => {
         console.log('create res: ', res);
         // this.a.openHome();
-        this.a.openForum(this.form.post_id);
+        if ( this.isForumPostCreate ) {
+          this.a.openForum(this.form.post_id);
+        } else if ( this.isBlogPostCreate ) {
+          this.a.openBlogPostView(res);
+        }
       }, e => {
         this.a.toast(e);
       });
@@ -128,7 +149,7 @@ export class PostComponent implements OnInit, AfterViewInit {
     if (this.form.subject === void 0) {
       this.form.subject = '';
     }
-    if ( !this.form.idx && !this.subjectChanged) {
+    if (!this.form.idx && !this.subjectChanged) {
       // let str = this.a._.stripTags(this.editor.content);
       let str = this.a._.stripTags(this.form.content);
       str = this.a._.htmlDecode(str).trim();

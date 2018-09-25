@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AppService } from '../../../services/app.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiPost, PhilGoApiService } from 'share/philgo-api/philgo-api.service';
@@ -10,7 +10,7 @@ import { ApiPost, PhilGoApiService } from 'share/philgo-api/philgo-api.service';
 })
 export class BlogViewComponent implements OnInit {
 
-  post: ApiPost;
+  @Input() post: ApiPost;
   constructor(
     public activatedRoute: ActivatedRoute,
     public a: AppService,
@@ -18,13 +18,19 @@ export class BlogViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.paramMap.subscribe(params => {
-      const idx = params.get('idx');
-      this.a.philgo.postLoad(idx).subscribe(post => {
-        console.log('post', post);
-        this.post = post;
-      }, e => this.a.toast(e));
-    });
+    // this.activatedRoute.paramMap.subscribe(params => {
+    //   const idx = params.get('idx');
+    //   if ( this.a.getCachePostInMemory() && this.a.getCachePostInMemory().idx === idx) {
+    //     console.log('Get post from memory');
+    //     this.post = this.a.getCachePostInMemory();
+    //   } else {
+    //     console.log('Get post from server');
+    //     this.a.philgo.postLoad(idx).subscribe(post => {
+    //       console.log('post', post);
+    //       this.post = post;
+    //     }, e => this.a.toast(e));
+    //   }
+    // });
   }
 
   onVote(post: ApiPost, mode: 'good' | 'bad') {

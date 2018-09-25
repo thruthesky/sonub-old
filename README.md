@@ -53,6 +53,11 @@
 
 * `npm run pwa` to run pwa project. This will open `https://w.sonub.com:8443`.
 
+## Design Guideline
+
+* Front page and other pages will be Facebook style design
+* Blog will be Blogger style design.
+
 ## Coding Guideline
 
 ### App Object References
@@ -61,7 +66,7 @@
   * You can use this for debugging.
   * You can do something like `a.version().subscibe(v => console.log(v))` on dev consle.
 
-* `window['ForumBasicListComponent']` has `ForumBasicListComponent` reference.
+* Some components have `window['comp']=this` in their constructor. Meaning you can use them in whaever manner you want.
 
 ### Route atttribute
 

@@ -20,9 +20,9 @@ export class HeaderComponent implements OnInit {
     a.routeChange.subscribe(route => {
       // console.log('Mobile header: route check:', route);
       if (a.inRootSite) {
-        if ( a.inFrontPage ) {
+        if (a.inFrontPage) {
           this.title = 'Front';
-        } else if ( a.inBlogPage ) {
+        } else if (a.inBlogPage) {
           this.title = 'Blog';
         }
 
@@ -39,8 +39,9 @@ export class HeaderComponent implements OnInit {
 
 
     a.philgo.blogChange.subscribe(blog => {
-      // console.log('=========> blog settings', blog);
-      this.title = blog.name;
+      if (blog) {
+        this.title = blog.name;
+      }
     });
   }
 
