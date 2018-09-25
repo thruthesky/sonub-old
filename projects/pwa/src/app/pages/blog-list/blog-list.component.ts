@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { AppService } from '../../../services/app.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
 import { ApiPostSearch, ApiForum, ApiPost, ApiBlogSettings, PhilGoApiService } from 'share/philgo-api/philgo-api.service';
 import { InfiniteScrollService } from 'share/philgo-api/infinite-scroll';
 
@@ -43,20 +43,43 @@ export class BlogListComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   infiniteScrollSubscription;
 
-
-
+  subscriptionRoute;
   //
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     public a: AppService,
     public philgo: PhilGoApiService,
     private scroll: InfiniteScrollService
   ) {
     console.log('BlogListComponent::constructor()');
+    /**
+     * Blog ready?
+     */
     philgo.blogChange.subscribe((blog: ApiBlogSettings) => {
       if (blog) {
-        console.log('blogChange.subscribe()');
+        /**
+         * Yes, blog is ready now.
+         */
+        console.log('=====> blogChange.subscribe()');
         this.initBlogPageLoad();
+
+
+        this.subscriptionRoute = a.routeChange.subscribe(route => {
+          /**
+           * Yes, category changed.
+           * If `this.forumLoaded` is false, it means, blog has not loaded yet.
+           * So, blog is not changed but first loaded.
+           */
+          if ( this.forumLoaded ) {
+            console.log('=====> category changed: ', route, this.category);
+            this.initBlogPageLoad();
+          } else {
+            console.log('=====> category listing. category is NOT chagned but first time loaded');
+          }
+        });
+
+
       }
     });
 
@@ -71,10 +94,19 @@ export class BlogListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnDestroy() {
     this.infiniteScrollSubscription.unsubscribe();
+    this.subscriptionRoute.unsubscribe();
   }
 
 
   initBlogPageLoad() {
+    this.page_no = 1;
+    this.posts = [];
+    this.forum = null;
+    this.postView = null;
+    this.category = null;
+    this.loading = false;
+    this.noMorePosts = false;
+    this.forumLoaded = false;
     this.activatedRoute.paramMap.subscribe(params => {
       this.idxView = params.get('idx');
       this.category = params.get('blog_category');
@@ -99,10 +131,10 @@ export class BlogListComponent implements OnInit, AfterViewInit, OnDestroy {
       limit: this.limit
     };
     if (this.a.inBlogSite) {
-      console.log('a.blog: ', this.a.blog);
+      // console.log('a.blog: ', this.a.blog);
       req.uid = this.a.blog.idx;
     }
-    if ( this.category ) {
+    if (this.category) {
       req.category = this.category;
     }
     if (this.idxView) {
@@ -110,10 +142,10 @@ export class BlogListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.idxView = 0;
     }
 
-    console.log('req: ', req);
+    // console.log('req: ', req);
     this.a.philgo.postSearch(req).subscribe(search => {
       this.loading = false;
-      console.log('BlogListComponent::loadPage() => search: ', search);
+      // console.log('BlogListComponent::loadPage() => search: ', search);
       this.forumLoaded = true;
       this.page_no++;
       this.forum = search;

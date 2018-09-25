@@ -35,3 +35,9 @@
 
 
 
+.mat-snack-bar-container[class*="error-"] {
+  background-color: rgb(146, 0, 0) !important;
+  .mat-simple-snackbar-action {
+    color: #ecd3dc !important;
+  }
+}

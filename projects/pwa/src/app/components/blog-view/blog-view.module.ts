@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BlogViewComponent } from './blog-view.component';
 import { BlogReplyModule } from '../../components/blog-reply/blog-reply.module';
 import { DisplayFilesModule } from 'share/philgo-api-components/display-files/display-files.module';
+import { MatMenuModule, MatIconModule } from '@angular/material';
 
 
 
@@ -10,7 +11,9 @@ import { DisplayFilesModule } from 'share/philgo-api-components/display-files/di
   imports: [
     CommonModule,
     BlogReplyModule,
-    DisplayFilesModule
+    DisplayFilesModule,
+    MatMenuModule,
+    MatIconModule
   ],
   declarations: [BlogViewComponent],
   exports: [BlogViewComponent]

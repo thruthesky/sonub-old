@@ -17,7 +17,7 @@ export class BlogSettingsComponent implements OnInit {
     philgo.blogLoadSettings( philgo.myBlogDomain() ).subscribe(res => {
       console.log('res: ', res);
       this.blog = res;
-    }, e => this.a.toast(e));
+    }, e => this.a.error(e));
   }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class BlogSettingsComponent implements OnInit {
       this.philgo.profile().subscribe(r => {
         console.log('blog save => user local storage updated to restore blog domain: ', r);
       });
-    }, e => this.a.toast(e));
+    }, e => this.a.error(e));
 
 
     return false;

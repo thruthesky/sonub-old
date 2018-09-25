@@ -34,6 +34,11 @@ export interface FrontPage {
   latest_blog_posts: Array<ApiPost>;
   no_of_blog_posts: number;
   news: Array<ApiPost>;
+  blog_featured_0: ApiPost;
+  blog_featured_1: ApiPost;
+  blog_featured_2: ApiPost;
+  blog_featured_3: ApiPost;
+  blog_featured_4: ApiPost;
 }
 
 
@@ -184,22 +189,20 @@ export class AppService {
    * Listen page changes.
    */
   initRouterEvent() {
-    this.router.events.subscribe((e: any) => {
-      if (e instanceof NavigationEnd) {
-        this.route = this.router.url;
-        this.routeChange.next(this.route);
-      }
-    });
-
 
 
     this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationStart) {
-        if (this.router.url === e.url) {
+        /**
+         * Reloads(Redirects) only if the current url is clicked again.
+         * It does not reloads if when different url is clicked but component is the same.
+         */
+        if (this.router.url === e.url ) {
           this.router.navigate(['/redirect'], { queryParams: { url: e.url } });
         }
       } else if (e instanceof NavigationEnd) {
         this.route = this.router.url;
+        this.routeChange.next(this.route);
       }
       /**
        * Scroll the page to the top after transitioning into another page.
@@ -283,7 +286,7 @@ export class AppService {
   initBlog() {
     if (this.inBlogSite) {
       this.philgo.blogLoadSettings(this.currentBlogDomain).subscribe(blog => {
-        console.log('blog settings', blog);
+        // console.log('blog settings', blog);
       }, e => this.toast(e));
     }
     this.philgo.blogChange.subscribe(blog => {
@@ -459,7 +462,13 @@ export class AppService {
     this.router.navigateByUrl(this.getUrlBlogView(post));
   }
 
+  /**
+   * Blog category list
+   * @param name blog category name
+   */
   getBlogCategoryUrl(name) {
+
+    // return `/redirect?url=` + encodeURIComponent(`/blog/${this.currentBlogDomain}/${name}`);
     return `/blog/${this.currentBlogDomain}/${name}`;
   }
 
@@ -588,7 +597,7 @@ export class AppService {
    * @param e Error Object
    */
   error(e: ApiError) {
-    this.toast(e, 'Close', { panelClass: `error error-${e.code}` });
+    this.toast(e, 'Close', { panelClass: `error-${e.code}`, duration: 70000 });
   }
 
   get myName(): string {

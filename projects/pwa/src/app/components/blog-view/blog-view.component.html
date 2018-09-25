@@ -1,4 +1,4 @@
-<section class="post blog-view" *ngIf=" post ">
+<section class="post blog-view" *ngIf=" post?.idx ">
 
   <div class="post-header">
     <div class="thumbnail">
@@ -32,6 +32,35 @@
       <button (click)=" onEdit(post) ">Edit</button>
       <button (click)=" onDelete( post ) ">Delete</button>
       <button (click)=" onReport( post ) ">Report</button>
+
+      ...
+      <mat-menu #postMenu="matMenu">
+        <ng-template matMenuContent>
+          <button mat-menu-item (click)=" onClickFeature(0) ">
+            <mat-icon>photo_size_select_actual</mat-icon>
+            <span>Featured Post</span>
+          </button>
+          <button mat-menu-item [matMenuTriggerFor]="subMenu">
+            <mat-icon>photo_size_select_actual</mat-icon>
+            <span>More Features</span>
+          </button>
+        </ng-template>
+      </mat-menu>
+
+      <mat-menu #subMenu="matMenu">
+        <ng-template matMenuContent>
+          <button mat-menu-item (click)=" onClickFeature(1) ">Feature 1</button>
+          <button mat-menu-item (click)=" onClickFeature(2) ">Feature 2</button>
+          <button mat-menu-item (click)=" onClickFeature(3) ">Feature 3</button>
+          <button mat-menu-item (click)=" onClickFeature(4) ">Feature 4</button>
+        </ng-template>
+      </mat-menu>
+
+
+
+      <button mat-icon-button [matMenuTriggerFor]="postMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
     </div>
   </div>
 
@@ -78,6 +107,9 @@
             <button (click)=" comment['edit'] = true ">Edit</button>
             <button (click)=" onDelete( comment ) ">Delete</button>
             <button (click)=" onReport( comment ) ">Report</button>
+
+
+
 
           </div>
 

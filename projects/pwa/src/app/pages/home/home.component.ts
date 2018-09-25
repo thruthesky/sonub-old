@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
     } else if ( a.loggedIn ) {
       options.blog = a.myBlogDomain;
     }
+
+    this.philgo.debug = true;
     philgo.app('sonub.frontPage', options).subscribe( res => {
       console.log('sonub fron page data', res);
       this.res = res;
