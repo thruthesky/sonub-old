@@ -34,6 +34,7 @@ export interface FrontPage {
   latest_blog_posts: Array<ApiPost>;
   no_of_blog_posts: number;
   news: Array<ApiPost>;
+  stories: Array<ApiPost>;
   blog_featured_0: ApiPost;
   blog_featured_1: ApiPost;
   blog_featured_2: ApiPost;
@@ -54,6 +55,7 @@ export const BLOG_INTRO_DOMAIN = environment.blogIntroDomain;
 
 
 export const F_BLOG_DOMAIN = 'varchar_1';
+
 
 @Injectable({
   providedIn: 'root'
@@ -126,9 +128,23 @@ export class AppService {
 
 
   /**
+   * 'blog' has the settings of current blog site.
    * 현재 접속 중인 블로그의 정보를 가지고 있다.
    */
   blog: ApiBlogSettings = null;
+
+
+  /**
+   * 'frontPage' has the first page data of root site or blog site.
+   */
+  frontPage: FrontPage;
+
+  DISCUSSION = 'discussion';
+  QNA = 'answer';
+  NEWS = 'media';
+  BUYANDSELL = 'market';
+  MANAGEMENT = 'sonub_management';
+
 
   /**
    * Initialize the app service.
@@ -415,6 +431,10 @@ export class AppService {
   }
 
 
+  getBlogPostCreateUrl() {
+    return `/post/blog`;
+  }
+
   getUrlPostView(post: ApiPost): string {
     if (!post) {
       return '';
@@ -460,7 +480,7 @@ export class AppService {
    * @param categoryName category name
    */
   openBlogCategory(categoryName) {
-    this.router.navigateByUrl( this.getBlogCategoryUrl(categoryName) );
+    this.router.navigateByUrl(this.getBlogCategoryUrl(categoryName));
   }
 
   /**
@@ -505,6 +525,9 @@ export class AppService {
     return `/blog/${this.currentBlogDomain}/${catgoryName}`;
   }
 
+  getForumUrl(post_id) {
+    return `/forum/${post_id}`;
+  }
   setPostInMemory(post: ApiPost) {
     this._$_cachePostInMemory = post;
   }
@@ -656,6 +679,20 @@ export class AppService {
     return url;
   }
 
+
+  /**
+   * Returns URL of post photo
+   * @param post Post
+   * @param width width
+   * @param height height
+   */
+  getPostPhotoUrl(post, width, height) {
+    return this.philgo.thumbnailUrl({
+      width: width,
+      height: height,
+      path: post.path_of_first_image
+    });
+  }
 
 
 }

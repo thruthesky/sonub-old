@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FrontPage, AppService } from '../../../../services/app.service';
 
 @Component({
   selector: 'app-desktop-right',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DesktopRightComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(
+    public a: AppService
+  ) { }
 
   ngOnInit() {
   }

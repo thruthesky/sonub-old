@@ -51,9 +51,6 @@
 
   #desktop-left {
 
-    background-color: blue;
-    color: white;
-
     @include sidebar-width();
 
     &>div {
@@ -80,8 +77,6 @@
 
   #desktop-right {
     @include sidebar-width();
-    background-color: green;
-    color: white;
 
     .desktop-right-sidebar {
       @include sidebar-width();

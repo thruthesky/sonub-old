@@ -1,4 +1,4 @@
-<a class="d-flex px-1" href="{{ a.getUrlPostView(post) }}" (click)="a.onClickPost( $event, post )">
+<a class="d-flex px-1" href="{{ a.getUrlPostView(post) }}" (click)="a.onClickPost( $event, post )" *ngIf=" post ">
 
   <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 100, height: 100, path: post.path_of_first_image }) }}">
   <div class="text" *ngIf=" post.subject ">{{ post.subject | slice:0:16 }}</div>

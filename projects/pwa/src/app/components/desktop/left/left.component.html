@@ -1,32 +1,57 @@
 <div>
-    <a routerLink="/register">
-      <img class="size-32px" src="{{ a.myPhotoUrl }}">
-      {{ a.myName }}
-    </a>
+  <a routerLink="/register">
+    <img class="size-32px" src="{{ a.myPhotoUrl }}">
+    {{ a.myName }}
+  </a>
 </div>
 
-<div>
+<section class="root-site-content" *ngIf=" a.inRootSite ">
+
+  <b>Sonub Network Hub</b>
+  <ul>
+    <li>Become Best Blog Writer</li>
+    <li>Create your blog now</li>
+  </ul>
+  <b>Communities</b>
+  <ul>
+    <li><a routerLink="{{ a.getForumUrl( a.DISCUSSION ) }}">Discussion</a></li>
+    <li><a routerLink="{{ a.getForumUrl( a.QNA ) }}">QnA</a></li>
+    <li><a routerLink="{{ a.getForumUrl( a.BUYANDSELL ) }}">Buy and Sell</a></li>
+    <li><a routerLink="{{ a.getForumUrl( a.NEWS ) }}">News</a></li>
+    <li><a routerLink="/job">Jobs</a></li>
+  </ul>
+
+  <ul>
+    <li>Statistics</li>
+  </ul>
+
+</section>
+
+<section class="user-content" *ngIf=" a.inBlogSite ">
+  <div>
     Blog Category 1<br>
     Blog Category 2<br>
     Blog Category 3<br>
     Blog Category 4<br>
     Blog Category 5<br>
-</div>
-<div>
-  Your site: xxx.sonub.com
-</div>
-<div>
-  Comments, Likes
-</div>
-<div>
-Post |  Settings | Stat<br>
-  Manage Blog Caetgores<br>
-  Themes and widgets<br>
-  Friends<br>
-  Blocked users, Who can comments,<br>
-</div>
-<div>
-  Statistics<br>
-  Today, Yesterday, last 7 days.<br>
+  </div>
+  <div>
+    Your site: xxx.sonub.com
+  </div>
 
-</div>
+  <div>
+    Comments, Likes
+  </div>
+  <div>
+    Post | Settings | Stat<br>
+    Manage Blog Caetgores<br>
+    Themes and widgets<br>
+    Friends<br>
+    Blocked users, Who can comments,<br>
+  </div>
+  <div>
+    Statistics<br>
+    Today, Yesterday, last 7 days.<br>
+  </div>
+
+</section>

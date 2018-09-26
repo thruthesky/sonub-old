@@ -7,7 +7,7 @@
     <!-- <a routerLink="/blog" *ngIf=" ! a.inBlogPage ">
       Blog
     </a> -->
+    <a routerLink="{{ a.getBlogPostCreateUrl() }}" *ngIf=" a.inMyBlog "><i class="material-icons">create</i></a>
     <a class="p-1" routerLink="/menu"><i class="material-icons">menu</i></a>
   </div>
 </mat-toolbar>
-

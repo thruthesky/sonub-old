@@ -9,7 +9,6 @@ import { PhilGoApiService } from 'share/philgo-api/philgo-api.service';
 })
 export class HomeComponent implements OnInit {
 
-  frontPage: FrontPage;
   constructor(
     public a: AppService,
     public philgo: PhilGoApiService
@@ -24,7 +23,7 @@ export class HomeComponent implements OnInit {
     this.philgo.debug = true;
     philgo.app('sonub.frontPage', options).subscribe( res => {
       console.log('sonub fron page data', res);
-      this.frontPage = res;
+      this.a.frontPage = res;
     }, e => {
       console.error(e);
     });

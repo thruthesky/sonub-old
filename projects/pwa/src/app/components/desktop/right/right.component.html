@@ -1,11 +1,59 @@
+}
+<div class="stories bg-white" *ngIf=" a.frontPage?.stories?.length ">
+  <div class="title d-flex justify-content-between">
+    <b>Your stories</b>
+    <span>Create blog</span>
+  </div>
 
-<div class="card mb-spacing">
-    right works!
-    <h1>right</h1><h1>right</h1><h1>right</h1>
+  <div class="posts">
+
+    <div class="post d-flex fs-sm">
+      <div class="mt-1 p-3" style="border: 2px solid rgb(49, 114, 235);">
+        <i class="material-icons">home</i>
+      </div>
+      <div>
+        <div>Add your story here</div>
+        <div>Sonub is free service.</div>
+      </div>
+    </div>
+
+    <div class="post d-flex fs-sm" *ngFor="let post of a.frontPage.stories">
+      <div class="mt-1 p-1" style="border: 2px solid rgb(49, 114, 235);">
+        <img class="d-block" src="{{ a.getPostPhotoUrl(post, 48, 48) }}">
+      </div>
+      <div>
+        <div>{{ post.subject }}</div>
+        <div>{{ post.content }}</div>
+      </div>
+    </div>
+  </div>
+
 </div>
-<h1>right</h1><h1>right</h1><h1>right</h1><h1>right</h1><h1>right</h1>
-<h1>right</h1><h1>right</h1><h1>right</h1><h1>right</h1><h1>right</h1>
-<h1>Yo right</h1><h1>Yo right</h1><h1>Yo right</h1><h1>Yo right</h1><h1>Yo right</h1>
-<h1>Yo right</h1><h1>Yo right</h1><h1>Yo right</h1><h1>Yo right</h1><h1>Yo right</h1>
+<div>
+    Do you want get a job? earn?<br>
+    Or you want your company grow?
+    selling or buying?
 
-    end line
+</div>
+<h1>right</h1>
+<h1>right</h1>
+<h1>right</h1>
+<h1>right</h1>
+<h1>right</h1>
+<h1>right</h1>
+<h1>right</h1>
+<h1>right</h1>
+<h1>right</h1>
+<h1>right</h1>
+<h1>Yo right</h1>
+<h1>Yo right</h1>
+<h1>Yo right</h1>
+<h1>Yo right</h1>
+<h1>Yo right</h1>
+<h1>Yo right</h1>
+<h1>Yo right</h1>
+<h1>Yo right</h1>
+<h1>Yo right</h1>
+<h1>Yo right</h1>
+
+end line
