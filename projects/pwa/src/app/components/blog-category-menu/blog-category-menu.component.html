@@ -1,0 +1,43 @@
+<div *ngIf=" a.isMobile && a.inBlogSite && a.blog?.no_of_categories ">
+
+  <div class="row fs-sm">
+    <ng-container *ngIf=" a.blog.categories.length < 5 ">
+      <a class="col py-2 bg-dark-1" *ngFor="let n of a.blog.categories" routerLink="{{ a.getBlogCategoryUrl(n) }}">
+        {{ n }}
+      </a>
+    </ng-container>
+    <ng-container *ngIf=" a.blog.categories.length >= 5 ">
+      <a class="col py-2 bg-dark-1" *ngFor="let n of [0, 1, 2, 3]" routerLink="{{ a.getBlogCategoryUrl(n) }}">
+        {{ a.blog.categories[n] }}
+      </a>
+      <div class="col">
+        <mat-menu #postMenu="matMenu">
+          <button mat-menu-item *ngFor="let n of moreCategories()" (click)=" a.openBlogCategory( n ) ">
+            <span>{{ n }}</span>
+          </button>
+
+          <button mat-menu-item *ngIf=" a.inMyBlog " (click)=" a.openBlogSettings() ">
+            <span>Settings</span>
+          </button>
+          <button mat-menu-item>
+            <span>Close</span>
+          </button>
+
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="postMenu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+
+</div>
+
+
+<div *ngIf=" a.isDesktop && a.inBlogSite && a.blog?.no_of_categories ">
+  <div class="row fs-sm">
+    <a class="col py-2 bg-dark-1" *ngFor="let n of a.blog.categories" routerLink="{{ a.getBlogCategoryUrl(n) }}">
+      {{ n }}
+    </a>
+  </div>
+</div>

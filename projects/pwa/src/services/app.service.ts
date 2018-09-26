@@ -175,7 +175,6 @@ export class AppService {
    * Set the size of app based on the screen width.
    */
   initScreen() {
-
     if (_.md()) {
       this.isDesktop = true;
       this.isMobile = false;
@@ -404,6 +403,9 @@ export class AppService {
       window.location.href = this.myBlogUrl;
     }
   }
+  openBlogSettings() {
+    this.router.navigateByUrl('/blog-settings');
+  }
   openForum(post_id: string) {
     if (post_id === 'blog') {
       this.router.navigateByUrl('/blog');
@@ -452,6 +454,16 @@ export class AppService {
   }
 
   /**
+   * Opens blog category under whatever blog domain.
+   * 현재 도메인내의 category 를 목록한다. 즉, 루트 도메인에서는 사용 할 수 없다.
+   *
+   * @param categoryName category name
+   */
+  openBlogCategory(categoryName) {
+    this.router.navigateByUrl( this.getBlogCategoryUrl(categoryName) );
+  }
+
+  /**
    * Returns url of blog post with a post-on-top
    * @param post blog post
    */
@@ -485,12 +497,12 @@ export class AppService {
 
   /**
    * Blog category list
-   * @param name blog category name
+   * @param catgoryName blog category name
    */
-  getBlogCategoryUrl(name) {
+  getBlogCategoryUrl(catgoryName) {
 
     // return `/redirect?url=` + encodeURIComponent(`/blog/${this.currentBlogDomain}/${name}`);
-    return `/blog/${this.currentBlogDomain}/${name}`;
+    return `/blog/${this.currentBlogDomain}/${catgoryName}`;
   }
 
   setPostInMemory(post: ApiPost) {
