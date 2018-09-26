@@ -6,24 +6,40 @@
 </div>
 
 <section class="root-site-content" *ngIf=" a.inRootSite ">
+  <section>
 
-  <b>Sonub Network Hub</b>
-  <ul>
-    <li>Become Best Blog Writer</li>
-    <li>Create your blog now</li>
-  </ul>
-  <b>Communities</b>
-  <ul>
-    <li><a routerLink="{{ a.getForumUrl( a.DISCUSSION ) }}">Discussion</a></li>
-    <li><a routerLink="{{ a.getForumUrl( a.QNA ) }}">QnA</a></li>
-    <li><a routerLink="{{ a.getForumUrl( a.BUYANDSELL ) }}">Buy and Sell</a></li>
-    <li><a routerLink="{{ a.getForumUrl( a.NEWS ) }}">News</a></li>
-    <li><a routerLink="/job">Jobs</a></li>
-  </ul>
+    <b>Sonub Network Hub</b>
+    <ul>
+      <li>Become Best Blog Writer</li>
+      <li>Create your blog now</li>
+    </ul>
 
-  <ul>
-    <li>Statistics</li>
-  </ul>
+  </section>
+  <section class="side-menu root-site-content">
+    <header>Communities</header>
+    <ul>
+      <li>
+        <i class="material-icons">question_answer</i>
+        <a routerLink="{{ a.getForumUrl( a.DISCUSSION ) }}">Discussion</a>
+      </li>
+      <li>
+        <i class="material-icons">help</i>
+        <a routerLink="{{ a.getForumUrl( a.QNA ) }}">QnA</a>
+      </li>
+      <li>
+        <i class="material-icons">shopping_cart</i>
+        <a routerLink="{{ a.getForumUrl( a.BUYANDSELL ) }}">Buy and Sell</a>
+      </li>
+      <li>
+        <i class="material-icons">fiber_new</i>
+        <a routerLink="{{ a.getForumUrl( a.NEWS ) }}">News</a>
+      </li>
+      <li>
+        <i class="material-icons">work</i>
+        <a routerLink="/job">Jobs</a>
+      </li>
+    </ul>
+  </section>
 
 </section>
 
@@ -49,9 +65,13 @@
     Friends<br>
     Blocked users, Who can comments,<br>
   </div>
-  <div>
-    Statistics<br>
-    Today, Yesterday, last 7 days.<br>
-  </div>
+
+  <section class="side-menu blog-site-content" *ngIf=" a.inBlogSite ">
+    <header>Blog Managment</header>
+    <ul>
+      <li>Statistics</li>
+      <li>Google Analystics</li>
+    </ul>
+  </section>
 
 </section>

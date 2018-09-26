@@ -1,11 +1,10 @@
-}
-<div class="stories bg-white" *ngIf=" a.frontPage?.stories?.length ">
-  <div class="title d-flex justify-content-between">
+<section class="stories box" *ngIf=" a.frontPage?.stories?.length ">
+  <header class="title d-flex justify-content-between">
     <b>Your stories</b>
     <span>Create blog</span>
-  </div>
+  </header>
 
-  <div class="posts">
+  <article class="posts">
 
     <div class="post d-flex fs-sm">
       <div class="mt-1 p-3" style="border: 2px solid rgb(49, 114, 235);">
@@ -26,14 +25,23 @@
         <div>{{ post.content }}</div>
       </div>
     </div>
-  </div>
+  </article>
 
-</div>
-<div>
-    Do you want get a job? earn?<br>
-    Or you want your company grow?
-    selling or buying?
-
+</section>
+<section class="widgets box">
+  <article>
+    Weather | Currency | Etc
+  </article>
+</section>
+<div class="ad-box sonub-adv">
+  <header>Do you want get a job? earn?</header>
+  <article>
+    Or selling or buying?<br>
+    Sonub is a big social hub network where you can grow with.<br>
+  </article>
+  <footer>
+    Live with sonub.com
+  </footer>
 </div>
 <h1>right</h1>
 <h1>right</h1>
