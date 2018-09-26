@@ -435,7 +435,12 @@ export class AppService {
     return `/post/blog`;
   }
 
-  getUrlPostView(post: ApiPost): string {
+  /**
+   * Return post view url.
+   * This supports all kinds of post like blog, ads, forum post etc.
+   * @param post post or blog data
+   */
+  getPostViewUrl(post: ApiPost): string {
     if (!post) {
       return '';
     }
@@ -443,13 +448,20 @@ export class AppService {
       if (post.link && post.link.trim()) {
         return post.link.trim();
       } else {
-        return `/${post.post_id}/${post.idx}`;
+        return `/forum/${post.post_id}/${post.idx}/${post.subject}`;
       }
     } if (post.post_id === 'blog') {
       return this.getUrlBlogViewList(post);
     } else {
-      return `/forum/${post.post_id}/${post.idx}`;
+      return `/forum/${post.post_id}/${post.idx}/${post.subject}`;
     }
+  }
+  /**
+   * @deprecated use this.getPostViewUrl();
+   * @param post post data
+   */
+  getUrlPostView(post: ApiPost): string {
+    return this.getPostViewUrl(post);
   }
 
   openPostView(post: ApiPost, event?: Event) {
@@ -484,18 +496,22 @@ export class AppService {
   }
 
   /**
-   * Returns url of blog post with a post-on-top
+   * Returns (blog post view) url of a blog post.
+   * @desc if the input post is not a blog post, then, it will return url of post view.
    * @param post blog post
    */
   getUrlBlogViewList(post): string {
     if (!post.post_id) {
       post.post_id = 'blog';
     }
-    if (post['blog'] === void 0) {
-      console.error('blog is not set');
+    if (post['blog'] === void 0 || !post['blog']) {
+      // console.error('blog is not set');
+      // return '#';
+      return this.getPostViewUrl(post);
+    } else {
+      // console.log('post', post);
+      return `/b/${post['blog']}/${post.idx}/${post.subject}`;
     }
-    // console.log('post', post);
-    return `/b/${post['blog']}/${post.idx}/${post.subject}`;
   }
 
   /**

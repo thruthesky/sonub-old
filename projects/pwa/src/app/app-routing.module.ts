@@ -16,6 +16,7 @@ const routes: Routes = [
     { path: 'post/edit/:idx', loadChildren: './pages/post/post.module#PostModule' },
     { path: 'forum/:post_id', loadChildren: './pages/forum/forum.module#ForumModule' },
     { path: 'forum/:post_id/:idx', loadChildren: './pages/forum/forum.module#ForumModule' },
+    { path: 'forum/:post_id/:idx/:subject', loadChildren: './pages/forum/forum.module#ForumModule' },
 
     // blog posting. Domain is not reuqired since I am posting only on my domain.
     { path: 'blog-post/:blog_category', loadChildren: './pages/post/post.module#PostModule' },
