@@ -1,26 +1,16 @@
-<mat-card class="example-card" *ngIf=" ! a._.isWebPushPermissionRequested() ">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image">
-        <i class="material-icons">
-            notification_important
-            </i>
+<div class="bg-white p-3 text-center" *ngIf=" ! a._.isWebPushPermissionRequested() ">
+    <div class="flex-center">
+        <i class="material-icons mr-2 fs-36px">notification_important</i>
+        <div class="fs-lg">{{ a.t({ko: '채팅 알림을 허용해주세요.', en: 'Please accept Notification'}) }}</div>
     </div>
-    <mat-card-title>{{ a.t({ko: '채팅 알림', en: 'Allow Chat Notification'}) }}</mat-card-title>
-    <mat-card-subtitle>{{ a.t({ko: '채팅 알림을 허용해주세요.', en: 'Please accept Notification'}) }}</mat-card-subtitle>
-  </mat-card-header>
 
-  <mat-card-content>
-    <p>{{ a.t({ko: '채팅 알림을 허용 해 주셔야 새로운 채팅이 있을 시 알림을 받을 수 있습니다.', en: 'Please allow notification. So we can notify
+    <p class="text-muted fs-md">{{ a.t({ko: '채팅 알림을 허용 해 주셔야 새로운 채팅이 있을 시 알림을 받을 수 있습니다.', en: 'Please allow notification. So we can notify
       you when your friends talk to you.'}) }}</p>
-    <button mat-button class="no-shadow" color="danger" (click)=" requestWebPushPermission() ">
+    <button class="fs-lg py-2 px-5" mat-flat-button (click)=" requestWebPushPermission() ">
       <span>{{ a.t({ko: '채팅 알림 허용하기', en: 'Allow Notification'}) }}</span>
-      <i class="material-icons">
-          notification_important
-          </i>
     </button>
 
-  </mat-card-content>
-</mat-card>
+</div>
 
 
 
