@@ -35,8 +35,8 @@
 
 
 <div *ngIf=" a.isDesktop && a.inBlogSite && a.blog?.no_of_categories ">
-  <div class="row fs-sm">
-    <a class="col py-2 bg-dark-1" *ngFor="let n of a.blog.categories" routerLink="{{ a.getBlogCategoryUrl(n) }}">
+  <div class="d-flex justify-content-between fs-sm">
+    <a class="py-2 bg-dark-1" *ngFor="let n of a.blog.categories" routerLink="{{ a.getBlogCategoryUrl(n) }}">
       {{ n }}
     </a>
   </div>

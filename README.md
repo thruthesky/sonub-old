@@ -59,6 +59,15 @@
 
 * Front page and other pages will be Facebook style design
 * Blog will be Blogger style design.
+* Design with component/utility class and Bootstrap class. Do not design with custom css/scss like below.
+
+This is wrong because it makes difficult to understand template design. In fact, I spent long time with this.
+
+```` scss
+#home {
+  margin-top: -1rem;
+}
+````
 
 ## Coding Guideline
 
