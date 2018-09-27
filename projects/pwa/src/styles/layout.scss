@@ -18,13 +18,14 @@
   }
 
   #mobile-content {
-    margin-top: $header-height;
+    padding-top: $header-height;
     // padding: $padding;
   }
 }
 
 
 #desktop-layout {
+  min-height: 100vh;
   background: #e9ebee;
   #desktop-header {
     position: fixed;

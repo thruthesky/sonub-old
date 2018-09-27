@@ -62,9 +62,9 @@ export class BlogViewComponent implements OnInit {
   }
 
   onClickFeature(n) {
-    this.philgo.postUpdateAccessCodeByMember(this.post.idx, 'blog_featured_' + n ).subscribe(post => {
-      console.log('postUpdateAccessCodeByMember:', post);
-    });
+    // this.philgo.postUpdateAccessCodeByMember(this.post.idx, 'blog_featured_' + n ).subscribe(post => {
+    //   console.log('postUpdateAccessCodeByMember:', post);
+    // });
   }
 
 }

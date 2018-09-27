@@ -164,6 +164,12 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+            "local": {
+              "fileReplacements": [{
+                  "replace": "projects/pwa/src/environments/environment.ts",
+                  "with": "projects/pwa/src/environments/environment.local.ts"
+                }]
             }
           }
         },
@@ -175,6 +181,9 @@
           "configurations": {
             "production": {
               "browserTarget": "pwa:build:production"
+            },
+            "local": {
+              "browserTarget": "pwa:build:local"
             }
           }
         },
