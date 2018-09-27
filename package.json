@@ -10,7 +10,8 @@
     "e2e": "ng e2e",
     "s": "npm run pwa",
     "pwa": "ng s pwa -o --host dev.sonub.com --port 8443 --disable-host-check --ssl --ssl-key '/Users/jaehosong/apps/sonub/tmp/ssl/sonub-private.key' --ssl-cert '/Users/jaehosong/apps/sonub/tmp/ssl/sonub-certificate-ca-bundle.crt'",
-    "pwa:local": "ng serve pwa --disable-host-check --configuration=local"
+    "pwa:local": "ng serve pwa --disable-host-check --configuration=local",
+    "pwa:live": "sudo ng serve pwa --configuration=live -o --host www.sonub.com --port 443 --disable-host-check --ssl --ssl-key '/Users/jaehosong/apps/sonub/tmp/ssl/sonub-private.key' --ssl-cert '/Users/jaehosong/apps/sonub/tmp/ssl/sonub-certificate-ca-bundle.crt'"
   },
   "private": true,
   "dependencies": {
