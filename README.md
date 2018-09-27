@@ -96,6 +96,11 @@
 * When users access site to `https://www.sonub.com`, they are automatically redirect to `https://sonub.com` by backend.
 * `https://dev.sonub.com` is considered as root site on development site in local computer.
 
+#### Root site content
+
+* When user is logged in, user's blog content will be shown on featured posts.
+* When user is not logged in, news content will be shown on featured posts.
+
 ### Main page
 
 * `main page` means the front page of `root site` which is on `/` route.
@@ -129,6 +134,16 @@
 * The route format is `/b/:idx/:subject`. With this route format, we can easily unify to access blog site from `root site` or `blog site`. And subject is for SEO.
 
 * blog post view page displays the post with easy access menus.
+
+### Sidebars
+
+* Sidebars only appear on desktop.
+
+* but Contents of sidebars will be loaded on mobile view. So, the sidebar content will be shown on mobile view in somewhere.
+
+* content of sidebars of root site front page would have more on sonub.com itself plug if user is logged in, logged in, login user's blog content.
+
+* sidebar of blog site will show only the blog's content.
 
 ### User blog creation
 
