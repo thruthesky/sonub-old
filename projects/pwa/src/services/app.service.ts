@@ -456,7 +456,7 @@ export class AppService {
       } else {
         return `/forum/${post.post_id}/${post.idx}/${post.subject}`;
       }
-    } if (post.post_id === 'blog') {
+    } if (post.post_id === 'blog' && post['blog'] ) {
       return this.getUrlBlogViewList(post);
     } else {
       return `/forum/${post.post_id}/${post.idx}/${post.subject}`;
