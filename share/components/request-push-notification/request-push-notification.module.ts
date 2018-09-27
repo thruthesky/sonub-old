@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 
 import { RequestPushNotificationComponent } from './request-push-notification.component';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
     imports: [
         CommonModule,
-        MatCardModule
+        MatCardModule,
+        MatButtonModule
     ],
     exports: [
         RequestPushNotificationComponent
