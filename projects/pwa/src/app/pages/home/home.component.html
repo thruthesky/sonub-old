@@ -1,110 +1,114 @@
-<app-blog-category-menu></app-blog-category-menu>
-<app-request-push-notification></app-request-push-notification>
+<div id="home">
 
-
-<!-- <div class="" *ngIf=" ! a.inMyBlog ">
-  Blog Owner: {{ a.blog?.owner }}
-  <a class="link" href="{{ a.myBlogUrl }}">My blog</a>
-  Your blog: <a class="link" href="{{ a.myBlogUrl }}">{{ a.myBlogUrl }}</a> (<a class="link" href="{{ a.myBlogUrl }}/blog/settings">change</a>)
-</div> -->
-
-
-
-
-<div class="text-editor mt-3" routerLink="{{ a.getBlogPostCreateUrl() }}" *ngIf=" a.inRootSite ">
-  <app-avatar class="mr-md-2"></app-avatar>
-  <div class="editor">
-    What's your story? ---- Text Animation with Hot topics
-  </div>
-</div>
-
-
-<!-- <div class="stats py-2">
-  <div>Sonub Version: {{ a.frontPage.info.version }}</div>
-  <div>My blog posts: {{ a.frontPage.no_of_my_blog_posts }}</div>
-</div> -->
-
-<!-- show only on rooe site -->
-<section *ngIf=" a.inRootSite ">
-
-
-
-  <app-blog-featured-wide-post *ngIf=" a.frontPage?.blog_featured_0 " [post]=" a.frontPage.blog_featured_0 "></app-blog-featured-wide-post>
-
-  <!-- show only if the user logged in -->
-  <div class="login-user-blog-content one-line-posts" *ngIf=" a.loggedIn && a.frontPage?.latest_blog_posts?.length">
-    <div class="my-blog-posts my-1" *ngFor="let post of a.frontPage.latest_blog_posts">
-      <app-post-line [post]=" post "></app-post-line>
-    </div>
-  </div>
-  <!--/login-user-blog-content-->
-
-
-  <div class="mt-3">
-    <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
-  </div>
-
-  <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPosts?.length">
-    <div class="row no-gutters">
-      <div class="col" *ngFor="let post of a.frontPage.communityPosts">
-        <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
+    <app-blog-category-menu></app-blog-category-menu>
+    <app-request-push-notification></app-request-push-notification>
+    
+    
+    <!-- <div class="" *ngIf=" ! a.inMyBlog ">
+      Blog Owner: {{ a.blog?.owner }}
+      <a class="link" href="{{ a.myBlogUrl }}">My blog</a>
+      Your blog: <a class="link" href="{{ a.myBlogUrl }}">{{ a.myBlogUrl }}</a> (<a class="link" href="{{ a.myBlogUrl }}/blog/settings">change</a>)
+    </div> -->
+    
+    
+    
+    
+    <div class="text-editor mt-3" routerLink="{{ a.getBlogPostCreateUrl() }}" *ngIf=" a.inRootSite ">
+      <app-avatar class="mr-md-2"></app-avatar>
+      <div class="editor">
+        What's your story? ---- Text Animation with Hot topics
       </div>
     </div>
-  </div>
-  <!--/community-posts-->
-
-
-
-  <div *ngIf=" a.frontPage?.news?.length ">
-    <h2>Sonub News</h2>
-    <app-post-multiline-with-thumbnail *ngFor="let post of a.frontPage.news " [post]=" post "></app-post-multiline-with-thumbnail>
-  </div>
-
-
-</section>
-<!--/root site-->
-
-
-<!-- show only on blog site -->
-<div class="user-blog" *ngIf=" a.inBlogSite ">
-
-  <app-blog-featured-wide-post *ngIf=" a.frontPage?.blog_featured_0 " [post]=" a.frontPage.blog_featured_0 "></app-blog-featured-wide-post>
-
-  <div class="one-line-posts" *ngIf=" a.frontPage?.latest_blog_posts?.length">
-    <div class="my-1" *ngFor="let post of a.frontPage.latest_blog_posts">
-      <app-post-line [post]=" post "></app-post-line>
-    </div>
-  </div>
-
-
-
-
-  <div class="mt-3">
-    <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
-  </div>
-
-  <div class="category-posts mt-3 p-2 bg-green">
-    <h4>Category 1 post</h4>
-    <h4>Category 2 post</h4>
-    <h4>Category 3 post</h4>
-    <h4>Category 4 post</h4>
-  </div>
-  <div>
-    <h4>latest posts</h4>
-    <h4>latest posts</h4>
-    <h4>latest posts</h4>
-    <h4>latest posts</h4>
-    <h4>latest posts</h4>
-    <h4>latest posts</h4>
-    [more ...]
-  </div>
-
-  <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPosts?.length">
-    <div class="row no-gutters">
-      <div class="col" *ngFor="let post of a.frontPage.communityPosts">
-        <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
+    
+    
+    <!-- <div class="stats py-2">
+      <div>Sonub Version: {{ a.frontPage.info.version }}</div>
+      <div>My blog posts: {{ a.frontPage.no_of_my_blog_posts }}</div>
+    </div> -->
+    
+    <!-- show only on rooe site -->
+    <section *ngIf=" a.inRootSite ">
+    
+    
+    
+      <app-blog-featured-wide-post *ngIf=" a.frontPage?.blog_featured_0 " [post]=" a.frontPage.blog_featured_0 "></app-blog-featured-wide-post>
+    
+      <!-- show only if the user logged in -->
+      <div class="login-user-blog-content one-line-posts" *ngIf=" a.loggedIn && a.frontPage?.latest_blog_posts?.length">
+        <div class="my-blog-posts my-1" *ngFor="let post of a.frontPage.latest_blog_posts">
+          <app-post-line [post]=" post "></app-post-line>
+        </div>
       </div>
+      <!--/login-user-blog-content-->
+    
+    
+      <div class="mt-3">
+        <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
+      </div>
+    
+      <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPosts?.length">
+        <div class="row no-gutters">
+          <div class="col" *ngFor="let post of a.frontPage.communityPosts">
+            <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
+          </div>
+        </div>
+      </div>
+      <!--/community-posts-->
+    
+    
+    
+      <div *ngIf=" a.frontPage?.news?.length ">
+        <h2>Sonub News</h2>
+        <app-post-multiline-with-thumbnail *ngFor="let post of a.frontPage.news " [post]=" post "></app-post-multiline-with-thumbnail>
+      </div>
+    
+    
+    </section>
+    <!--/root site-->
+    
+    
+    <!-- show only on blog site -->
+    <div class="user-blog" *ngIf=" a.inBlogSite ">
+    
+      <app-blog-featured-wide-post *ngIf=" a.frontPage?.blog_featured_0 " [post]=" a.frontPage.blog_featured_0 "></app-blog-featured-wide-post>
+    
+      <div class="one-line-posts" *ngIf=" a.frontPage?.latest_blog_posts?.length">
+        <div class="my-1" *ngFor="let post of a.frontPage.latest_blog_posts">
+          <app-post-line [post]=" post "></app-post-line>
+        </div>
+      </div>
+    
+    
+    
+    
+      <div class="mt-3">
+        <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
+      </div>
+    
+      <div class="category-posts mt-3 p-2 bg-green">
+        <h4>Category 1 post</h4>
+        <h4>Category 2 post</h4>
+        <h4>Category 3 post</h4>
+        <h4>Category 4 post</h4>
+      </div>
+      <div>
+        <h4>latest posts</h4>
+        <h4>latest posts</h4>
+        <h4>latest posts</h4>
+        <h4>latest posts</h4>
+        <h4>latest posts</h4>
+        <h4>latest posts</h4>
+        [more ...]
+      </div>
+    
+      <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPosts?.length">
+        <div class="row no-gutters">
+          <div class="col" *ngFor="let post of a.frontPage.communityPosts">
+            <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
+          </div>
+        </div>
+      </div>
+      <!--/community-posts-->
     </div>
-  </div>
-  <!--/community-posts-->
+    
 </div>
