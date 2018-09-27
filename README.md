@@ -59,7 +59,7 @@
 
 * Front page and other pages will be Facebook style design
 * Blog will be Blogger style design.
-* Design with component/utility class and Bootstrap class. Do not design with custom css/scss like below.
+* Design with `component/utility classes` and `Bootstrap classes`. Do not design with custom css/scss like below.
 
 This is wrong because it makes difficult to understand template design. In fact, I spent long time with this.
 
@@ -145,6 +145,15 @@ This is wrong because it makes difficult to understand template design. In fact,
 * The route format is `/b/:idx/:subject`. With this route format, we can easily unify to access blog site from `root site` or `blog site`. And subject is for SEO.
 
 * blog post view page displays the post with easy access menus.
+
+## Job
+
+### Job routes
+
+* For creating, `/job-post`
+* For editing, `/job-post/:idx`
+* For listing, `/job`, `/job/:category`
+* for viewing a post on top of list, `/job/:category/:idx`, `/job/category/:idx/:subject`.
 
 ### Sidebars
 

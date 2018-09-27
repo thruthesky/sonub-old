@@ -5,6 +5,6 @@ I am looking for <select name="category">
     <option value="englishtutor">English Tutor</option>
     <option value="carpenter">Carpenter</option>
 </select>
-Or <button (click)=" joblist.onClickJobPost() ">apply</button> for a job.
+Or <button routerLink="/job-post">apply</button> for a job.
 
-<app-job-list-component #joblist [group_id]=" a.groupId "></app-job-list-component>
+<app-job-list-component [group_id]=" a.groupId "></app-job-list-component>

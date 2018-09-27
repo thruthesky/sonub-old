@@ -47,8 +47,10 @@ const routes: Routes = [
     { path: 'blog', loadChildren: './pages/blog-main/blog-main.module#BlogMainModule' },
 
     { path: 'job', loadChildren: './pages/job/job.module#JobModule' },
+    { path: 'job-post', loadChildren: './pages/job-post/job-post.module#JobPostModule' },
     { path: 'job/:category', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job/:category/:idx', loadChildren: './pages/job/job.module#JobModule' },
+    { path: 'job/:category/:idx/:subject', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'redirect', component: RedirectComponent },
     { path: '**', component: PageNotFoundComponent },
 ];

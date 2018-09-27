@@ -15,7 +15,7 @@
         {{ a.myName }}
       </a>
 
-      <span (click)=" a.openMyBlog() " *ngIf=" ! a.inMyBlog ">My Blog</span>
+      <span class="white" (click)=" a.openMyBlog() " *ngIf=" ! a.inMyBlog ">My Blog</span>
       <a routerLink="{{ a.getBlogPostCreateUrl() }}">Create</a>
 
       <i class="material-icons">
