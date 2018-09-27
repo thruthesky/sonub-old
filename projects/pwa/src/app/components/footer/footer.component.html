@@ -1,8 +1,8 @@
-<section id="footer" class="mt-2 p-2 border-box w-100 overflow-hidden fs-sm">
+<section id="footer" class="mt-2 border-box w-100 overflow-hidden fs-sm">
 
-  <div class="adv box footer-advertisement">
+  <div class="adv footer-advertisement p-3">
 
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
       <div>
         <div class="d-flex-center size-32px circle bg-dark-2">
           <i class="material-icons">how_to_reg</i>
@@ -10,36 +10,38 @@
       </div>
       <div class="ml-2">
         <b>Looking for foreign boss?</b><br>
-        We have a lot of foregin boss who want to hire pinoy workers.<br>
-        Sonub Jobs
+        We have a lot of foregin boss who want to hire pinoy workers. 
+        <a class="link">Sonub Jobs</a>
       </div>
     </div>
   </div>
-  <hr>
 
-  <div class="search d-flex mt-2 p-1 border-1">
-    <app-logo></app-logo>
-    <input class="flex-grow-1 p-1 border-box border-0">
-    <button>Search</button>
-  </div>
-
-  <div class="container mt-2">
-    <div class="row">
-      <div class="col">
-        Blogs<br>
-        Help<br>
-        Seetings & Privacy<br>
-
-        <a href="https://sonub.com" (click)=" onClickSonub( $event ) ">Sonub</a>
-      </div>
-      <div class="col">
-        Report a Problem<br>
-        Terms & Policies<br>
-        Logout({{ a.philgo.myName() }})
+  <div class="bottom-dark-menu p-3">
+    <div class="search d-flex">
+      <app-logo></app-logo>
+      <input class="flex-grow-1 fs-md mx-1 border-0">
+      <button>Search</button>
+    </div>
+  
+    <div class="container-fluid my-2">
+      <div class="row">
+        <div class="col">
+          <a>Blogs</a>
+          <a>Help</a>
+          <a>Seetings & Privacy</a>
+          <a href="https://sonub.com" (click)=" onClickSonub( $event ) ">Sonub</a>
+        </div>
+        <div class="col">
+          <a>Report a Problem</a>
+          <a>Terms & Policies</a>
+          <a>Logout({{ a.philgo.myName() }})</a>
+        </div>
       </div>
     </div>
+
+    <div>
+      <div class="p-2 border text-center pointer">Back To Top</div>
+    </div>
   </div>
-  <div>
-    <div class="mt-2 p-2 bg-dark white text-center">Back To Top</div>
-  </div>
+
 </section>

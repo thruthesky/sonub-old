@@ -1,0 +1,49 @@
+#footer{
+    padding-top: 2rem;
+    *{
+        box-sizing: border-box
+    }
+
+    .footer-advertisement{
+        // background: #ebedf0;
+        border-top: 1px solid #d0d1d5;
+    }
+
+    .bottom-dark-menu{
+        background-color: #444950;
+        color: #bec3c9;
+
+        .search{
+            padding: .2rem;
+            background: #d3d7dc;
+            input{
+                background: transparent;
+            }
+            button{
+                background-color: #4267b2;
+                // border: 1px solid #365899;
+                border: 0;
+                border-radius: 2px;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+
+
+        .container-fluid{
+            .col{
+                padding: 0;
+                a{
+                    display: block;
+                    padding: .1rem .2rem;
+                    color: inherit;
+                    cursor: pointer;
+                    &:hover{
+                        background-color: #bec3c9;
+                        color: #000;
+                    }
+                }
+            }
+        }
+    }
+}
