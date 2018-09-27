@@ -2,11 +2,11 @@
   <div class="header-inner">
 
     <div class="left pl-1">
-        <a class="letter-logo" routerLink="/">S</a>
-        <div class="searchbar">
-          <input placeholder="Search">
-          <i class="searchbar-button material-icons">search</i>
-        </div>
+      <a class="letter-logo" routerLink="/">S</a>
+      <div class="searchbar">
+        <input placeholder="Search">
+        <i class="searchbar-button material-icons">search</i>
+      </div>
     </div>
 
     <div class="right">
@@ -15,7 +15,7 @@
         {{ a.myName }}
       </a>
 
-      <a href="{{ a.myBlogUrl }}" *ngIf=" ! a.inMyBlog ">My Blog</a>
+      <span (click)=" a.openMyBlog() " *ngIf=" ! a.inMyBlog ">My Blog</span>
       <a routerLink="{{ a.getBlogPostCreateUrl() }}">Create</a>
 
       <i class="material-icons">

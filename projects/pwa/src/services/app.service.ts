@@ -419,10 +419,17 @@ export class AppService {
     window.location.href = this.urlRootSite;
   }
   openMyBlog() {
-    if (this.inMyBlog) {
-      this.router.navigateByUrl('/');
+    if (this.loggedOut) {
+      this.toast(this.t({
+        en: 'Please login to see your blog. If you regiter, you will have a blog.',
+        ko: '로그인을 하셔야 블로그를 볼 수 있습니다. 회원 가입하시면 자동으로 블로그가 생깁니다.'
+      }));
     } else {
-      window.location.href = this.myBlogUrl;
+      if (this.inMyBlog) {
+        this.router.navigateByUrl('/');
+      } else {
+        window.location.href = this.myBlogUrl;
+      }
     }
   }
   openBlogSettings() {
@@ -456,7 +463,7 @@ export class AppService {
       } else {
         return `/forum/${post.post_id}/${post.idx}/${post.subject}`;
       }
-    } if (post.post_id === 'blog' && post['blog'] ) {
+    } if (post.post_id === 'blog' && post['blog']) {
       return this.getUrlBlogViewList(post);
     } else {
       return `/forum/${post.post_id}/${post.idx}/${post.subject}`;
