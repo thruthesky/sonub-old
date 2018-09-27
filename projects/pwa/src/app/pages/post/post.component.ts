@@ -126,6 +126,8 @@ export class PostComponent implements OnInit, AfterViewInit {
       if (!this.form.post_id) {
         this.a.toast(`Forum ID is empty.`);
       }
+      this.form.group_id = this.a.groupId;
+      console.log('post create from: ', this.form);
       this.philgo.postCreate(this.form).subscribe(res => {
         console.log('create res: ', res);
         // this.a.openHome();

@@ -126,6 +126,12 @@ export class AppService {
   // app root domain
   appRootDomain = APP_ROOT_DOMAIN;
 
+  /**
+   * app group id for philgo api.
+   * All posts will be created with this group id.
+   */
+  groupId = 'sonub';
+
 
   /**
    * 'blog' has the settings of current blog site.

@@ -170,6 +170,12 @@
                   "replace": "projects/pwa/src/environments/environment.ts",
                   "with": "projects/pwa/src/environments/environment.local.ts"
                 }]
+            },
+            "live": {
+              "fileReplacements": [{
+                  "replace": "projects/pwa/src/environments/environment.ts",
+                  "with": "projects/pwa/src/environments/environment.prod.ts"
+                }]
             }
           }
         },
@@ -184,6 +190,9 @@
             },
             "local": {
               "browserTarget": "pwa:build:local"
+            },
+            "live": {
+              "browserTarget": "pwa:build:live"
             }
           }
         },
