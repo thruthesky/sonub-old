@@ -32,10 +32,12 @@
 ### Serving with test domains and ssl
 
 * sample domains to test subdomains.
+  You must use only these domains as blog domains or the webbrowser will redirect you to reall server and that will cause accessing real site. Not the dev server.
 
 ```` text
 127.0.0.1       sonub.com
 127.0.0.1       www.sonub.com
+127.0.0.1       testuser.sonub.com
 127.0.0.1       thruthesky.sonub.com
 127.0.0.1       dev.sonub.com
 127.0.0.1       xxx.sonub.com
@@ -151,6 +153,8 @@
 * User can post without login.
   When user creates a post with email and passowrd, he will be automatically registered and blog will be created for him.
 * Or user can register and a blog will be automatically created.
+* Or simply when user login and gets 'user profile data' from server, the server creates user blog already.
+  So, user's blog is really ready when user clicks on 'my blog' button.
 
 ## How to use blog
 

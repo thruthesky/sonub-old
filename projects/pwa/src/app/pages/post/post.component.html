@@ -28,7 +28,7 @@
   <!-- <ng-simple-editor #editor [icons]="true" [init]="{ cursor: true }" (change)=" onChangeContent( $event ) "></ng-simple-editor> -->
   <ckeditor class='ckeditor' [editor]="Editor" [(ngModel)]=" form.content " (change)="onChangeContent( $event )"
     [config]="{
-    ckfinder: {uploadUrl: philgo.getServerRootUrl() + 'etc/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json' }
+    ckfinder: {uploadUrl: philgo.getFileServerRootUrl() + 'etc/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json' }
   }"></ckeditor>
 
   <div class="mt-1">

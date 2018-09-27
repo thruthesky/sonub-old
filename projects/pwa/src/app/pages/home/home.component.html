@@ -4,13 +4,6 @@
     <app-request-push-notification></app-request-push-notification>
     
     
-    <!-- <div class="" *ngIf=" ! a.inMyBlog ">
-      Blog Owner: {{ a.blog?.owner }}
-      <a class="link" href="{{ a.myBlogUrl }}">My blog</a>
-      Your blog: <a class="link" href="{{ a.myBlogUrl }}">{{ a.myBlogUrl }}</a> (<a class="link" href="{{ a.myBlogUrl }}/blog/settings">change</a>)
-    </div> -->
-    
-    
     
     
     <div class="text-editor mt-3" routerLink="{{ a.getBlogPostCreateUrl() }}" *ngIf=" a.inRootSite ">
@@ -19,12 +12,6 @@
         What's your story? ---- Text Animation with Hot topics
       </div>
     </div>
-    
-    
-    <!-- <div class="stats py-2">
-      <div>Sonub Version: {{ a.frontPage.info.version }}</div>
-      <div>My blog posts: {{ a.frontPage.no_of_my_blog_posts }}</div>
-    </div> -->
     
     <!-- show only on rooe site -->
     <section *ngIf=" a.inRootSite ">
@@ -46,15 +33,37 @@
         <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
       </div>
     
-      <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPosts?.length">
+      <div class="community-photos w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPosts?.length">
         <div class="row no-gutters">
           <div class="col" *ngFor="let post of a.frontPage.communityPosts">
             <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
           </div>
         </div>
       </div>
-      <!--/community-posts-->
+      <!--/community-photos-->
     
+      <section class="community-posts">
+        <div class="row">
+          <div class="col">
+            <h4>Discussion subject 1</h4>
+            <h4>Discussion subject 1</h4>
+          </div>
+          <div class="col">
+            <h4>QnA subject 1</h4>
+            <h4>QnA subject 1</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h4>Jobs subject 1</h4>
+            <h4>Jobs subject 1</h4>
+          </div>
+          <div class="col">
+            <h4>Buy & Sell subject 1</h4>
+            <h4>Buy & Sell subject 1</h4>
+          </div>
+        </div>
+      </section>
     
     
       <div *ngIf=" a.frontPage?.news?.length ">
