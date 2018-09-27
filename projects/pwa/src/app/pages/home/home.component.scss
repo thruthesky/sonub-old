@@ -1,38 +1,48 @@
 @import './../../../styles/variables.scss';
-#home{
-   margin-top: -1rem;
+
+/** This is mitake. It is hiding blog categories menu on desktop.
+ * @see coding guide line.
+#home {
+  margin-top: -1rem;
 }
-*{
-    box-sizing: border-box;
+*/
+
+/** This is a big mistake. Never use global '*' since it will affect all the element in DOM ( or Shadow DOM )
+* {
+  box-sizing: border-box;
+}
+*/
+
+.community-posts {
+  font-size: .85rem;
+
+  .row {
+    margin: 0 -.25em;
+
+    .text {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
 }
 
-.community-posts{
+.text-editor {
+  display: flex;
+  align-items: center;
+
+  .editor {
+    flex: 1;
+    padding: .5rem .5rem 1rem;
+    // border: 1px solid #dddfe2;
+    border: 1px solid #d1d2d5;
+    background: #fff;
     font-size: .85rem;
-    .row{
-        margin: 0 -.25em;
-        .text{
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-    }
+  }
 }
 
-.text-editor{
-    display: flex;
-    align-items: center;
-    .editor{
-        flex:1;
-        padding: .5rem .5rem 1rem ;
-        // border: 1px solid #dddfe2;
-        border: 1px solid #d1d2d5;
-        background: #fff;
-        font-size: .85rem;
-    }
-}
-
-.stats{
-    display: flex;
-    justify-content: space-between;
-    font-size: .9rem;
+.stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: .9rem;
 }

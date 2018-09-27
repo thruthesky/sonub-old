@@ -2,12 +2,6 @@
 
   <app-avatar *ngIf=" philgo.isLoggedIn() "></app-avatar>
   <section class="d-md-flex mb-1" *ngIf="philgo.isLoggedOut() ">
-<!-- 
-    <mat-form-field>
-      <input matInput placeholder="Name" name="name" [(ngModel)]=" form.user_name " (keyup)="onSubjectKeyUp()">
-      <mat-hint>Name</mat-hint>
-    </mat-form-field> -->
-
 
     <mat-form-field class="w-100 mr-md-3">
       <input matInput type="email" placeholder="Email" name="email" [(ngModel)]=" form.user_email " (keyup)="onSubjectKeyUp()">
@@ -25,7 +19,6 @@
 
   <div class="my-3 text-primary">Posting on {{ form.post_id }}</div>
 
-  <!-- <ng-simple-editor #editor [icons]="true" [init]="{ cursor: true }" (change)=" onChangeContent( $event ) "></ng-simple-editor> -->
   <ckeditor class='ckeditor' [editor]="Editor" [(ngModel)]=" form.content " (change)="onChangeContent( $event )"
     [config]="{
     ckfinder: {uploadUrl: philgo.getFileServerRootUrl() + 'etc/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json' }
@@ -40,23 +33,13 @@
     </mat-form-field>
 
   </div>
-  <!-- <div class="mt-1">
-    <app-display-files [edit]=" true " [post]=" form " [percentage]=" percentage "></app-display-files>
-  </div> -->
+
 
   <div class="mt-1 text-center">
-
-    <!-- <button mat-flat-button class="transparent-cover-wrapper">
-      <input class="transparent-cover pointer" type="file" name="file" (change)="onChangeFile($event)">
-      <div>Photo Upload</div>
-    </button> -->
-
     <button class="px-5 mt-4 my-md-3" mat-flat-button (click)=" onSubmit() ">
       <span class="mr-2">{{ a.t({ en: 'SUBMIT', ko: '글 등록'}) }}</span>
       <i class="material-icons">send</i>
     </button>
-
-
   </div>
 
 </section>
