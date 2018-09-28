@@ -8,6 +8,7 @@ import { AppService } from '../../../services/app.service';
 })
 export class JobComponent implements OnInit {
 
+  category = '';
   constructor(
     public a: AppService
   ) { }
