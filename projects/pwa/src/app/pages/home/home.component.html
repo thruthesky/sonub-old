@@ -34,9 +34,9 @@
         <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
       </div>
     
-      <div class="community-photos w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPosts?.length">
+      <div class="community-photos w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPhotos?.length">
         <div class="row no-gutters">
-          <div class="col" *ngFor="let post of a.frontPage.communityPosts">
+          <div class="col" *ngFor="let post of a.frontPage.communityPhotos">
             <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
           </div>
         </div>
@@ -111,9 +111,9 @@
         [more ...]
       </div>
     
-      <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPosts?.length">
+      <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPhotos?.length">
         <div class="row no-gutters">
-          <div class="col" *ngFor="let post of a.frontPage.communityPosts">
+          <div class="col" *ngFor="let post of a.frontPage.communityPhotos">
             <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
           </div>
         </div>
