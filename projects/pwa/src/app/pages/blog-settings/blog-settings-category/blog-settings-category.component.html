@@ -1,0 +1,27 @@
+<mat-toolbar>
+  <h1>Blog Category Settings</h1>
+  <span class="flex-grow-1"></span>
+  <button mat-button (click)=" a.openMyBlog() ">My blog</button>
+</mat-toolbar>
+
+
+<form (ngSubmit)=" onSubmit( $event ) " class="blog-settings-form">
+
+
+  <div class="list-row">
+    <h3>Category Settings</h3>
+
+    <div *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]">
+      <mat-form-field class="w-100">
+        <input matInput name="category{{ n }}" [(ngModel)]=" blog['category' + n] " placeholder="Category No. {{ n }} Name">
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div class="list-row">
+    <button mat-flat-button type="submit">Submit</button>
+    <button mat-flat-button type="button" routerLink="/blog">Cancel</button>
+  </div>
+
+</form>

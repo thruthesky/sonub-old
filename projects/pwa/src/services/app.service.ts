@@ -138,6 +138,10 @@ export class AppService {
    * 현재 접속 중인 블로그의 정보를 가지고 있다.
    */
   blog: ApiBlogSettings = null;
+  /**
+   * Max no of blog categories
+   */
+  blogMaxNoOfCategories = 8;
 
 
   /**
@@ -149,7 +153,7 @@ export class AppService {
   QNA = 'answer';
   NEWS = 'media';
   BUYANDSELL = 'market';
-  MANAGEMENT = 'sonub_management';
+  HELP = 'sonub_help';
 
 
   /**
@@ -433,7 +437,7 @@ export class AppService {
     }
   }
   openBlogSettings() {
-    this.router.navigateByUrl('/blog-settings');
+    this.router.navigateByUrl( this.getBlogSettingsUrl() );
   }
   openForum(post_id: string) {
     if (post_id === 'blog') {
@@ -443,6 +447,16 @@ export class AppService {
     }
   }
 
+
+  /**
+   * @desc All blog settings url needs the user to be his blog site.
+   */
+  getBlogSettingsUrl(): string {
+    return '/blog-settings';
+  }
+  getBlogSettingsCategoryUrl(): string {
+    return this.getBlogSettingsUrl() + '/category';
+  }
 
   getBlogPostCreateUrl() {
     return `/post/blog`;
@@ -475,6 +489,15 @@ export class AppService {
    */
   getUrlPostView(post: ApiPost): string {
     return this.getPostViewUrl(post);
+  }
+
+  /**
+   * returns url of the access code
+   * @param post_id post id
+   * @param code access code
+   */
+  getUrlPostViewByAccessCode(post_id: string, code: string) {
+    return `/forum/${post_id}/${code}`;
   }
 
   openPostView(post: ApiPost, event?: Event) {
@@ -723,5 +746,34 @@ export class AppService {
     });
   }
 
+
+  /**
+   * Returns categories array of string of current blog.
+   *
+   * @returns Array of string of the categories
+   *  or empty array if there is no category.
+   *
+   * @warning This can not be binded nor return reference.
+   * blog.categories may not have value by the time you call it.
+   * To be sure, use this.blog.categories.
+   */
+  blogCategories(): Array<string> {
+    if ( this.blog && this.blog.categories && this.blog.categories.length ) {
+      return this.blog.categories;
+    } else {
+      return [];
+    }
+  }
+
+  /**
+   * Returns no of categories of current blog.
+   */
+  blogNoOfCategories(): number {
+    if ( this.blog && this.blog.no_of_categories ) {
+      return _.parseNumber(this.blog.no_of_categories);
+    } else {
+      return 0;
+    }
+  }
 
 }

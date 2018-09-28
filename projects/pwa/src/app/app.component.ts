@@ -30,7 +30,7 @@ export class AppComponent {
     this.observeRightSidebarScroll();
     this.observeWindowResize();
 
-    console.log(' birth year: ', a.philgo.myGender());
+    console.log('is Admin: ', a.philgo.isAdmin());
 
   }
   @HostListener('window:resize', ['$event']) onresize(event: Event) {
