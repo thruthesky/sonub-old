@@ -1,0 +1,25 @@
+<mat-toolbar>
+    <h1>Blog Domain Settings</h1>
+  </mat-toolbar>
+  
+  
+  <form (ngSubmit)=" onSubmit( $event ) " class="blog-settings-form">
+  
+    <div class="list-row">
+      https://
+      <mat-form-field>
+        <input matInput name="domain" [(ngModel)]=" blog.domain " placeholder="Your domain">
+      </mat-form-field>
+      .sonub.com
+      <div>
+        Becareful when you change your domain. you will loose all your backlinks.
+      </div>
+    </div>
+  
+    <div class="list-row">
+      <button mat-flat-button type="submit">Submit</button>
+      <button mat-flat-button type="button" routerLink="/blog">Cancel</button>
+    </div>
+  
+  </form>
+

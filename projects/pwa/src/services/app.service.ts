@@ -318,6 +318,9 @@ export class AppService {
       if (!blog) {
         return;
       }
+      /**
+       * @desc call by reference
+       */
       this.blog = blog;
       /**
        * Store categories in an array for easy use.
@@ -456,6 +459,13 @@ export class AppService {
   }
   getBlogSettingsCategoryUrl(): string {
     return this.getBlogSettingsUrl() + '/category';
+  }
+  getBlogSettingsBasicUrl(): string {
+    return this.getBlogSettingsUrl() + '/basic';
+  }
+
+  getBlogSettingsDomainUrl(): string {
+    return this.getBlogSettingsUrl() + '/domain';
   }
 
   getBlogPostCreateUrl() {

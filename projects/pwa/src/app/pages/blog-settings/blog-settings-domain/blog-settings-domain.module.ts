@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BlogSettingsCategoryComponent } from './blog-settings-category.component';
+import { BlogSettingsDomainComponent } from './blog-settings-domain.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
@@ -9,21 +9,20 @@ import { FormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: '',
-    component: BlogSettingsCategoryComponent
+    component: BlogSettingsDomainComponent
   }
 ];
-
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     RouterModule.forChild(routes),
+    FormsModule,
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule
   ],
-  declarations: [BlogSettingsCategoryComponent]
+  declarations: [BlogSettingsDomainComponent]
 })
-export class BlogSettingsCategoryModule { }
+export class BlogSettingsDomainModule { }

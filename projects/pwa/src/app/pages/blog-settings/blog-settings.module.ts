@@ -20,10 +20,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes),
     MatListModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule
+    MatToolbarModule
   ],
   declarations: [BlogSettingsComponent]
 })
