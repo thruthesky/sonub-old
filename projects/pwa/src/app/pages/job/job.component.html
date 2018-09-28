@@ -1,4 +1,4 @@
-I am looking for <select name="category">
+I am looking for <select name="category" [(ngModel)]="category">
     <option value=''>Choose Occupation</option>
     <option value="housemaid">Housemaid</option>
     <option value="driver">Driver</option>
@@ -7,4 +7,4 @@ I am looking for <select name="category">
 </select>
 Or <button routerLink="/job-post">apply</button> for a job.
 
-<app-job-list-component [group_id]=" a.groupId "></app-job-list-component>
+<app-job-list-component [group_id]=" a.groupId " [category]=" category "></app-job-list-component>
