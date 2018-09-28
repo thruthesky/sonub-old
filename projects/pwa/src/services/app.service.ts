@@ -470,6 +470,15 @@ export class AppService {
   getBlogSettingsDomainUrl(): string {
     return this.getBlogSettingsUrl() + '/domain';
   }
+  getBlogStatVisitorUrl(): string {
+    return '/blog-stat/visitor';
+  }
+  getBlogNewCommentsUrl() {
+    return '/blog-new-comments';
+  }
+  getBlogNewEventsUrl() {
+    return '/blog-new-events';
+  }
 
   getBlogPostCreateUrl() {
     return `/post/blog`;
