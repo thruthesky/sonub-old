@@ -71,7 +71,7 @@ export class BlogListComponent implements OnInit, AfterViewInit, OnDestroy {
            * If `this.forumLoaded` is false, it means, blog has not loaded yet.
            * So, blog is not changed but first loaded.
            */
-          if ( this.forumLoaded ) {
+          if (this.forumLoaded) {
             console.log('=====> category changed: ', route, this.category);
             this.initBlogPageLoad();
           } else {
@@ -109,7 +109,12 @@ export class BlogListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.forumLoaded = false;
     this.activatedRoute.paramMap.subscribe(params => {
       this.idxView = params.get('idx');
-      this.category = params.get('blog_category');
+      const cat = params.get('blog_category');
+      if (cat === 'all') {
+        this.category = '';
+      } else {
+        this.category = cat;
+      }
       if (this.a.postInMemory && this.a.postInMemory.idx === this.idxView) {
         console.log('Got post from memory');
         this.postView = this.a.postInMemory;

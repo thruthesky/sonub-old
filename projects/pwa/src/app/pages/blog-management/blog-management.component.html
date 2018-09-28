@@ -1,0 +1,22 @@
+<mat-list>
+  <h3 matSubheader>Blog Settings</h3>
+
+  <mat-list-item routerLink="{{ a.getBlogSettingsBasicUrl() }}">
+    <i class="material-icons">
+      crop_original
+    </i>
+    <h4 matLine>Blog Basic Information</h4>
+  </mat-list-item>
+  <mat-list-item  routerLink="{{ a.getBlogSettingsDomainUrl() }}">
+    <i class="material-icons">
+      crop_original
+    </i>
+    <h4 matLine>Change Your Blog Domain</h4>
+  </mat-list-item>
+
+  <mat-list-item routerLink="{{ a.getBlogSettingsCategoryUrl() }}">
+    <i class="material-icons">chat</i>
+    <h4 matLine>Blog Categories</h4>
+  </mat-list-item>
+
+</mat-list>

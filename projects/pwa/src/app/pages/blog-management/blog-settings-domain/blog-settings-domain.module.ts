@@ -1,29 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BlogSettingsComponent } from './blog-settings.component';
+import { BlogSettingsDomainComponent } from './blog-settings-domain.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule } from '@angular/material';
+import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: BlogSettingsComponent
+    component: BlogSettingsDomainComponent
   }
 ];
-
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     RouterModule.forChild(routes),
+    FormsModule,
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule
   ],
-  declarations: [BlogSettingsComponent]
+  declarations: [BlogSettingsDomainComponent]
 })
-export class BlogSettingsModule { }
+export class BlogSettingsDomainModule { }

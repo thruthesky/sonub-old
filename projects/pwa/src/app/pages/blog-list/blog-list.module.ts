@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BlogListComponent } from './blog-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BlogViewModule } from '../../components/blog-view/blog-view.module';
-import { BlogCategoryMenuModule } from '../../components/blog-category-menu/blog-category-menu.module';
+import { BlogCategoryTopMenuModule } from '../../components/blog-category-top-menu/blog-category-top-menu.module';
 
 
 
@@ -19,7 +19,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild( routes ),
     BlogViewModule,
-    BlogCategoryMenuModule
+    BlogCategoryTopMenuModule
   ],
   declarations: [BlogListComponent]
 })

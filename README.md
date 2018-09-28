@@ -184,3 +184,9 @@ This is wrong because it makes difficult to understand template design. In fact,
 ## How to use blog
 
 * [Sonub management - Blog settings](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.r3epipx47iam)
+
+## Case study
+
+### User asks why he doesn't see his blog contents on his site
+
+* Answer: It's not his blog. The user may be changed domain and he forget to visit his new domain.

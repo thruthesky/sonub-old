@@ -33,21 +33,31 @@ const routes: Routes = [
     // blog post view. Single post view only. a.getUrlBlogView()
     { path: 'bv/:idx/:subject', loadChildren: './pages/blog-view/blog-view.module#BlogViewPageModule' },
 
-
-
-    // no use
-    // { path: 'blog/:blog_domain', loadChildren: './pages/blog/blog.module#BlogModule' },
-
     // blog settings. Domain is not required since user can only enter blog settings pages only under his domain.
-    { path: 'blog-settings', loadChildren: './pages/blog-settings/blog-settings.module#BlogSettingsModule' },
+    {
+        path: 'blog-management',
+        loadChildren: './pages/blog-management/blog-management.module#BlogManagementModule'
+    },
+    {
+        path: 'blog-settings/basic',
+        loadChildren: './pages/blog-management/blog-settings-basic/blog-settings-basic.module#BlogSettingsBasicModule'
+    },
+    {
+        path: 'blog-settings/category',
+        loadChildren: './pages/blog-management/blog-settings-category/blog-settings-category.module#BlogSettingsCategoryModule'
+    },
 
-    // { path: 'b/:idx/:subject', loadChildren: './pages/blog-view/blog-view.module#BlogViewModule' },
+    {
+        path: 'blog-settings/domain',
+        loadChildren: './pages/blog-management/blog-settings-domain/blog-settings-domain.module#BlogSettingsDomainModule'
+    },
 
     // blog main page. blog portal. all blogs content. This is for root site only.
     { path: 'blog', loadChildren: './pages/blog-main/blog-main.module#BlogMainModule' },
 
     { path: 'job', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job-post', loadChildren: './pages/job-post/job-post.module#JobPostModule' },
+    { path: 'job-post/:idx', loadChildren: './pages/job-post/job-post.module#JobPostModule' },
     { path: 'job/:category', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job/:category/:idx', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job/:category/:idx/:subject', loadChildren: './pages/job/job.module#JobModule' },
