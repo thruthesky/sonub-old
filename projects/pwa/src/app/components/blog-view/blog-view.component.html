@@ -11,6 +11,7 @@
       <div class="fs-sm">
         <span class="mr-3 darkgreen" *ngIf=" post?.member "> {{ post?.member?.nickname }}</span>
         <span>Date: {{ philgo.shortDate(post.stamp ) }}</span>
+        <span class="pl-2">[{{ post.category }}]</span>
       </div>
     </div>
   </div>

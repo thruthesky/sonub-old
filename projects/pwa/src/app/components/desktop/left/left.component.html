@@ -61,7 +61,9 @@
     <ul>
       <li *ngFor=" let category of  a.blog.categories " routerLink="{{ a.getBlogCategoryUrl(category) }}">{{ category
         }}</li>
+        <li routerLink="{{ a.getBlogCategoryUrl( 'all' ) }}">All posts</li>
     </ul>
+    
   </div>
 
   <div>
@@ -73,9 +75,6 @@
       <li routerLink="{{ a.getBlogSettingsUrl() }}">Blog settings</li>
       <li routerLink="{{ a.getBlogSettingsCategoryUrl() }}">Categories</li>
       <li>Statistics</li>
-      <li>Reactions</li>
-      <li>Themese</li>
-      <li>Widgets</li>
     </ul>
   </section>
 
