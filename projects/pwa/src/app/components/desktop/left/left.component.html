@@ -51,36 +51,30 @@
   </section>
 
 </section>
+<!--/inRoot-->
 
 <section class="user-content" *ngIf=" a.inBlogSite ">
-  <div>
-    Blog Category 1<br>
-    Blog Category 2<br>
-    Blog Category 3<br>
-    Blog Category 4<br>
-    Blog Category 5<br>
-  </div>
-  <div>
-    Your site: xxx.sonub.com
+  <div class="side-menu" *ngIf=" a.blog?.categories?.length ">
+    <ul>
+      <li *ngFor=" let category of  a.blog.categories " routerLink="{{ a.getBlogCategoryUrl(category) }}">{{ category
+        }}</li>
+    </ul>
   </div>
 
   <div>
-    Comments, Likes
-  </div>
-  <div>
-    Post | Settings | Stat<br>
-    Manage Blog Caetgores<br>
-    Themes and widgets<br>
-    Friends<br>
-    Blocked users, Who can comments,<br>
   </div>
 
   <section class="side-menu blog-site-content" *ngIf=" a.inBlogSite ">
     <header>Blog Managment</header>
     <ul>
+      <li routerLink="{{ a.getBlogSettingsUrl() }}">Blog settings</li>
+      <li>Categories</li>
       <li>Statistics</li>
-      <li>Google Analystics</li>
+      <li>Reactions</li>
+      <li>Themese</li>
+      <li>Widgets</li>
     </ul>
   </section>
+
 
 </section>

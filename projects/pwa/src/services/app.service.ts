@@ -433,7 +433,7 @@ export class AppService {
     }
   }
   openBlogSettings() {
-    this.router.navigateByUrl('/blog-settings');
+    this.router.navigateByUrl( this.getBlogSettingsUrl() );
   }
   openForum(post_id: string) {
     if (post_id === 'blog') {
@@ -443,6 +443,13 @@ export class AppService {
     }
   }
 
+
+  /**
+   * @desc All blog settings url needs the user to be his blog site.
+   */
+  getBlogSettingsUrl(): string {
+    return '/blog-settings';
+  }
 
   getBlogPostCreateUrl() {
     return `/post/blog`;
@@ -732,5 +739,34 @@ export class AppService {
     });
   }
 
+
+  /**
+   * Returns categories array of string of current blog.
+   *
+   * @returns Array of string of the categories
+   *  or empty array if there is no category.
+   *
+   * @warning This can not be binded nor return reference.
+   * blog.categories may not have value by the time you call it.
+   * To be sure, use this.blog.categories.
+   */
+  blogCategories(): Array<string> {
+    if ( this.blog && this.blog.categories && this.blog.categories.length ) {
+      return this.blog.categories;
+    } else {
+      return [];
+    }
+  }
+
+  /**
+   * Returns no of categories of current blog.
+   */
+  blogNoOfCategories(): number {
+    if ( this.blog && this.blog.no_of_categories ) {
+      return _.parseNumber(this.blog.no_of_categories);
+    } else {
+      return 0;
+    }
+  }
 
 }

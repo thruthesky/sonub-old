@@ -3,9 +3,10 @@
 /** This is mitake. It is hiding blog categories menu on desktop.
  * @see design guide line.
 #home {
-  margin-top: -1rem;
-}
+    margin-top: -1rem;
+  }
 */
+
 
 /** This is a big mistake. Never use global '*' since it will affect all the element in DOM ( or Shadow DOM )
 * {

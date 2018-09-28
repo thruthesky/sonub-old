@@ -1,4 +1,4 @@
-<div *ngIf=" a.isMobile && a.inBlogSite && a.blog?.no_of_categories ">
+<div *ngIf=" a.blog?.categories?.length ">
 
   <div class="row fs-sm">
     <ng-container *ngIf=" a.blog.categories.length < 5 ">
@@ -34,10 +34,10 @@
 </div>
 
 
-<div *ngIf=" a.isDesktop && a.inBlogSite && a.blog?.no_of_categories ">
+<!-- <div *ngIf=" a.isDesktop && a.blog?.no_of_categories ">
   <div class="d-flex justify-content-between fs-sm">
     <a class="py-2 bg-dark-1" *ngFor="let n of a.blog.categories" routerLink="{{ a.getBlogCategoryUrl(n) }}">
       {{ n }}
     </a>
   </div>
-</div>
+</div> -->
