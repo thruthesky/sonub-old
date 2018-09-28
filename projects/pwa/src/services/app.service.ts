@@ -452,8 +452,11 @@ export class AppService {
 
 
   /**
-   * @desc All blog settings url needs the user to be his blog site.
+   * @desc All blog managements & settings url need the user to be his blog site.
    */
+  getBlogManagementUrl(): string {
+    return '/blog-management';
+  }
   getBlogSettingsUrl(): string {
     return '/blog-settings';
   }

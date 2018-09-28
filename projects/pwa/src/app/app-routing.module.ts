@@ -34,19 +34,22 @@ const routes: Routes = [
     { path: 'bv/:idx/:subject', loadChildren: './pages/blog-view/blog-view.module#BlogViewPageModule' },
 
     // blog settings. Domain is not required since user can only enter blog settings pages only under his domain.
-    { path: 'blog-settings', loadChildren: './pages/blog-settings/blog-settings.module#BlogSettingsModule' },
+    {
+        path: 'blog-management',
+        loadChildren: './pages/blog-management/blog-management.module#BlogManagementModule'
+    },
     {
         path: 'blog-settings/basic',
-        loadChildren: './pages/blog-settings/blog-settings-basic/blog-settings-basic.module#BlogSettingsBasicModule'
+        loadChildren: './pages/blog-management/blog-settings-basic/blog-settings-basic.module#BlogSettingsBasicModule'
     },
     {
         path: 'blog-settings/category',
-        loadChildren: './pages/blog-settings/blog-settings-category/blog-settings-category.module#BlogSettingsCategoryModule'
+        loadChildren: './pages/blog-management/blog-settings-category/blog-settings-category.module#BlogSettingsCategoryModule'
     },
 
     {
         path: 'blog-settings/domain',
-        loadChildren: './pages/blog-settings/blog-settings-domain/blog-settings-domain.module#BlogSettingsDomainModule'
+        loadChildren: './pages/blog-management/blog-settings-domain/blog-settings-domain.module#BlogSettingsDomainModule'
     },
 
     // blog main page. blog portal. all blogs content. This is for root site only.

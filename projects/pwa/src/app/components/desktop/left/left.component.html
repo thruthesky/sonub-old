@@ -70,9 +70,9 @@
   </div>
 
   <section class="side-menu blog-site-content" *ngIf=" a.inBlogSite ">
-    <header>Blog Managment</header>
+    <header routerLink="{{ a.getBlogManagementUrl() }}">Blog Managment</header>
     <ul>
-      <li routerLink="{{ a.getBlogSettingsUrl() }}">Blog settings</li>
+      <li routerLink="{{ a.getBlogManagementUrl() }}">Blog dashboard</li>
       <li routerLink="{{ a.getBlogSettingsCategoryUrl() }}">Categories</li>
       <li>Statistics</li>
     </ul>

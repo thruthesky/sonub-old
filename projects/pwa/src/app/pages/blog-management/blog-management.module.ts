@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BlogSettingsComponent } from './blog-settings.component';
+import { BlogManagementComponent } from './blog-management.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatListModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: BlogSettingsComponent
+    component: BlogManagementComponent
   }
 ];
 
@@ -22,6 +22,6 @@ const routes: Routes = [
     MatListModule,
     MatToolbarModule
   ],
-  declarations: [BlogSettingsComponent]
+  declarations: [BlogManagementComponent]
 })
-export class BlogSettingsModule { }
+export class BlogManagementModule { }

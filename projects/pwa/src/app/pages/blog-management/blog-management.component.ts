@@ -3,11 +3,11 @@ import { AppService } from '../../../services/app.service';
 import { PhilGoApiService, ApiBlogSettings } from 'share/philgo-api/philgo-api.service';
 
 @Component({
-  selector: 'app-blog-settings',
-  templateUrl: './blog-settings.component.html',
-  styleUrls: ['./blog-settings.component.scss']
+  selector: 'app-blog-management',
+  templateUrl: './blog-management.component.html',
+  styleUrls: ['./blog-management.component.scss']
 })
-export class BlogSettingsComponent implements OnInit {
+export class BlogManagementComponent implements OnInit {
 
   blog: ApiBlogSettings = <any>{};
   constructor(
@@ -21,7 +21,6 @@ export class BlogSettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   onSubmit($event: Event) {
