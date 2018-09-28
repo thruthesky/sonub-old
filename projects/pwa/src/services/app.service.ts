@@ -4,7 +4,7 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 // import { ERROR_WRONG_IDX_MEMBER, ERROR_WRONG_SESSION_ID } from '../../../../share/philgo-api/philgo-api.service';
 
 import { SimpleLibrary as _ } from 'ng-simple-library';
-import { ApiPost, PhilGoApiService, USER_LOGIN_SESSION_INFO, ApiBlogSettings, ApiError } from 'share/philgo-api/philgo-api.service';
+import { ApiPost, PhilGoApiService, ApiBlogSettings, ApiError } from 'share/philgo-api/philgo-api.service';
 
 
 import * as firebase from 'firebase/app';
@@ -14,6 +14,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie';
+
+import * as io from 'socket.io-client';
+const socket = io('http://localhost:8080');
+
 
 
 
@@ -189,6 +193,7 @@ export class AppService {
     this.initUserInformationChangeEvent();
     // this.initCookieLogin();
     this.initBlog();
+    this.initLog();
   }
 
   initLanguage() {
@@ -231,6 +236,7 @@ export class AppService {
       } else if (e instanceof NavigationEnd) {
         this.route = this.router.url;
         this.routeChange.next(this.route);
+        this.log({ path: this.route });
       }
       /**
        * Scroll the page to the top after transitioning into another page.
@@ -832,4 +838,15 @@ export class AppService {
     }
   }
 
+
+  initLog() {
+    socket.on('welcome', data => {
+      console.log('Connected to log server. Welcome data:', data);
+    });
+  }
+
+  log(options: { path: string }) {
+    // const str = JSON.stringify( options );
+    socket.emit('log', options);
+  }
 }
