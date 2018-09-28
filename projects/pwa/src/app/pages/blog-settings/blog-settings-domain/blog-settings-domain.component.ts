@@ -37,9 +37,9 @@ export class BlogSettingsDomainComponent implements OnInit {
       this.a.toast(this.a.t({ en: 'Blog domain settings have successfully updated.', ko: '블로그 도메인 설정을 저장하였습니다.' }));
       this.philgo.profile().subscribe(r => {
         console.log('blog save => user local storage updated to restore blog domain: ', r);
+        this.a.openMyBlog();
       });
     }, e => this.a.error(e));
-
 
     return false;
   }
