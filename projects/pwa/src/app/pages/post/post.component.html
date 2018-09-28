@@ -36,8 +36,21 @@
   </div>
 
 
-  <div class="my-2 text-center">
-    <button class="px-5 mt-4 my-md-1" mat-flat-button (click)=" onSubmit() ">
+  <div class="mt-1" *ngIf=" philgo.isAdmin() ">
+
+
+      <mat-form-field appearance="fill"  class="w-100">
+        <input class="w-100" matInput name="access_code" [(ngModel)]=" form.access_code " (keyup)="onSubjectKeyUp()">
+        <mat-label>Access Code</mat-label>
+        <!-- <mat-hint>Access Code</mat-hint> -->
+      </mat-form-field>
+  
+    </div>
+
+    
+
+  <div class="mt-1 text-center">
+    <button class="px-5 mt-4 my-md-3" mat-flat-button (click)=" onSubmit() ">
       <span class="mr-2">{{ a.t({ en: 'SUBMIT', ko: '글 등록'}) }}</span>
       <i class="material-icons">send</i>
     </button>
