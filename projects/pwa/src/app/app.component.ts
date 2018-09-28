@@ -30,7 +30,9 @@ export class AppComponent {
     this.observeRightSidebarScroll();
     this.observeWindowResize();
 
-    console.log('is Admin: ', a.philgo.isAdmin());
+    // console.log('is Admin: ', a.philgo.isAdmin());
+
+    // a.philgo.postLoad(1694).subscribe(p => console.log('p', p));
 
   }
   @HostListener('window:resize', ['$event']) onresize(event: Event) {

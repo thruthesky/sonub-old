@@ -99,6 +99,8 @@ This is wrong because it makes difficult to understand template design. In fact,
   * `sonub-help`
   on `sonub_help` forum. These posts will be linked to sonub site menu.
 
+* Set admin ids on PhilGo Admin Page.
+
 ## Life Cycle of Site
 
 ### Terms

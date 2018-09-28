@@ -27,7 +27,7 @@ interface Environment {
 }
 
 export interface FrontPage {
-  communityPosts: Array<ApiPost>;
+  communityPhotos: Array<ApiPost>;
   info: {
     version: string;
   };
