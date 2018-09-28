@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="post d-flex fs-sm" *ngFor="let post of a.frontPage.stories">
+    <div class="post d-flex pointer fs-sm" *ngFor="let post of a.frontPage.stories" (click)=" a.openBlogCategory( post.category, post.blog ) ">
       <div class="mt-1 p-1" style="border: 2px solid rgb(49, 114, 235);">
         <img class="d-block" src="{{ a.getPostPhotoUrl(post, 48, 48) }}">
       </div>

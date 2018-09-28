@@ -548,12 +548,23 @@ export class AppService {
 
   /**
    * Opens blog category under whatever blog domain.
-   * 현재 도메인내의 category 를 목록한다. 즉, 루트 도메인에서는 사용 할 수 없다.
+   *
+   * If the input blogDomain is not current blog domain, then it will reload the blog site.
+   * If the input blogDomain is same as current blog domain, then it will open the category page ( NOT reloading )
    *
    * @param categoryName category name
+   * @param blogDomain blog domain. If this is omitted, it assumes you are trying to open the category under current blog domain.
    */
-  openBlogCategory(categoryName) {
-    this.router.navigateByUrl(this.getBlogCategoryUrl(categoryName));
+  openBlogCategory(categoryName, blogDomain?) {
+    if (blogDomain) {
+      if (blogDomain === this.currentBlogDomain) {
+        this.router.navigateByUrl(this.getBlogCategoryUrl(categoryName));
+      } else {
+        window.location.href = this.getBlogCategoryUrl(categoryName, blogDomain);
+      }
+    } else {
+      this.router.navigateByUrl(this.getBlogCategoryUrl(categoryName));
+    }
   }
 
   /**
@@ -593,13 +604,20 @@ export class AppService {
   }
 
   /**
-   * Blog category list
+   * Blog category list of current domain.
+   * @desc You cannot link to other domain in Angular ( You can by hacking or using Angular router scheme. )
+   *      So, you cannot use this method to link other blog's category
+   *        though it returns the url of the blog's domain and category
+   *        it will not work because of 'base href'.
+   *      Use openBlogCategory() which can open a new blog domain
    * @param catgoryName blog category name
    */
-  getBlogCategoryUrl(catgoryName) {
-
-    // return `/redirect?url=` + encodeURIComponent(`/blog/${this.currentBlogDomain}/${name}`);
-    return `/blog/${this.currentBlogDomain}/${catgoryName}`;
+  getBlogCategoryUrl(catgoryName, blogDomain?) {
+    if (blogDomain) {
+      return this.getBlogDomainUrl(blogDomain) + `/blog/${blogDomain}/${catgoryName}`;
+    } else {
+      return `/blog/${this.currentBlogDomain}/${catgoryName}`;
+    }
   }
 
   getForumUrl(post_id) {
@@ -753,6 +771,19 @@ export class AppService {
       url += ':' + APP_PORT;
     }
 
+    return url;
+  }
+
+  /**
+   * Returns root url of the blog domain
+   * @param domain blog domain
+   */
+  getBlogDomainUrl(domain): string {
+    let url = '';
+    url = APP_PROTOCOL + domain + '.' + this.appRootDomain;
+    if (APP_PORT) {
+      url += ':' + APP_PORT;
+    }
     return url;
   }
 
