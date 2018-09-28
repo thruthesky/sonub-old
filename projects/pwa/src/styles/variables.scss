@@ -18,6 +18,7 @@ $spacing: 12px;
 
 .transparent-cover-wrapper {
     position: relative;
+    overflow: hidden;
 }
 .transparent-cover {
   position: absolute;

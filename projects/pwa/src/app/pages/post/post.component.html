@@ -1,35 +1,36 @@
-<section class="p-3 bg-white" page="post">
+<section class="p-4 bg-white" page="post">
 
   <app-avatar *ngIf=" philgo.isLoggedIn() "></app-avatar>
-  <section class="d-md-flex mb-1" *ngIf="philgo.isLoggedOut() ">
+  <section class="d-md-flex" *ngIf="philgo.isLoggedOut() ">
 
-    <mat-form-field class="w-100 mr-md-3">
-      <input matInput type="email" placeholder="Email" name="email" [(ngModel)]=" form.user_email " (keyup)="onSubjectKeyUp()">
-      <mat-hint>Email</mat-hint>
+    <mat-form-field appearance="fill" class="w-100 mr-md-3">
+      <input matInput type="email" name="email" [(ngModel)]=" form.user_email " (keyup)="onSubjectKeyUp()">
+      <mat-label>Email</mat-label>
     </mat-form-field>
 
 
-    <mat-form-field class="w-100 ml-md-3">
-      <input matInput type="password" placeholder="Password" name="password" [(ngModel)]=" form.user_password " (keyup)="onSubjectKeyUp()">
-      <mat-hint>Password</mat-hint>
+    <mat-form-field appearance="fill" class="w-100 ml-md-3">
+      <input matInput type="password" name="password" [(ngModel)]=" form.user_password " (keyup)="onSubjectKeyUp()">
+      <mat-label>Password</mat-label>
     </mat-form-field>
 
   </section>
 
 
-  <div class="my-3 text-primary">Posting on {{ form.post_id }}</div>
+  <div class="mb-3 text-primary">Posting on {{ form.post_id }}</div>
 
   <ckeditor class='ckeditor' [editor]="Editor" [(ngModel)]=" form.content " (change)="onChangeContent( $event )"
     [config]="{
     ckfinder: {uploadUrl: philgo.getFileServerRootUrl() + 'etc/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json' }
   }"></ckeditor>
 
-  <div class="mt-1">
+  <div class="mt-4">
 
 
-    <mat-form-field class="w-100">
-      <input class="w-100" matInput placeholder="Title" name="subject" [(ngModel)]=" form.subject " (keyup)="onSubjectKeyUp()">
-      <mat-hint>Please input title</mat-hint>
+    <mat-form-field appearance="fill" class="w-100">
+      <input class="w-100" matInput name="subject" [(ngModel)]=" form.subject " (keyup)="onSubjectKeyUp()">
+      <mat-label>Title</mat-label>
+      <!-- <mat-hint>Please input title</mat-hint> -->
     </mat-form-field>
 
   </div>
@@ -38,9 +39,10 @@
   <div class="mt-1" *ngIf=" philgo.isAdmin() ">
 
 
-      <mat-form-field class="w-100">
-        <input class="w-100" matInput placeholder="Access Code" name="access_code" [(ngModel)]=" form.access_code " (keyup)="onSubjectKeyUp()">
-        <mat-hint>Access Code</mat-hint>
+      <mat-form-field appearance="fill"  class="w-100">
+        <input class="w-100" matInput name="access_code" [(ngModel)]=" form.access_code " (keyup)="onSubjectKeyUp()">
+        <mat-label>Access Code</mat-label>
+        <!-- <mat-hint>Access Code</mat-hint> -->
       </mat-form-field>
   
     </div>
