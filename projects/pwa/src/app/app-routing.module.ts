@@ -46,11 +46,24 @@ const routes: Routes = [
         path: 'blog-settings/category',
         loadChildren: './pages/blog-management/blog-settings-category/blog-settings-category.module#BlogSettingsCategoryModule'
     },
-
     {
         path: 'blog-settings/domain',
         loadChildren: './pages/blog-management/blog-settings-domain/blog-settings-domain.module#BlogSettingsDomainModule'
     },
+    {
+        path: 'blog-stat/visitor',
+        loadChildren: './pages/blog-management/blog-stat-visitor/blog-stat-visitor.module#BlogStatVisitorModule'
+    },
+
+    {
+        path: 'blog-new-comments',
+        loadChildren: './pages/blog-management/blog-new-comments/blog-new-comments.module#BlogNewCommentsModule'
+    },
+    {
+        path: 'blog-new-events',
+        loadChildren: './pages/blog-management/blog-new-events/blog-new-events.module#BlogNewEventsModule'
+    },
+
 
     // blog main page. blog portal. all blogs content. This is for root site only.
     { path: 'blog', loadChildren: './pages/blog-main/blog-main.module#BlogMainModule' },

@@ -96,6 +96,7 @@ This is wrong because it makes difficult to understand template design. In fact,
 * Admin needs to write post with acccess code
   * `create-your-blog-now`
   * `become-best-blog-writer`
+  * `sonub-help`
   on `sonub_help` forum. These posts will be linked to sonub site menu.
 
 ## Life Cycle of Site

@@ -18,13 +18,14 @@
       <span class="white" (click)=" a.openMyBlog() " *ngIf=" ! a.inMyBlog ">My Blog</span>
       <a routerLink="{{ a.getBlogPostCreateUrl() }}">Create</a>
 
-      <i class="material-icons">
+      <i class="material-icons" routerLink="{{ a.getBlogNewCommentsUrl() }}">
         chat
       </i>
-      <i class="material-icons">
+      <i class="material-icons" routerLink="{{ a.getBlogNewEventsUrl() }}">
         notifications
       </i>
-      <i class="material-icons">help</i>
+      <i class="material-icons" routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'sonub-help') }}">help</i>
+
       <a class="pr-0" routerLink="/menu"><i class="material-icons">menu</i></a>
     </div>
 

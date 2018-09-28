@@ -42,6 +42,14 @@
   </mat-list-item>
 
 
+
+  <mat-list-item routerLink="{{ a.getUrlPostViewByAccessCode('sonub-help') }}">
+    <i class="material-icons">help</i>
+    <h4 matLine>Help</h4>
+  </mat-list-item>
+
+
+
   <mat-list-item routerLink="/login" *ngIf=" philgo.isLoggedOut() ">
     <i class="material-icons">
       arrow_forward_ios
