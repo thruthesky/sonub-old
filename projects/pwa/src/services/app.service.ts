@@ -149,7 +149,7 @@ export class AppService {
   QNA = 'answer';
   NEWS = 'media';
   BUYANDSELL = 'market';
-  MANAGEMENT = 'sonub_management';
+  HELP = 'sonub_help';
 
 
   /**
@@ -475,6 +475,15 @@ export class AppService {
    */
   getUrlPostView(post: ApiPost): string {
     return this.getPostViewUrl(post);
+  }
+
+  /**
+   * returns url of the access code
+   * @param post_id post id
+   * @param code access code
+   */
+  getUrlPostViewByAccessCode(post_id: string, code: string) {
+    return `/forum/${post_id}/${code}`;
   }
 
   openPostView(post: ApiPost, event?: Event) {

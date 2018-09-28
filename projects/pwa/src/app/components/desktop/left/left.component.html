@@ -11,11 +11,11 @@
     <ul>
       <li>
         <i class="material-icons">border_color</i>
-        <a routerLink="#">Become Best Blog Writer</a>
+        <a routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'become-best-blog-writer' ) }}">Become Best Blog Writer</a>
       </li>
       <li>
         <i class="material-icons">format_bold</i>
-        <a routerLink="#">Create your blog now</a>
+        <a routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'create-your-blog-now' ) }}">Create your blog now</a>
       </li>
     </ul>
 
@@ -42,6 +42,10 @@
       <li>
         <i class="material-icons">work</i>
         <a routerLink="/job">Jobs</a>
+      </li>
+      <li *ngIf=" a.philgo.isAdmin() ">
+        <i class="material-icons">help</i>
+        <a routerLink="{{ a.getForumUrl( a.HELP ) }}">Managment Forum</a>
       </li>
     </ul>
   </section>
