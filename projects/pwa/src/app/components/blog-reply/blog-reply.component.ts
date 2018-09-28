@@ -74,9 +74,10 @@ export class BlogReplyComponent implements OnInit, AfterViewInit {
           this.root.comments.push(<any>res);
         }
         // clear
-        this.post['reply'] = false;
+        this.post['reply'] = false; // being used in template to show to reply form under comment.
         this.form.content = '';
         this.form.files = [];
+        this.form.gid = _.randomString(19, this.philgo.myIdx());
       }, e => this.a.error(e));
     }
   }

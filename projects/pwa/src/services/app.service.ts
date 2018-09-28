@@ -28,6 +28,9 @@ interface Environment {
 
 export interface FrontPage {
   communityPhotos: Array<ApiPost>;
+  communityPosts: {
+    [key: string]: Array<ApiPost>
+  };
   info: {
     version: string;
   };
@@ -440,7 +443,7 @@ export class AppService {
     }
   }
   openBlogSettings() {
-    this.router.navigateByUrl( this.getBlogSettingsUrl() );
+    this.router.navigateByUrl(this.getBlogManagementUrl());
   }
   openForum(post_id: string) {
     if (post_id === 'blog') {
@@ -780,7 +783,7 @@ export class AppService {
    * To be sure, use this.blog.categories.
    */
   blogCategories(): Array<string> {
-    if ( this.blog && this.blog.categories && this.blog.categories.length ) {
+    if (this.blog && this.blog.categories && this.blog.categories.length) {
       return this.blog.categories;
     } else {
       return [];
@@ -791,7 +794,7 @@ export class AppService {
    * Returns no of categories of current blog.
    */
   blogNoOfCategories(): number {
-    if ( this.blog && this.blog.no_of_categories ) {
+    if (this.blog && this.blog.no_of_categories) {
       return _.parseNumber(this.blog.no_of_categories);
     } else {
       return 0;
