@@ -40,6 +40,14 @@ const routes: Routes = [
 
     // blog settings. Domain is not required since user can only enter blog settings pages only under his domain.
     { path: 'blog-settings', loadChildren: './pages/blog-settings/blog-settings.module#BlogSettingsModule' },
+    {
+        path: 'blog-settings/basic',
+        loadChildren: './pages/blog-settings/basic-blog-settings-basic.module#BlogSettingsBasicModule'
+    },
+    {
+        path: 'blog-settings/category',
+        loadChildren: './pages/blog-settings/blog-settings-category/blog-settings-category.module#BlogSettingsCategoryModule'
+    },
 
     // { path: 'b/:idx/:subject', loadChildren: './pages/blog-view/blog-view.module#BlogViewModule' },
 

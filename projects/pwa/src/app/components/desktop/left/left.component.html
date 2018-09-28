@@ -54,6 +54,9 @@
 <!--/inRoot-->
 
 <section class="user-content" *ngIf=" a.inBlogSite ">
+  <div clas="blog-name" *ngIf=" a.blog?.name ">
+    {{ a.blog.name }}
+  </div>
   <div class="side-menu" *ngIf=" a.blog?.categories?.length ">
     <ul>
       <li *ngFor=" let category of  a.blog.categories " routerLink="{{ a.getBlogCategoryUrl(category) }}">{{ category
@@ -68,7 +71,7 @@
     <header>Blog Managment</header>
     <ul>
       <li routerLink="{{ a.getBlogSettingsUrl() }}">Blog settings</li>
-      <li>Categories</li>
+      <li routerLink="{{ a.getBlogSettingsCategoryUrl() }}">Categories</li>
       <li>Statistics</li>
       <li>Reactions</li>
       <li>Themese</li>

@@ -138,6 +138,10 @@ export class AppService {
    * 현재 접속 중인 블로그의 정보를 가지고 있다.
    */
   blog: ApiBlogSettings = null;
+  /**
+   * Max no of blog categories
+   */
+  blogMaxNoOfCategories = 8;
 
 
   /**
@@ -449,6 +453,9 @@ export class AppService {
    */
   getBlogSettingsUrl(): string {
     return '/blog-settings';
+  }
+  getBlogSettingsCategoryUrl(): string {
+    return this.getBlogSettingsUrl() + '/category';
   }
 
   getBlogPostCreateUrl() {
