@@ -1,34 +1,40 @@
-<mat-toolbar>
-    <h1>Blog Basic Settings</h1>
-  </mat-toolbar>
-  
-  
-<form (ngSubmit)=" onSubmit( $event ) " class="blog-settings-form">
-  <div class="list-row">
-    <mat-form-field class="w-100">
-      <input matInput name="name" [(ngModel)]=" blog.name " placeholder="Your blog name">
-      <mat-hint>
-        Input your blog name.
-      </mat-hint>
-    </mat-form-field>
-  </div>
-  <div class="list-row">
-    <mat-form-field class="w-100">
-      <textarea matInput name="description" [(ngModel)]=" blog.description " placeholder="Describe your blogs"></textarea>
-      <mat-hint>
-        Describe your blog in 255 letters.
-      </mat-hint>
-    </mat-form-field>
-  </div>
 
+<mat-toolbar class="bg-secondary white">
+    <h1 class="px-2">Blog Basic Settings</h1>
+</mat-toolbar>
+      
 
-
-  <div class="list-row">
-      <button mat-flat-button type="submit">Submit</button>
-      <button mat-flat-button type="button" routerLink="/blog">Cancel</button>
+  <form  class="p-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
+    <div class="list-row my-4">
+      <mat-form-field appearance="fill" class="w-100">
+        <input matInput name="name" [(ngModel)]=" blog.name ">
+        <mat-label>Your blog name</mat-label>
+        <mat-hint>Input your blog name.</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="list-row my-4">
+      <mat-form-field appearance="fill" class="w-100">
+        <textarea rows="10" matInput name="description" [(ngModel)]=" blog.description "></textarea>
+        <mat-label>Describe your blogs</mat-label>
+        <mat-hint>Describe your blog in 255 letters.</mat-hint>
+      </mat-form-field>
     </div>
   
-</form>
+  
+  
+    <div class="list-row my-4 text-center">
+      <button class="mx-2 bg-primary" mat-flat-button type="submit">
+        <span class="mr-2">Submit</span>
+        <i class="material-icons">send</i>
+      </button>
+      <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog">
+        <i class="material-icons red">clear</i>
+        <span class="ml-1">Cancel</span>
+      </button>
+    </div>
+    
+  </form>
+
 
 
 
