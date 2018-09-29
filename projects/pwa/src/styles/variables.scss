@@ -16,6 +16,12 @@ $sidebar-width: 240px;
 $padding: 8px;
 $spacing: 12px;
 
+// breakpoints
+$sm: 544px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
 .transparent-cover-wrapper {
     position: relative;
     overflow: hidden;
