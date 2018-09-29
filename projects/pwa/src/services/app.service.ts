@@ -16,7 +16,7 @@ import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie';
 
 import * as io from 'socket.io-client';
-const socket = io('http://localhost:8080');
+const socket = io('http://localhost:3080');
 
 
 
@@ -236,7 +236,9 @@ export class AppService {
       } else if (e instanceof NavigationEnd) {
         this.route = this.router.url;
         this.routeChange.next(this.route);
-        this.log({ path: this.route });
+        if (this.router.url.indexOf('redirect') === -1) {
+          this.log({ path: this.router.url });
+        }
       }
       /**
        * Scroll the page to the top after transitioning into another page.
@@ -847,6 +849,8 @@ export class AppService {
 
   log(options: { path: string }) {
     // const str = JSON.stringify( options );
+    options['domain'] = this.currentBlogDomain;
+    console.log('options: ', options);
     socket.emit('log', options);
   }
 }
