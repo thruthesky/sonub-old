@@ -1,0 +1,22 @@
+li,
+.hover-effect{
+    padding: .25rem 0;
+    border: 1px solid transparent;
+    .material-icons{
+        margin-right: .5rem;
+    }
+    &:hover{
+        background-color: #f5f6f7;
+        border: 1px solid #dddfe2;
+        border-radius: 2px;
+        cursor: pointer;
+    }
+    &>a{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+}

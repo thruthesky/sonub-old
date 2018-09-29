@@ -1,10 +1,24 @@
-I am looking for <select name="category" [(ngModel)]="category">
-    <option value=''>Choose Occupation</option>
-    <option value="housemaid">Housemaid</option>
-    <option value="driver">Driver</option>
-    <option value="englishtutor">English Tutor</option>
-    <option value="carpenter">Carpenter</option>
-</select>
-Or <button routerLink="/job-post">apply</button> for a job.
+<section class=" p-3 p-md-4 bg-white">
 
-<app-job-list-component [group_id]=" a.groupId " [category]=" category "></app-job-list-component>
+    <div class="flex-center flex-md-row flex-column bg-light p-3 fs-md">
+        <div>
+            I am looking for 
+            <select class="category mx-2" name="category" [(ngModel)]="category">
+                <option value=''>Choose Occupation</option>
+                <option value="housemaid">Housemaid</option>
+                <option value="driver">Driver</option>
+                <option value="englishtutor">English Tutor</option>
+                <option value="carpenter">Carpenter</option>
+            </select>
+        </div>
+        <div class="m-2">or</div> 
+        <button class="mx-2 flex-center rounded border bg-primary py-1 px-3 white pointer" routerLink="/job-post">
+            <i class="material-icons mr-1">how_to_reg</i>
+            <span>Apply for a job</span>
+        </button> 
+
+    </div>
+    
+    <app-job-list-component [group_id]=" a.groupId " [category]=" category "></app-job-list-component>
+            
+</section>

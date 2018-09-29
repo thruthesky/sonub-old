@@ -1,8 +1,11 @@
-<section class="login bg-white p-4 p-md-5">
+<mat-toolbar class="bg-secondary white">
+  <h1 class="px-2">Login</h1>
+</mat-toolbar>
+<section class="login bg-white p-4">
 
   <div class="form-title flex-center mb-4">
     <img class="logo" src="../../../../../../src/assets/sonub-logo.webp">
-    <h1>Login</h1>
+    <h1>Sonub Login</h1>
   </div>
 
   <div *ngIf=" philgo.isLoggedIn(); else login ">You have logged in as {{ philgo.nickname() }}.</div>
