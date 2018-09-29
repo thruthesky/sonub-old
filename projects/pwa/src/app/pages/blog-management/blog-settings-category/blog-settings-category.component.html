@@ -1,25 +1,28 @@
 <mat-toolbar>
-  <h1>Blog Category Settings</h1>
+  <h1 class="px-2">Blog Category Settings</h1>
 </mat-toolbar>
 
 
-<form (ngSubmit)=" onSubmit( $event ) " class="blog-settings-form">
+<form  class="bg-white p-4" (ngSubmit)=" onSubmit( $event ) ">
 
+  <h3 class="mt-0">Category Settings</h3>
 
-  <div class="list-row">
-    <h3>Category Settings</h3>
-
-    <div *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]">
-      <mat-form-field class="w-100">
-        <input matInput name="category{{ n }}" [(ngModel)]=" blog['category' + n] " placeholder="Category No. {{ n }} Name">
-      </mat-form-field>
-    </div>
-
+  <div *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]">
+    <mat-form-field appearance="fill" class="w-100">
+      <input matInput name="category{{ n }}" [(ngModel)]=" blog['category' + n] ">
+      <mat-label>Category No. {{ n }} Name</mat-label>
+    </mat-form-field>
   </div>
 
-  <div class="list-row">
-    <button mat-flat-button type="submit">Submit</button>
-    <button mat-flat-button type="button" routerLink="/blog">Cancel</button>
+  <div class="list-row my-4 text-center">
+    <button class="mx-2 bg-primary" mat-flat-button type="submit">
+      <span class="mr-2">Submit</span>
+      <i class="material-icons">send</i>
+    </button>
+    <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog">
+      <i class="material-icons red">clear</i>
+      <span class="ml-1">Cancel</span>
+    </button>
   </div>
 
 </form>

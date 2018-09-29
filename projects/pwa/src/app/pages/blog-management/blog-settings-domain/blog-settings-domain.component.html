@@ -1,25 +1,39 @@
-<mat-toolbar>
-    <h1>Blog Domain Settings</h1>
-  </mat-toolbar>
-  
-  
-  <form (ngSubmit)=" onSubmit( $event ) " class="blog-settings-form">
-  
-    <div class="list-row">
-      https://
-      <mat-form-field>
-        <input matInput name="domain" [(ngModel)]=" blog.domain " placeholder="Your domain">
-      </mat-form-field>
-      .sonub.com
-      <div>
-        Becareful when you change your domain. you will loose all your backlinks.
-      </div>
-    </div>
-  
-    <div class="list-row">
-      <button mat-flat-button type="submit">Submit</button>
-      <button mat-flat-button type="button" routerLink="/blog">Cancel</button>
-    </div>
-  
-  </form>
+<div class="p-4 bg-white">
+    <mat-toolbar>
+        <h1 class="px-1">Blog Domain Settings</h1>
+      </mat-toolbar>
+        
+        
+      <form (ngSubmit)=" onSubmit( $event ) " class="blog-settings-form">
+      
+        <div class="list-row mt-4 mb-5 px-4">
+          <div class=" flex-center">
+              <span>https://</span>
+              <mat-form-field class="flex-grow-1 mx-2">
+                <input matInput name="domain" [(ngModel)]=" blog.domain " placeholder="Your domain">
+              </mat-form-field>
+              <span>.sonub.com</span>
+          </div>
+
+          <div class="flex-center fs-md">
+            <i class="material-icons mr-2 text-danger">warning</i>
+            <span>Becareful when you change your domain. you will loose all your backlinks.</span>
+          </div>
+
+        </div>
+
+        <div class="list-row my-4 text-center">
+          <button class="mx-2 bg-primary" mat-flat-button type="submit">
+            <span class="mr-2">Submit</span>
+            <i class="material-icons">send</i>
+          </button>
+          <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog">
+            <i class="material-icons red">clear</i>
+            <span class="ml-1">Cancel</span>
+          </button>
+        </div>
+      
+      </form>
+</div>
+
 
