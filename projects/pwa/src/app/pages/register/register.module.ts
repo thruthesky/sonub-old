@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegisterComponent } from './register.component';
 import { CommonModule } from '@angular/common';
 import { RegisterComponentModule } from 'share/philgo-api-components/user/register/register.module';
+import { MatToolbarModule } from '@angular/material';
 
 const routes: Routes = [
     {
@@ -16,7 +17,8 @@ const routes: Routes = [
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        RegisterComponentModule
+        RegisterComponentModule,
+        MatToolbarModule
     ],
     exports: [],
     declarations: [RegisterComponent],

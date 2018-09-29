@@ -1,6 +1,10 @@
 <section class="p-4 bg-white" page="post">
 
-  <app-avatar *ngIf=" philgo.isLoggedIn() "></app-avatar>
+  <div class="flex-center justify-content-between">
+      <app-avatar class="d-block mb-3" *ngIf=" philgo.isLoggedIn() "></app-avatar>
+      <div class="mb-3 text-primary">Posting on {{ form.post_id }}</div>
+  </div>
+
   <section class="d-md-flex" *ngIf="philgo.isLoggedOut() ">
 
     <mat-form-field appearance="fill" class="w-100 mr-md-3">
@@ -26,9 +30,6 @@
 
   </div>
 
-
-  <div class="mb-3 text-primary">Posting on {{ form.post_id }}</div>
-
   <ckeditor class='ckeditor' [editor]="Editor" [(ngModel)]=" form.content " (change)="onChangeContent( $event )"
     [config]="{
     ckfinder: {uploadUrl: philgo.getFileServerRootUrl() + 'etc/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json' }
@@ -49,11 +50,23 @@
 
     
 
-  <div class="mt-1 text-center">
+  <!-- <div class="mt-1 text-center">
     <button class="px-5 mt-4 my-md-3" mat-flat-button (click)=" onSubmit() ">
       <span class="mr-2">{{ a.t({ en: 'SUBMIT', ko: '글 등록'}) }}</span>
       <i class="material-icons">send</i>
     </button>
+  </div> -->
+
+  <div class="list-row my-4 text-center">
+    <button class="mx-2 bg-primary" mat-flat-button type="submit"  (click)=" onSubmit() ">
+      <span class="mr-2">Submit</span>
+      <i class="material-icons">send</i>
+    </button>
+    <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/menu">
+      <i class="material-icons red">clear</i>
+      <span class="ml-1">Cancel</span>
+    </button>
   </div>
+  
 
 </section>
