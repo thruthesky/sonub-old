@@ -7,28 +7,25 @@
 
   <section class="d-md-flex" *ngIf="philgo.isLoggedOut() ">
 
-    <mat-form-field appearance="fill" class="w-100 mr-md-3">
+    <mat-form-field appearance="outline" class="w-100 mr-md-3">
       <input matInput type="email" name="email" [(ngModel)]=" form.user_email " (keyup)="onSubjectKeyUp()">
       <mat-label>Email</mat-label>
     </mat-form-field>
 
 
-    <mat-form-field appearance="fill" class="w-100 ml-md-3">
+    <mat-form-field appearance="outline" class="w-100 ml-md-3">
       <input matInput type="password" name="password" [(ngModel)]=" form.user_password " (keyup)="onSubjectKeyUp()">
       <mat-label>Password</mat-label>
     </mat-form-field>
 
   </section>
 
-  <div class="mt-1">
 
-    <mat-form-field appearance="fill" class="w-100">
-      <input class="w-100" matInput name="subject" [(ngModel)]=" form.subject " (keyup)="onSubjectKeyUp()">
-      <mat-label>Title</mat-label>
-      <!-- <mat-hint>Please input title</mat-hint> -->
-    </mat-form-field>
+  <mat-form-field appearance="outline" class="w-100">
+    <input class="w-100" matInput name="subject" [(ngModel)]=" form.subject " (keyup)="onSubjectKeyUp()">
+    <mat-label>Title</mat-label>
+  </mat-form-field>
 
-  </div>
 
   <ckeditor class='ckeditor' [editor]="Editor" [(ngModel)]=" form.content " (change)="onChangeContent( $event )"
     [config]="{
@@ -36,35 +33,20 @@
   }"></ckeditor>
 
 
-
-  <div class="mt-3" *ngIf=" philgo.isAdmin() ">
-
-
-      <mat-form-field appearance="fill"  class="w-100">
-        <input class="w-100" matInput name="access_code" [(ngModel)]=" form.access_code " (keyup)="onSubjectKeyUp()">
-        <mat-label>Access Code</mat-label>
-        <!-- <mat-hint>Access Code</mat-hint> -->
-      </mat-form-field>
-  
-    </div>
+  <mat-form-field appearance="outline" *ngIf=" philgo.isAdmin() " class="mt-3 w-100">
+    <input class="w-100" matInput name="access_code" [(ngModel)]=" form.access_code " (keyup)="onSubjectKeyUp()">
+    <mat-label>Access Code</mat-label>
+  </mat-form-field>
 
     
-
-  <!-- <div class="mt-1 text-center">
-    <button class="px-5 mt-4 my-md-3" mat-flat-button (click)=" onSubmit() ">
-      <span class="mr-2">{{ a.t({ en: 'SUBMIT', ko: '글 등록'}) }}</span>
-      <i class="material-icons">send</i>
-    </button>
-  </div> -->
-
   <div class="list-row my-4 text-center">
-    <button class="mx-2 bg-primary" mat-flat-button type="submit"  (click)=" onSubmit() ">
-      <span class="mr-2">Submit</span>
-      <i class="material-icons">send</i>
-    </button>
     <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/menu">
       <i class="material-icons red">clear</i>
       <span class="ml-1">Cancel</span>
+    </button>
+    <button class="mx-2 bg-primary" mat-flat-button type="submit"  (click)=" onSubmit() ">
+      <span class="mr-2">Submit</span>
+      <i class="material-icons">send</i>
     </button>
   </div>
   

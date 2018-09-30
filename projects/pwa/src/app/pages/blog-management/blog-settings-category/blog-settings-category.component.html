@@ -1,4 +1,4 @@
-<mat-toolbar class="bg-secondary white">
+<mat-toolbar class="border-top border-top-md-0">
   <h1 class="px-2">Blog Category Settings</h1>
 </mat-toolbar>
 
@@ -7,21 +7,21 @@
 
   <!-- <h3 class="mt-0">Category Settings</h3> -->
 
-  <div *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]">
-    <mat-form-field appearance="fill" class="w-100">
+  <div class="categories d-flex flex-wrap">
+    <mat-form-field class="border-box" appearance="outline"  *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]">
       <input matInput name="category{{ n }}" [(ngModel)]=" blog['category' + n] ">
       <mat-label>Category No. {{ n }} Name</mat-label>
     </mat-form-field>
   </div>
 
   <div class="list-row my-4 text-center">
-    <button class="mx-2 bg-primary" mat-flat-button type="submit">
-      <span class="mr-2">Submit</span>
-      <i class="material-icons">send</i>
-    </button>
     <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog">
       <i class="material-icons red">clear</i>
       <span class="ml-1">Cancel</span>
+    </button>
+    <button class="mx-2 bg-primary" mat-flat-button type="submit">
+      <span class="mr-2">Submit</span>
+      <i class="material-icons">send</i>
     </button>
   </div>
 

@@ -1,35 +1,31 @@
 
-<mat-toolbar class="bg-secondary white">
+<mat-toolbar  class="border-top border-top-md-0">
     <h1 class="px-2">Blog Basic Settings</h1>
 </mat-toolbar>
       
 
   <form  class="p-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
-    <div class="list-row my-4">
-      <mat-form-field appearance="fill" class="w-100">
+      <mat-form-field  class="mt-1 w-100" appearance="outline">
         <input matInput name="name" [(ngModel)]=" blog.name ">
         <mat-label>Your blog name</mat-label>
         <mat-hint>Input your blog name.</mat-hint>
       </mat-form-field>
-    </div>
-    <div class="list-row my-4">
-      <mat-form-field appearance="fill" class="w-100">
+      <mat-form-field  class="mt-3 w-100" appearance="outline">
         <textarea rows="10" matInput name="description" [(ngModel)]=" blog.description "></textarea>
         <mat-label>Describe your blogs</mat-label>
         <mat-hint>Describe your blog in 255 letters.</mat-hint>
       </mat-form-field>
-    </div>
   
   
   
     <div class="list-row my-4 text-center">
-      <button class="mx-2 bg-primary" mat-flat-button type="submit">
-        <span class="mr-2">Submit</span>
-        <i class="material-icons">send</i>
-      </button>
       <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog">
         <i class="material-icons red">clear</i>
         <span class="ml-1">Cancel</span>
+      </button>
+      <button class="mx-2 bg-primary" mat-flat-button type="submit">
+        <span class="mr-2">Submit</span>
+        <i class="material-icons">send</i>
       </button>
     </div>
     

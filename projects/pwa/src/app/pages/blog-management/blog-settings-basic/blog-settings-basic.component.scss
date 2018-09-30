@@ -1,0 +1,6 @@
+@import './../../../../styles/variables.scss';
+@media (min-width:$md){
+    mat-toolbar{
+        border-top: 0!important;
+    }
+}

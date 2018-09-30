@@ -1,3 +1,21 @@
+@import './../../../../styles/variables.scss';
 .bg-gray{
     background: #ccc;
+}
+
+
+.categories{
+    mat-form-field{
+        width: 100%;
+    }
+    @media (min-width:$md){
+        mat-form-field:nth-child(odd){
+            width: 50%;
+            padding-right: .75rem;
+        }
+        mat-form-field:nth-child(even){
+            padding-left: .75rem;
+            width: 50%;
+        }
+    }
 }

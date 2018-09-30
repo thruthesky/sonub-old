@@ -1,13 +1,13 @@
-<mat-toolbar class="bg-secondary white">
-  <h1 class="px-1">Blog Domain Settings</h1>
+<mat-toolbar  class="border-top border-top-md-0">
+  <h1 class="px-2">Blog Domain Settings</h1>
 </mat-toolbar>
 
-  <form class="p-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
+  <form class="px-3 p-md-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
   
-    <div class="list-row mt-4 mb-5 px-4">
-      <div class=" flex-center">
+    <div class="list-row mt-4 mb-5 px-md-4">
+      <div class=" flex-center bg-light mb-3 pt-4 border">
           <span>https://</span>
-          <mat-form-field class="flex-grow-1 mx-2">
+          <mat-form-field class=" mx-2">
             <input matInput name="domain" [(ngModel)]=" blog.domain " placeholder="Your domain">
           </mat-form-field>
           <span>.sonub.com</span>
@@ -21,13 +21,13 @@
     </div>
 
     <div class="list-row my-4 text-center">
-      <button class="mx-2 bg-primary" mat-flat-button type="submit">
-        <span class="mr-2">Submit</span>
-        <i class="material-icons">send</i>
-      </button>
       <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog">
         <i class="material-icons red">clear</i>
         <span class="ml-1">Cancel</span>
+      </button>
+      <button class="mx-2 bg-primary" mat-flat-button type="submit">
+        <span class="mr-2">Submit</span>
+        <i class="material-icons">send</i>
       </button>
     </div>
   
