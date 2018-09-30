@@ -40,7 +40,7 @@ export class BlogViewComponent implements OnInit {
     }, e => this.a.error(e));
   }
   onEdit(post: ApiPost) {
-    alert('edit');
+    this.a.openPostEdit(post);
   }
 
   onDelete(post: ApiPost) {
@@ -52,17 +52,15 @@ export class BlogViewComponent implements OnInit {
   }
 
   onReport(post: ApiPost) {
-
     this.philgo.postReport(post.idx).subscribe(res => {
-      this.a.toast({
-        content: this.philgo.t({ en: 'This post has been reported.', ko: '본 글은 신고되었습니다.' })
-      });
+      this.a.toast(
+        this.a.t({ en: 'This post has been reported.', ko: '본 글은 신고되었습니다.' })
+      );
     }, e => this.a.error(e));
-
   }
 
   onClickFeature(n) {
-    this.philgo.postUpdateAccessCodeByMember(this.post.idx, 'blog_featured_' + n ).subscribe(post => {
+    this.philgo.postUpdateAccessCodeByMember(this.post.idx, 'blog_featured_' + n).subscribe(post => {
       console.log('postUpdateAccessCodeByMember:', post);
     });
   }

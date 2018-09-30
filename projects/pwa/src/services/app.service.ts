@@ -203,6 +203,9 @@ export class AppService {
     // this.initCookieLogin();
     this.initBlog();
     this.initLog();
+
+
+    philgo.currency().subscribe(c => console.log(c));
   }
 
   initLanguage() {
@@ -259,9 +262,11 @@ export class AppService {
       }
 
 
-      if (event instanceof RouteConfigLoadStart) {
+      if (e instanceof RouteConfigLoadStart) {
+        console.log('config log start');
         this.showRouterLoader = true;
-      } else if (event instanceof RouteConfigLoadEnd) {
+      } else if (e instanceof RouteConfigLoadEnd) {
+        console.log('config log start');
         this.showRouterLoader = false;
       }
     });
@@ -561,11 +566,18 @@ export class AppService {
     }
     this.setPostInMemory(post);
     if (post.post_id === 'blog') {
-      if ( post.blog && post.blog === this.currentBlogDomain) {
-        this.router.navigateByUrl(this.getBlogViewListUrl(post));
+      if (post.blog) {
+        // console.log(`if (${post.blog} === ${this.currentBlogDomain}) {`);
+        if (post.blog === this.currentBlogDomain) {
+          this.router.navigateByUrl(this.getBlogViewListUrl(post));
+        } else {
+          window.location.href = this.getBlogDomainUrl(post.blog) + this.getBlogViewListUrl(post);
+        }
       } else {
-        window.location.href = this.getBlogDomainUrl(post.blog) + this.getBlogViewListUrl(post);
+        this.router.navigateByUrl(this.getBlogViewListUrl(post));
       }
+
+
       // this.router.navigateByUrl(this.getBlogViewListUrl(post));
     } else {
       this.router.navigateByUrl('/forum/' + post.post_id + '/' + post.idx);

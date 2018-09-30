@@ -1,13 +1,12 @@
+<app-lazy-loader></app-lazy-loader>
 <div class="#layout" [attr.route]=" a.route ">
   <div id="mobile-layout" *ngIf=" a.isMobile ">
     <div id="mobile-header">
       <app-mobile-header></app-mobile-header>
     </div>
     <div id="mobile-content">
+      
       <router-outlet></router-outlet>
-      <div class="bg-green" *ngIf=" a.showRouterLoader ">
-        Router Loading ...
-      </div>
     </div>
     <div id="mobile-footer">
       <app-mobile-footer></app-mobile-footer>
@@ -28,6 +27,7 @@
           </td>
           <td id="desktop-center">
             <div class="desktop-center-content">
+              
               <router-outlet></router-outlet>
             </div>
 

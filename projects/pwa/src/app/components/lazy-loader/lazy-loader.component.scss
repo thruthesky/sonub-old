@@ -1,0 +1,27 @@
+@keyframes router-load-indicator-animation {
+  from {
+    opacity: 0.0;
+  }
+
+  to {
+    opacity: .8;
+  }
+}
+
+.lazy-loader {
+  position: fixed;
+  z-index: 5678;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  animation-delay: 500ms;
+  animation-duration: 1000ms;
+  animation-fill-mode: both;
+  animation-name: router-load-indicator-animation;
+
+  .inner {
+    padding: .4em 4em .4em 1em;
+    background-color: white;
+  }
+}
