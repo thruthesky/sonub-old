@@ -205,6 +205,7 @@ export class AppService {
     this.initLog();
 
 
+    philgo.weatherMap().subscribe(g => console.log('geo:', g));
   }
 
   initLanguage() {
@@ -891,5 +892,23 @@ export class AppService {
     options['domain'] = this.currentBlogDomain;
     console.log('options: ', options);
     socket.emit('log', options);
+  }
+
+  date_hia(stamp) {
+    let d;
+    if (stamp) {
+      d = new Date(_.parseNumber(stamp) * 1000);
+    } else {
+      d = new Date();
+    }
+
+    // return d.getFullYear();
+    let hours = d.getHours();
+    let minutes: any = d.getMinutes();
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    return hours + ':' + minutes + ' ' + ampm;
   }
 }

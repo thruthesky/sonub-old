@@ -31,6 +31,7 @@ import { FooterModule } from './components/footer/footer.module';
 import { RedirectComponent } from './pages/redirect/redirect.component';
 import { LazyLoaderModule } from './components/lazy-loader/lazy-loader.module';
 import { CurrencyModule } from './components/currency/currency.module';
+import { WeatherModule } from './components/weather/weather.module';
 
 
 /**
@@ -69,7 +70,8 @@ firebase.initializeApp(firebaseConfig);
     LogoModule,
     FooterModule,
     LazyLoaderModule,
-    CurrencyModule
+    CurrencyModule,
+    WeatherModule
   ],
   providers: [],
   bootstrap: [AppComponent]

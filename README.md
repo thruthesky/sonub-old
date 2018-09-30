@@ -108,6 +108,8 @@ This is wrong because it makes difficult to understand template design. In fact,
 
 * Set admin ids on PhilGo Admin Page.
 
+* Update GEO IP DATA every month.
+
 ## Life Cycle of Site
 
 ### Terms
