@@ -72,6 +72,12 @@ This is wrong because it makes difficult to understand template design. In fact,
 
 ## Coding Guideline
 
+### Difference of getXxxxUrl() and urlXxxxx()
+
+* getXxxUrl() can refresh the site based on the domain.
+
+* `routerLink="{{ a.urlXxxxx() }}` cannot refresh the page and cannot chagne the blog domain.
+
 ### SEO URL link
 
 * `<a href='...'>` or `routerLink` are for hueman only.

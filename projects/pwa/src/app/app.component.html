@@ -5,6 +5,9 @@
     </div>
     <div id="mobile-content">
       <router-outlet></router-outlet>
+      <div class="bg-green" *ngIf=" a.showRouterLoader ">
+        Router Loading ...
+      </div>
     </div>
     <div id="mobile-footer">
       <app-mobile-footer></app-mobile-footer>
