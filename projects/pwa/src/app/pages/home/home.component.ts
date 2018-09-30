@@ -13,8 +13,9 @@ export class HomeComponent implements OnInit {
     public a: AppService,
     public philgo: PhilGoApiService
   ) {
-    const options = { blog: '' };
+    const options = { blog: '', in_blog: false };
     if ( a.inBlogSite ) {
+      options.in_blog = true;
       options.blog = a.currentBlogDomain;
     } else if ( a.loggedIn ) {
       options.blog = a.myBlogDomain;

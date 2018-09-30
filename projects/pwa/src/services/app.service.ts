@@ -15,12 +15,6 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie';
 
-import * as io from 'socket.io-client';
-const socket = io('http://localhost:3080');
-
-
-
-
 interface Environment {
   production: boolean;
   port: string;
@@ -28,17 +22,27 @@ interface Environment {
   philgoServerUrl: string;
   philgoFileServerUrl: string;
   newFileServerUrl: string;
+  sonubSupportingServerUrl: string;
 }
 
+
+import * as io from 'socket.io-client';
+const socket = io( environment.sonubSupportingServerUrl );
+
+
+
+
+
 export interface FrontPage {
-  communityPhotos: Array<ApiPost>;
-  communityPosts: {
+  communityPhotos: Array<ApiPost>;  // for root site only
+  communityPosts: {                 // for root site only
     [key: string]: Array<ApiPost>
   };
   info: {
     version: string;
   };
   latest_blog_posts: Array<ApiPost>;
+  latest_blog_photos: Array<ApiPost>;     // for blog site only
   no_of_blog_posts: number;
   news: Array<ApiPost>;
   stories: Array<ApiPost>;
@@ -220,9 +224,10 @@ export class AppService {
 
   /**
    * Listen page changes.
+   *
+   * It does many things on route changes.
    */
   initRouterEvent() {
-
 
     this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationStart) {

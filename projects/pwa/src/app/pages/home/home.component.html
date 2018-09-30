@@ -95,11 +95,10 @@
       <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
     </div>
 
-    <div class="category-posts mt-3 p-2 bg-green">
-      <h4>Category 1 post</h4>
-      <h4>Category 2 post</h4>
-      <h4>Category 3 post</h4>
-      <h4>Category 4 post</h4>
+    <div class="blog-latest-photos mt-3 p-2" *ngIf=" a.frontPage?.latest_blog_photos?.length ">
+      <div class="blog-latest-photo" *ngFor="let photo of a.frontPage.latest_blog_photos ">
+        <app-post-multiline-with-thumbnail [post]="photo"></app-post-multiline-with-thumbnail>
+      </div>
     </div>
     <div>
       <h4>latest posts</h4>
@@ -111,13 +110,13 @@
       [more ...]
     </div>
 
-    <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPhotos?.length">
+    <!-- <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPhotos?.length">
       <div class="row no-gutters">
         <div class="col" *ngFor="let post of a.frontPage.communityPhotos">
           <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
         </div>
       </div>
-    </div>
+    </div> -->
     <!--/community-posts-->
   </div>
 
