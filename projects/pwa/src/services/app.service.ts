@@ -205,7 +205,6 @@ export class AppService {
     this.initLog();
 
 
-    philgo.currency().subscribe(c => console.log(c));
   }
 
   initLanguage() {
