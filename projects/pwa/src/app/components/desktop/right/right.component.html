@@ -4,24 +4,26 @@
     <span>Create blog</span>
   </header>
 
-  <article class="posts">
+  <article class="posts pr-3 pb-3">
 
-    <div class="post d-flex fs-sm">
-      <div class="mt-1 p-3" style="border: 2px solid rgb(49, 114, 235);">
-        <i class="material-icons">home</i>
+    <div class="post d-flex mt-2 fs-sm">
+      <div class="flex-center p-1 size-40px rounded" style="border: 2px solid rgb(49, 114, 235);">
+        <i class="material-icons">add</i>
       </div>
-      <div>
-        <div>Add your story here</div>
+      <div class="ml-2 mt-1 w-75">
+        <div class="fw-bold">Add your story here</div>
         <div>Sonub is free service.</div>
       </div>
     </div>
 
-    <div class="post d-flex pointer fs-sm" *ngFor="let post of a.frontPage.stories" (click)=" a.openBlogCategory( post.category, post.blog ) ">
-      <div class="mt-1 p-1" style="border: 2px solid rgb(49, 114, 235);">
-        <img class="d-block" src="{{ a.getPostPhotoUrl(post, 48, 48) }}">
+    <div class="post d-flex pointer fs-sm mt-2" *ngFor="let post of a.frontPage.stories" (click)=" a.openBlogCategory( post.category, post.blog ) ">
+      <div class="w-25">
+          <div class="p-1 size-40px rounded" style="border: 2px solid rgb(49, 114, 235);">
+            <img class="w-100" src="{{ a.getPostPhotoUrl(post, 48, 48) }}">
+          </div>
       </div>
-      <div>
-        <div>{{ post.subject }}</div>
+      <div class="ml-2 mt-1 w-75">
+        <div class="text-link fw-bold truncate">{{ post.subject }}</div>
         <div>{{ post.content }}</div>
       </div>
     </div>
