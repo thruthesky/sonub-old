@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 
 // import { ERROR_WRONG_IDX_MEMBER, ERROR_WRONG_SESSION_ID } from '../../../../share/philgo-api/philgo-api.service';
 
@@ -27,7 +27,7 @@ interface Environment {
 
 
 import * as io from 'socket.io-client';
-const socket = io( environment.sonubSupportingServerUrl );
+const socket = io(environment.sonubSupportingServerUrl);
 
 
 
@@ -168,6 +168,11 @@ export class AppService {
 
 
   /**
+   * Show loader for slow lazy loading
+   */
+  showRouterLoader = false;
+
+  /**
    * Initialize the app service.
    *
    * This App Service constructor must run only one time per app booting.
@@ -251,6 +256,13 @@ export class AppService {
        */
       if (e instanceof NavigationEnd) {
         this._.scrollToTop();
+      }
+
+
+      if (event instanceof RouteConfigLoadStart) {
+        this.showRouterLoader = true;
+      } else if (event instanceof RouteConfigLoadEnd) {
+        this.showRouterLoader = false;
       }
     });
 
@@ -516,7 +528,7 @@ export class AppService {
         return `/forum/${post.post_id}/${post.idx}/${post.subject}`;
       }
     } if (post.post_id === 'blog' && post['blog']) {
-      return this.getUrlBlogViewList(post);
+      return this.getBlogViewListUrl(post);
     } else {
       return `/forum/${post.post_id}/${post.idx}/${post.subject}`;
     }
@@ -538,18 +550,29 @@ export class AppService {
     return `/forum/${post_id}/${code}`;
   }
 
+  /**
+   * Opens a post depending on domain, it can refresh the website.
+   * @param post post
+   * @param event click event
+   */
   openPostView(post: ApiPost, event?: Event) {
     if (event) {
       event.preventDefault();
     }
     this.setPostInMemory(post);
     if (post.post_id === 'blog') {
-      this.router.navigateByUrl(this.getUrlBlogViewList(post));
+      if ( post.blog && post.blog === this.currentBlogDomain) {
+        this.router.navigateByUrl(this.getBlogViewListUrl(post));
+      } else {
+        window.location.href = this.getBlogDomainUrl(post.blog) + this.getBlogViewListUrl(post);
+      }
+      // this.router.navigateByUrl(this.getBlogViewListUrl(post));
     } else {
       this.router.navigateByUrl('/forum/' + post.post_id + '/' + post.idx);
     }
     return false;
   }
+
   /**
    * open blog list page with a post-on-top.
    * @param post blog post
@@ -585,7 +608,7 @@ export class AppService {
    * @desc if the input post is not a blog post, then, it will return url of post view.
    * @param post blog post
    */
-  getUrlBlogViewList(post): string {
+  getBlogViewListUrl(post): string {
     if (!post.post_id) {
       post.post_id = 'blog';
     }
@@ -791,7 +814,7 @@ export class AppService {
    * Returns root url of the blog domain
    * @param domain blog domain
    */
-  getBlogDomainUrl(domain): string {
+  getBlogDomainUrl(domain: string): string {
     let url = '';
     url = APP_PROTOCOL + domain + '.' + this.appRootDomain;
     if (APP_PORT) {
@@ -807,7 +830,7 @@ export class AppService {
    * @param width width
    * @param height height
    */
-  getPostPhotoUrl(post, width, height) {
+  getPostPhotoUrl(post: ApiPost, width: number, height: number) {
     return this.philgo.thumbnailUrl({
       width: width,
       height: height,
