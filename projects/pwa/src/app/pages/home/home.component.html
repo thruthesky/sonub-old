@@ -7,7 +7,7 @@
 
 
 
-  <div class="text-editor mt-3" routerLink="{{ a.getBlogPostCreateUrl() }}" *ngIf=" a.inRootSite ">
+  <div class="text-editor" routerLink="{{ a.getBlogPostCreateUrl() }}" *ngIf=" a.inRootSite ">
     <app-avatar class="mr-md-2"></app-avatar>
     <div class="editor">
       What's your story? ---- Text Animation with Hot topics
@@ -100,15 +100,7 @@
         <app-post-multiline-with-thumbnail [post]="photo"></app-post-multiline-with-thumbnail>
       </div>
     </div>
-    <div>
-      <h4>latest posts</h4>
-      <h4>latest posts</h4>
-      <h4>latest posts</h4>
-      <h4>latest posts</h4>
-      <h4>latest posts</h4>
-      <h4>latest posts</h4>
-      [more ...]
-    </div>
+    
 
     <!-- <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPhotos?.length">
       <div class="row no-gutters">

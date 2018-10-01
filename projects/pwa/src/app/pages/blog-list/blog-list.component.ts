@@ -93,8 +93,15 @@ export class BlogListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.infiniteScrollSubscription = this.scroll.watch('section.blog-list', 300).subscribe(e => this.loadBlogPage());
   }
   ngOnDestroy() {
-    this.infiniteScrollSubscription.unsubscribe();
-    this.subscriptionRoute.unsubscribe();
+    if (this.infiniteScrollSubscription) {
+      this.infiniteScrollSubscription.unsubscribe();
+      this.infiniteScrollSubscription = null;
+    }
+
+    if (this.subscriptionRoute) {
+      this.subscriptionRoute.unsubscribe();
+      this.subscriptionRoute = null;
+    }
   }
 
 

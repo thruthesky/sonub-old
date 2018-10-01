@@ -35,6 +35,7 @@
   You must use only these domains as blog domains or the webbrowser will redirect you to reall server and that will cause accessing real site. Not the dev server.
 
 ```` text
+192.168.0.254   local.philgo.com
 127.0.0.1       sonub.com
 127.0.0.1       www.sonub.com
 127.0.0.1       testuser.sonub.com
@@ -71,6 +72,12 @@ This is wrong because it makes difficult to understand template design. In fact,
 
 ## Coding Guideline
 
+### Difference of getXxxxUrl() and urlXxxxx()
+
+* getXxxUrl() can refresh the site based on the domain.
+
+* `routerLink="{{ a.urlXxxxx() }}` cannot refresh the page and cannot chagne the blog domain.
+
 ### SEO URL link
 
 * `<a href='...'>` or `routerLink` are for hueman only.
@@ -100,6 +107,8 @@ This is wrong because it makes difficult to understand template design. In fact,
   on `sonub_help` forum. These posts will be linked to sonub site menu.
 
 * Set admin ids on PhilGo Admin Page.
+
+* Update GEO IP DATA every month.
 
 ## Life Cycle of Site
 

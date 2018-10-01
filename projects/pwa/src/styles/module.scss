@@ -23,3 +23,9 @@
         color: #222;
     }
 }
+
+@media (min-width:$md){
+    .border-top-md-0{
+        border-top: 0!important;
+    }
+}

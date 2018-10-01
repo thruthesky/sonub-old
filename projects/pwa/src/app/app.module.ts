@@ -29,6 +29,9 @@ import { CookieModule } from 'ngx-cookie';
 import { LogoModule } from './components/logo/logo.module';
 import { FooterModule } from './components/footer/footer.module';
 import { RedirectComponent } from './pages/redirect/redirect.component';
+import { LazyLoaderModule } from './components/lazy-loader/lazy-loader.module';
+import { CurrencyModule } from './components/currency/currency.module';
+import { WeatherModule } from './components/weather/weather.module';
 
 
 /**
@@ -65,7 +68,10 @@ firebase.initializeApp(firebaseConfig);
     AppRoutingModule,
     PageNotFoundModule,
     LogoModule,
-    FooterModule
+    FooterModule,
+    LazyLoaderModule,
+    CurrencyModule,
+    WeatherModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -86,9 +92,9 @@ export class AppModule {
 
     philgo.setFirebaseApp(firebase); // firebase
 
-    philgo.app('sonub.config').subscribe(res => { // get site(app) config from server.
-      console.log('sonub config', res);
-      philgo.mergeConfig(res);
-    });
+    // philgo.app('sonub.config').subscribe(res => { // get site(app) config from server.
+    //   console.log('sonub config', res);
+    //   philgo.mergeConfig(res);
+    // });
   }
 }

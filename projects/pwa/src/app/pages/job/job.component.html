@@ -3,13 +3,15 @@
     <div class="flex-center flex-md-row flex-column bg-light p-3 fs-md">
         <div>
             I am looking for 
-            <select class="category mx-2" name="category" [(ngModel)]="category">
-                <option value=''>Choose Occupation</option>
-                <option value="housemaid">Housemaid</option>
-                <option value="driver">Driver</option>
-                <option value="englishtutor">English Tutor</option>
-                <option value="carpenter">Carpenter</option>
-            </select>
+            <mat-form-field class="mx-2">
+                <mat-select name="category" [(ngModel)]="category">
+                    <mat-option value=''>Choose Occupation</mat-option>
+                    <mat-option value="housemaid">Housemaid</mat-option>
+                    <mat-option value="driver">Driver</mat-option>
+                    <mat-option value="englishtutor">English Tutor</mat-option>
+                    <mat-option value="carpenter">Carpenter</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
         <div class="m-2">or</div> 
         <button class="mx-2 flex-center rounded border bg-primary py-1 px-3 white pointer" routerLink="/job-post">

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 
 // import { ERROR_WRONG_IDX_MEMBER, ERROR_WRONG_SESSION_ID } from '../../../../share/philgo-api/philgo-api.service';
 
@@ -27,7 +27,7 @@ interface Environment {
 
 
 import * as io from 'socket.io-client';
-const socket = io( environment.sonubSupportingServerUrl );
+const socket = io(environment.sonubSupportingServerUrl);
 
 
 
@@ -168,6 +168,11 @@ export class AppService {
 
 
   /**
+   * Show loader for slow lazy loading
+   */
+  showRouterLoader = false;
+
+  /**
    * Initialize the app service.
    *
    * This App Service constructor must run only one time per app booting.
@@ -198,6 +203,9 @@ export class AppService {
     // this.initCookieLogin();
     this.initBlog();
     this.initLog();
+
+
+    philgo.weatherMap().subscribe(g => console.log('geo:', g));
   }
 
   initLanguage() {
@@ -251,6 +259,15 @@ export class AppService {
        */
       if (e instanceof NavigationEnd) {
         this._.scrollToTop();
+      }
+
+
+      if (e instanceof RouteConfigLoadStart) {
+        console.log('config log start');
+        this.showRouterLoader = true;
+      } else if (e instanceof RouteConfigLoadEnd) {
+        console.log('config log start');
+        this.showRouterLoader = false;
       }
     });
 
@@ -516,7 +533,7 @@ export class AppService {
         return `/forum/${post.post_id}/${post.idx}/${post.subject}`;
       }
     } if (post.post_id === 'blog' && post['blog']) {
-      return this.getUrlBlogViewList(post);
+      return this.getBlogViewListUrl(post);
     } else {
       return `/forum/${post.post_id}/${post.idx}/${post.subject}`;
     }
@@ -538,18 +555,36 @@ export class AppService {
     return `/forum/${post_id}/${code}`;
   }
 
+  /**
+   * Opens a post depending on domain, it can refresh the website.
+   * @param post post
+   * @param event click event
+   */
   openPostView(post: ApiPost, event?: Event) {
     if (event) {
       event.preventDefault();
     }
     this.setPostInMemory(post);
     if (post.post_id === 'blog') {
-      this.router.navigateByUrl(this.getUrlBlogViewList(post));
+      if (post.blog) {
+        // console.log(`if (${post.blog} === ${this.currentBlogDomain}) {`);
+        if (post.blog === this.currentBlogDomain) {
+          this.router.navigateByUrl(this.getBlogViewListUrl(post));
+        } else {
+          window.location.href = this.getBlogDomainUrl(post.blog) + this.getBlogViewListUrl(post);
+        }
+      } else {
+        this.router.navigateByUrl(this.getBlogViewListUrl(post));
+      }
+
+
+      // this.router.navigateByUrl(this.getBlogViewListUrl(post));
     } else {
       this.router.navigateByUrl('/forum/' + post.post_id + '/' + post.idx);
     }
     return false;
   }
+
   /**
    * open blog list page with a post-on-top.
    * @param post blog post
@@ -585,7 +620,7 @@ export class AppService {
    * @desc if the input post is not a blog post, then, it will return url of post view.
    * @param post blog post
    */
-  getUrlBlogViewList(post): string {
+  getBlogViewListUrl(post): string {
     if (!post.post_id) {
       post.post_id = 'blog';
     }
@@ -791,7 +826,7 @@ export class AppService {
    * Returns root url of the blog domain
    * @param domain blog domain
    */
-  getBlogDomainUrl(domain): string {
+  getBlogDomainUrl(domain: string): string {
     let url = '';
     url = APP_PROTOCOL + domain + '.' + this.appRootDomain;
     if (APP_PORT) {
@@ -807,7 +842,7 @@ export class AppService {
    * @param width width
    * @param height height
    */
-  getPostPhotoUrl(post, width, height) {
+  getPostPhotoUrl(post: ApiPost, width: number, height: number) {
     return this.philgo.thumbnailUrl({
       width: width,
       height: height,
@@ -857,5 +892,23 @@ export class AppService {
     options['domain'] = this.currentBlogDomain;
     console.log('options: ', options);
     socket.emit('log', options);
+  }
+
+  date_hia(stamp) {
+    let d;
+    if (stamp) {
+      d = new Date(_.parseNumber(stamp) * 1000);
+    } else {
+      d = new Date();
+    }
+
+    // return d.getFullYear();
+    let hours = d.getHours();
+    let minutes: any = d.getMinutes();
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    return hours + ':' + minutes + ' ' + ampm;
   }
 }

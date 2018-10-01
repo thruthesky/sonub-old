@@ -5,6 +5,7 @@ import { JobComponent } from './job.component';
 import { CommonModule } from '@angular/common';
 import { JobListComponentModule } from 'share/philgo-api-components/forum/job/list/job-list.component.module';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material';
 
 const routes: Routes = [
     {
@@ -18,7 +19,8 @@ const routes: Routes = [
         CommonModule,
         FormsModule,
         RouterModule.forChild(routes),
-        JobListComponentModule
+        JobListComponentModule,
+        MatSelectModule
     ],
     exports: [],
     declarations: [JobComponent],

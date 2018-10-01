@@ -1,0 +1,22 @@
+<section class="weatherMap box" *ngIf=" map ">
+  <header>Weather At {{ map.weather.name }}, {{ map.weather.sys.country }}</header>
+  <article>
+    <div class="weather" *ngIf=" map?.weather?.weather ">
+      <div>
+        <img src="{{ map.weather.icon_url }}">
+      </div>
+      <div>
+        {{ map.weather.weather[0].description | titlecase }}
+      </div>
+      <div>
+        Temp: {{ map.weather.main.temp }} &#8451;
+      </div>
+      <div>
+        Cloud Cover: {{ map.weather.clouds.all }}%
+      </div>
+    </div>
+    <div class="uv">
+      UV: {{ map.uv.value }} - {{ uvString() }}
+    </div>
+  </article>
+</section>
