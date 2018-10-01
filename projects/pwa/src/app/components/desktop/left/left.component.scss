@@ -20,3 +20,15 @@ li,
     }
 
 }
+
+.hover-icon {
+    .material-icons{
+        opacity: 0;
+        font-size: 1.15rem;
+    }
+    &:hover{
+        .material-icons{
+            opacity: 1;
+        }
+    }
+}

@@ -76,9 +76,15 @@
   </div>
   <div class="side-menu" *ngIf=" a.blog?.categories?.length ">
     <ul>
-      <li *ngFor=" let category of  a.blog.categories " routerLink="{{ a.getBlogCategoryUrl(category) }}">{{ category
-        }}</li>
-        <li routerLink="{{ a.getBlogCategoryUrl( 'all' ) }}">All posts</li>
+      <li  class="hover-icon flex-center justify-content-between" *ngFor=" let category of  a.blog.categories; let index = index " routerLink="{{ a.getBlogCategoryUrl(category) }}">
+        <!-- <span class="d-inline-block bg-primary white mr-2 fs-xs py-1 px-2">{{index+1}}</span> -->
+          <span> {{ category}}</span>
+          <i class="material-icons text-muted">more_horiz</i>
+      </li>
+      <li class="hover-icon flex-center justify-content-between" routerLink="{{ a.getBlogCategoryUrl( 'all' ) }}">
+          <span> All posts</span>
+          <i class="material-icons text-muted">more_horiz</i>
+      </li>
     </ul>
     
   </div>
