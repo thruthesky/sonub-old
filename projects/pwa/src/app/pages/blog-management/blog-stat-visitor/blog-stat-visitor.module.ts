@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlogStatVisitorComponent } from './blog-stat-visitor.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MatToolbarModule} from '@angular/material';
+import {
+  MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule,
+  MatToolbarModule
+} from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -17,8 +21,13 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild(routes),
-    MatToolbarModule
+    MatFormFieldModule,
+    MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   declarations: [BlogStatVisitorComponent]
 })
