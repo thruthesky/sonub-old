@@ -600,6 +600,7 @@ export class AppService {
    *
    * If the input blogDomain is not current blog domain, then it will reload the blog site.
    * If the input blogDomain is same as current blog domain, then it will open the category page ( NOT reloading )
+   * If user is in root site, then it will reload the page to blog domain.
    *
    * @param categoryName category name
    * @param blogDomain blog domain. If this is omitted, it assumes you are trying to open the category under current blog domain.
@@ -613,6 +614,7 @@ export class AppService {
       }
     } else {
       this.router.navigateByUrl(this.getBlogCategoryUrl(categoryName));
+      // window.location.href = this.getBlogCategoryUrl(categoryName, blogDomain);
     }
   }
 
