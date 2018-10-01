@@ -1,12 +1,11 @@
-<div class="fs-sm">
+
   <div class="d-flex">
     <div class="photo">
       <img *ngIf=" a.philgo.isLoggedOut() " class="size-32px" src="{{ a.anonymousPhotoUrl }}">
       <img *ngIf=" a.philgo.isLoggedIn() " class="size-32px rounded" src="{{ a.myPhotoUrl }}">
     </div>
-    <div class="meta pt-1 pl-2">
+    <div class="meta pl-2">
       <div class="name">{{ a.myName }}</div>
-      <div class="meta">Lv. 100 Fan. 1014</div>
+      <div class="meta fs-sm">Lv. 100 Fan. 1014</div>
     </div>
   </div>
-</div>
