@@ -209,3 +209,9 @@
 .mw-300px {
   max-width: 300px !important;
 }
+
+.truncate{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

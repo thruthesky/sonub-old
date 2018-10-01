@@ -7,17 +7,17 @@
 
 <section class="root-site-content mt-4" *ngIf=" a.inRootSite ">
   <section class="side-menu">
-    <b class="text-muted">Sonub Network Hub</b>
+    <b>Sonub Network Hub</b>
     <ul>
       <li>
         <a routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'become-best-blog-writer' ) }}">
-          <i class="material-icons">border_color</i>
+          <i class="material-icons text-secondary">star</i>
           Become Best Blog Writer
         </a>
       </li>
       <li>
         <a routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'create-your-blog-now' ) }}">
-          <i class="material-icons">format_bold</i>
+          <i class="material-icons text-secondary">format_bold</i>
           Create your blog now
         </a>
       </li>
@@ -26,41 +26,41 @@
   </section>
 
   <section class="side-menu root-site-content mt-4">
-    <header class="text-muted">Communities</header>
+    <header>Communities</header>
     <ul>
       <li>
         <a routerLink="{{ a.getForumUrl( a.DISCUSSION ) }}">
-          <i class="material-icons">question_answer</i>
+          <i class="material-icons text-secondary">question_answer</i>
           Discussion
         </a>
       </li>
       <li>
         <a routerLink="{{ a.getForumUrl( a.QNA ) }}">
-          <i class="material-icons">help</i>
+          <i class="material-icons text-secondary">help</i>
           QnA
         </a>
       </li>
       <li>
         <a routerLink="{{ a.getForumUrl( a.BUYANDSELL ) }}">
-          <i class="material-icons">shopping_cart</i>
+          <i class="material-icons text-secondary">shopping_cart</i>
           Buy and Sell
         </a>
       </li>
       <li>
         <a routerLink="{{ a.getForumUrl( a.NEWS ) }}">
-          <i class="material-icons">fiber_new</i>
+          <i class="material-icons text-secondary">fiber_new</i>
           News
         </a>
       </li>
       <li>
         <a routerLink="/job">
-          <i class="material-icons">work</i>
+          <i class="material-icons text-secondary">work</i>
           Jobs
         </a>
       </li>
       <li *ngIf=" a.philgo.isAdmin() ">
         <a routerLink="{{ a.getForumUrl( a.HELP ) }}">
-          <i class="material-icons">help</i>
+          <i class="material-icons text-secondary">help</i>
           Managment Forum
         </a>
       </li>
@@ -76,9 +76,14 @@
   </div>
   <div class="side-menu" *ngIf=" a.blog?.categories?.length ">
     <ul>
-      <li *ngFor=" let category of  a.blog.categories " routerLink="{{ a.getBlogCategoryUrl(category) }}">{{ category
-        }}</li>
-        <li routerLink="{{ a.getBlogCategoryUrl( 'all' ) }}">All posts</li>
+      <li  class="hover-icon flex-center justify-content-between" *ngFor=" let category of  a.blog.categories; let index = index " routerLink="{{ a.getBlogCategoryUrl(category) }}">
+          <span> {{ category}}</span>
+          <i class="material-icons text-muted">more_horiz</i>
+      </li>
+      <li class="hover-icon flex-center justify-content-between" routerLink="{{ a.getBlogCategoryUrl( 'all' ) }}">
+          <span> All posts</span>
+          <i class="material-icons text-muted">more_horiz</i>
+      </li>
     </ul>
     
   </div>
@@ -89,27 +94,42 @@
   <section class="side-menu blog-site-content" *ngIf=" a.inBlogSite ">
     <header class="pointer" routerLink="{{ a.getBlogManagementUrl() }}">Blog Managment</header>
     <ul>
-      <li routerLink="{{ a.getBlogManagementUrl() }}">Blog dashboard</li>
-      <li routerLink="{{ a.getBlogSettingsCategoryUrl() }}">Categories</li>
-      <li routerLink="{{ a.getBlogStatVisitorUrl() }}">Statistics</li>
+      <li>
+        <a routerLink="{{ a.getBlogManagementUrl() }}"> 
+            <i class="material-icons text-secondary">subject</i>
+            Blog dashboard
+        </a>
+      </li>
+      <li>
+        <a routerLink="{{ a.getBlogSettingsCategoryUrl() }}">
+            <i class="material-icons text-secondary">category</i>
+            Categories
+        </a>
+      </li>
+      <li>
+        <a routerLink="{{ a.getBlogStatVisitorUrl() }}">
+            <i class="material-icons text-secondary">equalizer</i>
+            Statistics
+        </a>
+      </li>
     </ul>
   </section>
 
 
   <section class="side-menu root-site-content mt-4">
-      <header class="text-muted">Communities</header>
+      <header>Communities</header>
       <ul>
 
         
         <li>
           <a routerLink="{{ a.getForumUrl( a.NEWS ) }}">
-            <i class="material-icons">fiber_new</i>
+            <i class="material-icons text-secondary">fiber_new</i>
             News
           </a>
         </li>
         <li>
           <a routerLink="/job">
-            <i class="material-icons">work</i>
+            <i class="material-icons text-secondary">work</i>
             Jobs
           </a>
         </li>
