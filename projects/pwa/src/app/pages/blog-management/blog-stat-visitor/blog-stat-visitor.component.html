@@ -1,21 +1,34 @@
 <mat-toolbar  class="border-top border-top-md-0">
-    <h1 class="px-2">Satistics</h1>
+    <h1 class="px-2">Statistics</h1>
 </mat-toolbar>
+
+<mat-form-field>
+  <input matInput [matDatepicker]="from_date_picker" placeholder="Date From" disabled [(ngModel)]=" from_date " (dateChange)="loadStat()">
+  <mat-datepicker-toggle matSuffix [for]="from_date_picker"></mat-datepicker-toggle>
+  <mat-datepicker #from_date_picker disabled="false"></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput [matDatepicker]="to_date_picker" placeholder="Date To" disabled [(ngModel)]=" to_date " (dateChange)="loadStat()">
+  <mat-datepicker-toggle matSuffix [for]="to_date_picker"></mat-datepicker-toggle>
+  <mat-datepicker #to_date_picker disabled="false"></mat-datepicker>
+</mat-form-field>
+
 
 <section class="bg-white p-4">
         Select Period: 2018-05-05 ~ 2018-09-09<br>
 
         No of visitors on each day.<br>
-        
+
         Total no of visitors on selected period<br>
-        
+
         No of page view on each day<br>
-        
+
         Total no of page view on selected period<br>
-        
-        
+
+
         Languages(Country) base on browser language<br>
-        
-        
+
+
         Platform stat: Windows, Mac, Android, iOS, etc.<br>
 </section>
