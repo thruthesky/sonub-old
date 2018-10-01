@@ -239,6 +239,7 @@ export class AppService {
 
     this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationStart) {
+        console.log('NavigationStart', e);
         /**
          * Reloads(Redirects) only if the current url is clicked again.
          * It does not reloads if when different url is clicked but component is the same.
