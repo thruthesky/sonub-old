@@ -15,9 +15,9 @@
   </mat-list-item>
   <mat-list-item (click)=" a.openBlogSettings() " *ngIf=" a.inMyBlog ">
     <i class="material-icons">
-      crop_original
+      subject
     </i>
-    <h4 matLine>My Blog Settings</h4>
+    <h4 matLine>Blog dashboard</h4>
   </mat-list-item>
 
   <mat-list-item routerLink="/forum/{{ a.DISCUSSION }}">
@@ -72,7 +72,7 @@
 
   <mat-list-item routerLink="/profile" *ngIf=" philgo.isLoggedIn() ">
     <i class="material-icons">
-      arrow_forward_ios
+      account_circle
     </i>
     <h4 matLine>{{ a.t({ en: 'Profile Update', ko: '회원 정보 수정'}) }}</h4>
   </mat-list-item>
