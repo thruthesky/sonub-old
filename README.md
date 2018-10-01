@@ -156,7 +156,7 @@ This is wrong because it makes difficult to understand template design. In fact,
 
 * 3 api calls are made when visiting blog site.
   * 1st call for `sonub config` in app module. ( this may not be called when user does not load blog domain. )
-  * 2nd call for sonub front apge in home component to get first page content inclding blog site's content.
+  * 2nd call for sonub front apge in home component to get first page content including blog site's content.
   * 3rd call for blog settings in app service.
 
 ### Blog post view
