@@ -12,7 +12,13 @@ const routes: Routes = [
     { path: 'register', loadChildren: './pages/register/register.module#RegisterModule' },
     { path: 'profile', loadChildren: './pages/register/register.module#RegisterModule' },
     { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsModule' },
+
+    /**
+     * Posting page
+     */
     { path: 'post/:post_id', loadChildren: './pages/post/post.module#PostModule' },
+    { path: 'post', loadChildren: './pages/post/post.module#PostModule' },
+
     { path: 'post/edit/:idx', loadChildren: './pages/post/post.module#PostModule' },
     { path: 'forum/:post_id', loadChildren: './pages/forum/forum.module#ForumModule' },
     { path: 'forum/:post_id/:idx', loadChildren: './pages/forum/forum.module#ForumModule' },
@@ -20,6 +26,7 @@ const routes: Routes = [
 
     // blog posting. Domain is not reuqired since I am posting only on my domain.
     { path: 'blog-post/:blog_category', loadChildren: './pages/post/post.module#PostModule' },
+    { path: 'blog-post', loadChildren: './pages/post/post.module#PostModule' },
 
     /**
      * blog list.

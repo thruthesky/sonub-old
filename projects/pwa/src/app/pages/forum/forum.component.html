@@ -1,7 +1,13 @@
-
-<a class="create-post-button" routerLink="/post/{{ post_id }}">
-    <i class="material-icons">add</i>
-    <span>New Post</span>
-</a>
+<header class="d-flex justif-content-between">
+  <div>
+    {{ a.philgo.forumName( post_id ) | titlecase }}
+  </div>
+  <nav>
+    <a class="" routerLink="/post/{{ post_id }}">
+      <i class="material-icons">add</i>
+      <span>New Post</span>
+    </a>
+  </nav>
+</header>
 
 <app-forum-basic-list (edit)=" a.openPostEdit( $event ) "></app-forum-basic-list>

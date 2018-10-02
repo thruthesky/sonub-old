@@ -2,7 +2,32 @@
 
   <div class="flex-center justify-content-between">
     <app-avatar class="d-block mb-3" *ngIf=" philgo.isLoggedIn() "></app-avatar>
-    <div class="mb-3 text-primary">Posting on {{ form.post_id }}</div>
+    <div class="mb-3 text-primary">
+      <div>Select where you want to post...</div>
+
+      Posting on {{ form.post_id }}
+      <div>
+        <select name='post_id' [(ngModel)]="form.post_id">
+          <option value=''>Select Forum </option>
+          <option value='blog'>My Blog</option>
+          <option value='discussion'>Discussion</option>
+          <option value='answer'>Question & Answer</option>
+          <option value='market'>Buy & Sell</option>
+          <option value='media'>News</option>
+        </select>
+      </div>
+      <div *ngIf=" a.blog?.categories ">
+        <select name='category' [(ngModel)]="form.category" *ngIf=" form.post_id == 'blog' ">
+          <ng-container *ngIf=" a.blog.categories?.length ">
+            <option value=''>Select Blog Category</option>
+            <option *ngFor=" let category of a.blog.categories " value='{{ category }}'>{{ category }}</option>
+          </ng-container>
+          <ng-container *ngIf=" ! a.blog.categories?.length ">
+            <option value=''>No category. Please create category.</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
   </div>
 
   <section class="d-md-flex" *ngIf="philgo.isLoggedOut() ">
@@ -31,8 +56,8 @@
     [config]="{
     ckfinder: {uploadUrl: philgo.getFileServerRootUrl() + 'etc/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json' }
   }">
-  <div>Write comment</div>
-</ckeditor>
+    <div>Write comment</div>
+  </ckeditor>
 
 
   <section class="admin-options box" *ngIf=" philgo.isAdmin() ">

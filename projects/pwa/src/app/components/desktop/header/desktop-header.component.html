@@ -18,7 +18,7 @@
       </a>
 
       <span class="white" (click)=" a.openMyBlog() " *ngIf=" ! a.inMyBlog ">My Blog</span>
-      <a routerLink="{{ a.getBlogPostCreateUrl() }}">Create</a>
+      <a routerLink="/post">Create</a>
 
       <i class="material-icons" routerLink="{{ a.getBlogNewCommentsUrl() }}">
         chat

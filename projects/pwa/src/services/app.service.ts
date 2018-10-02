@@ -337,18 +337,25 @@ export class AppService {
   // }
 
   /**
-   * When user visits a blog, load blog settings and initialize it.
+   * @since 2018-10-01 If user is logged in and the user is in root site, then it loads login user's blog settigns.
+   * @desc When user visits a blog, load blog settings and initialize it.
    * @desc when a user visits a blog
    *    - the browser may visite from outside. Meaning there is page reload.
    *    - Or the broswer may visite from inside. Meaning there will be no page reload.
    *      In this case, this method must be re-invoked.
    */
   initBlog() {
+
     if (this.inBlogSite) {
       this.philgo.blogLoadSettings(this.currentBlogDomain).subscribe(blog => {
         // console.log('blog settings', blog);
       }, e => this.toast(e));
+    } else {
+      if ( this.loggedIn ) {
+        this.philgo.blogLoadSettings( this.myBlogDomain ).subscribe(b => {});
+      }
     }
+
     this.philgo.blogChange.subscribe(blog => {
       if (!blog) {
         return;
@@ -839,7 +846,7 @@ export class AppService {
     return url;
   }
   getBlogUrl(domain: string): string {
-    return this.getBlogDomainUrl( domain );
+    return this.getBlogDomainUrl(domain);
   }
   /**
    * Returns 'abc.sonub.com' only.
