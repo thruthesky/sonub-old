@@ -20,64 +20,102 @@
   <app-root>
     <section id="shell">
       <style>
-        body { margin: 0; padding: 0; }
+
+        /* base */
+        body, h1, p { margin: 0; padding: 0 }
         #shell {
-          height: 100vh;
-          background-color: #eee;
+          background: #e9ebee;
+          font-family: Arial, Helvetica, sans-serif
         }
+
+        /* utilities */
+        #shell .flex-center{ display: flex; justify-content: center; align-items: center}
+        #shell .flex-column{ flex-direction: column }
+        #shell .flex-wrap{ flex-wrap: wrap }
+        #shell .p-4 {padding: 2.25rem }
+        #shell .py-4 {padding: 2.25rem 0 }
+        #shell .pt-5 {padding-top: 3rem }
+        #shell .w-1200px { width: 1200px }
+        #shell .mw-900px { max-width: 900px }
+        #shell .min-h-8vh { min-height: 8vh }
+        #shell .min-h-84vh { min-height: 84vh }
+        #shell .fs-lg { font-size: 1.4rem }
+        #shell .fs-md { font-size: 1.2rem }
+        #shell .fw-light { font-weight: lighter }
+        #shell .text-center { text-align: center }
+
         
-        #shell article {
-          padding-top: 3em;
-        }
+        /* modules */
         #shell header {
-          background-color: rgba(148, 122, 89, 0.562);
+          padding: 0 1.5em;
+          background-color: #29487D;
+          color:#fff
         }
-        #shell footer {
-          background-color: rgb(178, 194, 209);
+        #shell footer{
+          padding: 0 1.5em;
+          background-color: rgb(178, 194, 209)
         }
+        #shell .description {
+          padding: 0 1.5rem;
+          line-height: 1.4em
+        }
+        #shell .description a{
+          display: inline-block;
+          padding:1rem 1.5rem;
+        }
+
         #shell .sonub-logo {
-          
+          animation: rotate 1.2s linear infinite;
+          color:#29487D
         }
-        #shell .p-3 { padding: 1em; }
-        #shell .pt-3em { padding-top: 3em; }
-        #shell .mt-3em { margin-top: 3em; }
+        @keyframes rotate {
+          0% {transform: rotate(0deg)}
+          100% {transform: rotate(360deg)}
+        }
 
-        #shell .categories a {
-          display: block;
-          padding: 1em 0;
-        }
       </style>
-      <header class="p-3">
-        #title
+
+      <header class="flex-center min-h-8vh">
+        <h1 class="w-1200px fw-light fs-md">#title</h1>
       </header>
-      <article class="p-3 pt-3em">
-        #description
 
-        <div>
-            <svg class="sonub-log" version="1.0" xmlns="http://www.w3.org/2000/svg" width="101.000000pt" height="102.000000pt"
-            viewBox="0 0 101.000000 102.000000" preserveAspectRatio="xMidYMid meet">
-            <g transform="translate(0.000000,102.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-              <path fill="currentColor" d="M545 1001 c-96 -34 -188 -92 -313 -195 -151 -124 -232 -251 -232
-         -364 0 -79 17 -118 76 -182 125 -133 434 -260 634 -260 96 0 139 11 188 47 80
-         60 112 151 112 323 0 309 -96 568 -235 631 -53 24 -163 24 -230 0z" />
-            </g>
-          </svg>
+      <article class="flex-center flex-column min-h-84vh">
 
-          <div class="loading-text">Loading ... please wait for 3 seconds only.</div>
-        </div>
-        <div class="categories">
-            <a href="#category-1-url">#category-1</a>
-            <a href="#category-2-url">#category-2</a>
-            <a href="#category-3-url">#category-3</a>
-            <a href="#category-4-url">#category-4</a>
-            <a href="#category-5-url">#category-5</a>
-            <a href="#category-6-url">#category-6</a>
-            <a href="#category-7-url">#category-7</a>
-            <a href="#category-8-url">#category-8</a>
-        </div>
+          <section class="text-center pt-5">
+            <svg class="sonub-logo" version="1.0" xmlns="http://www.w3.org/2000/svg" width="70pt" height="72pt"
+              viewBox="0 0 101.000000 102.000000" preserveAspectRatio="xMidYMid meet">
+              <g transform="translate(0.000000,102.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                <path fill="currentColor" d="M545 1001 c-96 -34 -188 -92 -313 -195 -151 -124 -232 -251 -232
+                -364 0 -79 17 -118 76 -182 125 -133 434 -260 634 -260 96 0 139 11 188 47 80
+                60 112 151 112 323 0 309 -96 568 -235 631 -53 24 -163 24 -230 0z" />
+              </g>
+            </svg>
+            <p class="p-4 fs-lg">Loading. Please wait for 3 seconds only...</p>
+          </section>
+
+          <section class="description mw-900px">
+            <p>
+                #description. 
+                This is an example description with 255 characters. This blog is intended for everyone to use expecting everyone to gain some knowledge.
+                This blog is intended for everyone to use expecting everyone to gain some knowledge. Soon
+                <nav class="flex-center flex-wrap py-4">
+                    <a href="#category-1-url">#category-1,</a>
+                    <a href="#category-2-url">#category-2,</a>
+                    <a href="#category-3-url">#category-3,</a>
+                    <a href="#category-4-url">#category-4,</a>
+                    <a href="#category-5-url">#category-5,</a>
+                    <a href="#category-6-url">#category-6,</a>
+                    <a href="#category-7-url">#category-7,</a>
+                    <a href="#category-8-url">#category-8,</a>
+                </nav>
+            </p>
+          </section>
+
       </article>
-      <footer class="mt-3em p-3">
-        #title
+
+
+      <footer class="flex-center min-h-8vh">
+        <p class="w-1200px">#title</p>
       </footer>
     </section>
   </app-root>
