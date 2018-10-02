@@ -25,6 +25,9 @@ const routes: Routes = [
      * blog list.
      * Domain is required listing from root site.
      */
+    /**
+     * blog/domain/category is being used in SEO(PHP) also.
+     */
     { path: 'blog/:blog_domain/:blog_category', loadChildren: './pages/blog-list/blog-list.module#BlogListModule' },
 
     // blog post view on top and list at bottom. Domain is required for listing from root site.

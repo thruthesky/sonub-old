@@ -1,5 +1,9 @@
 # Sonub
 
+## Repository
+
+* [BitBucket SEO](https://bitbucket.org/withcenter/sonub-seo/src/master/)
+
 ## Documents
 
 * [Sonub Management Doc](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.m1tz4v8spj4k)
@@ -88,11 +92,40 @@ This is wrong because it makes difficult to understand template design. In fact,
 
 ### SEO Development
 
-* Nginx will load `index.php` for all urls.
-* And then, `index.php` will read `indexhtml` and patch SEO data before display to webbrowser.
+* Nginx is listening 443 port so, accessing `https://www.sonub.com` with port 443 will connect to nginx.
+
+* Nginx will load `index.php` for all urls of all subdomains of sonub.com
+
+* And then, `index.php` will read `index.html` and patch SEO data before display to webbrowser.
+
 * `index.php` will get information from database based on `blog domain` and `post idx`.
+
 * The app must have `app shell` which has category links to its blog category for `SEO indexing`
   * `app shell` will be displayed before `Angular bootstrap`.
+
+#### SEO local work
+
+* To do live test,
+  * run `npm run pwa`,
+  * run `npm run build:ngnix`
+  * run `nginx`
+    * nginx must listen `https://www.sonub.com` on `~/www/sonub-seo` folder as `127.0.0.1`.
+  * open web browser for `ng serve`
+  * open web browser for `nginx`
+
+* When you edit, you can see the changes quickly on `https://www.sonub.com`, `https://www.thruthesky.sonub.com`.
+
+* It should very smooth working with App shell and SEO.
+  * When you edit index.html, the edit must appear on your web browser in realtime.
+
+#### App Shell Coding
+
+##### App Shell Design
+
+* To desing app shell
+  * Load `index.html` using any browser.
+    example) `file:///Users/jaehosong/apps/sonub/projects/pwa/src/index.html`
+  * And edit, refresh. that's all.
 
 ### App Object References
 
