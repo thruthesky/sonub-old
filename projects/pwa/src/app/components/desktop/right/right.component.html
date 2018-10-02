@@ -6,26 +6,29 @@
 
   <article class="posts pr-3 pb-3">
 
-    <div class="post d-flex mt-2">
-      <div class="flex-center p-1 size-40px rounded" style="border: 2px solid rgb(49, 114, 235);">
+    <div class="post d-flex align-items-center mt-2">
+      <div class="left flex-center w-30 p-1px size-48px rounded" style="border: 2px solid rgb(49, 114, 235);">
         <i class="material-icons">add</i>
       </div>
-      <div class="ml-2 mt-1 w-75">
-        <div class="fw-bold">Add your story here</div>
-        <div class="fs-sm text-muted">Sonub is free service.</div>
+      <div class="right ml-2 w-70">
+        <div class="mt-2px fw-bold">Add your story here</div>
+        <div class="fs-sm text-muted ">Sonub is free service.</div>
       </div>
     </div>
 
     <div class="post d-flex pointer mt-2" *ngFor="let post of a.frontPage.stories" (click)=" a.openBlogCategory( post.category, post.blog ) ">
-      <div class="w-25">
-          <div class="p-1 size-40px rounded" style="border: 2px solid rgb(49, 114, 235);">
+      <div class="left w-30">
+          <div class="flex-center p-1px size-48px rounded" style="border: 2px solid rgb(49, 114, 235);">
             <img class="w-100" src="{{ a.getPostPhotoUrl(post, 48, 48) }}">
           </div>
       </div>
-      <div class="ml-2 mt-1 w-75">
-        <div class="text-link fw-bold truncate">{{ post.subject }}</div>
-        <div  class="mt-1 fs-sm text-muted">{{ post.content }}</div>
-        <div>{{ a.getBlogDomain(post.blog) }}</div>
+      <div class="right ml-2 w-70">
+        <div class="mt-2px text-link fw-bold truncate">{{ post.subject }}</div>
+        <div  class="truncate">{{ post.content }}</div>
+        <div class="d-flex align-items-center text-secondary">
+          <i class="material-icons mr-1 fs-md">tv</i>
+          {{ a.getBlogDomain(post.blog) }}
+        </div>
       </div>
     </div>
   </article>
