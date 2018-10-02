@@ -26,6 +26,6 @@ export class StatService {
     getPageView(req: PageView): Observable<PageView> {
         req['function'] = 'pageView';
         const params = new HttpParams( { fromObject: <any> req } );
-        return <any> this.http.get( environment.sonubSupportingServerUrl, { params: params } );
+        return <any> this.http.get( environment.sonubLogApiServerUrl, { params: params } );
     }
 }

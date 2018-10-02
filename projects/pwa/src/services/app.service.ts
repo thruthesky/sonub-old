@@ -22,12 +22,13 @@ interface Environment {
   philgoServerUrl: string;
   philgoFileServerUrl: string;
   newFileServerUrl: string;
-  sonubSupportingServerUrl: string;
+  sonubLogServerUrl: string;
+  sonubLogApiServerUrl: string;
 }
 
 
 import * as io from 'socket.io-client';
-const socket = io(environment.sonubSupportingServerUrl);
+const socket = io(environment.sonubLogServerUrl);
 
 
 
@@ -900,13 +901,21 @@ export class AppService {
     });
   }
 
-  log(options: { path: string }) {
+  log(data: { path: string }) {
     // const str = JSON.stringify( options );
-    options['domain'] = this.currentBlogDomain;
-    console.log('options: ', options);
-    socket.emit('log', options);
+    data['domain'] = this.currentBlogDomain;
+    data['idx_member'] = this.philgo.myIdx();
+    data['id'] = this.philgo.myId();
+    data['referrer'] = document.referrer;
+    console.log('data: ', data);
+    socket.emit('log', data);
   }
 
+
+  /**
+   * Returns hours and minute in '3:30 pm'.
+   * @param stamp stamp of time
+   */
   date_hia(stamp) {
     let d;
     if (stamp) {
