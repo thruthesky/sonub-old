@@ -837,6 +837,16 @@ export class AppService {
     }
     return url;
   }
+  getBlogUrl(domain: string): string {
+    return this.getBlogDomainUrl( domain );
+  }
+  /**
+   * Returns 'abc.sonub.com' only.
+   * @param domain domain
+   */
+  getBlogDomain(domain: string): string {
+    return domain + '.' + this.appRootDomain;
+  }
 
 
   /**

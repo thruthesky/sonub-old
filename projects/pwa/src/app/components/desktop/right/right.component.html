@@ -23,8 +23,9 @@
           </div>
       </div>
       <div class="ml-2 mt-1 w-75">
-        <div class="text-link fw-bold truncate">[{{ post.blog}}] {{ post.subject }}</div>
-        <div  class="fs-sm text-muted mt-3px">{{ post.content }}</div>
+        <div class="text-link fw-bold truncate">{{ post.subject }}</div>
+        <div  class="mt-3px fs-sm text-muted">{{ post.content }}</div>
+        <div>{{ a.getBlogDomain(post.blog) }}</div>
       </div>
     </div>
   </article>

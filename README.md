@@ -86,6 +86,14 @@ This is wrong because it makes difficult to understand template design. In fact,
 * But put `href` on `<a>` as much as possible since hueman want to copy the link also.
 * SEO will be done by backend side.
 
+### SEO Development
+
+* Nginx will load `index.php` for all urls.
+* And then, `index.php` will read `indexhtml` and patch SEO data before display to webbrowser.
+* `index.php` will get information from database based on `blog domain` and `post idx`.
+* The app must have `app shell` which has category links to its blog category for `SEO indexing`
+  * `app shell` will be displayed before `Angular bootstrap`.
+
 ### App Object References
 
 * `window['a']` has `AppService` reference.
