@@ -3,9 +3,9 @@
     <img src="{{ philgo.thumbnailUrl({ width: 140, height: 70, path: post.path_of_first_image }) }}">
   </div>
   <div class="ml-2">
-    <div class="text bold" *ngIf=" post.subject ">{{ post.subject | slice:0:32 }}</div>
+    <div class="text bold truncate" *ngIf=" post.subject ">{{ post.subject }}</div>
     <div class="text text-muted" *ngIf=" a.postContentOnMainPhoto(post) ">
-      {{ a.postContentOnMainPhoto(post) | slice: 0 : 68 }}
+      {{ a.postContentOnMainPhoto(post) }}
     </div>
   </div>
 
