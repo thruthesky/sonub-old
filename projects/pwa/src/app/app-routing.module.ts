@@ -22,6 +22,8 @@ const routes: Routes = [
     { path: 'post/edit/:idx', loadChildren: './pages/post/post.module#PostModule' },
     { path: 'forum/:post_id', loadChildren: './pages/forum/forum.module#ForumModule' },
     { path: 'forum/:post_id/:idx', loadChildren: './pages/forum/forum.module#ForumModule' },
+
+    /// This is being used in PHP for SEO. it cannot be changed.
     { path: 'forum/:post_id/:idx/:subject', loadChildren: './pages/forum/forum.module#ForumModule' },
 
     // blog posting. Domain is not reuqired since I am posting only on my domain.
@@ -38,6 +40,7 @@ const routes: Routes = [
     { path: 'blog/:blog_domain/:blog_category', loadChildren: './pages/blog-list/blog-list.module#BlogListModule' },
 
     // blog post view on top and list at bottom. Domain is required for listing from root site.
+    // This is being used in PHP SEO.
     { path: 'b/:blog_domain/:idx/:subject', loadChildren: './pages/blog-list/blog-list.module#BlogListModule' },
 
     // blog post view. Single post view only. a.getUrlBlogView()
@@ -51,6 +54,10 @@ const routes: Routes = [
     {
         path: 'blog-settings/basic',
         loadChildren: './pages/blog-management/blog-settings-basic/blog-settings-basic.module#BlogSettingsBasicModule'
+    },
+    {
+        path: 'blog-settings/sitemap',
+        loadChildren: './pages/blog-management/blog-sitemap/blog-sitemap.module#BlogSitemapModule'
     },
     {
         path: 'blog-settings/category',

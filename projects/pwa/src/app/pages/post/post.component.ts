@@ -20,7 +20,8 @@ export class PostComponent implements OnInit, AfterViewInit {
 
 
   form: ApiPost = <any>{
-    post_id: 'blog',
+    post_id: '',
+    category: '',
     subject: '',
     content: '',
     gid: _.randomString(19, this.philgo.myIdx())
@@ -63,18 +64,17 @@ export class PostComponent implements OnInit, AfterViewInit {
       if (params.get('post_id')) {
         this.isForumPostCreate = true;
         this.form.post_id = params.get('post_id');
-      }
-
-      if (params.get('blog_category')) {
+        console.log('got post id: ', this.form.post_id);
+      } else if (params.get('blog_category')) {
         this.isBlogPostCreate = true;
         this.form.post_id = 'blog';
         this.form.category = params.get('blog_category');
-      }
-
-
-      if (params.get('idx')) {
+        console.log('got category: ', this.form.category);
+      } else if (params.get('idx')) {
         this.isPostEdit = true;
         const idx = params.get('idx');
+
+        console.log('got post idx: ', this.form.idx);
         const post = this.a.postInMemory;
         if (post) {
           console.log(`Got post from memory`);
@@ -83,7 +83,14 @@ export class PostComponent implements OnInit, AfterViewInit {
           console.log('No post in memory. Going to get it from server');
           this.philgo.postLoad(idx).subscribe(p => this.form = p, e => this.a.toast(e));
         }
+      } else {
+        console.log('Got no param');
+        if ( this.a.inMyBlog ) {
+          this.form.post_id = 'blog';
+          this.form.category = '';
+        }
       }
+
     });
 
   }

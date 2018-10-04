@@ -1,36 +1,83 @@
-
-<mat-toolbar  class="border-top border-top-md-0">
-    <h1 class="px-2">Blog Basic Settings</h1>
+<mat-toolbar class="border-top border-top-md-0">
+  <h1 class="px-2">Blog Basic Settings</h1>
 </mat-toolbar>
+
+
+<form class="p-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
+
+  <mat-form-field class="mt-1 w-100" appearance="outline">
+    <input matInput name="name" [(ngModel)]=" blog.name ">
+    <mat-label>Your blog name</mat-label>
+    <mat-hint>Input your blog name.</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="mt-3 w-100" appearance="outline">
+    <textarea rows="10" matInput name="description" [(ngModel)]=" blog.description "></textarea>
+    <mat-label>Describe your blogs</mat-label>
+    <mat-hint>Describe your blog in 255 letters.</mat-hint>
+  </mat-form-field>
+
+
+
+  <mat-form-field class="mt-1 w-100" appearance="outline">
+    <input matInput name="keywords" [(ngModel)]=" blog.keywords ">
+    <mat-label>Keywords</mat-label>
+    <mat-hint>Input your sites keywords. This keywords will be used in SEO. You can add many keywords separating by
+      comma(,). But not exceeding 255 chars over all.</mat-hint>
+  </mat-form-field>
+
+
+  <mat-form-field class="mt-1 w-100" appearance="outline">
+    <input matInput name="author" [(ngModel)]=" blog.author ">
+    <mat-label>Author Name</mat-label>
+    <mat-hint>Input your blog author name. This may be a person's name or company name.</mat-hint>
+  </mat-form-field>
+
+  <div class="blog-favicon">
+      <div>Favicon</div>
+      <div>
+        <div class="position-relative">
+          <div class="mx-auto mb-1 size-64px of-hidden">
+            <img class="w-100" src="{{ blog.url_favicon }}">
+          </div>
+          <input type="file" name="favicon" (change)=" onChangeFile($event,  'blog_favicon' ) ">
+        </div>
+        <div class=" mw-180px my-2 p-1 rounded bg-success fs-xs white text-center" *ngIf=" percentage && code == 'blog_favicon' " [style.width]="percentage + '%'">{{percentage}}%</div>
+      </div>
+      <div>
+        Upload Favicon.
+        Must be PNG image file with 64px width and 64px height.
+      </div>
+    </div>
+
+    <div class="blog-seo-image">
+        <div>Preview Image</div>
+        <div>
+          <div class="position-relative">
+            <div class="">
+              <img class="w-100" src="{{ blog.url_seo_image }}">
+            </div>
+            <input type="file" name="seoimage" (change)=" onChangeFile($event,  'blog_seo_image' ) ">
+          </div>
+          <div class=" mw-180px my-2 p-1 rounded bg-success fs-xs white text-center" *ngIf=" percentage && code == 'blog_seo_image' "
+              [style.width]="percentage && code == 'blog_seo_image' + '%'">{{percentage && code == 'blog_seo_image'}}%</div>
+        </div>
+        <div>
+          Upload Favicon.
+          Recommend in 800 pixcels of width and 300 pixcels of height. This image will be used in SEO and site previews.
+        </div>
+      </div>
       
 
-  <form  class="p-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
-      <mat-form-field  class="mt-1 w-100" appearance="outline">
-        <input matInput name="name" [(ngModel)]=" blog.name ">
-        <mat-label>Your blog name</mat-label>
-        <mat-hint>Input your blog name.</mat-hint>
-      </mat-form-field>
-      <mat-form-field  class="mt-3 w-100" appearance="outline">
-        <textarea rows="10" matInput name="description" [(ngModel)]=" blog.description "></textarea>
-        <mat-label>Describe your blogs</mat-label>
-        <mat-hint>Describe your blog in 255 letters.</mat-hint>
-      </mat-form-field>
-  
-  
-  
-    <div class="list-row my-4 text-center">
-      <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog">
-        <i class="material-icons red">clear</i>
-        <span class="ml-1">Cancel</span>
-      </button>
-      <button class="mx-2 bg-primary" mat-flat-button type="submit">
-        <span class="mr-2">Submit</span>
-        <i class="material-icons">send</i>
-      </button>
-    </div>
-    
-  </form>
+  <div class="list-row my-4 text-center">
+    <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog">
+      <i class="material-icons red">clear</i>
+      <span class="ml-1">Cancel</span>
+    </button>
+    <button class="mx-2 bg-primary" mat-flat-button type="submit">
+      <span class="mr-2">Submit</span>
+      <i class="material-icons">send</i>
+    </button>
+  </div>
 
-
-
-
+</form>

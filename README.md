@@ -107,16 +107,35 @@ This is wrong because it makes difficult to understand template design. In fact,
 
 * To do live test,
   * run `npm run pwa`,
-  * run `npm run build:ngnix`
+  * run `npm run build:seo`
   * run `nginx`
     * nginx must listen `https://www.sonub.com` on `~/www/sonub-seo` folder as `127.0.0.1`.
   * open web browser for `ng serve`
-  * open web browser for `nginx`
+  * open web browser for `nginx`. just access `https://www.sonub.com` and SEO should work.
 
 * When you edit, you can see the changes quickly on `https://www.sonub.com`, `https://www.thruthesky.sonub.com`.
 
 * It should very smooth working with App shell and SEO.
   * When you edit index.html, the edit must appear on your web browser in realtime.
+
+#### SEO Logic
+
+* If `robot` access index.php, `app shell` will be displayed.
+
+* And `app shell` has enough links to menus and sitemap.
+
+  * `app shell` for root site exposes `/blogs` page which has all of user's blog.
+    This means all blogs have chance to be crawled by `robots`.
+
+  * `root site app shell` also exposes `sitemap` for all menus of the site including menu page itself and login etc.
+
+  * `blog app shell` exposts all the blog menus and its `sitemap` which has the latest 1,000 posts.
+
+#### SEO Tools
+
+##### Sitemaps
+
+* See [Sitemaps in Sonub management doc](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.qsv5o2at3zi0)
 
 #### App Shell Coding
 
