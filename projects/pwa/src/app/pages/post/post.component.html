@@ -1,31 +1,35 @@
 <section class="p-4 bg-white" page="post">
 
-  <div class="flex-center justify-content-between">
-    <app-avatar class="d-block mb-3" *ngIf=" philgo.isLoggedIn() "></app-avatar>
-    <div class="mb-3 text-primary">
-      <div>Select where you want to post...</div>
-
-      Posting on {{ form.post_id }}
-      <div>
-        <select name='post_id' [(ngModel)]="form.post_id">
-          <option value=''>Select Forum </option>
-          <option value='blog'>My Blog</option>
-          <option value='discussion'>Discussion</option>
-          <option value='answer'>Question & Answer</option>
-          <option value='market'>Buy & Sell</option>
-          <option value='media'>News</option>
-        </select>
-      </div>
-      <div *ngIf=" a.blog?.categories ">
-        <select name='category' [(ngModel)]="form.category" *ngIf=" form.post_id == 'blog' ">
-          <ng-container *ngIf=" a.blog.categories?.length ">
-            <option value=''>Select Blog Category</option>
-            <option *ngFor=" let category of a.blog.categories " value='{{ category }}'>{{ category }}</option>
-          </ng-container>
-          <ng-container *ngIf=" ! a.blog.categories?.length ">
-            <option value=''>No category. Please create category.</option>
-          </ng-container>
-        </select>
+  <div class="d-md-flex justify-content-between mt-2 pr-md-1">
+    <div class=" mb-2 w-100 w-md-25">
+        <app-avatar class="d-block mb-2" *ngIf=" philgo.isLoggedIn() "></app-avatar>
+        <div class="text-success">Posting on {{ form.post_id }}</div>
+    </div>
+    <div class="w-100 w-md-70">
+      <div class="fs-sm">Select where you want to post...</div>
+      <div class="d-flex flex-wrap flex-md-nowrap">
+          <mat-form-field class="w-100">
+              <mat-select name='post_id' [(ngModel)]="form.post_id">
+                <mat-option value=''>Select Forum </mat-option>
+                <mat-option value='blog'>My Blog</mat-option>
+                <mat-option value='discussion'>Discussion</mat-option>
+                <mat-option value='answer'>Question & Answer</mat-option>
+                <mat-option value='market'>Buy & Sell</mat-option>
+                <mat-option value='media'>News</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <ng-container  *ngIf=" a.blog?.categories ">
+                <mat-form-field class="w-100 ml-md-4"  *ngIf=" form.post_id == 'blog' ">
+                    <mat-select name='category' [(ngModel)]="form.category" placeholder="Select Blog Category">
+                      <ng-container *ngIf=" a.blog.categories?.length ">
+                        <mat-option *ngFor=" let category of a.blog.categories " value='{{ category }}'>{{ category }}</mat-option>
+                      </ng-container>
+                      <ng-container *ngIf=" ! a.blog.categories?.length ">
+                        <mat-option value=''>No category. Please create category.</mat-option>
+                      </ng-container>
+                    </mat-select>
+                  </mat-form-field>
+            </ng-container>
       </div>
     </div>
   </div>

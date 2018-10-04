@@ -11,15 +11,7 @@
     <mat-hint>Input your blog name.</mat-hint>
   </mat-form-field>
 
-  <mat-form-field class="mt-3 w-100" appearance="outline">
-    <textarea rows="10" matInput name="description" [(ngModel)]=" blog.description "></textarea>
-    <mat-label>Describe your blogs</mat-label>
-    <mat-hint>Describe your blog in 255 letters.</mat-hint>
-  </mat-form-field>
-
-
-
-  <mat-form-field class="mt-1 w-100" appearance="outline">
+  <mat-form-field class="mt-2 w-100" appearance="outline">
     <input matInput name="keywords" [(ngModel)]=" blog.keywords ">
     <mat-label>Keywords</mat-label>
     <mat-hint>Input your sites keywords. This keywords will be used in SEO. You can add many keywords separating by
@@ -27,46 +19,62 @@
   </mat-form-field>
 
 
-  <mat-form-field class="mt-1 w-100" appearance="outline">
+  <mat-form-field class="mt-5 mt-md-3 w-100" appearance="outline">
     <input matInput name="author" [(ngModel)]=" blog.author ">
     <mat-label>Author Name</mat-label>
     <mat-hint>Input your blog author name. This may be a person's name or company name.</mat-hint>
   </mat-form-field>
 
-  <div class="blog-favicon">
-      <div>Favicon</div>
-      <div>
-        <div class="position-relative">
-          <div class="mx-auto mb-1 size-64px of-hidden">
-            <img class="w-100" src="{{ blog.url_favicon }}">
-          </div>
-          <input type="file" name="favicon" (change)=" onChangeFile($event,  'blog_favicon' ) ">
-        </div>
-        <div class=" mw-180px my-2 p-1 rounded bg-success fs-xs white text-center" *ngIf=" percentage && code == 'blog_favicon' " [style.width]="percentage + '%'">{{percentage}}%</div>
-      </div>
-      <div>
-        Upload Favicon.
-        Must be PNG image file with 64px width and 64px height.
-      </div>
-    </div>
+  <mat-form-field class="mt-4 mt-md-3 w-100" appearance="outline">
+    <textarea rows="10" matInput name="description" [(ngModel)]=" blog.description "></textarea>
+    <mat-label>Describe your blogs</mat-label>
+    <mat-hint>Describe your blog in 255 letters.</mat-hint>
+  </mat-form-field>
 
-    <div class="blog-seo-image">
-        <div>Preview Image</div>
-        <div>
-          <div class="position-relative">
-            <div class="">
-              <img class="w-100" src="{{ blog.url_seo_image }}">
-            </div>
-            <input type="file" name="seoimage" (change)=" onChangeFile($event,  'blog_seo_image' ) ">
+  <div class="d-md-flex my-4 my-md-3">
+      <div class="blog-favicon pr-md-2">
+        <div class="mb-1 text-primary fs-md">Favicon</div>
+
+        <div class="position-relative border rounded">
+          <div class="flex-center my-2 mx-auto size-64px of-hidden">
+            <img *ngIf="blog.url_favicon" class="w-100" src="{{ blog.url_favicon }}">
+            <i *ngIf="!blog.url_favicon" class="material-icons fs-xxl text-secondary">
+                add_a_photo
+              </i>
           </div>
-          <div class=" mw-180px my-2 p-1 rounded bg-success fs-xs white text-center" *ngIf=" percentage && code == 'blog_seo_image' "
-              [style.width]="percentage && code == 'blog_seo_image' + '%'">{{percentage && code == 'blog_seo_image'}}%</div>
+          <input class="transparent-cover w-100 h-100 pointer" type="file" name="favicon" (change)=" onChangeFile($event,  'blog_favicon' ) ">
         </div>
-        <div>
+
+        <div class=" mw-180px my-2 p-1 rounded bg-success fs-xs white text-center border-box" *ngIf=" percentage && code == 'blog_favicon' " [style.width]="percentage + '%'">{{percentage}}%</div>
+      
+        <div class="p-1 fs-sm text-muted">
           Upload Favicon.
-          Recommend in 800 pixcels of width and 300 pixcels of height. This image will be used in SEO and site previews.
+          Must be PNG image file with 64px width and 64px height.
         </div>
       </div>
+      
+        <div class="blog-seo-image pl-md-2 mt-3 mt-md-0">
+          <div class="mb-1 text-primary fs-md">Preview Image</div>
+
+            <div class="position-relative border rounded">
+              <div class="flex-center my-2 mx-auto of-hidden w-170px h-64px">
+                <img *ngIf="blog.url_seo_image" class="w-100" src="{{ blog.url_seo_image }}">
+                <i *ngIf=" !blog.url_seo_image " class="material-icons fs-xxl text-secondary">
+                    add_a_photo
+                  </i>
+              </div>
+              <input class="transparent-cover  w-100 h-100 pointer" type="file" name="seoimage" (change)=" onChangeFile($event,  'blog_seo_image' ) ">
+            </div>
+
+            <div class=" mw-180px my-2 p-1 rounded bg-success fs-xs white text-center border-box" *ngIf=" percentage && code == 'blog_seo_image' "
+            [style.width]="percentage && code == 'blog_seo_image' + '%'">{{percentage && code == 'blog_seo_image'}}%</div>
+
+          <div class="p-1 fs-sm text-muted">
+            Upload Favicon.
+            Recommend in 800 pixels of width and 300 pixels of height. This image will be used in SEO and site previews.
+          </div>
+        </div>
+  </div>
       
 
   <div class="list-row my-4 text-center">

@@ -1,5 +1,18 @@
 
+@import './../../../styles/variables.scss';
 .ck.ck-editor__main>.ck-editor__editable {
   min-height: 200px !important;
   max-height: 400px !important;
+}
+
+@media (min-width:$md){
+  .w-md-25{
+    width: 25%!important
+  }
+  .w-md-70{
+    width: 70%!important
+  }
+  .flex-md-nowrap{
+    flex-wrap: nowrap;
+  }
 }
