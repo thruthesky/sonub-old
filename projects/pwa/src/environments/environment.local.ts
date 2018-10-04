@@ -1,7 +1,8 @@
 export const environment = {
     production: false,
     envName: 'local',
-    port: '8443',
+    // port: '8443',
+    port: '9443',
     blogIntroDomain: 'intro.sonub.com',
     philgoServerUrl: 'https://local.philgo.com/api.php',
     philgoFileServerUrl: 'https://local.philgo.com/api.php',
