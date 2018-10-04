@@ -48,7 +48,7 @@ const routes: Routes = [
 
     // blog settings. Domain is not required since user can only enter blog settings pages only under his domain.
     {
-        path: 'blog-management',
+        path: 'blog-dashboard',
         loadChildren: './pages/blog-management/blog-management.module#BlogManagementModule'
     },
     {
@@ -79,6 +79,14 @@ const routes: Routes = [
     {
         path: 'blog-new-events',
         loadChildren: './pages/blog-management/blog-new-events/blog-new-events.module#BlogNewEventsModule'
+    },
+    {
+        path: 'blog-settings/app-icon',
+        loadChildren: './pages/blog-management/blog-app-icon/blog-app-icon.module#BlogAppIconModule'
+    },
+    {
+        path: 'blog-settings/push-notifications',
+        loadChildren: './pages/blog-management/blog-push-notifications/blog-push-notifications.module#BlogPushNotificationsModule'
     },
 
 
