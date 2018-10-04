@@ -15,17 +15,16 @@
 </mat-form-field>
 
 <mat-form-field>
-  <mat-select placeholder="Hour From" (selectionChange)="loadHourStat()" >
-    <mat-option *ngFor="let h of _.makeArrayNumber(23)" [value]="h">
-      {{ h }}
+  <mat-select placeholder="Hour From" [(ngModel)]=" from_hour "  (selectionChange)="loadStat()" >
+    <mat-option *ngFor="let h of _.makeArrayNumber(23)" [value]=" h ">
+      {{ a.philgo.add0(h) + ':00' }}
     </mat-option>
   </mat-select>
 </mat-form-field>
-
 <mat-form-field>
-  <mat-select placeholder="Hour To" [(ngModel)]="to_hour" (selectionChange)="loadHourStat()">
-    <mat-option *ngFor="let h of _.makeArrayNumber(23)"  [value]="h">
-      {{ h }}
+  <mat-select placeholder="Hour To" [(ngModel)]=" to_hour " (selectionChange)="loadStat()">
+    <mat-option *ngFor="let h of _.makeArrayNumber(24)"  [value]=" h ">
+      {{  a.philgo.add0(h) + ':59' }}
     </mat-option>
   </mat-select>
 </mat-form-field>
@@ -38,7 +37,7 @@
     <table *ngIf="data['uniqueVisitor']">
       <tr *ngFor="let k of _.keys(data['uniqueVisitor'])">
         <td>{{k}}</td>
-        <td>{{data['uniqueVisitor'][k]}}</td>
+        <td>{{ data['uniqueVisitor'][k]}}</td>
       </tr>
     </table>
   </div>
@@ -47,7 +46,7 @@
     <table *ngIf=" data['everyHourUniqueVisitor'] ">
       <tr *ngFor="let k of _.keys(data['everyHourUniqueVisitor'])">
         <td>{{k}}</td>
-        <td>{{data['everyHourUniqueVisitor'][k]}}</td>
+        <td>{{h}}{{data['everyHourUniqueVisitor'][k]}}</td>
       </tr>
     </table>
   </div>

@@ -14,8 +14,8 @@ export class BlogStatVisitorComponent implements OnInit {
   from_date = new Date((new Date()).getTime() - 7 * 24 * 60 * 60 * 1000);
   to_date = new Date();
 
-  from_hour = null;
-  to_hour = null;
+  from_hour = 0;
+  to_hour = 23;
 
   data = {
     pageView: null,
@@ -33,7 +33,6 @@ export class BlogStatVisitorComponent implements OnInit {
               private stat: StatService
   ) {
     this.loadStat();
-    this.loadHourStat();
   }
 
   ngOnInit() {
@@ -46,9 +45,11 @@ export class BlogStatVisitorComponent implements OnInit {
       from_year: this.from_date.getFullYear(),
       from_month: this.from_date.getMonth() + 1,
       from_day: this.from_date.getDate(),
+      from_hour: this.from_hour,
       to_year: this.to_date.getFullYear(),
       to_month: this.to_date.getMonth() + 1,
       to_day: this.to_date.getDate(),
+      to_hour: this.to_hour
     };
   }
 
@@ -62,6 +63,14 @@ export class BlogStatVisitorComponent implements OnInit {
       this.a.error(e);
     });
 
+    req.function = 'everyHourPageView';
+    this.stat.getData(req).subscribe(res => {
+      console.log('everyHourPageView: ', res);
+      this.data['everyHourPageView'] = res['data'];
+    }, e => {
+      this.a.error(e);
+    });
+
 
     req.function = 'uniqueVisitor';
     this.stat.getData(req).subscribe(res => {
@@ -71,27 +80,18 @@ export class BlogStatVisitorComponent implements OnInit {
       this.a.error(e);
     });
 
-    this.loadHourStat();
-  }
 
-
-
-  loadHourStat() {
-    const req = this.request('everyHourPageView');
-    this.stat.getData(req).subscribe(res => {
-      console.log('everyHourPageView: ', res);
-      this.data['everyHourPageView'] = res['data'];
-    }, e => {
-      this.a.error(e);
-    });
 
     req.function = 'everyHourUniqueVisitor';
     this.stat.getData(req).subscribe(res => {
       console.log('everyHourUniqueVisitor: ', res);
       this.data['everyHourUniqueVisitor'] = res['data'];
+      console.log(this.data);
     }, e => {
       this.a.error(e);
     });
+
   }
+
 
 }
