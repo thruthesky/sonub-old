@@ -3,27 +3,32 @@
 
   <mat-list-item routerLink="{{ a.getBlogSettingsBasicUrl() }}">
     <i class="material-icons">
-      crop_original
+      assignment
     </i>
     <h4 matLine>Blog Basic Information</h4>
   </mat-list-item>
   <mat-list-item  routerLink="{{ a.getBlogSettingsDomainUrl() }}">
     <i class="material-icons">
-      crop_original
+      create
     </i>
     <h4 matLine>Change Your Blog Domain</h4>
   </mat-list-item>
 
   <mat-list-item routerLink="{{ a.getBlogSettingsCategoryUrl() }}">
-    <i class="material-icons">chat</i>
+    <i class="material-icons">category</i>
     <h4 matLine>Blog Categories</h4>
   </mat-list-item>
 
 
   <mat-list-item routerLink="{{ a.getBlogStatVisitorUrl() }}">
-    <i class="material-icons">chat</i>
-    <h4 matLine>Visitor Statistics</h4>
-  </mat-list-item>
+      <i class="material-icons">equalizer</i>
+      <h4 matLine>Visitor Statistics</h4>
+    </mat-list-item>
   
+    <mat-list-item routerLink="{{ a.getBlogSettingsSitemapUrl() }}">
+        <i class="material-icons">equalizer</i>
+        <h4 matLine>Sitemap</h4>
+      </mat-list-item>
+        
 </mat-list>
 

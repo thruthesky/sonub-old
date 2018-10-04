@@ -1,4 +1,4 @@
-<section class="post blog-view" *ngIf=" post?.idx ">
+<section class="post blog-view bg-white" *ngIf=" post?.idx ">
 
   <div class="post-header">
     <div class="thumbnail">
@@ -16,12 +16,12 @@
     </div>
   </div>
 
-  <div class="post-content">
+  <div class="post-content ">
     <div>
-      <div class="post-text-content" [innerHTML]=" a.safeHtml( post?.content ) "></div>
+      <div class="post-text-content child-image-mw-100 child-image-mb-2 child-caption-center-bold pb-2" [innerHTML]=" a.safeHtml( post?.content ) "></div>
     </div>
 
-    <div class="buttons">
+    <div class="post-buttons border-top">
       <button [attr.color]=" post.good == '0' ? 'medium' : 'primary'" (click)=" onVote(post, 'good') ">
         <i class="material-icons">thumb_up</i>
         <span> {{ post.good == '0' ? '' : ' ' + post.good }}</span>
@@ -34,14 +34,13 @@
       <button (click)=" onDelete( post ) ">Delete</button>
       <button (click)=" onReport( post ) ">Report</button>
 
-      ...
       <mat-menu #postMenu="matMenu">
         <ng-template matMenuContent>
-          <button mat-menu-item (click)=" onClickFeature(0) ">
+          <button class="flex-center" mat-menu-item (click)=" onClickFeature(0) ">
             <mat-icon>photo_size_select_actual</mat-icon>
             <span>Featured Post</span>
           </button>
-          <button mat-menu-item [matMenuTriggerFor]="subMenu">
+          <button class="flex-center" mat-menu-item [matMenuTriggerFor]="subMenu">
             <mat-icon>photo_size_select_actual</mat-icon>
             <span>More Features</span>
           </button>
@@ -60,21 +59,21 @@
 
 
       <button mat-icon-button [matMenuTriggerFor]="postMenu">
-        <mat-icon>more_vert</mat-icon>
+        <mat-icon class="text-success">more_vert</mat-icon>
       </button>
     </div>
   </div>
 
 
-  <div>
+  <div class="border-top">
     <app-blog-reply [root]=" post " [post]=" post "></app-blog-reply>
 
-    <div class="comments comments-depth bg-light pt-2" *ngIf=" post?.comments?.length ">
+    <div class="comments comments-depth bg-white px-3 pt-2" *ngIf=" post?.comments?.length ">
       <div class="comment" *ngFor=" let comment of post.comments " [attr.depth]=" comment.depth ">
 
         <div class="ml-1 w-100">
 
-          <div class="d-flex">
+          <div class="d-flex  pt-3 pb-1">
             <div class="thumbnail">
               <img [src]="philgo.primaryPhotoUrl( comment?.member?.idx_primary_photo )">
             </div>
@@ -87,21 +86,21 @@
             </div>
           </div>
 
-          <div class="pl-3 pt-1" *ngIf=" ! comment['edit'] ">
-            <div [innerHTML]="comment.content"></div>
+          <div class="pt-1" *ngIf=" ! comment['edit'] ">
+            <div class="py-2" *ngIf="comment.content" [innerHTML]="comment.content"></div>
             <app-display-files *ngIf="comment.files.length" class="d-block pt-2 pb-1" [post]=" comment "
               [showWhenContentHasNoImage]=" true "></app-display-files>
           </div>
-          <div class="buttons" *ngIf=" ! comment['edit'] ">
+          <div class="comment-buttons" *ngIf=" ! comment['edit'] ">
             <button [attr.color]=" comment.good == '0' ? 'medium' : 'primary'" (click)=" onVote(comment, 'good') ">
               <i class="material-icons">thumb_up</i>
               <i>{{ comment.good == '0' ? '' : ' ' + comment.good }}</i>
             </button>
-            <button color="medium" (click)=" onVote(comment, 'bad') ">
+            <button (click)=" onVote(comment, 'bad') ">
               <i class="material-icons">thumb_down</i>
               <i> {{ comment.bad == '0' ? '' : ' ' + comment.bad }}</i>
             </button>
-            <button color="medium" (click)=" comment['reply'] = true ">
+            <button (click)=" comment['reply'] = true ">
               <i class="material-icons">reply</i>
               <span>Reply</span>
             </button>

@@ -1,7 +1,13 @@
-@mixin sidebar-width () {
+@mixin left-sidebar () {
   margin: 0;
   padding: 0;
-  width: $sidebar-width;
+  width: $left-sidebar-width;
+  box-sizing: border-box;
+}
+@mixin right-sidebar () {
+  margin: 0;
+  padding: 0;
+  width: $right-sidebar-width;
   box-sizing: border-box;
 }
 
@@ -51,18 +57,16 @@
   }
 
   #desktop-left {
-
-    @include sidebar-width();
-
+    width: $left-sidebar-width;
     &>div {
-      @include sidebar-width();
+      @include left-sidebar();
       position: fixed;
     }
   }
 
   #desktop-center {
     padding: 0;
-    max-width: $max-width - $sidebar-width * 2;
+    max-width: $max-width - $left-sidebar-width - $right-sidebar-width;
     overflow: hidden;
     box-sizing: border-box;
 
@@ -77,10 +81,9 @@
   }
 
   #desktop-right {
-    @include sidebar-width();
-
+    width: $right-sidebar-width;
     .desktop-right-sidebar {
-      @include sidebar-width();
+      @include right-sidebar();
 
       &.fix {
         position: fixed;

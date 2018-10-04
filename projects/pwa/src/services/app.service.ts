@@ -22,12 +22,13 @@ interface Environment {
   philgoServerUrl: string;
   philgoFileServerUrl: string;
   newFileServerUrl: string;
-  sonubSupportingServerUrl: string;
+  sonubLogServerUrl: string;
+  sonubLogApiServerUrl: string;
 }
 
 
 import * as io from 'socket.io-client';
-const socket = io(environment.sonubSupportingServerUrl);
+const socket = io(environment.sonubLogServerUrl);
 
 
 
@@ -239,6 +240,7 @@ export class AppService {
 
     this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationStart) {
+        console.log('NavigationStart', e);
         /**
          * Reloads(Redirects) only if the current url is clicked again.
          * It does not reloads if when different url is clicked but component is the same.
@@ -335,18 +337,25 @@ export class AppService {
   // }
 
   /**
-   * When user visits a blog, load blog settings and initialize it.
+   * @since 2018-10-01 If user is logged in and the user is in root site, then it loads login user's blog settigns.
+   * @desc When user visits a blog, load blog settings and initialize it.
    * @desc when a user visits a blog
    *    - the browser may visite from outside. Meaning there is page reload.
    *    - Or the broswer may visite from inside. Meaning there will be no page reload.
    *      In this case, this method must be re-invoked.
    */
   initBlog() {
+
     if (this.inBlogSite) {
       this.philgo.blogLoadSettings(this.currentBlogDomain).subscribe(blog => {
         // console.log('blog settings', blog);
       }, e => this.toast(e));
+    } else {
+      if ( this.loggedIn ) {
+        this.philgo.blogLoadSettings( this.myBlogDomain ).subscribe(b => {});
+      }
     }
+
     this.philgo.blogChange.subscribe(blog => {
       if (!blog) {
         return;
@@ -500,9 +509,24 @@ export class AppService {
     return this.getBlogSettingsUrl() + '/basic';
   }
 
+  /**
+   * Url of sitemap settings page.
+   */
+  getBlogSettingsSitemapUrl(): string {
+    return this.getBlogSettingsUrl() + '/sitemap';
+  }
+
+  /**
+   * Url of blog sitemap
+   */
+  getBlogSitemapUrl() {
+    return this.getBlogUrl( this.currentBlogDomain ) + '/sitemap.xml';
+  }
+
   getBlogSettingsDomainUrl(): string {
     return this.getBlogSettingsUrl() + '/domain';
   }
+
   getBlogStatVisitorUrl(): string {
     return '/blog-stat/visitor';
   }
@@ -599,6 +623,7 @@ export class AppService {
    *
    * If the input blogDomain is not current blog domain, then it will reload the blog site.
    * If the input blogDomain is same as current blog domain, then it will open the category page ( NOT reloading )
+   * If user is in root site, then it will reload the page to blog domain.
    *
    * @param categoryName category name
    * @param blogDomain blog domain. If this is omitted, it assumes you are trying to open the category under current blog domain.
@@ -612,6 +637,7 @@ export class AppService {
       }
     } else {
       this.router.navigateByUrl(this.getBlogCategoryUrl(categoryName));
+      // window.location.href = this.getBlogCategoryUrl(categoryName, blogDomain);
     }
   }
 
@@ -834,6 +860,16 @@ export class AppService {
     }
     return url;
   }
+  getBlogUrl(domain: string): string {
+    return this.getBlogDomainUrl(domain);
+  }
+  /**
+   * Returns 'abc.sonub.com' only.
+   * @param domain domain
+   */
+  getBlogDomain(domain: string): string {
+    return domain + '.' + this.appRootDomain;
+  }
 
 
   /**
@@ -887,13 +923,21 @@ export class AppService {
     });
   }
 
-  log(options: { path: string }) {
+  log(data: { path: string }) {
     // const str = JSON.stringify( options );
-    options['domain'] = this.currentBlogDomain;
-    console.log('options: ', options);
-    socket.emit('log', options);
+    data['domain'] = this.currentBlogDomain;
+    data['idx_member'] = this.philgo.myIdx();
+    data['id'] = this.philgo.myId();
+    data['referrer'] = document.referrer;
+    console.log('data: ', data);
+    socket.emit('log', data);
   }
 
+
+  /**
+   * Returns hours and minute in '3:30 pm'.
+   * @param stamp stamp of time
+   */
   date_hia(stamp) {
     let d;
     if (stamp) {

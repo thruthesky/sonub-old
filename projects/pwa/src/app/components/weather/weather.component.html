@@ -1,22 +1,19 @@
 <section class="weatherMap box" *ngIf=" map ">
-  <header>Weather At {{ map.weather.name }}, {{ map.weather.sys.country }}</header>
-  <article>
+  <header class="pb-2 bg-white text-darkgreen">Weather at {{ map.weather.name }}, {{ map.weather.sys.country }}</header>
+  <article class="pt-0">
     <div class="weather" *ngIf=" map?.weather?.weather ">
-      <div>
-        <img src="{{ map.weather.icon_url }}">
+
+      <div class="d-flex align-items-center px-1">
+        <span class="resize-cloud-icon of-hidden"><img src="{{ map.weather.icon_url }}"></span>
+        <div class="ml-2 truncate">
+          <div class="fs-md truncate">{{ map.weather.weather[0].description | titlecase }}</div>
+          <div class="pt-1 text-muted">Temperature: {{ map.weather.main.temp }} &#8451;</div>
+        </div>
       </div>
-      <div>
-        {{ map.weather.weather[0].description | titlecase }}
-      </div>
-      <div>
-        Temp: {{ map.weather.main.temp }} &#8451;
-      </div>
-      <div>
-        Cloud Cover: {{ map.weather.clouds.all }}%
-      </div>
-    </div>
-    <div class="uv">
-      UV: {{ map.uv.value }} - {{ uvString() }}
+
+      <div class="p-2 my-2 bg-light"> Cloud Cover: {{ map.weather.clouds.all }}%</div>
+      <div class="uv p-2 my-2 bg-light">UV: {{ map.uv.value }} - {{ uvString() }}</div>
+
     </div>
   </article>
 </section>

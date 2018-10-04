@@ -4,6 +4,7 @@ import { BlogListComponent } from './blog-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BlogViewModule } from '../../components/blog-view/blog-view.module';
 import { BlogCategoryTopMenuModule } from '../../components/blog-category-top-menu/blog-category-top-menu.module';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 
 
@@ -19,7 +20,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild( routes ),
     BlogViewModule,
-    BlogCategoryTopMenuModule
+    BlogCategoryTopMenuModule,
+    MatProgressSpinnerModule
   ],
   declarations: [BlogListComponent]
 })

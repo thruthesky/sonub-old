@@ -1,5 +1,9 @@
 # Sonub
 
+## Repository
+
+* [BitBucket SEO](https://bitbucket.org/withcenter/sonub-seo/src/master/)
+
 ## Documents
 
 * [Sonub Management Doc](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.m1tz4v8spj4k)
@@ -85,6 +89,62 @@ This is wrong because it makes difficult to understand template design. In fact,
 * It is perfectly fine to navigate with click event like `(click)=" a.openHome() "` since it does not matter whether `<a href='....'>` exists or not.
 * But put `href` on `<a>` as much as possible since hueman want to copy the link also.
 * SEO will be done by backend side.
+
+### SEO Development
+
+* Nginx is listening 443 port so, accessing `https://www.sonub.com` with port 443 will connect to nginx.
+
+* Nginx will load `index.php` for all urls of all subdomains of sonub.com
+
+* And then, `index.php` will read `index.html` and patch SEO data before display to webbrowser.
+
+* `index.php` will get information from database based on `blog domain` and `post idx`.
+
+* The app must have `app shell` which has category links to its blog category for `SEO indexing`
+  * `app shell` will be displayed before `Angular bootstrap`.
+
+#### SEO local work
+
+* To do live test,
+  * run `npm run pwa`,
+  * run `npm run build:seo`
+  * run `nginx`
+    * nginx must listen `https://www.sonub.com` on `~/www/sonub-seo` folder as `127.0.0.1`.
+  * open web browser for `ng serve`
+  * open web browser for `nginx`. just access `https://www.sonub.com` and SEO should work.
+
+* When you edit, you can see the changes quickly on `https://www.sonub.com`, `https://www.thruthesky.sonub.com`.
+
+* It should very smooth working with App shell and SEO.
+  * When you edit index.html, the edit must appear on your web browser in realtime.
+
+#### SEO Logic
+
+* If `robot` access index.php, `app shell` will be displayed.
+
+* And `app shell` has enough links to menus and sitemap.
+
+  * `app shell` for root site exposes `/blogs` page which has all of user's blog.
+    This means all blogs have chance to be crawled by `robots`.
+
+  * `root site app shell` also exposes `sitemap` for all menus of the site including menu page itself and login etc.
+
+  * `blog app shell` exposts all the blog menus and its `sitemap` which has the latest 1,000 posts.
+
+#### SEO Tools
+
+##### Sitemaps
+
+* See [Sitemaps in Sonub management doc](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.qsv5o2at3zi0)
+
+#### App Shell Coding
+
+##### App Shell Design
+
+* To desing app shell
+  * Load `index.html` using any browser.
+    example) `file:///Users/jaehosong/apps/sonub/projects/pwa/src/index.html`
+  * And edit, refresh. that's all.
 
 ### App Object References
 

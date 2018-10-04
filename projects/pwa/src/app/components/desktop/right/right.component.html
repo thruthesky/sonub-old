@@ -1,4 +1,4 @@
-<section class="stories box" *ngIf=" a.frontPage?.stories?.length ">
+<section class="stories box mt-0 mb-12px" *ngIf=" a.frontPage?.stories?.length ">
   <header class="title d-flex justify-content-between">
     <b>Your stories</b>
     <span>Create blog</span>
@@ -6,25 +6,29 @@
 
   <article class="posts pr-3 pb-3">
 
-    <div class="post d-flex mt-2 fs-sm">
-      <div class="flex-center p-1 size-40px rounded" style="border: 2px solid rgb(49, 114, 235);">
+    <div class="post d-flex align-items-center mt-2">
+      <div class="left flex-center w-30 p-1px size-48px rounded" style="border: 2px solid rgb(49, 114, 235);">
         <i class="material-icons">add</i>
       </div>
-      <div class="ml-2 mt-1 w-75">
-        <div class="fw-bold">Add your story here</div>
-        <div>Sonub is free service.</div>
+      <div class="right ml-2 w-70">
+        <div class="mt-2px fw-bold">Add your story here</div>
+        <div class="fs-sm text-muted ">Sonub is free service.</div>
       </div>
     </div>
 
-    <div class="post d-flex pointer fs-sm mt-2" *ngFor="let post of a.frontPage.stories" (click)=" a.openBlogCategory( post.category, post.blog ) ">
-      <div class="w-25">
-          <div class="p-1 size-40px rounded" style="border: 2px solid rgb(49, 114, 235);">
+    <div class="post d-flex pointer mt-2" *ngFor="let post of a.frontPage.stories" (click)=" a.openBlogCategory( post.category, post.blog ) ">
+      <div class="left w-30">
+          <div class="flex-center p-1px size-48px rounded" style="border: 2px solid rgb(49, 114, 235);">
             <img class="w-100" src="{{ a.getPostPhotoUrl(post, 48, 48) }}">
           </div>
       </div>
-      <div class="ml-2 mt-1 w-75">
-        <div class="text-link fw-bold truncate">{{ post.subject }}</div>
-        <div>{{ post.content }}</div>
+      <div class="right ml-2 w-70">
+        <div class="mt-2px text-link fw-bold truncate">{{ post.subject }}</div>
+        <div  class="truncate">{{ post.content }}</div>
+        <div class="d-flex align-items-center text-secondary">
+          <i class="material-icons mr-1 fs-md">tv</i>
+          {{ a.getBlogDomain(post.blog) }}
+        </div>
       </div>
     </div>
   </article>
@@ -34,24 +38,36 @@
 <app-currency></app-currency>
 <app-weather></app-weather>
 <section class="widgets box">
-  <article>
-    Add Widget [+]
+  <article class="d-flex align-items-center px-2 py-1">
+    <i class="material-icons mx-1">add</i>
+    <span>Add New Widget</span>
   </article>
 </section>
 
 <section class="ad-box sonub-adv">
   <header>Do you want get a job? earn?</header>
-  <article>
+  <article class="pt-3">
     Or selling or buying?<br>
     Sonub is a big social hub network where you can grow with.<br>
   </article>
-  <footer>
+  <footer class="text-muted">
     Live with sonub.com
   </footer>
 </section>
 
 <section class="ad-box sonub-free-adv">
   <header>Free Advertisement</header>
+  <article class="pt-3">
+    You can post advertisement free<br>
+    Post now<br>
+  </article>
+  <footer class="text-muted">
+    Free Advertisement
+  </footer>
+</section>
+
+<section class="ad-box sonub-free-adv">
+  <header>Another Advertisement</header>
   <article>
     You can post advertisement free<br>
     Post now<br>
@@ -60,9 +76,3 @@
     Free Advertisement
   </footer>
 </section>
-
-<h1>right</h1>
-<h1>right</h1>
-<h1>Yo right</h1>
-
-end line
