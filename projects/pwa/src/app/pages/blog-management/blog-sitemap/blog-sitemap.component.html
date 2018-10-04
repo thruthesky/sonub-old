@@ -1,9 +1,12 @@
-<h1>Blog Sitemap Url</h1>
+
+<mat-toolbar  class="border-top border-top-md-0">
+    <h1 class="px-2">Blog Sitemap Url</h1>
+</mat-toolbar>
 
 
-<div class="mb-3 p-2 bg-light">
-  {{ a.getBlogSitemapUrl() }}
-</div>
 
-This is your blog sitemap url.<br>
-Submit this url as your sitemap to search engines like google.
+<section class="bg-white p-4">
+    <h2 class=" mb-4 p-4 text-center text-wrap border rounded bg-light fs-lg">{{ a.getBlogSitemapUrl() }}</h2>
+    <p>This is your blog sitemap url.</p>
+    <p class="text-muted fs-md">Submit this url as your sitemap to search engines like google.</p> 
+</section>
