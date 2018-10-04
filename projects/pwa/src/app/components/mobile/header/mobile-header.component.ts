@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
       // console.log('Mobile header: route check:', route);
       if (a.inRootSite) {
         if (a.inFrontPage) {
-          this.title = 'Front';
+          this.title = 'Sonub';
         } else if (a.inBlogPage) {
           this.title = 'Blog';
         }

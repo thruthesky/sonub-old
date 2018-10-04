@@ -4,9 +4,9 @@
     {{ title }}
   </div>
   <div class="menu d-flex">
-    <!-- <a routerLink="/blog" *ngIf=" ! a.inBlogPage ">
-      Blog
-    </a> -->
+    <a (click)="a.openMyBlog()" *ngIf=" ! a.inMyBlog ">
+      My Blog
+    </a>
     <a class="flex-center p-2" routerLink="{{ a.getBlogPostCreateUrl() }}" *ngIf="a.inMyBlog "><i class="material-icons">create</i></a>
     <a class="flex-center p-2 pr-3" routerLink="/menu"><i class="material-icons">menu</i></a>
   </div>
