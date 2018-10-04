@@ -351,8 +351,8 @@ export class AppService {
         // console.log('blog settings', blog);
       }, e => this.toast(e));
     } else {
-      if ( this.loggedIn ) {
-        this.philgo.blogLoadSettings( this.myBlogDomain ).subscribe(b => {});
+      if (this.loggedIn) {
+        this.philgo.blogLoadSettings(this.myBlogDomain).subscribe(b => { });
       }
     }
 
@@ -467,7 +467,10 @@ export class AppService {
   openRootSite() {
     window.location.href = this.urlRootSite;
   }
-  openMyBlog() {
+  openMyBlog( event?: Event ) {
+    if ( event ) {
+      event.preventDefault();
+    }
     if (this.loggedOut) {
       this.toast(this.t({
         en: 'Please login to see your blog. If you regiter, you will have a blog.',
@@ -480,6 +483,7 @@ export class AppService {
         window.location.href = this.myBlogUrl;
       }
     }
+    return false;
   }
   openBlogSettings() {
     this.router.navigateByUrl(this.getBlogManagementUrl());
@@ -520,7 +524,7 @@ export class AppService {
    * Url of blog sitemap
    */
   getBlogSitemapUrl() {
-    return this.getBlogUrl( this.currentBlogDomain ) + '/sitemap.xml';
+    return this.getBlogUrl(this.currentBlogDomain) + '/sitemap.xml';
   }
 
   getBlogSettingsDomainUrl(): string {
@@ -860,8 +864,26 @@ export class AppService {
     }
     return url;
   }
+  /**
+   * Returns blog url of the input - '2nd blog domain'
+   * @param domain 2nd domain name only. Not full domain.
+   *
+   * @return
+   *  - If input is 'abc', then 'abc.sonub.com' will be returned.
+   *  - If not logged in, empty string will be returned.
+   */
   getBlogUrl(domain: string): string {
-    return this.getBlogDomainUrl(domain);
+    if (this.loggedIn) {
+      return this.getBlogDomainUrl(domain);
+    } else {
+      return '';
+    }
+  }
+
+  getMyBlogUrl(): string {
+
+    return this.myBlogUrl;
+
   }
   /**
    * Returns 'abc.sonub.com' only.
