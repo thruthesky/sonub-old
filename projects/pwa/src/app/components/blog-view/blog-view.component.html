@@ -33,10 +33,15 @@
       <button (click)=" onEdit(post) ">Edit</button>
       <button (click)=" onDelete( post ) ">Delete</button>
       <button (click)=" onReport( post ) ">Report</button>
+      
+
+      <button mat-icon-button [matMenuTriggerFor]="postMenu">
+        <mat-icon class="text-success">more_vert</mat-icon>
+      </button>
 
       <mat-menu #postMenu="matMenu">
         <ng-template matMenuContent>
-          <button class="flex-center" mat-menu-item (click)=" onClickFeature(0) ">
+          <button class="flex-center" mat-menu-item (click)=" onClickFeature(0) " routerLink="/" >
             <mat-icon>photo_size_select_actual</mat-icon>
             <span>Featured Post</span>
           </button>
@@ -49,18 +54,13 @@
 
       <mat-menu #subMenu="matMenu">
         <ng-template matMenuContent>
-          <button mat-menu-item (click)=" onClickFeature(1) ">Feature 1</button>
-          <button mat-menu-item (click)=" onClickFeature(2) ">Feature 2</button>
-          <button mat-menu-item (click)=" onClickFeature(3) ">Feature 3</button>
-          <button mat-menu-item (click)=" onClickFeature(4) ">Feature 4</button>
+          <button mat-menu-item (click)=" onClickFeature(1) "   routerLink="/">Feature 1</button>
+          <button mat-menu-item (click)=" onClickFeature(2) "   routerLink="/">Feature 2</button>
+          <button mat-menu-item (click)=" onClickFeature(3) "   routerLink="/">Feature 3</button>
+          <button mat-menu-item (click)=" onClickFeature(4) "   routerLink="/">Feature 4</button>
         </ng-template>
       </mat-menu>
 
-
-
-      <button mat-icon-button [matMenuTriggerFor]="postMenu">
-        <mat-icon class="text-success">more_vert</mat-icon>
-      </button>
     </div>
   </div>
 
