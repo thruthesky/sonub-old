@@ -54,8 +54,8 @@
           font-family: Arial, Helvetica, sans-serif
         }
 
-        #shell relative {
-          position: relative;
+        #shell .relative {
+          position: relative!important;
         }
 
 
@@ -71,102 +71,104 @@
         }
 
 
-        #shell .p-3 {
-          padding: 2rem 0
+        #shell .px-3 {
+          padding: 0 1.5rem;
         }
-        #shell .py-4 {
-          padding: 2.25rem 0
+        #shell .p-4 {
+          padding: 2.25rem;
         }
 
         #shell .mt-5 {
           margin-top: 3rem
         }
-        
 
 
-        #shell .min-h-8vh {
-          min-height: 8vh
+        #shell .min-h-10vh {
+          min-height: 10vh
+        }
+        #shell .min-h-80vh {
+          min-height: 80vh
+        }
+        #shell .max-w-1024px {
+          max-width: 1024px
+        }
+        #shell .w-100 {
+          width: 100%
+        }
+        #shell .h-100 {
+          height: 100%
         }
 
-        #shell .min-h-84vh {
-          min-height: 84vh
-        }
 
         #shell .fs-md {
           font-size: 1.2rem
         }
-
         #shell .fw-light {
           font-weight: lighter
         }
 
-        #shell .text-center {
-          text-align: center
-        }
-
-        #shell .mw-1024px {
-          margin: 0 auto;
-          max-width: 1024px;
-        }
 
 
         /* modules */
         #shell header {
-          padding: 0 1.5em;
           background-color: #29487D;
           color: #fff
         }
 
         #shell footer {
-          padding: 0 1.5em;
           background-color: rgb(178, 194, 209)
         }
 
-
-        #shell nav a {
-          display: inline-block;
-          width: 49%;
-          box-sizing: border-box;
-          padding: 1rem 1.5rem;
-          color: rgb(88, 95, 88);
-        }
         #shell .sonub-logo {
           animation: rotate 1.2s linear infinite;
           color: #29487D
         }
 
+        #shell .loader-text{
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          color: white;
+          font-size: .9rem;
+        }
+        #shell .description{
+          max-width: 560px;
+          margin: 2em 1em 1em;
+          padding: 1.5em;
+          line-height: 1.5em;
+          background-color: white;
+          border-radius: 5px
+        }
+        
         @media all and (min-width: 512px) {
           #shell nav {
             width: 512px;
             margin: 0 auto;
           }
-          #shell nav a {
-            max-width: 30%;
-            text-align: center;
-          }
         }
-
 
         @keyframes rotate {
           0% {
-            transform: rotate(0deg)
+            transform: rotateY(0deg)
           }
 
           100% {
-            transform: rotate(360deg)
+            transform: rotateY(360deg)
           }
         }
 
       </style>
 
-      <header class="p-3">
-        <h1 class="mw-1024px fw-light fs-md">#title</h1>
+      <header class="flex-center min-h-10vh">
+        <h1 class=" max-w-1024px w-100 h-100 px-3 fw-light fs-md">#title</h1>
       </header>
 
-      <article class="flex-center flex-column min-h-84vh">
+      <article class="flex-center flex-column min-h-80vh">
 
-        <section class="relative text-center mt-5">
-          <svg class="sonub-logo" version="1.0" xmlns="http://www.w3.org/2000/svg" width="70pt" height="72pt" viewBox="0 0 101.000000 102.000000"
+        <section class="relative mt-5">
+          <svg class="sonub-logo" version="1.0" xmlns="http://www.w3.org/2000/svg" width="86pt" height="87pt" viewBox="0 0 101.000000 102.000000"
             preserveAspectRatio="xMidYMid meet">
             <g transform="translate(0.000000,102.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
               <path fill="currentColor" d="M545 1001 c-96 -34 -188 -92 -313 -195 -151 -124 -232 -251 -232
@@ -174,15 +176,15 @@
                 60 112 151 112 323 0 309 -96 568 -235 631 -53 24 -163 24 -230 0z" />
             </g>
           </svg>
-          <div class="text" style="position: absolute; top: 2.5em; left: .8em; color: white;">Loading...</div>
+          <div class="loader-text flex-center">Loading...</div>
         </section>
 
 
-        <section class="description" style="max-width: 560px; margin: 2em 1em 1em; padding: 1.5em; line-height: 1.5em; background-color: white; border-radius: 5px;">
+        <section class="description">
           <div>#description</div>
         </section>
 
-        <nav class="py-4">
+        <nav class="p-4">
           #category-1
           #category-2
           #category-3
@@ -197,8 +199,8 @@
       </article>
 
 
-      <footer class="p-3">
-        <p class="mw-1024px">#title</p>
+      <footer class="flex-center min-h-10vh">
+        <p class="max-w-1024px w-100 h-100 px-3">#title</p>
       </footer>
     </section>
   </app-root>

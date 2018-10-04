@@ -1,11 +1,11 @@
-<header class="d-flex justif-content-between">
+<header class="flex-center justify-content-between mt-2 mt-md-0  px-3 bg-white fs-sm">
   <div>
     {{ a.philgo.forumName( post_id ) | titlecase }}
   </div>
   <nav>
-    <a class="" routerLink="/post/{{ post_id }}">
-      <i class="material-icons">add</i>
-      <span>New Post</span>
+    <a class="flex-center text-primary p-2" routerLink="/post/{{ post_id }}">
+      <i class="material-icons fs-lg">add</i>
+      New Post
     </a>
   </nav>
 </header>
