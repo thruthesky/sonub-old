@@ -14,18 +14,63 @@
   <mat-datepicker #to_date_picker disabled="false"></mat-datepicker>
 </mat-form-field>
 
+<mat-form-field>
+  <mat-select placeholder="Hour From" (selectionChange)="loadHourStat()" >
+    <mat-option *ngFor="let h of _.makeArrayNumber(23)" [value]="h">
+      {{ h }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="Hour To" [(ngModel)]="to_hour" (selectionChange)="loadHourStat()">
+    <mat-option *ngFor="let h of _.makeArrayNumber(23)"  [value]="h">
+      {{ h }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
 <section class="bg-white p-4">
         Select Period: 2018-05-05 ~ 2018-09-09<br>
 
-        No of visitors on each day.<br>
+  <div>
+    <div>No of visitors on each day.</div>
+    <table *ngIf="data['uniqueVisitor']">
+      <tr *ngFor="let k of _.keys(data['uniqueVisitor'])">
+        <td>{{k}}</td>
+        <td>{{data['uniqueVisitor'][k]}}</td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <div>Total no of visitors on selected period</div>
+    <table *ngIf=" data['everyHourUniqueVisitor'] ">
+      <tr *ngFor="let k of _.keys(data['everyHourUniqueVisitor'])">
+        <td>{{k}}</td>
+        <td>{{data['everyHourUniqueVisitor'][k]}}</td>
+      </tr>
+    </table>
+  </div>
 
-        Total no of visitors on selected period<br>
+  <div>
+    <div>No of page view on each day</div>
+    <table *ngIf="data['pageView']">
+      <tr *ngFor="let k of _.keys(data['pageView'])">
+        <td>{{k}}</td>
+        <td>{{data['pageView'][k]}}</td>
+      </tr>
+    </table>
+  </div>
 
-        No of page view on each day<br>
-
-        Total no of page view on selected period<br>
-
+  <div>
+    <div>Total no of page view on selected period</div>
+    <table *ngIf="data['everyHourPageView']">
+      <tr *ngFor="let k of _.keys(data['everyHourPageView'])">
+        <td>{{k}}</td>
+        <td>{{data['everyHourPageView'][k]}}</td>
+      </tr>
+    </table>
+  </div>
 
         Languages(Country) base on browser language<br>
 
