@@ -14,7 +14,8 @@ export class BlogStatVisitorComponent implements OnInit {
   to_date = new Date();
 
   constructor(private a: AppService,
-    private stat: StatService) {
+              private stat: StatService
+  ) {
     this.loadStat();
   }
 
@@ -34,6 +35,7 @@ export class BlogStatVisitorComponent implements OnInit {
       to_day: this.to_date.getDate(),
     };
 
+
     this.stat.getData(req).subscribe(res => {
       console.log('page view stat: ', res);
     }, e => {
@@ -47,7 +49,6 @@ export class BlogStatVisitorComponent implements OnInit {
     }, e => {
       this.a.error(e);
     });
-
 
 
   }

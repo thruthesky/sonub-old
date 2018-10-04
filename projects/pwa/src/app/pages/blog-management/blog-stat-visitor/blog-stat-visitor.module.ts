@@ -7,6 +7,7 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { ComponentServiceModule } from '../../../../../../../share/philgo-api-components/service/component.service.module';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     RouterModule.forChild(routes),
+    ComponentServiceModule,
     MatFormFieldModule,
     MatToolbarModule,
     MatDatepickerModule,
