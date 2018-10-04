@@ -56,6 +56,10 @@ const routes: Routes = [
         loadChildren: './pages/blog-management/blog-settings-basic/blog-settings-basic.module#BlogSettingsBasicModule'
     },
     {
+        path: 'blog-settings/sitemap',
+        loadChildren: './pages/blog-management/blog-sitemap/blog-sitemap.module#BlogSitemapModule'
+    },
+    {
         path: 'blog-settings/category',
         loadChildren: './pages/blog-management/blog-settings-category/blog-settings-category.module#BlogSettingsCategoryModule'
     },

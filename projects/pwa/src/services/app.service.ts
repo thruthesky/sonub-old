@@ -509,9 +509,24 @@ export class AppService {
     return this.getBlogSettingsUrl() + '/basic';
   }
 
+  /**
+   * Url of sitemap settings page.
+   */
+  getBlogSettingsSitemapUrl(): string {
+    return this.getBlogSettingsUrl() + '/sitemap';
+  }
+
+  /**
+   * Url of blog sitemap
+   */
+  getBlogSitemapUrl() {
+    return this.getBlogUrl( this.currentBlogDomain ) + '/sitemap.xml';
+  }
+
   getBlogSettingsDomainUrl(): string {
     return this.getBlogSettingsUrl() + '/domain';
   }
+
   getBlogStatVisitorUrl(): string {
     return '/blog-stat/visitor';
   }
