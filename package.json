@@ -12,7 +12,7 @@
     "pwa": "ng s pwa -o --host dev.sonub.com --port 8443 --disable-host-check --ssl --ssl-key '/Users/jaehosong/apps/sonub/tmp/ssl/sonub-private.key' --ssl-cert '/Users/jaehosong/apps/sonub/tmp/ssl/sonub-certificate-ca-bundle.crt'",
     "pwa:local": "ng serve pwa --configuration=local -o --host www.sonub.com --port 8443 --disable-host-check --ssl --ssl-key ./tmp/ssl/sonub-private.key --ssl-cert ./tmp/ssl/sonub-certificate-ca-bundle.crt",
     "pwa:live": "sudo nginx -s stop; sudo ng serve pwa --configuration=live -o --host www.sonub.com --port 443 --disable-host-check --ssl --ssl-key '/Users/jaehosong/apps/sonub/tmp/ssl/sonub-private.key' --ssl-cert '/Users/jaehosong/apps/sonub/tmp/ssl/sonub-certificate-ca-bundle.crt'",
-    "pwa:live:c": "ng serve pwa --configuration=live -o --host www.sonub.com --port 9443 --disable-host-check --ssl --ssl-key ./tmp/ssl/sonub-private.key --ssl-cert ./tmp/ssl/sonub-certificate-ca-bundle.crt",
+    "pwa:live:c": "ng serve pwa --configuration=live -o --host www.sonub.com --port 8443 --disable-host-check --ssl --ssl-key ./tmp/ssl/sonub-private.key --ssl-cert ./tmp/ssl/sonub-certificate-ca-bundle.crt",
     "publish": "ng build --prod pwa && npm run scp",
     "scp": "cd dist/pwa && scp -r * sonub@v8.sonub.com:./www",
     "build:seo": "ng build pwa --watch --delete-output-path=false --output-path=/Users/jaehosong/www/sonub-seo"
