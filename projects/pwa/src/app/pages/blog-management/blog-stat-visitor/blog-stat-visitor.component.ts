@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StatService } from '../../../../services/stat.service';
 import { AppService } from '../../../../services/app.service';
-import { ComponentService } from '../../../../../../../share/philgo-api-components/service/component.service';
 
 @Component({
   selector: 'app-blog-stat-visitor',
@@ -15,8 +14,8 @@ export class BlogStatVisitorComponent implements OnInit {
   to_date = new Date();
 
   constructor(private a: AppService,
-              private stat: StatService,
-              private stat: StatService) {
+              private stat: StatService
+  ) {
     this.loadStat();
   }
 
