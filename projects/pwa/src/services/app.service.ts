@@ -501,10 +501,16 @@ export class AppService {
    * @desc All blog managements & settings url need the user to be his blog site.
    */
   getBlogManagementUrl(): string {
-    return '/blog-management';
+    return '/blog-dashboard';
   }
   getBlogSettingsUrl(): string {
     return '/blog-settings';
+  }
+  getBlogSettingsAppIconUrl(): string {
+    return this.getBlogSettingsUrl() + '/app-icon';
+  }
+  getBlogSettingsPushNotificationsUrl(): string {
+    return this.getBlogSettingsUrl() + '/push-notifications';
   }
   getBlogSettingsCategoryUrl(): string {
     return this.getBlogSettingsUrl() + '/category';
@@ -977,4 +983,6 @@ export class AppService {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     return hours + ':' + minutes + ' ' + ampm;
   }
+
+
 }
