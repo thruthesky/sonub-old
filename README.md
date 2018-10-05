@@ -92,13 +92,19 @@ This is wrong because it makes difficult to understand template design. In fact,
 
 ### SEO Development
 
-* Nginx is listening 443 port so, accessing `https://www.sonub.com` with port 443 will connect to nginx.
+This section describes how developer can develop and test SEO on local computer.
 
-* Nginx will load `index.php` for all urls of all subdomains of sonub.com
+* Nginx must listen `https://www.sonub.com` (443 port) so, you can access on `https://www.sonub.com` with port 443 which give you the real production environment while your are testing on local computer.
 
-* And then, `index.php` will read `index.html` and patch SEO data before display to webbrowser.
+* Nginx must load `index.html` as starting point. Meaning, Security limit extention must include `.html` so, HTML can be run as PHP.
+  * This is because service worker caches index.html not index.php.
+
+* `index.html` will include `index.php` so, `index.php` will take over all the process.
+  * and then, `index.php` will read `index.html` file and patch SEO data
+  * and echo the content of index.html to the browser.
 
 * `index.php` will get information from database based on `blog domain` and `post idx`.
+  * `root site` will have `root.sonub.com` configuration. @see see [Root Site Management](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.e9795yxifzr0)
 
 * The app must have `app shell` which has category links to its blog category for `SEO indexing`
   * `app shell` will be displayed before `Angular bootstrap`.
@@ -113,10 +119,25 @@ This is wrong because it makes difficult to understand template design. In fact,
   * open web browser for `ng serve`
   * open web browser for `nginx`. just access `https://www.sonub.com` and SEO should work.
 
-* When you edit, you can see the changes quickly on `https://www.sonub.com`, `https://www.thruthesky.sonub.com`.
+* When you edit, you can see the changes quickly on `https://www.sonub.com`, `https://thruthesky.sonub.com`.
+
+* When you edit `https://root.sonub.com` configuration, it will apply to `root site` and you can test it on local computer. @see see [Root Site Management](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.e9795yxifzr0)
 
 * It should very smooth working with App shell and SEO.
-  * When you edit index.html, the edit must appear on your web browser in realtime.
+  * When you edit index.html on VSCode,
+    * `ng serve` will update.
+    * `npm run build:seo` will update the code on `~/www/sonub-seo/` folder and you can see the change on web browser.
+    * And then you can edit `~www/sonub-seo/index.php` to see SEO changes.
+
+#### App Shell Work
+
+* you can access `https://as.sonub.com` for development, `https://appshell.sonub.com` for production to see app shell.
+
+#### A2HS & Service Worker
+
+* To see if A2HS & Service Worker are properly working, you have to publish to real production site. It's not working on local computer.
+
+* To test Service worker and A2HS, chagne blog configuration and see if service worker updates and app icons, names are updated.
 
 #### SEO Logic
 
@@ -169,6 +190,56 @@ This is wrong because it makes difficult to understand template design. In fact,
 * Set admin ids on PhilGo Admin Page.
 
 * Update GEO IP DATA every month.
+
+### Nginx & PHP Setup
+
+* Add the following on /etc/php-fpm.d/www.conf
+
+```` text
+security.limit_extensions = .php .html fest.json
+````
+
+* Add the following on nginx conf
+
+```` text
+# redirection is necessary for PWA. Lighthouse check-up.
+server {
+    listen         80;
+    server_name    .sonub.com;
+    rewrite ^ https://$host$request_uri? permanent;
+}
+
+server {
+    server_name  .sonub.com;
+    listen          443 ssl;
+    ssl_certificate       /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.crt;
+    ssl_certificate_key   /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.key;
+    autoindex on;
+
+    root   /Users/jaehosong/www/sonub-seo;
+    index  index.html;
+
+    location / {
+            try_files $uri $uri/ /index.html?$args;
+    }
+
+    # Run (mani)fest.json as PHP to dynamically generate blog settings.
+    # Run index.html as PHP
+    location ~ (\.php|\.html|fest\.json)$ {
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+}
+````
+
+
+
+## Testing
+
+* Since `sonub.com` and `www.sonub.com` are used in locally
+  * HTTP redirection to HTTPS may not work (Unless you set it on Nginx) and will be failed on Lighthouse.
+* `npm run build:prod:seo` does watch because `ngsw-worker.js` is not being copied.
 
 ## Life Cycle of Site
 
@@ -252,6 +323,14 @@ This is wrong because it makes difficult to understand template design. In fact,
 * Or user can register and a blog will be automatically created.
 * Or simply when user login and gets 'user profile data' from server, the server creates user blog already.
   So, user's blog is really ready when user clicks on 'my blog' button.
+
+## Root Site Configuration
+
+* see [Root Site Management](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.e9795yxifzr0)
+
+## A2HS
+
+*  /// 
 
 ## How to use blog
 

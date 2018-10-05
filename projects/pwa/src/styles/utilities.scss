@@ -4,6 +4,21 @@
   height: 36px !important;
 }
 
+.h-200px{
+  height: 200px!important;
+}
+
+.h-100px{
+  height: 100px!important;
+}
+@media (min-width:$md){
+
+  .h-md-150px{
+    height: 150px!important;
+  }
+}
+
+
 .size-24px {
   width: 24px;
   height: 24px;
@@ -20,8 +35,25 @@
   font-weight: 600;
 }
 
-.mb-spacing {
-  margin-bottom: $spacing;
+.mb-default-spacing {
+  margin-bottom: $spacing!important;
+}
+.mt-default-spacing {
+  margin-top: $spacing!important;
+}
+.ml-default-spacing {
+  margin-left: $spacing!important;
+}
+.mr-default-spacing {
+  margin-right: $spacing!important;
+}
+.m-default-spacing{
+  margin: $spacing!important;
+}
+
+
+.p-default-spacing{
+  padding: $spacing!important;
 }
 
 .relative {
@@ -222,6 +254,31 @@
 
 .text-wrap{
   word-break: break-all;
+}
+
+.text-link{
+  color: #365899;
+}
+
+.text-darkgreen{
+  color: #1F766A;
+}
+
+.p-2px{
+  padding: 2px!important;
+}
+
+.m-2px{
+  margin: 2px!important;
+}
+
+.mt-2px{
+  margin-top: 2px!important;
+}
+
+.mx-minus-2px{
+  margin-left: -2px!important;
+  margin-right: -2px!important;
 }
 
 
