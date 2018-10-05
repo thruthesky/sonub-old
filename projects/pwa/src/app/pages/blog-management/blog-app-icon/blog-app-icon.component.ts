@@ -13,7 +13,13 @@ export class BlogAppIconComponent implements OnInit {
   constructor(
     public a: AppService,
     public philgo: PhilGoApiService
-  ) { }
+  ) {
+
+    philgo.blogLoadSettings(philgo.myBlogDomain()).subscribe(res => {
+      console.log('res: ', res);
+      this.blog = Object.assign({}, res);
+    }, e => this.a.error(e));
+  }
 
   ngOnInit() {
   }
@@ -24,7 +30,7 @@ export class BlogAppIconComponent implements OnInit {
 
     console.log('req: ', this.blog);
     const data: ApiBlogSettings = <any>{};
-    data.name = this.blog.app_name;
+    data.app_name = this.blog.app_name;
     data.app_short_name = this.blog.app_short_name;
     data.app_theme_color = this.blog.app_theme_color;
     this.philgo.blogSaveSettings(data).subscribe(res => {

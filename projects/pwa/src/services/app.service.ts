@@ -957,6 +957,7 @@ export class AppService {
     data['idx_member'] = this.philgo.myIdx();
     data['id'] = this.philgo.myId();
     data['referrer'] = document.referrer;
+    data['lang'] = _.languageCode;
     console.log('data: ', data);
     socket.emit('log', data);
   }

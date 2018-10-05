@@ -66,7 +66,7 @@ export class BlogSettingsBasicComponent implements OnInit {
         this.percentage = res;
       } else {
         console.log('file success: ', res);
-        if ( this.code == 'blog_favicon' ) {
+        if ( this.code === 'blog_favicon' ) {
           this.blog['url_favicon'] = res.src;
         } else {
           this.blog['url_seo_image'] = res.src;
