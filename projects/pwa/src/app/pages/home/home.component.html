@@ -73,19 +73,14 @@
   <!-- show only on blog site -->
   <div class="user-blog" *ngIf=" a.inBlogSite ">
 
-    <app-blog-featured-wide-post class="d-block mb-default-spacing" *ngIf=" a.frontPage?.blog_featured_0 " [post]=" a.frontPage.blog_featured_0 "></app-blog-featured-wide-post>
+    <app-blog-featured-wide-post *ngIf=" a.frontPage?.blog_featured_0 " [post]=" a.frontPage.blog_featured_0 "></app-blog-featured-wide-post>
+
+    <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
 
     <div class="one-line-posts mb-default-spacing" *ngIf=" a.frontPage?.latest_blog_posts?.length">
       <div *ngFor="let post of a.frontPage.latest_blog_posts">
         <app-post-line [post]=" post "></app-post-line>
       </div>
-    </div>
-
-
-
-
-    <div >
-      <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
     </div>
 
     <div class="blog-latest-photos mt-3 p-2" *ngIf=" a.frontPage?.latest_blog_photos?.length ">

@@ -1,4 +1,4 @@
-<a *ngIf=" post " class="relative flex-center of-hidden bg-black white " routerLink="{{ a.getBlogViewListUrl( post ) }}">
+<a *ngIf=" post " class="relative flex-center of-hidden h-200px bg-secondary white " routerLink="{{ a.getBlogViewListUrl( post ) }}">
     <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 740, height: 200, path: post.path_of_first_image }) }}">
     <div class="title w-100 py-2 px-3 left-bottom bg-dark-opacity-5 fs-sm">{{ post.subject }}</div>
 </a>
