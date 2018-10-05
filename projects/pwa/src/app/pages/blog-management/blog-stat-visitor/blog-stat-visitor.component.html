@@ -14,61 +14,60 @@
   <mat-datepicker #to_date_picker disabled="false"></mat-datepicker>
 </mat-form-field>
 
-<mat-form-field>
-  <mat-select placeholder="Hour From" [(ngModel)]=" from_hour "  (selectionChange)="loadStat()" >
-    <mat-option *ngFor="let h of _.makeArrayNumber(23)" [value]=" h ">
-      {{ a.philgo.add0(h) + ':00' }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field>
-  <mat-select placeholder="Hour To" [(ngModel)]=" to_hour " (selectionChange)="loadStat()">
-    <mat-option *ngFor="let h of _.makeArrayNumber(24)"  [value]=" h ">
-      {{  a.philgo.add0(h) + ':59' }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
 <section class="bg-white p-4">
-        Select Period: 2018-05-05 ~ 2018-09-09<br>
 
   <div>
-    <div>No of visitors on each day.</div>
-    <table *ngIf="data['uniqueVisitor']">
+    <div class="stat-content position-relative">
+      <div class="stat-bars d-inline-block" *ngFor="let k of _.keys(data['uniqueVisitor'])">
+        <div>
+        <span class="stats-bar" style="width: {{ data['uniqueVisitor'][k]}} + 'px'">{{ data['uniqueVisitor'][k]}}</span>
+        <span class="stats-bar" style="width: {{ data['pageView'][k]}} + 'px'">{{ data['pageView'][k] }}</span>
+        </div>
+        <div>
+          {{k}}
+        </div>
+      </div>
+    </div>
+
+    <table class="text-center" border="1" *ngIf="data['uniqueVisitor']">
+      <tr>
+        <td>Date</td>
+        <td>Unique Visitor</td>
+        <td>Page View</td>
+      </tr>
       <tr *ngFor="let k of _.keys(data['uniqueVisitor'])">
         <td>{{k}}</td>
         <td>{{ data['uniqueVisitor'][k]}}</td>
+        <td>{{ data['pageView'][k] }}</td>
       </tr>
     </table>
   </div>
   <div>
     <div>Total no of visitors on selected period</div>
-    <table *ngIf=" data['everyHourUniqueVisitor'] ">
-      <tr *ngFor="let k of _.keys(data['everyHourUniqueVisitor'])">
-        <td>{{k}}</td>
-        <td>{{h}}{{data['everyHourUniqueVisitor'][k]}}</td>
-      </tr>
-    </table>
+    <!--<table *ngIf=" data['everyHourUniqueVisitor'] ">-->
+      <!--<tr *ngFor="let k of data['everyHourUniqueVisitor']; let i = index;">-->
+        <!--<td>{{ i }} {{ k }}</td>-->
+      <!--</tr>-->
+    <!--</table>-->
   </div>
 
   <div>
     <div>No of page view on each day</div>
-    <table *ngIf="data['pageView']">
-      <tr *ngFor="let k of _.keys(data['pageView'])">
-        <td>{{k}}</td>
-        <td>{{data['pageView'][k]}}</td>
-      </tr>
-    </table>
+    <!--<table *ngIf="data['pageView']">-->
+      <!--<tr *ngFor="let k of _.keys(data['pageView'])">-->
+        <!--<td>{{k}}</td>-->
+
+      <!--</tr>-->
+    <!--</table>-->
   </div>
 
   <div>
     <div>Total no of page view on selected period</div>
-    <table *ngIf="data['everyHourPageView']">
-      <tr *ngFor="let k of _.keys(data['everyHourPageView'])">
-        <td>{{k}}</td>
-        <td>{{data['everyHourPageView'][k]}}</td>
-      </tr>
-    </table>
+    <!--<table *ngIf="data['everyHourPageView']">-->
+      <!--<tr *ngFor="let k of data['everyHourPageView']; let i = index;">-->
+        <!--<td>{{ i }} {{ k }}</td>-->
+      <!--</tr>-->
+    <!--</table>-->
   </div>
 
         Languages(Country) base on browser language<br>
