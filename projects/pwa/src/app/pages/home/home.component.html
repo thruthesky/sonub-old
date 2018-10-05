@@ -1,10 +1,10 @@
-<div class="p-default-spacing pt-0 pt-md-3 bg-white" id="home">
+<div class="p-default-spacing pt-0 p-md-3 bg-white" id="home">
 
   <app-blog-category-top-menu class="login-user-blog-content" *ngIf=" a.isMobile "></app-blog-category-top-menu>
   <app-request-push-notification></app-request-push-notification>
 
 
-  <div class="text-editor d-md-flex align-items-center mb-default-spacing" routerLink="{{ a.getBlogPostCreateUrl() }}" *ngIf=" a.inRootSite ">
+  <div class="text-editor d-md-flex align-items-center mb-default-spacing mt-3 mt-md-0" routerLink="{{ a.getBlogPostCreateUrl() }}" *ngIf=" a.inRootSite ">
     <app-avatar class="mr-md-2"></app-avatar>
     <div class="editor mt-2 mt-md-0">
       What's your story? ---- Text Animation with Hot topics
@@ -60,8 +60,8 @@
     </section>
 
 
-    <div *ngIf=" a.frontPage?.news?.length ">
-      <h2>Sonub News</h2>
+    <div class="mt-5 mb-3" *ngIf=" a.frontPage?.news?.length ">
+      <h2 class="my-0 fs-lg text-dark">Sonub News</h2>
       <app-post-multiline-with-thumbnail *ngFor="let post of a.frontPage.news " [post]=" post "></app-post-multiline-with-thumbnail>
     </div>
 
@@ -83,7 +83,7 @@
       </div>
     </div>
 
-    <div class="blog-latest-photos mt-3 p-2" *ngIf=" a.frontPage?.latest_blog_photos?.length ">
+    <div class="blog-latest-photos" *ngIf=" a.frontPage?.latest_blog_photos?.length ">
       <div class="blog-latest-photo" *ngFor="let photo of a.frontPage.latest_blog_photos ">
         <app-post-multiline-with-thumbnail [post]="photo"></app-post-multiline-with-thumbnail>
       </div>
