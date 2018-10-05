@@ -124,7 +124,10 @@ This section describes how developer can develop and test SEO on local computer.
 * When you edit `https://root.sonub.com` configuration, it will apply to `root site` and you can test it on local computer. @see see [Root Site Management](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.e9795yxifzr0)
 
 * It should very smooth working with App shell and SEO.
-  * When you edit index.html, the edit must appear on your web browser in realtime.
+  * When you edit index.html on VSCode,
+    * `ng serve` will update.
+    * `npm run build:seo` will update the code on `~/www/sonub-seo/` folder and you can see the change on web browser.
+    * And then you can edit `~www/sonub-seo/index.php` to see SEO changes.
 
 #### App Shell Work
 
@@ -187,6 +190,50 @@ This section describes how developer can develop and test SEO on local computer.
 * Set admin ids on PhilGo Admin Page.
 
 * Update GEO IP DATA every month.
+
+### Nginx & PHP Setup
+
+* Add the following on /etc/php-fpm.d/www.conf
+
+```` text
+security.limit_extensions = .php .html fest.json
+````
+
+* Add the following on nginx conf
+
+```` text
+# redirection is necessary for PWA. Lighthouse check-up.
+server {
+    listen         80;
+    server_name    .sonub.com;
+    rewrite ^ https://$host$request_uri? permanent;
+}
+
+server {
+    server_name  .sonub.com;
+    listen          443 ssl;
+    ssl_certificate       /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.crt;
+    ssl_certificate_key   /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.key;
+    autoindex on;
+
+    root   /Users/jaehosong/www/sonub-seo;
+    index  index.html;
+
+    location / {
+            try_files $uri $uri/ /index.html?$args;
+    }
+
+    # Run (mani)fest.json as PHP to dynamically generate blog settings.
+    # Run index.html as PHP
+    location ~ (\.php|\.html|fest\.json)$ {
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+}
+````
+
+
 
 ## Testing
 
