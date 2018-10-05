@@ -32,7 +32,7 @@ import { RedirectComponent } from './pages/redirect/redirect.component';
 import { LazyLoaderModule } from './components/lazy-loader/lazy-loader.module';
 import { CurrencyModule } from './components/currency/currency.module';
 import { WeatherModule } from './components/weather/weather.module';
-// import { ServiceWorkerModule } from '@angular/service-worker';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 /**
@@ -73,7 +73,7 @@ firebase.initializeApp(firebaseConfig);
     LazyLoaderModule,
     CurrencyModule,
     WeatherModule,
-    // ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
