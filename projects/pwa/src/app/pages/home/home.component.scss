@@ -14,19 +14,19 @@
 }
 */
 
-.community-posts {
-  font-size: .85rem;
+// .community-posts {
+//   font-size: .85rem;
 
-  .row {
-    margin: 0 -.25em;
+//   .row {
+//     margin: 0 -.25em;
 
-    .text {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-  }
-}
+//     .text {
+//       overflow: hidden;
+//       white-space: nowrap;
+//       text-overflow: ellipsis;
+//     }
+//   }
+// }
 
 .text-editor {
   .editor {
@@ -39,8 +39,8 @@
   }
 }
 
-.stats {
-  display: flex;
-  justify-content: space-between;
-  font-size: .9rem;
+.mx-minus-1{
+  margin-left: -.25rem;
+  margin-right: -.25rem;
 }
+

@@ -1,10 +1,10 @@
-<div class="p-default-spacing bg-white" id="home">
+<div class="p-default-spacing pt-0 pt-md-3 bg-white" id="home">
 
   <app-blog-category-top-menu class="login-user-blog-content" *ngIf=" a.isMobile "></app-blog-category-top-menu>
   <app-request-push-notification></app-request-push-notification>
 
 
-  <div class="text-editor d-md-flex align-items-center mb-default-spacing mt-default-spacing" routerLink="{{ a.getBlogPostCreateUrl() }}" *ngIf=" a.inRootSite ">
+  <div class="text-editor d-md-flex align-items-center mb-default-spacing" routerLink="{{ a.getBlogPostCreateUrl() }}" *ngIf=" a.inRootSite ">
     <app-avatar class="mr-md-2"></app-avatar>
     <div class="editor mt-2 mt-md-0">
       What's your story? ---- Text Animation with Hot topics
@@ -19,7 +19,7 @@
 
     <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
 
-    <div class="login-user-blog-content one-line-posts mb-default-spacing" *ngIf=" a.loggedIn && a.frontPage?.latest_blog_posts?.length">
+    <div class="login-user-blog-content mb-default-spacing mt-default-spacing" *ngIf=" a.loggedIn && a.frontPage?.latest_blog_posts?.length">
       <div class="my-blog-posts" *ngFor="let post of a.frontPage.latest_blog_posts">
         <app-post-line [post]=" post "></app-post-line>
       </div>
@@ -27,9 +27,9 @@
     <!--/login-user-blog-content-->
 
 
-    <div class="community-photos w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPhotos?.length">
-      <div class="row no-gutters">
-        <div class="col" *ngFor="let post of a.frontPage.communityPhotos">
+    <div class="community-photos w-100 of-hidden" *ngIf=" a.frontPage?.communityPhotos?.length">
+      <div class="row no-gutters  mx-minus-1">
+        <div class="col of-hidden px-1" *ngFor="let post of a.frontPage.communityPhotos">
           <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
         </div>
       </div>
@@ -77,7 +77,7 @@
 
     <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
 
-    <div class="one-line-posts mb-default-spacing" *ngIf=" a.frontPage?.latest_blog_posts?.length">
+    <div class="one-line-posts mb-default-spacing mt-default-spacing" *ngIf=" a.frontPage?.latest_blog_posts?.length">
       <div *ngFor="let post of a.frontPage.latest_blog_posts">
         <app-post-line [post]=" post "></app-post-line>
       </div>
