@@ -36,20 +36,24 @@
 }
 
 .mb-default-spacing {
-  margin-bottom: $spacing;
+  margin-bottom: $spacing!important;
 }
 .mt-default-spacing {
-  margin-top: $spacing;
+  margin-top: $spacing!important;
 }
 .ml-default-spacing {
-  margin-left: $spacing;
+  margin-left: $spacing!important;
 }
 .mr-default-spacing {
-  margin-right: $spacing;
+  margin-right: $spacing!important;
+}
+.m-default-spacing{
+  margin: $spacing!important;
 }
 
+
 .p-default-spacing{
-  padding: $spacing;
+  padding: $spacing!important;
 }
 
 .relative {
