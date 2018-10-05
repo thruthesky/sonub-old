@@ -1,4 +1,4 @@
-<section class="stories box mt-0 mb-12px" *ngIf=" a.frontPage?.stories?.length ">
+<section class="stories box mt-0 mb-default-spacing" *ngIf=" a.frontPage?.stories?.length ">
   <header class="title d-flex justify-content-between">
     <b>Your stories</b>
     <span>Create blog</span>
@@ -7,7 +7,7 @@
   <article class="posts pr-3 pb-3">
 
     <div class="post d-flex align-items-center mt-2">
-      <div class="left flex-center w-30 p-1px size-48px rounded" style="border: 2px solid rgb(49, 114, 235);">
+      <div class="left flex-center w-30 p-2px size-48px rounded" style="border: 2px solid rgb(49, 114, 235);">
         <i class="material-icons">add</i>
       </div>
       <div class="right ml-2 w-70">
@@ -18,7 +18,7 @@
 
     <div class="post d-flex pointer mt-2" *ngFor="let post of a.frontPage.stories" (click)=" a.openBlogCategory( post.category, post.blog ) ">
       <div class="left w-30">
-          <div class="flex-center p-1px size-48px rounded" style="border: 2px solid rgb(49, 114, 235);">
+          <div class="flex-center p-2px size-48px rounded" style="border: 2px solid rgb(49, 114, 235);">
             <img class="w-100" src="{{ a.getPostPhotoUrl(post, 48, 48) }}">
           </div>
       </div>

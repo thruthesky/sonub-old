@@ -20,8 +20,21 @@
   font-weight: 600;
 }
 
-.mb-spacing {
+.mb-default-spacing {
   margin-bottom: $spacing;
+}
+.mt-default-spacing {
+  margin-top: $spacing;
+}
+.ml-default-spacing {
+  margin-left: $spacing;
+}
+.mr-default-spacing {
+  margin-right: $spacing;
+}
+
+.p-default-spacing{
+  padding: $spacing;
 }
 
 .relative {
@@ -223,5 +236,22 @@
 .text-wrap{
   word-break: break-all;
 }
+
+.text-link{
+  color: #365899;
+}
+
+.p-2px{
+  padding: 2px;
+}
+
+.m-2px{
+  margin: 2px;
+}
+
+.mt-2px{
+  margin-top: 2px;
+}
+
 
 
