@@ -63,15 +63,6 @@ export class BlogStatVisitorComponent implements OnInit {
       this.a.error(e);
     });
 
-    req.function = 'everyHourPageView';
-    this.stat.getData(req).subscribe(res => {
-      console.log('everyHourPageView: ', res);
-      this.data['everyHourPageView'] = res['data'];
-    }, e => {
-      this.a.error(e);
-    });
-
-
     req.function = 'uniqueVisitor';
     this.stat.getData(req).subscribe(res => {
       console.log('unique visitor stat: ', res);
@@ -81,15 +72,22 @@ export class BlogStatVisitorComponent implements OnInit {
     });
 
 
-
-    req.function = 'everyHourUniqueVisitor';
-    this.stat.getData(req).subscribe(res => {
-      console.log('everyHourUniqueVisitor: ', res);
-      this.data['everyHourUniqueVisitor'] = res['data'];
-      console.log(this.data);
-    }, e => {
-      this.a.error(e);
-    });
+    // req.function = 'everyHourPageView';
+    // this.stat.getData(req).subscribe(res => {
+    //   console.log('everyHourPageView: ', res);
+    //   this.data['everyHourPageView'] = res['data'];
+    // }, e => {
+    //   this.a.error(e);
+    // });
+    //
+    // req.function = 'everyHourUniqueVisitor';
+    // this.stat.getData(req).subscribe(res => {
+    //   console.log('everyHourUniqueVisitor: ', res);
+    //   this.data['everyHourUniqueVisitor'] = res['data'];
+    //   console.log(this.data);
+    // }, e => {
+    //   this.a.error(e);
+    // });
 
   }
 
