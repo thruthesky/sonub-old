@@ -16,7 +16,7 @@
     "publish": "ng build --prod pwa && npm run scp",
     "scp": "cd dist/pwa && scp -r * sonub@v8.sonub.com:./www",
     "build:seo": "ng build pwa --watch --delete-output-path=false --output-path=/Users/jaehosong/www/sonub-seo",
-    "build:prod:seo": "ng build pwa --prod --watch --delete-output-path=false --output-path=/Users/jaehosong/www/sonub-seo"
+    "build:prod:seo": "ng build pwa --prod --delete-output-path=false --output-path=/Users/jaehosong/www/sonub-seo"
   },
   "private": true,
   "dependencies": {

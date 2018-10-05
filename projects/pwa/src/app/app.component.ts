@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { AppService } from '../services/app.service';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +34,12 @@ export class AppComponent {
     // console.log('is Admin: ', a.philgo.isAdmin());
 
     // a.philgo.postLoad(1694).subscribe(p => console.log('p', p));
+
+  if (environment.production && 'serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistration()
+      .then(active => !active && navigator.serviceWorker.register('/ngsw-worker.js'))
+      .catch(console.error);
+  }
 
   }
   @HostListener('window:resize', ['$event']) onresize(event: Event) {
