@@ -1,10 +1,8 @@
-<mat-toolbar class="pr-0">
+<mat-toolbar>
   <app-logo></app-logo>
-  <div class="center">
-    {{ title }}
-  </div>
+  <h1 class=" fs-md px-3 truncate">{{ title }}</h1>
   <div class="menu d-flex">
-    <a (click)="a.openMyBlog()" *ngIf=" ! a.inMyBlog ">
+    <a class="flex-center fs-md px-3 truncate" (click)="a.openMyBlog()" *ngIf="  !a.inMyBlog ">
       My Blog
     </a>
     <a class="flex-center p-2" routerLink="{{ a.getBlogPostCreateUrl() }}" *ngIf="a.inMyBlog "><i class="material-icons">create</i></a>
