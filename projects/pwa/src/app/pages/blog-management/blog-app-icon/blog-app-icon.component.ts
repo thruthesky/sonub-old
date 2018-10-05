@@ -34,6 +34,15 @@ export class BlogAppIconComponent implements OnInit {
     data.app_name = this.blog.app_name;
     data.app_short_name = this.blog.app_short_name;
     data.app_theme_color = this.blog.app_theme_color;
+    data.app_url_icons_src_72 = this.blog.app_url_icons_src_72;
+    data.app_url_icons_src_96 = this.blog.app_url_icons_src_96;
+    data.app_url_icons_src_128 = this.blog.app_url_icons_src_128;
+    data.app_url_icons_src_144 = this.blog.app_url_icons_src_144;
+    data.app_url_icons_src_152 = this.blog.app_url_icons_src_152;
+    data.app_url_icons_src_192 = this.blog.app_url_icons_src_192;
+    data.app_url_icons_src_384 = this.blog.app_url_icons_src_384;
+    data.app_url_icons_src_512 = this.blog.app_url_icons_src_512;
+
     this.philgo.blogSaveSettings(data).subscribe(res => {
       console.log('blog saved: ', res);
       this.a.toast(this.a.t({ en: 'Blog settings have successfully updated.', ko: '블로그 설정이 저장되었습니다.' }));
@@ -79,14 +88,14 @@ export class BlogAppIconComponent implements OnInit {
    */
   generateAppIconThumbnails(path: string, count: number) {
     const sizes = [
-      { width: 72, height: 72},
-      { width: 96, height: 96},
-      { width: 128, height: 128},
-      { width: 144, height: 144},
-      { width: 152, height: 152},
-      { width: 192, height: 192},
-      { width: 384, height: 384},
-      { width: 512, height: 512},
+      { width: 72, height: 72 },
+      { width: 96, height: 96 },
+      { width: 128, height: 128 },
+      { width: 144, height: 144 },
+      { width: 152, height: 152 },
+      { width: 192, height: 192 },
+      { width: 384, height: 384 },
+      { width: 512, height: 512 },
     ];
     const options: ApiThumbnailGenerate = {
       path: path,
@@ -96,13 +105,30 @@ export class BlogAppIconComponent implements OnInit {
       mode: 'adaptive',
       ext: 'png',
     };
-    this.philgo.generateThumbnail(options).subscribe(thumb64 => {
-      console.log('thumbnail generate', thumb64);
-      if ( count >= 7 ) {
+    this.philgo.generateThumbnail(options).subscribe(thumb => {
+      console.log('thumbnail generate', thumb);
+      if (options.width === 72) {
+        this.blog.app_url_icons_src_72 = thumb['path'];
+      } else if (options.width === 96) {
+        this.blog.app_url_icons_src_96 = thumb['path'];
+      } else if (options.width === 128) {
+        this.blog.app_url_icons_src_128 = thumb['path'];
+      } else if (options.width === 144) {
+        this.blog.app_url_icons_src_144 = thumb['path'];
+      } else if (options.width === 152) {
+        this.blog.app_url_icons_src_152 = thumb['path'];
+      } else if (options.width === 192) {
+        this.blog.app_url_icons_src_192 = thumb['path'];
+      } else if (options.width === 384) {
+        this.blog.app_url_icons_src_384 = thumb['path'];
+      } else if (options.width === 512) {
+        this.blog.app_url_icons_src_512 = thumb['path'];
+      }
+      if (count >= 7) {
         return;
       } else {
         count++;
-        this.generateAppIconThumbnails( path, count);
+        this.generateAppIconThumbnails(path, count);
       }
     }, e => this.a.error(e));
   }
