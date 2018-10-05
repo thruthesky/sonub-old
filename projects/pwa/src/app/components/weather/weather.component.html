@@ -1,5 +1,5 @@
 <section class="weatherMap box" *ngIf=" map ">
-  <header class="pb-2 bg-white text-darkgreen">Weather at {{ map.weather.name }}, {{ map.weather.sys.country }}</header>
+  <header class="pb-2 bg-white text-darkgreen">Weather at {{ map.weather?.name }}, {{ map.weather?.sys?.country }}</header>
   <article class="pt-0">
     <div class="weather" *ngIf=" map?.weather?.weather ">
 

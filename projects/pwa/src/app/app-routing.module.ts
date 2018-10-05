@@ -4,6 +4,12 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { RedirectComponent } from './pages/redirect/redirect.component';
 
 
+/**
+ * 여기서 부터.... ngsw-worker.js 가 동작하지 않는다.
+ * Angular 기본 @nagular/pwa 는 동작을 한다.
+ * 하지만 sonub project 에서는 동작하지 않는다. 모든 모듈과 컴포넌트를 다 주석 처리하고, 최소한의 코드로 실행되도록 해 본다.
+ * 정안되면, 새로운 프로젝트를 추가하고, pwa 추가하고, 전체 코드를 하나씩 복사를 해 가며 어떤 타이밍에서 안되는지 찾아낸다.
+ */
 const routes: Routes = [
     { path: '', pathMatch: 'full', loadChildren: './pages/home/home.module#HomeModule' },
     { path: 'help', loadChildren: './pages/help/help.module#HelpModule' },
