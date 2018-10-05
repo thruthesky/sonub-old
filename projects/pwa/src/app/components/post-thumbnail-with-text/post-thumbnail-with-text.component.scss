@@ -1,0 +1,8 @@
+@import './../../../styles/variables.scss';
+
+@media (min-width:$md){
+    .size-md-64px{
+        height: 64px;
+        width: 64px;
+    }
+}
