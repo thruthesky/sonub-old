@@ -7,7 +7,7 @@
     </i>
     <h4 matLine>Blog Basic Information</h4>
   </mat-list-item>
-  <mat-list-item  routerLink="{{ a.getBlogSettingsDomainUrl() }}">
+  <mat-list-item routerLink="{{ a.getBlogSettingsDomainUrl() }}">
     <i class="material-icons">
       create
     </i>
@@ -21,14 +21,25 @@
 
 
   <mat-list-item routerLink="{{ a.getBlogStatVisitorUrl() }}">
-      <i class="material-icons">equalizer</i>
-      <h4 matLine>Visitor Statistics</h4>
-    </mat-list-item>
-  
-    <mat-list-item routerLink="{{ a.getBlogSettingsSitemapUrl() }}">
-      <i class="material-icons">transform</i>
-      <h4 matLine>Sitemap</h4>
-    </mat-list-item>
-        
-</mat-list>
+    <i class="material-icons">equalizer</i>
+    <h4 matLine>Visitor Statistics</h4>
+  </mat-list-item>
 
+  <mat-list-item routerLink="{{ a.getBlogSettingsSitemapUrl() }}">
+    <i class="material-icons">transform</i>
+    <h4 matLine>Sitemap</h4>
+  </mat-list-item>
+
+
+  <mat-list-item routerLink="{{ a.getBlogSettingsAppIconUrl() }}">
+    <i class="material-icons">equalizer</i>
+    <h4 matLine>App Icon</h4>
+  </mat-list-item>
+
+
+  <mat-list-item routerLink="{{ a.getBlogSettingsPushNotificationsUrl() }}">
+    <i class="material-icons">equalizer</i>
+    <h4 matLine>Notifications</h4>
+  </mat-list-item>
+
+</mat-list>
