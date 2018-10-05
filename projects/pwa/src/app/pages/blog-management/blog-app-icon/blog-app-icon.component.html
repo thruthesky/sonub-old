@@ -11,37 +11,59 @@
 
 <form class="p-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
 
-    <mat-form-field class="mt-1 w-100" appearance="outline">
-        <input matInput name="app_name" [(ngModel)]=" blog.app_name ">
-        <mat-label>App name</mat-label>
-        <mat-hint>Input app name. Ex) Social Network Hub</mat-hint>
-      </mat-form-field>
+  <mat-form-field class="mt-1 w-100" appearance="outline">
+    <input matInput name="app_name" [(ngModel)]=" blog.app_name ">
+    <mat-label>App name</mat-label>
+    <mat-hint>Input app name. Ex) Social Network Hub</mat-hint>
+  </mat-form-field>
 
-      <mat-form-field class="mt-1 w-100" appearance="outline">
-          <input matInput name="app_short_name" [(ngModel)]=" blog.app_short_name ">
-          <mat-label>App short name</mat-label>
-          <mat-hint>Input app short name in 8 letters. Ex) Sonub</mat-hint>
-        </mat-form-field>
+  <mat-form-field class="mt-1 w-100" appearance="outline">
+    <input matInput name="app_short_name" [(ngModel)]=" blog.app_short_name ">
+    <mat-label>App short name</mat-label>
+    <mat-hint>Input app short name in 8 letters. Ex) Sonub</mat-hint>
+  </mat-form-field>
 
-        <mat-form-field class="mt-1 w-100" appearance="outline">
-            <input matInput name="app_theme_color" [(ngModel)]=" blog.app_theme_color ">
-            <mat-label>App theme color</mat-label>
-            <mat-hint>Input app theme color</mat-hint>
-          </mat-form-field>
-      
+  <mat-form-field class="mt-1 w-100" appearance="outline">
+    <input matInput name="app_theme_color" [(ngModel)]=" blog.app_theme_color ">
+    <mat-label>App theme color</mat-label>
+    <mat-hint>Input app theme color</mat-hint>
+  </mat-form-field>
 
-  app icon image 512px.<br>
-  
+
+
+  <div class="blog-seo-image pl-md-2 mt-3 mt-md-0">
+    <div class="mb-1 text-primary fs-md">Preview Image</div>
+
+    <div class="position-relative border rounded">
+      <div class="flex-center my-2 mx-auto of-hidden w-170px h-64px">
+        <img *ngIf="blog.url_seo_image" class="w-100" src="{{ blog.app_url_icons_src_512 }}">
+        <i *ngIf=" !blog.url_seo_image " class="material-icons fs-xxl text-secondary">
+          add_a_photo
+        </i>
+      </div>
+      <input class="pointer" type="file" name="blog_icon_image" (change)=" onChangeFile($event,  'blog_app_icon' ) ">
+    </div>
+
+    <div class=" mw-180px my-2 p-1 rounded bg-success fs-xs white text-center border-box" *ngIf=" percentage  "
+      [style.width]="percentage + '%'">{{ percentage }}%</div>
+
+    <div class="p-1 fs-sm text-muted">
+      Upload App Icon.<br>
+      Important: The image must be PNG image and width and height must be 512p pixcels.<br>
+    </div>
+  </div>
+
+
 
   <div class="list-row my-4 text-center">
-      <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog">
-        <i class="material-icons red">clear</i>
-        <span class="ml-1">Cancel</span>
-      </button>
-      <button class="mx-2 bg-primary" mat-flat-button type="submit">
-        <span class="mr-2">Submit</span>
-        <i class="material-icons">send</i>
-      </button>
-    </div>
-    
+    <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog">
+      <i class="material-icons red">clear</i>
+      <span class="ml-1">Cancel</span>
+    </button>
+    <button class="mx-2 bg-primary" mat-flat-button type="submit">
+      <span class="mr-2">Submit</span>
+      <i class="material-icons">send</i>
+    </button>
+  </div>
+
 </form>
