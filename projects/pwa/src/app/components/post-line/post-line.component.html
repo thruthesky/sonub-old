@@ -1,3 +1,4 @@
-<a *ngIf=" post " class="post blog-post link-list" (click)=" a.openPostView( post, $event ) " href="{{ a.getBlogViewListUrl( post ) }}">
-  [{{ post.blog }}] {{ post.subject }}
+<a *ngIf=" post " class="link-list px-3 py-2 bg-white border-bottom truncate" (click)=" a.openPostView( post, $event ) " href="{{ a.getBlogViewListUrl( post ) }}">
+  <span class="fs-md">{{ post.blog }} - </span>
+  <span class="ml-1 fw-bold fs-sm text-link"> {{ post.subject }} </span>
 </a>

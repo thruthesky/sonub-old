@@ -4,6 +4,7 @@ import { BlogViewComponent } from './blog-view.component';
 import { BlogReplyModule } from '../../components/blog-reply/blog-reply.module';
 import { DisplayFilesModule } from 'share/philgo-api-components/display-files/display-files.module';
 import { MatMenuModule, MatIconModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -13,7 +14,8 @@ import { MatMenuModule, MatIconModule } from '@angular/material';
     BlogReplyModule,
     DisplayFilesModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ],
   declarations: [BlogViewComponent],
   exports: [BlogViewComponent]
