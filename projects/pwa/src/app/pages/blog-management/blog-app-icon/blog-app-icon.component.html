@@ -1,10 +1,35 @@
-<p>
-  blog-app-icon works!
-</p>
+<mat-toolbar class="border-top border-top-md-0">
+  <h1 class="px-2">Add Blog To Home Screen</h1>
+</mat-toolbar>
 
+<div>
+  You can install your blog on visitors mobile home screen just like native app.
+  This give you great benefit since users can easily access your blog.
+  This is very important feature. If you are really serious about running a good blog site, please fill in the form and
+  submit.
+</div>
 
-app icon image 512px.<br>
-app name: Ex) Social Network Hub<br>
-app short name: Ex) Sonub<br>
-theme color<br>
-background color<br>
+<form class="p-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
+
+    <mat-form-field class="mt-1 w-100" appearance="outline">
+        <input matInput name="app_name" [(ngModel)]=" blog.app_name ">
+        <mat-label>App name</mat-label>
+        <mat-hint>Input app name. Ex) Social Network Hub</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mt-1 w-100" appearance="outline">
+          <input matInput name="app_short_name" [(ngModel)]=" blog.app_short_name ">
+          <mat-label>App short name</mat-label>
+          <mat-hint>Input app short name in 8 letters. Ex) Sonub</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="mt-1 w-100" appearance="outline">
+            <input matInput name="app_theme_color" [(ngModel)]=" blog.app_theme_color ">
+            <mat-label>App theme color</mat-label>
+            <mat-hint>Input app theme color</mat-hint>
+          </mat-form-field>
+      
+
+  app icon image 512px.<br>
+  
+</form>
