@@ -96,20 +96,17 @@ This section describes how developer can develop and test SEO on local computer.
 
 * Nginx must listen `https://www.sonub.com` (443 port) so, you can access on `https://www.sonub.com` with port 443 which give you the real production environment while your are testing on local computer.
 
-* Nginx must load `index.html` as starting point. Meaning, Security limit extention must include `.html` so, HTML can be run as PHP.
-  * This is because service worker caches index.html not index.php.
+#### SEO local work and patching index.html
 
-* `index.html` will include `index.php` so, `index.php` will take over all the process.
-  * and then, `index.php` will read `index.html` file and patch SEO data
+* When user access `index.html`, `index.php` will run it. ( This is set by Nginx )
+* And then, `index.php` will read `index.html` file and patch SEO data
   * and echo the content of index.html to the browser.
 
 * `index.php` will get information from database based on `blog domain` and `post idx`.
   * `root site` will have `root.sonub.com` configuration. @see see [Root Site Management](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.e9795yxifzr0)
 
-* The app must have `app shell` which has category links to its blog category for `SEO indexing`
+* The app must have `app shell` which has category links to its blog category for `SEO indexing` so, `Search robots` can index important links and sitemaps.
   * `app shell` will be displayed before `Angular bootstrap`.
-
-#### SEO local work
 
 * To do live test,
   * run `npm run pwa`,
@@ -120,8 +117,10 @@ This section describes how developer can develop and test SEO on local computer.
   * open web browser for `nginx`. just access `https://www.sonub.com` and SEO should work.
 
 * When you edit, you can see the changes quickly on `https://www.sonub.com`, `https://thruthesky.sonub.com`.
+  * remember, you have hosted custom domain `sonub.com` as 127.0.0.1
 
-* When you edit `https://root.sonub.com` configuration, it will apply to `root site` and you can test it on local computer. @see see [Root Site Management](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.e9795yxifzr0)
+* For `root site` SEO patch, you can edit `https://root.sonub.com` configuration, it will apply to `root site`.
+  * Test it on local computer. @see see [Root Site Management](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.e9795yxifzr0)
 
 * It should very smooth working with App shell and SEO.
   * When you edit index.html on VSCode,
@@ -133,24 +132,42 @@ This section describes how developer can develop and test SEO on local computer.
 
 * you can access `https://as.sonub.com` for development, `https://appshell.sonub.com` for production to see app shell.
 
-#### A2HS & Service Worker
+#### Service Worker
+
+* Service worker seems to work on localhost and custom doamin while A2HS does not work on localhost nor custom domain.
+
+* If you build app with `ng build`, then `ngsw-worker.js` will not be copied and will not be registered since `environment.productoin` is false.
+
+* 
+
+#### A2HS
 
 * To see if A2HS & Service Worker are properly working, you have to publish to real production site. It's not working on local computer.
 
 * To test Service worker and A2HS, chagne blog configuration and see if service worker updates and app icons, names are updated.
 
+#### Manifest for each blogs
+
+* When `/manifest.json` is accessed, `/manifest.php` will be run. ( This is set by Nginx )
+* And then, `manifest.php` will read `manifest.json` and patch blogs information and send to browser.
+  * Patch information is
+    * app name
+    * app short anme
+    * theme color
+    * app icon urls
+
 #### SEO Logic
 
-* If `robot` access index.php, `app shell` will be displayed.
+* If `robot` access index.html, `app shell` will be displayed first.
 
-* And `app shell` has enough links to menus and sitemap.
+* And `app shell` has enough links to menus and sitemap for `search engine indexing`.
 
-  * `app shell` for root site exposes `/blogs` page which has all of user's blog.
+  * `app shell` for root site exposes `/blogs` page which has all of user's blog list.
     This means all blogs have chance to be crawled by `robots`.
 
-  * `root site app shell` also exposes `sitemap` for all menus of the site including menu page itself and login etc.
+  * `root site app shell` also exposes `sitemap` for forums.
 
-  * `blog app shell` exposts all the blog menus and its `sitemap` which has the latest 1,000 posts.
+  * `user blog app shell` exposts all the blog menus and its `sitemap` which has the latest 1,000 posts.
 
 #### SEO Tools
 
@@ -210,36 +227,44 @@ server {
 }
 
 server {
-    server_name  .sonub.com;
-    listen          443 ssl;
-    ssl_certificate       /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.crt;
-    ssl_certificate_key   /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.key;
-    autoindex on;
+        server_name  .sonub.com;
+        listen          443 ssl;
+        ssl_certificate       /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.crt;
+        ssl_certificate_key   /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.key;
+        autoindex on;
 
-    root   /Users/jaehosong/www/sonub-seo;
-    index  index.html;
+        root   /Users/jaehosong/www/sonub-seo;
+        index  index.html;
 
-    location / {
-            try_files $uri $uri/ /index.html?$args;
-    }
+        location / {
+                try_files $uri $uri/ /index.html?$args;
+        }
 
-    # Run (mani)fest.json as PHP to dynamically generate blog settings.
-    # Run index.html as PHP
-    location ~ (\.php|\.html|fest\.json)$ {
-        fastcgi_pass   127.0.0.1:9000;
-        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-        include        fastcgi_params;
-    }
+        location ~ \.php$ {
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+        # index.html will fall into index.php
+        location /index.html {
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_param  SCRIPT_FILENAME  $document_root/index.php;
+            include        fastcgi_params;
+        }
+        # manifest.json will fall into manifest.php
+        location /manifest.json {
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_param  SCRIPT_FILENAME  $document_root/manifest.php;
+            include        fastcgi_params;
+        }
 }
 ````
-
-
 
 ## Testing
 
 * Since `sonub.com` and `www.sonub.com` are used in locally
   * HTTP redirection to HTTPS may not work (Unless you set it on Nginx) and will be failed on Lighthouse.
-* `npm run build:prod:seo` does watch because `ngsw-worker.js` is not being copied.
+* `npm run build:seo:prod` does watch because `ngsw-worker.js` is not being copied.
 
 ## Life Cycle of Site
 

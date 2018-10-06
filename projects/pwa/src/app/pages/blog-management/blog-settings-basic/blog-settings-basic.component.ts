@@ -37,6 +37,7 @@ export class BlogSettingsBasicComponent implements OnInit {
     data.description = this.blog.description;
     data.keywords = this.blog.keywords;
     data.author = this.blog.author;
+    data.copyright = this.blog.copyright;
     this.philgo.blogSaveSettings(data).subscribe(res => {
       console.log('blog saved: ', res);
       this.a.toast(this.a.t({ en: 'Blog settings have successfully updated.', ko: '블로그 설정이 저장되었습니다.' }));

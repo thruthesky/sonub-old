@@ -36,8 +36,8 @@
 
     <div class="position-relative border rounded">
       <div class="flex-center my-2 mx-auto of-hidden w-170px h-64px">
-        <img *ngIf="blog.url_seo_image" class="size-100px" src="{{ blog.app_url_icons_src_512 }}">
-        <i *ngIf=" !blog.url_seo_image " class="material-icons fs-xxl text-secondary">
+        <img *ngIf=" blog.app_url_icons_src_512 " class="size-100px" src="{{ blog.app_url_icons_src_512 }}">
+        <i class="material-icons fs-xxl text-secondary">
           add_a_photo
         </i>
       </div>

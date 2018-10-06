@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { AppService } from '../services/app.service';
 import { environment } from '../environments/environment';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,8 @@ export class AppComponent {
   resize = new Subject();
 
   constructor(
-    public a: AppService
+    public a: AppService,
+    private swUpdate: SwUpdate
   ) {
     console.log('AppComponent::constructor()');
     this.observeRightSidebarScroll();
@@ -35,12 +37,40 @@ export class AppComponent {
 
     // a.philgo.postLoad(1694).subscribe(p => console.log('p', p));
 
-  if (environment.production && 'serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistration()
-      .then(active => !active && navigator.serviceWorker.register('/ngsw-worker.js'))
-      .catch(console.error);
-  }
 
+    /**
+     * Register Angular Service Worker
+     * Angular Service Worker 는 Zone 이 stable 할 때 등록을 하는데, 잘 안된다. 그래서 여기서 강제로 등록한다.
+     */
+    if (environment.production && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistration()
+        .then(active => !active && navigator.serviceWorker.register('/ngsw-worker.js'))
+        .catch(console.error);
+    }
+
+    /**
+     * Service worker 가 업데이트 되면, (또는 뭔가가 업데이트 되면) 기존 service worker 를 업데이트한다.
+     * 그래서 새로 업데이트 된 내용을 볼 수 있게 한다.
+     */
+    swUpdate.available.subscribe(event => {
+      console.log(`Service worker is available ...`);
+      swUpdate.activateUpdate().then(() => {
+        console.log(`Service worker is updated. Going to reload now!`);
+        window.location.reload();
+      });
+    });
+
+    /**
+     * Angular doc
+     */
+    swUpdate.available.subscribe(event => {
+      console.log('current version is', event.current);
+      console.log('available version is', event.available);
+    });
+    swUpdate.activated.subscribe(event => {
+      console.log('old version was', event.previous);
+      console.log('new version is', event.current);
+    });
   }
   @HostListener('window:resize', ['$event']) onresize(event: Event) {
     this.resize.next();

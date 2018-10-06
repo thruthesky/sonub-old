@@ -31,6 +31,18 @@
     <mat-hint>Describe your blog in 255 letters.</mat-hint>
   </mat-form-field>
 
+  <mat-form-field class="mt-4 mt-md-3 w-100" appearance="outline">
+    <input matInput name="copyright" [(ngModel)]=" blog.copyright ">
+    <mat-label>Copyright</mat-label>
+    <mat-hint>
+      This is a good place to put your company name, moible number, email. But keep it short. 60 letters are recommended.
+      Example)
+      <div>
+        (C) Sonub, Inc. Contact: 000-0000-0000 admin@sonub.com
+      </div>
+    </mat-hint>
+  </mat-form-field>
+
   <div class="d-md-flex my-4 my-md-3">
       <div class="blog-favicon pr-md-2">
         <div class="mb-1 text-primary fs-md">Favicon</div>
@@ -48,8 +60,9 @@
         <div class=" mw-180px my-2 p-1 rounded bg-success fs-xs white text-center border-box" *ngIf=" percentage && code == 'blog_favicon' " [style.width]="percentage + '%'">{{percentage}}%</div>
       
         <div class="p-1 fs-sm text-muted">
-          Upload Favicon.
-          Must be PNG image file with 64px width and 64px height.
+          Upload Favicon.<br>
+          Must be PNG image file with 64px width and 64px height.<br>
+          The Favicon will be used in 3 places. (1) favicon (2) mobile logo (3) desktop logo.
         </div>
       </div>
       
@@ -70,7 +83,7 @@
             [style.width]="percentage && code == 'blog_seo_image' + '%'">{{percentage && code == 'blog_seo_image'}}%</div>
 
           <div class="p-1 fs-sm text-muted">
-            Upload Favicon.
+            Site Preview Image.<br>
             Recommend in 1024px pixels of width and 512 pixels of height. This image will be used in SEO and site previews.
           </div>
         </div>
