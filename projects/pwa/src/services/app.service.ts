@@ -28,6 +28,8 @@ interface Environment {
 
 
 import * as io from 'socket.io-client';
+import { DialogService } from 'share/components/dialog/dialog.service';
+import { AlertData } from 'share/components/dialog/dialog-interfaces';
 const socket = io(environment.sonubLogServerUrl);
 
 
@@ -192,7 +194,8 @@ export class AppService {
     private snackBar: MatSnackBar,
     private router: Router,
     private cookie: CookieService,
-    public philgo: PhilGoApiService
+    public philgo: PhilGoApiService,
+    private dialog: DialogService
   ) {
     window['a'] = this;
     this.initLanguage();
@@ -1041,5 +1044,9 @@ export class AppService {
     return hours + ':' + minutes + ' ' + ampm;
   }
 
+
+  alert(data: AlertData) {
+    this.dialog.alert(data);
+  }
 
 }
