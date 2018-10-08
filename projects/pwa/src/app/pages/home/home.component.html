@@ -1,7 +1,7 @@
 
 <div id="home">
   <app-blog-category-top-menu class="login-user-blog-content" *ngIf=" a.isMobile "></app-blog-category-top-menu>
-  <div class="text-editor d-md-flex align-items-center rounded mt-3 mt-md-0 mb-md-3 p-default-spacing bg-white" 
+  <div class="text-editor d-md-flex align-items-center rounded mt-2 mt-md-0 mb-md-3 p-default-spacing bg-white" 
       *ngIf=" a.inRootSite " routerLink="{{ a.getBlogPostCreateUrl() }}" >
       <app-avatar class="mr-md-3"></app-avatar>
       <div class="editor mt-2 mt-md-0 rounded">
@@ -38,24 +38,24 @@
             </div>
           </div>
           <!--/community-photos-->
-      
-          <section class="community-posts" *ngIf=" a.frontPage?.communityPosts ">
-            <div class="row">
-              <div class="col" *ngIf=" a.frontPage.communityPosts['discussion']?.length >= 2 ">
+          
+          <section class="community-posts  mt-5 mb-4" *ngIf=" a.frontPage?.communityPosts ">
+            <div class="row no-gutters">
+              <div class="col pr-md-1" *ngIf=" a.frontPage.communityPosts['discussion']?.length >= 2 ">
                 <app-post-line [post]="a.frontPage.communityPosts['discussion'][0]"></app-post-line>
                 <app-post-line [post]="a.frontPage.communityPosts['discussion'][1]"></app-post-line>
               </div>
-              <div class="col" *ngIf=" a.frontPage.communityPosts['answer']?.length >= 2 ">
+              <div class="col pl-md-1" *ngIf=" a.frontPage.communityPosts['answer']?.length >= 2 ">
                 <app-post-line [post]="a.frontPage.communityPosts['answer'][0]"></app-post-line>
                 <app-post-line [post]="a.frontPage.communityPosts['answer'][1]"></app-post-line>
               </div>
             </div>
-            <div class="row">
-              <div class="col" *ngIf=" a.frontPage.communityPosts['market']?.length >= 2 ">
+            <div class="row no-gutters">
+              <div class="col pr-md-1" *ngIf=" a.frontPage.communityPosts['market']?.length >= 2 ">
                 <app-post-line [post]="a.frontPage.communityPosts['market'][0]"></app-post-line>
                 <app-post-line [post]="a.frontPage.communityPosts['market'][1]"></app-post-line>
               </div>
-              <div class="col" *ngIf=" a.frontPage.communityPosts['media']?.length >= 2 ">
+              <div class="col pl-md-1" *ngIf=" a.frontPage.communityPosts['media']?.length >= 2 ">
                 <app-post-line [post]="a.frontPage.communityPosts['media'][0]"></app-post-line>
                 <app-post-line [post]="a.frontPage.communityPosts['media'][1]"></app-post-line>
               </div>

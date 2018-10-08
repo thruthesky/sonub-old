@@ -81,6 +81,10 @@
   }
 
   #desktop-right {
+    display: none;
+    @media (min-width:$lg) {
+      display: table-cell
+    }
     width: $right-sidebar-width;
     .desktop-right-sidebar {
       @include right-sidebar();
