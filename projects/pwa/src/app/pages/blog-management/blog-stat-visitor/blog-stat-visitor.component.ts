@@ -17,20 +17,11 @@ export class BlogStatVisitorComponent implements OnInit {
   from_hour = 0;
   to_hour = 23;
 
-  statsView = 'daily';
+  selectedStats = 'uniqueVisitor';
 
   data = {
     pageView: null,
-    everyHourPageView: null,
     uniqueVisitor: null,
-    everyHourUniqueVisitor: null
-  };
-
-  total = {
-    pageView: null,
-    everyHourPageView: null,
-    uniqueVisitor: null,
-    everyHourUniqueVisitor: null
   };
 
   /**
@@ -40,6 +31,11 @@ export class BlogStatVisitorComponent implements OnInit {
 
   monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
   'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+
+  selectedTitle = {
+    pageView: 'Page View',
+    uniqueVisitor: 'Visitor'
+  };
 
 
   constructor(public a: AppService,
@@ -66,12 +62,19 @@ export class BlogStatVisitorComponent implements OnInit {
     };
   }
 
-  loadStat() {
+  loadStat(func = null) {
 
-    const req = this.request('statistics');
+    if ( func ) {
+      this.selectedStats = func;
+    }
+    // if ( this.data[func] && this.data[func]['stats']) {
+    //   return;
+    // }
+
+    const req = this.request(this.selectedStats);
     this.stat.getData(req).subscribe(res => {
-      console.log('statistics: ', res);
-      this.data = res['data'];
+      console.log(`${this.selectedStats}: `, res);
+      this.data[this.selectedStats] = res['data'];
     }, e => {
       this.a.error(e);
     });
@@ -135,10 +138,7 @@ export class BlogStatVisitorComponent implements OnInit {
     const month = Ymd.substring(4, 6) - 1;
     const day  = Ymd.substring(6, 8);
 
-    const d = new Date(year, month, day);
-    if ( this.statsView === 'daily' ) {
-      return day + ' ' + this.monthNames[month];
-    }
+    return day + ' ' + this.monthNames[month];
   }
 
 
