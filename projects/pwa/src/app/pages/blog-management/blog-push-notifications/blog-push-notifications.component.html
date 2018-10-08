@@ -1,3 +1,58 @@
-<p>
-  blog-push-notifications works!
-</p>
+<header>
+  <h1>
+    Notifications
+  </h1>
+  <p>
+    You can send notifications to your blog subscribers.
+    A message will be delivered on their mobile or computers.
+  </p>
+</header>
+<main>
+
+  <em *ngIf=" !idx ">
+    You have not chosen a post. Please choose a post to send notifications.
+    <dfn>
+      (1) Go to a post. (2) Click menu. (3) click 'Send notifications'
+    </dfn>
+  </em>
+
+  <section *ngIf=" idx ">
+
+    Post No.: {{ idx }}
+    No. of Subscribers: {{ noOfTokens }}
+
+
+    <div class="favicon" *ngIf="blog">
+      <div class="">Favicon</div>
+      <div><img class="size-64px" src="{{ blog.url_favicon }}"></div>
+      <div>Favicon will be used for notification icon.</div>
+    </div>
+
+
+    <form (ngSubmit)=" onSubmit() " *ngIf="post">
+
+        <div>
+
+            Subject:
+            <input name="title" [(ngModel)]="form.title">
+        </div>
+      
+        <div>
+
+            Content:
+            <input name="body" [(ngModel)]="form.body">
+        </div>
+
+        <div>
+          <button type="submit">Send Notifications To Blog subscribers</button>
+        </div>
+
+    </form>
+
+  </section>
+
+
+</main>
+<footer>
+
+</footer>

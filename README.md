@@ -74,6 +74,21 @@ This is wrong because it makes difficult to understand template design. In fact,
 }
 ````
 
+### Page layout
+
+```` html
+<header>
+  <h1>Page Title. Required.</h1>
+  <p>Description. Optional.</p>
+</header>
+<main>
+  Required.
+</main>
+<footer>
+  extra content. Optional.
+</footer>
+````
+
 ## Coding Guideline
 
 ### Difference of getXxxxUrl() and urlXxxxx()

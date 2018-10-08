@@ -49,7 +49,7 @@ const routes: Routes = [
     // This is being used in PHP SEO.
     { path: 'b/:blog_domain/:idx/:subject', loadChildren: './pages/blog-list/blog-list.module#BlogListModule' },
 
-    // blog post view. Single post view only. a.getUrlBlogView()
+    // blog post view. Single post view only. a.getBlogViewUrl()
     { path: 'bv/:idx/:subject', loadChildren: './pages/blog-view/blog-view.module#BlogViewPageModule' },
 
     // blog settings. Domain is not required since user can only enter blog settings pages only under his domain.
@@ -90,8 +90,15 @@ const routes: Routes = [
         path: 'blog-settings/app-icon',
         loadChildren: './pages/blog-management/blog-app-icon/blog-app-icon.module#BlogAppIconModule'
     },
+
+    // send push notification
     {
-        path: 'blog-settings/push-notifications',
+        path: 'blog-management/push-notifications',
+        loadChildren: './pages/blog-management/blog-push-notifications/blog-push-notifications.module#BlogPushNotificationsModule'
+    },
+    // send push notification with a post
+    {
+        path: 'blog-management/push-notifications/:idx',
         loadChildren: './pages/blog-management/blog-push-notifications/blog-push-notifications.module#BlogPushNotificationsModule'
     },
 

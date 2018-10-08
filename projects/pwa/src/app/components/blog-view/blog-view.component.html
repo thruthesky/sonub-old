@@ -34,8 +34,8 @@
       <button (click)=" onDelete( post ) ">Delete</button>
       <button (click)=" onReport( post ) ">Report</button>
       
-
-      <button mat-icon-button [matMenuTriggerFor]="postMenu">
+      
+      <button mat-icon-button [matMenuTriggerFor]="postMenu" *ngIf=" a.inMyBlog && a.philgo.isMyPost(post) ">
         <mat-icon class="text-success">more_vert</mat-icon>
       </button>
 
@@ -49,6 +49,12 @@
             <mat-icon>photo_size_select_actual</mat-icon>
             <span>More Features</span>
           </button>
+
+          <button class="flex-center" mat-menu-item (click)=" a.openNotification(post.idx) ">
+            <mat-icon>photo_size_select_actual</mat-icon>
+            <span>Send Notifications</span>
+          </button>
+
         </ng-template>
       </mat-menu>
 
