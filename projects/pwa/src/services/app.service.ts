@@ -467,8 +467,8 @@ export class AppService {
   openRootSite() {
     window.location.href = this.urlRootSite;
   }
-  openMyBlog( event?: Event ) {
-    if ( event ) {
+  openMyBlog(event?: Event) {
+    if (event) {
       event.preventDefault();
     }
     if (this.loggedOut) {
@@ -627,6 +627,14 @@ export class AppService {
   openBlogViewList(post: ApiPost, event?: Event) {
     return this.openPostView(post, event);
   }
+
+  /**
+   * Opens https://tips.sonub.com/
+   */
+  openBlogTips() {
+    window.location.href = this.getBlogUrl('tips');
+  }
+
 
   /**
    * Opens blog category under whatever blog domain.
@@ -876,14 +884,9 @@ export class AppService {
    *
    * @return
    *  - If input is 'abc', then 'abc.sonub.com' will be returned.
-   *  - If not logged in, empty string will be returned.
    */
   getBlogUrl(domain: string): string {
-    if (this.loggedIn) {
-      return this.getBlogDomainUrl(domain);
-    } else {
-      return '';
-    }
+    return this.getBlogDomainUrl(domain);
   }
 
   getMyBlogUrl(): string {

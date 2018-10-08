@@ -122,6 +122,12 @@
             Sitemap
         </a>
       </li>
+      <li *ngIf=" a.inMyBlog ">
+        <a  (click)=" a.openBlogTips() ">
+            <i class="material-icons text-secondary">transform</i>
+            Blog Tips
+        </a>
+      </li>
             
     </ul>
   </section>
