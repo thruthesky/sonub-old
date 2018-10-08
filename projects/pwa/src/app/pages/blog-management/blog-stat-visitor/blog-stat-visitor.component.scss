@@ -1,0 +1,25 @@
+.of-scroll{
+    overflow: auto;
+    .stats-table{
+        width: 100%;
+        border-collapse: collapse;
+        font-size: .87rem;
+        td,th{
+            padding: .25rem .5rem;
+            border: 1px solid #ddd;
+            overflow: auto;
+            vertical-align: middle
+        }
+        th{
+            padding: .5rem;
+        }
+    }
+}
+
+.mw-3px{
+    min-width: 3px;
+}
+.bar-display{
+    margin: .1rem 0;
+    height: 15px;
+}
