@@ -1,14 +1,14 @@
 <div *ngIf=" a.blog?.categories?.length ">
 
   <div class="container-fluid p-0">
-      <div class="row no-gutters fs-sm text-center">
+      <div class="row no-gutters fs-sm  bg-dark-1 text-center">
           <ng-container *ngIf=" a.blog.categories.length < 5 ">
-            <a class="col py-2 bg-dark-1" *ngFor="let n of a.blog.categories" routerLink="{{ a.getBlogCategoryUrl(n) }}">
+            <a class="col py-2" *ngFor="let n of a.blog.categories" routerLink="{{ a.getBlogCategoryUrl(n) }}">
               {{ n }}
             </a>
           </ng-container>
           <ng-container *ngIf=" a.blog.categories.length >= 5 ">
-            <a class="col py-2 bg-dark-1" *ngFor="let n of [0, 1, 2, 3]" routerLink="{{ a.getBlogCategoryUrl(n) }}">
+            <a class="col py-2" *ngFor="let n of [0, 1, 2, 3]" routerLink="{{ a.getBlogCategoryUrl(n) }}">
               {{ a.blog.categories[n] }}
             </a>
             <div class="col">
@@ -25,7 +25,7 @@
                 </button>
       
               </mat-menu>
-              <button mat-icon-button [matMenuTriggerFor]="postMenu">
+              <button class="flex-center w-100 h-100" mat-icon-button [matMenuTriggerFor]="postMenu">
                 <mat-icon>more_vert</mat-icon>
               </button>
             </div>
