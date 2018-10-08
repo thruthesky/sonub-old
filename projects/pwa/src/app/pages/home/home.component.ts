@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
     this.philgo.debug = true;
     philgo.app('sonub.frontPage', options).subscribe( res => {
-      console.log('sonub fron page data', res);
+      // console.log('sonub fron page data', res);
       this.a.frontPage = res;
     }, e => {
       console.error(e);

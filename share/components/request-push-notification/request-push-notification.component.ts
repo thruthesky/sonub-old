@@ -24,7 +24,7 @@ export class RequestPushNotificationComponent implements OnInit {
     // const messaging = this.a.firebase.messaging();
     // console.log('requestPushNotificationPermission()');
     this.a.messaging.requestPermission().then(() => {
-      const domain = this.a.blogOwnerIdx;
+      const domain = this.a.pushDomain;
       console.log('   ===> Notification permission granted.');
       // TODO(developer): Retrieve an Instance ID token for use with FCM.
       // Callback fired if Instance ID token is updated.

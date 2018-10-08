@@ -203,8 +203,10 @@ export class AppService {
     this.initUserEvent();
     // this.initCookieLogin();
     this.initBlog();
-    this.initLog();
 
+    this.initRootSite();
+
+    this.initLog();
 
     philgo.weatherMap().subscribe(g => console.log('geo:', g));
   }
@@ -240,7 +242,7 @@ export class AppService {
 
     this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationStart) {
-        console.log('NavigationStart', e);
+        // console.log('NavigationStart', e);
         /**
          * Reloads(Redirects) only if the current url is clicked again.
          * It does not reloads if when different url is clicked but component is the same.
@@ -265,10 +267,10 @@ export class AppService {
 
 
       if (e instanceof RouteConfigLoadStart) {
-        console.log('config log start');
+        // console.log('config log start');
         this.showRouterLoader = true;
       } else if (e instanceof RouteConfigLoadEnd) {
-        console.log('config log start');
+        // console.log('config log start');
         this.showRouterLoader = false;
       }
     });
@@ -284,16 +286,16 @@ export class AppService {
    */
   initUserEvent() {
     this.philgo.userRegister.subscribe(user => {
-      this.philgo.updateWebPushToken( this.blogOwnerIdx );
+      this.philgo.updateWebPushToken(this.pushDomain);
     });
     this.philgo.userLogin.subscribe(user => {
-      this.philgo.updateWebPushToken( this.blogOwnerIdx );
+      this.philgo.updateWebPushToken(this.pushDomain);
     });
     this.philgo.userUpdate.subscribe(user => {
       // console.log('User update event: ', user);
     });
     this.philgo.userChange.subscribe(user => {
-      console.log(' ==> initUserInformationChangeEvent() user: ', user);
+      // console.log(' ==> initUserInformationChangeEvent() user: ', user);
       // if (user) {
       //   /// user is logged in
       //   const d = new Date();
@@ -345,6 +347,23 @@ export class AppService {
 
   // }
 
+
+  /**
+   * 블로그 사이트가 아닌, 소너브 루트 사이트이면 초기화를 한다.
+   */
+  initRootSite() {
+    if (!this.inRootSite) {
+      return;
+    }
+
+    console.log('initRootSite()');
+    this.philgo.updateWebPushToken(this.pushDomain);
+
+    if (this.loggedIn) {
+      this.philgo.blogLoadSettings(this.myBlogDomain).subscribe(b => { });
+    }
+  }
+
   /**
    * @since 2018-10-01 If user is logged in and the user is in root site, then it loads login user's blog settigns.
    * @desc When user visits a blog, load blog settings and initialize it.
@@ -354,15 +373,17 @@ export class AppService {
    *      In this case, this method must be re-invoked.
    */
   initBlog() {
-
+    // console.log('initBlog()');
     if (this.inBlogSite) {
       this.philgo.blogLoadSettings(this.currentBlogDomain).subscribe(blog => {
-        // console.log('blog settings', blog);
+        /**
+         * When user is in blog site and blog site inofmration have been loaded, then update push tokens.
+         */
+        // console.log('blog:', blog);
+        this.philgo.updateWebPushToken(this.pushDomain);
       }, e => this.toast(e));
     } else {
-      if (this.loggedIn) {
-        this.philgo.blogLoadSettings(this.myBlogDomain).subscribe(b => { });
-      }
+      // 블로그 사이트가 아니면, 즉, 소너브 메인 페이지이면, 로그인한 사용자의 블로그 정보를 보여준다. 이것은 initRootSite() 를 참고한다.
     }
 
     this.philgo.blogChange.subscribe(blog => {
@@ -387,14 +408,15 @@ export class AppService {
 
   }
   /**
-   * 블로그 소유주의 회원 idx 를 리턴한다.
+   * 사용자가 블로그 사이트에 있는 경우, 블로그 소유주의 회원 idx 가 push domain 이 된다.
+   * 사용자가 루트 사이트라면, sonub-root-site 가 도메인이 된다.
    * @desc 이 값은 push_tokens_v2 에 저장된다.
    */
-  get blogOwnerIdx(): any {
-    if ( this.blog && this.blog.idx ) {
+  get pushDomain(): any {
+    if (this.inBlogSite && this.blog && this.blog.idx) {
       return this.blog.idx;
     } else {
-      return 0;
+      return 'sonub-root-site';
     }
   }
 
@@ -530,8 +552,12 @@ export class AppService {
   getBlogSettingsAppIconUrl(): string {
     return this.getBlogSettingsUrl() + '/app-icon';
   }
-  getBlogSettingsPushNotificationsUrl(): string {
-    return this.getBlogSettingsUrl() + '/push-notifications';
+  getBlogPushNotificationsUrl(idx?): string {
+    let url = '/blog-management/push-notifications';
+    if (idx) {
+      url += '/' + idx;
+    }
+    return url;
   }
   getBlogSettingsCategoryUrl(): string {
     return this.getBlogSettingsUrl() + '/category';
@@ -703,7 +729,7 @@ export class AppService {
    * Returns url of blog view. ( single post view )
    * @param post blog post
    */
-  getUrlBlogView(post: ApiPost): string {
+  getBlogViewUrl(post: ApiPost): string {
     this.setPostInMemory(post);
     return `/bv/${post.idx}/${post.subject}`;
   }
@@ -713,7 +739,17 @@ export class AppService {
    * @param post blog post
    */
   openBlogView(post: ApiPost) {
-    this.router.navigateByUrl(this.getUrlBlogView(post));
+    const url = this.getBlogViewUrl(post);
+    console.log('blog url: ', url);
+    this.router.navigateByUrl(url);
+  }
+
+  /**
+   * Open push notification pge
+   * @param idx post idx
+   */
+  openNotification(idx) {
+    this.router.navigateByUrl(this.getBlogPushNotificationsUrl(idx));
   }
 
   /**
@@ -770,7 +806,7 @@ export class AppService {
      * 채팅에서 백그라운드로 메시지가 와도 별로 할 것이 없다. 왜냐하면, firebase realtiem update 로 message toast 를 상단에 보여주기 때문이다.
      */
     this.messaging.onMessage((payload) => {
-      console.log('Got FCM notification! Display on windows.');
+      // console.log('Got FCM notification! Display on windows.');
       alert('Got push tokens');
     });
 
@@ -967,7 +1003,7 @@ export class AppService {
 
   initLog() {
     socket.on('welcome', data => {
-      console.log('Connected to log server. Welcome data:', data);
+      // console.log('Connected to log server. Welcome data:', data);
     });
   }
 
@@ -978,7 +1014,7 @@ export class AppService {
     data['id'] = this.philgo.myId();
     data['referrer'] = document.referrer;
     data['lang'] = _.languageCode;
-    console.log('data: ', data);
+    // console.log('data: ', data);
     socket.emit('log', data);
   }
 

@@ -147,7 +147,7 @@ export class BlogListComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     if (this.a.inBlogSite) {
       // console.log('a.blog: ', this.a.blog);
-      req.uid = this.a.blogOwnerIdx;
+      req.uid = this.a.pushDomain;
     }
     if (this.category) {
       req.category = this.category;
