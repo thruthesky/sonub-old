@@ -2,17 +2,21 @@
     <h1 class="px-2">Statistics</h1>
 </mat-toolbar>
 
-<mat-form-field>
-  <input matInput [matDatepicker]="from_date_picker" placeholder="Date From" disabled [(ngModel)]=" from_date " (dateChange)="loadStat()">
-  <mat-datepicker-toggle matSuffix [for]="from_date_picker"></mat-datepicker-toggle>
-  <mat-datepicker #from_date_picker disabled="false"></mat-datepicker>
-</mat-form-field>
-
-<mat-form-field>
-  <input matInput [matDatepicker]="to_date_picker" placeholder="Date To" disabled [(ngModel)]=" to_date " (dateChange)="loadStat()">
-  <mat-datepicker-toggle matSuffix [for]="to_date_picker"></mat-datepicker-toggle>
-  <mat-datepicker #to_date_picker disabled="false"></mat-datepicker>
-</mat-form-field>
+<div class="flex-center justify-content-around flex-wrap bg-white pt-5">
+    <mat-form-field appearance="outline">
+        <mat-label>Date From</mat-label>
+        <input matInput [matDatepicker]="from_date_picker" disabled [(ngModel)]=" from_date " (dateChange)="loadStat()">
+        <mat-datepicker-toggle matSuffix [for]="from_date_picker"></mat-datepicker-toggle>
+        <mat-datepicker #from_date_picker disabled="false"></mat-datepicker>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline">
+        <mat-label>Date To</mat-label>
+        <input matInput [matDatepicker]="to_date_picker" disabled [(ngModel)]=" to_date " (dateChange)="loadStat()">
+        <mat-datepicker-toggle matSuffix [for]="to_date_picker"></mat-datepicker-toggle>
+        <mat-datepicker #to_date_picker disabled="false"></mat-datepicker>
+      </mat-form-field>
+</div>
 
 <section class="bg-white p-4">
 
