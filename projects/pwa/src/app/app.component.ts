@@ -4,6 +4,7 @@ import { debounceTime } from 'rxjs/operators';
 import { AppService } from '../services/app.service';
 import { environment } from '../environments/environment';
 import { SwUpdate } from '@angular/service-worker';
+import { AlertData } from 'share/components/dialog/dialog-interfaces';
 
 @Component({
   selector: 'app-root',
@@ -71,6 +72,12 @@ export class AppComponent {
       console.log('old version was', event.previous);
       console.log('new version is', event.current);
     });
+
+
+    const data: AlertData = <any>{};
+    data.content = 'Oo.. this is content';
+    this.a.alert(data);
+
   }
   @HostListener('window:resize', ['$event']) onresize(event: Event) {
     this.resize.next();

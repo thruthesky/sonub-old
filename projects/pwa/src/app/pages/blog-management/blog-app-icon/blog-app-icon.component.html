@@ -1,8 +1,8 @@
 <mat-toolbar class="border-top border-top-md-0">
-  <h1 class="px-2">Add Blog To Home Screen</h1>
+  <h1 class="px-2 fw-light">Add Blog To Home Screen</h1>
 </mat-toolbar>
 
-<div>
+<div class="px-4 py-3 bg-darkgreen white fs-md">
   You can install your blog on visitors mobile home screen just like native app.
   This give you great benefit since users can easily access your blog.
   This is very important feature. If you are really serious about running a good blog site, please fill in the form and
@@ -31,28 +31,27 @@
 
 
 
-  <div class="blog-app-icon-thumbnails pl-md-2 mt-3 mt-md-0">
-    <div class="mb-1 text-primary fs-md">Preview Image</div>
+  <div class="blog-app-icon-thumbnails mt-3">
+    <div class="my-1 mx-2 text-dark fs-md">Mobile App Icon</div>
 
-    <div class="position-relative border rounded">
-      <div class="flex-center my-2 mx-auto of-hidden w-170px h-64px">
-        <img *ngIf=" blog.app_url_icons_src_512 " class="size-100px" src="{{ blog.app_url_icons_src_512 }}">
-        <i class="material-icons fs-xxl text-secondary">
-          add_a_photo
-        </i>
+    <div class="position-relative p-2 border rounded text-center">
+      <div class="flex-center mx-auto of-hidden size-200px" *ngIf=" blog.app_url_icons_src_512 ">
+        <img class="w-100" src="{{ blog.app_url_icons_src_512 }}">
       </div>
-      <input class="pointer" type="file" name="blog_icon_image" (change)=" onChangeFile($event,  'blog_app_icon' ) ">
+      <i  *ngIf=" !blog.app_url_icons_src_512 " class="material-icons fs-xxl text-secondary">
+        add_a_photo
+      </i>
+      <input class="transparent-cover w-100 pointer" type="file" name="blog_icon_image" (change)=" onChangeFile($event,  'blog_app_icon' ) ">
     </div>
 
     <div class=" mw-180px my-2 p-1 rounded bg-success fs-xs white text-center border-box" *ngIf=" percentage  "
       [style.width]="percentage + '%'">{{ percentage }}%</div>
 
-    <div class="p-1 fs-sm text-muted">
-      Upload App Icon.<br>
-      Important: The image must be PNG image and width and height must be 512p pixcels.<br>
-    </div>
+    <div class="my-1 mx-2 p-1 fs-sm text-muted">Upload App Icon.</div>
+    <div class="mt-4 mx-2 fs-sm"><span class=" text-danger">Important:</span> The image must be PNG image and width and height must be 512 pixels.</div>
+  
 
-    <div class="generated-thumbnails">
+    <div class="generated-thumbnails py-4">
       <img *ngIf="blog.app_url_icons_src_72"  src="{{ blog.app_url_icons_src_72 }}">
       <img *ngIf="blog.app_url_icons_src_96"  src="{{ blog.app_url_icons_src_96 }}">
       <img *ngIf="blog.app_url_icons_src_128"  src="{{ blog.app_url_icons_src_128 }}">
@@ -65,7 +64,7 @@
 
 
 
-  <div class="list-row my-4 text-center">
+  <div class="list-row mt-4 mb-5 text-center">
     <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog">
       <i class="material-icons red">clear</i>
       <span class="ml-1">Cancel</span>

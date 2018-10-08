@@ -74,6 +74,21 @@ This is wrong because it makes difficult to understand template design. In fact,
 }
 ````
 
+### Page layout
+
+```` html
+<header>
+  <h1>Page Title. Required.</h1>
+  <p>Description. Optional.</p>
+</header>
+<main>
+  Required.
+</main>
+<footer>
+  extra content. Optional.
+</footer>
+````
+
 ## Coding Guideline
 
 ### Difference of getXxxxUrl() and urlXxxxx()
@@ -138,9 +153,9 @@ This section describes how developer can develop and test SEO on local computer.
 
 * If you build app with `ng build`, then `ngsw-worker.js` will not be copied and will not be registered since `environment.productoin` is false.
 
-* 
-
 #### A2HS
+
+* User can upload PWA Icon and if user is using Chrome on Android, a popup messages shows to add icon to home screen.
 
 * To see if A2HS & Service Worker are properly working, you have to publish to real production site. It's not working on local computer.
 
@@ -219,6 +234,7 @@ security.limit_extensions = .php .html fest.json
 * Add the following on nginx conf
 
 ```` text
+#### Sonub Nginx Configuration
 # redirection is necessary for PWA. Lighthouse check-up.
 server {
     listen         80;
@@ -229,10 +245,14 @@ server {
 server {
         server_name  .sonub.com;
         listen          443 ssl;
+
+        ## Warning - change paths
         ssl_certificate       /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.crt;
         ssl_certificate_key   /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.key;
         autoindex on;
 
+
+        ## Warning - change path
         root   /Users/jaehosong/www/sonub-seo;
         index  index.html;
 
@@ -258,7 +278,14 @@ server {
             include        fastcgi_params;
         }
 }
+#### EO Sonub
 ````
+
+#### PUSH NOTIFICATION
+
+* If the app didn't request push notification permission, it requests in `app-request-push-notification` component.
+* If user accepts, the component gets push token and saves into `sonub_push_tokens` table on database server.
+* And whenever the ap is booting, the app get push token and updates to server.
 
 ## Testing
 
@@ -352,10 +379,6 @@ server {
 ## Root Site Configuration
 
 * see [Root Site Management](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.e9795yxifzr0)
-
-## A2HS
-
-*  /// 
 
 ## How to use blog
 

@@ -1,22 +1,26 @@
 <mat-toolbar  class="border-top border-top-md-0">
-    <h1 class="px-2">Statistics</h1>
+    <h1 class="px-md-2 fw-light">Statistics</h1>
 </mat-toolbar>
 
-<mat-form-field>
-  <input matInput [matDatepicker]="from_date_picker" placeholder="Date From" disabled [(ngModel)]=" from_date " (dateChange)="loadStat()">
-  <mat-datepicker-toggle matSuffix [for]="from_date_picker"></mat-datepicker-toggle>
-  <mat-datepicker #from_date_picker disabled="false"></mat-datepicker>
-</mat-form-field>
+<div class="d-md-flex bg-white px-3 px-md-4 pt-4">
+    <mat-form-field class="w-100 mr-md-3 border-box" appearance="outline">
+      <mat-label>Date From</mat-label>
+      <input matInput [matDatepicker]="from_date_picker" disabled [(ngModel)]=" from_date " (dateChange)="loadStat()">
+      <mat-datepicker-toggle matSuffix [for]="from_date_picker"></mat-datepicker-toggle>
+      <mat-datepicker #from_date_picker disabled="false"></mat-datepicker>
+    </mat-form-field>
 
-<mat-form-field>
-  <input matInput [matDatepicker]="to_date_picker" placeholder="Date To" disabled [(ngModel)]=" to_date " (dateChange)="loadStat()">
-  <mat-datepicker-toggle matSuffix [for]="to_date_picker"></mat-datepicker-toggle>
-  <mat-datepicker #to_date_picker disabled="false"></mat-datepicker>
-</mat-form-field>
+    <mat-form-field class="w-100 ml-md-3 border-box" appearance="outline">
+      <mat-label>Date To</mat-label>
+      <input matInput [matDatepicker]="to_date_picker" disabled [(ngModel)]=" to_date " (dateChange)="loadStat()">
+      <mat-datepicker-toggle matSuffix [for]="to_date_picker"></mat-datepicker-toggle>
+      <mat-datepicker #to_date_picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+</div>
 
-<section class="bg-white p-4">
+<section class="bg-white px-3 px-md-4 pt-0">
 
-  <div>
+  <div class="of-scroll">
     <div>Daily</div>
     <div class="bar-stats position-relative" *ngIf="data?.uniqueVisitor?.stats">
       <div class="bar-content" *ngFor="let k of _.keys(data['uniqueVisitor']['stats'])">
@@ -45,28 +49,68 @@
         <td>Total</td>
         <td *ngIf="data?.uniqueVisitor?.total" >{{ data?.uniqueVisitor?.total }}</td>
         <td *ngIf="data?.pageView?.total">{{ data?.pageView?.total }}</td>
+
+
+    <!--<table class="stats-table" *ngIf="data?.uniqueVisitor?.stats ">-->
+      <!--<tr>-->
+        <!--<th width="20">Date</th>-->
+        <!--<th class="bg-info white fw-light fs-sm" width="15">Unique Visitor</th>-->
+        <!--<th class="bg-darkgreen white fw-light fs-sm" width="15">Page View</th>-->
+        <!--<th width="50">Graph</th>-->
+      <!--</tr>-->
+      <!--<tr *ngFor="let k of _.keys(data['uniqueVisitor'])">-->
+        <!--<td class="text-nowrap text-center" width="20">{{k | slice: 4: 6}}/{{k | slice: 6: 8}}/{{k | slice: 0: 4}}</td>-->
+        <!--<td width="15">{{ data['uniqueVisitor'][k]}}</td>-->
+        <!--<td width="15">{{ data['pageView'][k] }}</td>-->
+        <!--<td width="50">-->
+          <!--<div class="d-flex align-items-center">-->
+              <!--<span class="mr-1 fs-xs fw-bold text-nowrap">UV</span>-->
+              <!--<span [style.width]=" data['uniqueVisitor'][k]/15+ 'px'" -->
+                   <!--[class.mw-3px]="data['uniqueVisitor'][k]!=0"  class="bar-display bg-info "></span>-->
+          <!--</div>-->
+          <!--<div class="d-flex align-items-center">-->
+              <!--<span  class="mr-1 fs-xs fw-bold text-nowrap"> PV </span>-->
+              <!--<span [style.width]=" data['pageView'][k]/15 + 'px'" -->
+                   <!--[class.mw-3px]="data['pageView'][k]!=0" class="bar-display bg-darkgreen"></span>-->
+          <!--</div>-->
+        <!--</td>-->
       </tr>
     </table>
+
   </div>
+
+
   <div>
-    <div>Total no of visitors on selected period</div>
+    <!-- <div>Total no of visitors on selected period</div> -->
     <!--<table *ngIf=" data['everyHourUniqueVisitor'] ">-->
       <!--<tr *ngFor="let k of data['everyHourUniqueVisitor']; let i = index;">-->
         <!--<td>{{ i }} {{ k }}</td>-->
       <!--</tr>-->
     <!--</table>-->
   </div>
+
   <div>
-    <div>Total no of page view on selected period</div>
+    <!-- <div>No of page view on each day</div> -->
+    <!--<table *ngIf="data['pageView']">-->
+      <!--<tr *ngFor="let k of _.keys(data['pageView'])">-->
+        <!--<td>{{k}}</td>-->
+
+      <!--</tr>-->
+    <!--</table>-->
+  </div>
+
+  <div>
+    <!-- <div>Total no of page view on selected period</div> -->
     <!--<table *ngIf="data['everyHourPageView']">-->
       <!--<tr *ngFor="let k of data['everyHourPageView']; let i = index;">-->
         <!--<td>{{ i }} {{ k }}</td>-->
       <!--</tr>-->
     <!--</table>-->
   </div>
+  <div class="px-2 pt-4 pb-5">
+      <p>Languages(Country) base on browser language</p>
 
-        Languages(Country) base on browser language<br>
+      <p> Platform stat: Windows, Mac, Android, iOS, etc.</p>
+  </div>
 
-
-        Platform stat: Windows, Mac, Android, iOS, etc.<br>
 </section>

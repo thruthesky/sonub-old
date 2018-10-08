@@ -33,6 +33,7 @@ import { LazyLoaderModule } from './components/lazy-loader/lazy-loader.module';
 import { CurrencyModule } from './components/currency/currency.module';
 import { WeatherModule } from './components/weather/weather.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { DialogModule } from 'share/components/dialog/dialog.module';
 
 
 /**
@@ -73,7 +74,8 @@ firebase.initializeApp(firebaseConfig);
     LazyLoaderModule,
     CurrencyModule,
     WeatherModule,
-    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -32,14 +32,20 @@
 
 
   <mat-list-item routerLink="{{ a.getBlogSettingsAppIconUrl() }}">
-    <i class="material-icons">equalizer</i>
-    <h4 matLine>App Icon</h4>
+    <i class="material-icons">mobile_friendly</i>
+    <h4 matLine>Mobile Application Setup</h4>
   </mat-list-item>
 
-  <mat-list-item routerLink="{{ a.getBlogSettingsPushNotificationsUrl() }}">
-    <i class="material-icons">equalizer</i>
+  <mat-list-item routerLink="{{ a.getBlogPushNotificationsUrl() }}">
+    <i class="material-icons">add_alert</i>
     <h4 matLine>Notifications</h4>
   </mat-list-item>
+
+  <mat-list-item (click)=" a.openBlogTips() ">
+    <i class="material-icons">near_me</i>
+    <h4 matLine>Blog Tips</h4>
+  </mat-list-item>
+
 
 
 </mat-list>

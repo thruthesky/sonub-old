@@ -40,8 +40,6 @@ export class PostComponent implements OnInit, AfterViewInit {
   percentage = 0;
 
 
-  isForumPostCreate = false;
-  isBlogPostCreate = false;
   isPostEdit = false;
   ///
   constructor(
@@ -57,16 +55,20 @@ export class PostComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     setTimeout(() => this.initView(), 10);
   }
+  get isForumPostCreate(): boolean {
+    return ! this.isBlogPostCreate;
+  }
+  get isBlogPostCreate(): boolean {
+    return this.form.post_id === 'blog';
+  }
   initView() {
 
     this.activatedRoute.paramMap.subscribe(params => {
 
       if (params.get('post_id')) {
-        this.isForumPostCreate = true;
         this.form.post_id = params.get('post_id');
         console.log('got post id: ', this.form.post_id);
       } else if (params.get('blog_category')) {
-        this.isBlogPostCreate = true;
         this.form.post_id = 'blog';
         this.form.category = params.get('blog_category');
         console.log('got category: ', this.form.category);
@@ -131,7 +133,10 @@ export class PostComponent implements OnInit, AfterViewInit {
        * Create
        */
       if (!this.form.post_id) {
-        this.a.toast(`Forum ID is empty.`);
+        return this.a.toast(`Forum ID is empty.`);
+      }
+      if ( this.form.post_id === 'blog' && ! this.form.category ) {
+        return this.a.toast( this.a.t({ en: 'Please select category', ko: '카테고리를 선택하세요.' }));
       }
       this.form.group_id = this.a.groupId;
       console.log('post create from: ', this.form);
@@ -142,6 +147,8 @@ export class PostComponent implements OnInit, AfterViewInit {
           this.a.openForum(this.form.post_id);
         } else if ( this.isBlogPostCreate ) {
           this.a.openBlogView(res);
+        } else {
+          console.log('What? is it not blog or forum posting?');
         }
       }, e => {
         this.a.toast(e);

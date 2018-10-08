@@ -142,9 +142,12 @@ export class BlogListComponent implements OnInit, AfterViewInit, OnDestroy {
       page_no: this.page_no,
       limit: this.limit
     };
+    /**
+     * 해당 블로그 사이트 글만 표시
+     */
     if (this.a.inBlogSite) {
       // console.log('a.blog: ', this.a.blog);
-      req.uid = this.a.blog.idx;
+      req.uid = this.a.pushDomain;
     }
     if (this.category) {
       req.category = this.category;
