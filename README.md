@@ -219,6 +219,7 @@ security.limit_extensions = .php .html fest.json
 * Add the following on nginx conf
 
 ```` text
+#### Sonub Nginx Configuration
 # redirection is necessary for PWA. Lighthouse check-up.
 server {
     listen         80;
@@ -229,10 +230,14 @@ server {
 server {
         server_name  .sonub.com;
         listen          443 ssl;
+
+        ## Warning - change paths
         ssl_certificate       /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.crt;
         ssl_certificate_key   /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.key;
         autoindex on;
 
+
+        ## Warning - change path
         root   /Users/jaehosong/www/sonub-seo;
         index  index.html;
 
@@ -258,6 +263,7 @@ server {
             include        fastcgi_params;
         }
 }
+#### EO Sonub
 ````
 
 ## Testing
