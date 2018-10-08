@@ -33,8 +33,7 @@
       <button (click)=" onEdit(post) ">Edit</button>
       <button (click)=" onDelete( post ) ">Delete</button>
       <button (click)=" onReport( post ) ">Report</button>
-      
-      
+
       <button mat-icon-button [matMenuTriggerFor]="postMenu" *ngIf=" a.inMyBlog && a.philgo.isMyPost(post) ">
         <mat-icon class="text-success">more_vert</mat-icon>
       </button>
@@ -72,7 +71,8 @@
 
 
   <div class="border-top">
-    <app-blog-reply [root]=" post " [post]=" post "></app-blog-reply>
+    <app-comment-box [root]=" post " [post]=" post "></app-comment-box>
+    
 
     <div class="comments comments-depth bg-white px-3 pt-2" *ngIf=" post?.comments?.length ">
       <div class="comment" *ngFor=" let comment of post.comments " [attr.depth]=" comment.depth ">
@@ -114,12 +114,9 @@
             <button (click)=" onDelete( comment ) ">Delete</button>
             <button (click)=" onReport( comment ) ">Report</button>
 
-
-
-
           </div>
 
-          <app-blog-reply [root]=" post " [post]=" comment " *ngIf=" comment['edit'] == true || comment['reply'] == true "></app-blog-reply>
+          <app-comment-box [root]=" post " [post]=" comment " *ngIf=" comment['edit'] == true || comment['reply'] == true "></app-comment-box>
         </div>
       </div>
     </div>
