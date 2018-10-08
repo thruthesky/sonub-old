@@ -200,7 +200,7 @@ export class AppService {
     this.initScreen();
     this.initPushNotification();
     this.initRouterEvent();
-    this.initUserInformationChangeEvent();
+    this.initUserEvent();
     // this.initCookieLogin();
     this.initBlog();
     this.initLog();
@@ -282,7 +282,16 @@ export class AppService {
    * @desc it saves user login session on cookie, so when user changes 'subdomain',
    *  the user still be logged in.
    */
-  initUserInformationChangeEvent() {
+  initUserEvent() {
+    this.philgo.userRegister.subscribe(user => {
+      this.philgo.updateWebPushToken( this.blogOwnerIdx );
+    });
+    this.philgo.userLogin.subscribe(user => {
+      this.philgo.updateWebPushToken( this.blogOwnerIdx );
+    });
+    this.philgo.userUpdate.subscribe(user => {
+      // console.log('User update event: ', user);
+    });
     this.philgo.userChange.subscribe(user => {
       console.log(' ==> initUserInformationChangeEvent() user: ', user);
       // if (user) {
@@ -375,6 +384,18 @@ export class AppService {
         }
       }
     });
+
+  }
+  /**
+   * 블로그 소유주의 회원 idx 를 리턴한다.
+   * @desc 이 값은 push_tokens_v2 에 저장된다.
+   */
+  get blogOwnerIdx(): any {
+    if ( this.blog && this.blog.idx ) {
+      return this.blog.idx;
+    } else {
+      return 0;
+    }
   }
 
   get loggedIn(): boolean {
@@ -741,12 +762,7 @@ export class AppService {
 
 
   /**
-   * @logic
-   *    1. Ask user to accept 'push' permission.
-   *      1-a) If user click the button 'ask the permission'
-   *      1-b) If user accepts, send push token to server.
-   *      1-c) and Send push token to server every time user runs the app.
-   *    2. If user rejects, show warning.
+   * onMessage() is being invoked when the user is on this site(domain) and message received from FCM.
    */
   initPushNotification() {
 
@@ -755,6 +771,7 @@ export class AppService {
      */
     this.messaging.onMessage((payload) => {
       console.log('Got FCM notification! Display on windows.');
+      alert('Got push tokens');
     });
 
   }

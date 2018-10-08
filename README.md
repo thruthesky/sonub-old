@@ -138,9 +138,9 @@ This section describes how developer can develop and test SEO on local computer.
 
 * If you build app with `ng build`, then `ngsw-worker.js` will not be copied and will not be registered since `environment.productoin` is false.
 
-* 
-
 #### A2HS
+
+* User can upload PWA Icon and if user is using Chrome on Android, a popup messages shows to add icon to home screen.
 
 * To see if A2HS & Service Worker are properly working, you have to publish to real production site. It's not working on local computer.
 
@@ -266,6 +266,12 @@ server {
 #### EO Sonub
 ````
 
+#### PUSH NOTIFICATION
+
+* If the app didn't request push notification permission, it requests in `app-request-push-notification` component.
+* If user accepts, the component gets push token and saves into `sonub_push_tokens` table on database server.
+* And whenever the ap is booting, the app get push token and updates to server.
+
 ## Testing
 
 * Since `sonub.com` and `www.sonub.com` are used in locally
@@ -358,10 +364,6 @@ server {
 ## Root Site Configuration
 
 * see [Root Site Management](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.e9795yxifzr0)
-
-## A2HS
-
-*  /// 
 
 ## How to use blog
 
