@@ -1,0 +1,28 @@
+.bar-stats {
+  overflow: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: .75em;
+}
+.bar-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.bar-content {
+  width: 2em;
+}
+
+.bar-item {
+  position: relative;
+  margin: 0 1px;
+  min-width: 1.2em;
+  min-height: 1px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom: .5px solid gray;
+  background-color: gray;
+  text-align: center;
+}

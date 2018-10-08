@@ -17,28 +17,34 @@
 <section class="bg-white p-4">
 
   <div>
-    <div class="stat-content position-relative">
-      <div class="stat-bars d-inline-block" *ngFor="let k of _.keys(data['uniqueVisitor'])">
-        <div>
-        <span class="stats-bar" style="width: {{ data['uniqueVisitor'][k]}} + 'px'">{{ data['uniqueVisitor'][k]}}</span>
-        <span class="stats-bar" style="width: {{ data['pageView'][k]}} + 'px'">{{ data['pageView'][k] }}</span>
+    <div>Daily</div>
+    <div class="bar-stats position-relative" *ngIf="data?.uniqueVisitor?.stats">
+      <div class="bar-content" *ngFor="let k of _.keys(data['uniqueVisitor']['stats'])">
+        <div class="bar-items">
+          <div class="bar-item bg-gray" *ngIf="data['uniqueVisitor']['stats']" [style.height.px]=" barHeight(data['uniqueVisitor']['stats'][k] , data?.uniqueVisitor?.total)"></div>
+          <div class="bar-item bg-green" *ngIf="data['pageView']['stats']" [style.height.px]=" barHeight(data['pageView']['stats'][k], data?.pageView?.total)"></div>
         </div>
-        <div>
-          {{k}}
+        <div class="bar-date text-center">
+          {{ formatDate( k )}}
         </div>
       </div>
     </div>
 
-    <table class="text-center" border="1" *ngIf="data['uniqueVisitor']">
+    <table class="text-center" border="1" *ngIf="data?.uniqueVisitor?.stats ">
       <tr>
         <td>Date</td>
-        <td>Unique Visitor</td>
-        <td>Page View</td>
+        <td bgcolor="gray">Unique Visitor</td>
+        <td bgcolor="green">Page View</td>
       </tr>
-      <tr *ngFor="let k of _.keys(data['uniqueVisitor'])">
+      <tr *ngFor="let k of _.keys(data['uniqueVisitor']['stats'])">
         <td>{{k}}</td>
-        <td>{{ data['uniqueVisitor'][k]}}</td>
-        <td>{{ data['pageView'][k] }}</td>
+        <td *ngIf="data['uniqueVisitor']['stats']" >{{ data['uniqueVisitor']['stats'][k]}}</td>
+        <td *ngIf="data['pageView']['stats']">{{ data['pageView']['stats'][k] }}</td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td *ngIf="data?.uniqueVisitor?.total" >{{ data?.uniqueVisitor?.total }}</td>
+        <td *ngIf="data?.pageView?.total">{{ data?.pageView?.total }}</td>
       </tr>
     </table>
   </div>
@@ -50,17 +56,6 @@
       <!--</tr>-->
     <!--</table>-->
   </div>
-
-  <div>
-    <div>No of page view on each day</div>
-    <!--<table *ngIf="data['pageView']">-->
-      <!--<tr *ngFor="let k of _.keys(data['pageView'])">-->
-        <!--<td>{{k}}</td>-->
-
-      <!--</tr>-->
-    <!--</table>-->
-  </div>
-
   <div>
     <div>Total no of page view on selected period</div>
     <!--<table *ngIf="data['everyHourPageView']">-->
