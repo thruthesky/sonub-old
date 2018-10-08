@@ -29,7 +29,7 @@ interface Environment {
 
 import * as io from 'socket.io-client';
 import { DialogService } from 'share/components/dialog/dialog.service';
-import { AlertData } from 'share/components/dialog/dialog-interfaces';
+import { AlertData, ConfirmData } from 'share/components/dialog/dialog-interfaces';
 const socket = io(environment.sonubLogServerUrl);
 
 
@@ -730,11 +730,17 @@ export class AppService {
 
   /**
    * Returns url of blog view. ( single post view )
+   * @desc If you have only post.idx, then passing <any>{ idx: idx, subject: subject } will do.
    * @param post blog post
+   * @param fullUrl if it is set to true, it returns full url.
    */
-  getBlogViewUrl(post: ApiPost): string {
+  getBlogViewUrl(post: ApiPost, fullUrl: boolean = false): string {
     this.setPostInMemory(post);
-    return `/bv/${post.idx}/${post.subject}`;
+    let url = `/bv/${post.idx}/${post.subject}`;
+    if (fullUrl) {
+      url = this.getBlogDomainUrl(this.currentBlogDomain) + url;
+    }
+    return url;
   }
 
   /**
@@ -808,9 +814,30 @@ export class AppService {
     /**
      * 채팅에서 백그라운드로 메시지가 와도 별로 할 것이 없다. 왜냐하면, firebase realtiem update 로 message toast 를 상단에 보여주기 때문이다.
      */
-    this.messaging.onMessage((payload) => {
+    this.messaging.onMessage(async payload => {
       // console.log('Got FCM notification! Display on windows.');
-      alert('Got push tokens');
+      console.log('payload: ', payload);
+      const notification = payload['notification'];
+      // alert('Got push tokens');
+      const data: ConfirmData = <any>{};
+      data.title = '[' + this.t({ en: 'Notification', ko: '알림' }) + '] ' + notification['title'];
+      data.content = notification['body'];
+      data.content += '<div class="mt-3">' + this.t({ en: 'Do you want to read the blog post?', ko: '해당 블로그 글로 이동하시겠습니까?' }) + '</div>';
+      const re = await this.alert(data);
+      if (re) {
+
+        let url: string = notification['click_action'];
+
+        if (url && url.indexOf('bv/')) {
+          // const idx = url.split('bv/').pop().split('/').shift();
+          // const post: ApiPost = <any>{ idx: idx, subject: notification['title'] };
+          // console.log('url: ', this.getBlogViewUrl(post));
+          // this.openBlogView(post);
+          url = 'bv/' + url.split('bv/').pop();
+          console.log('url: ', url);
+          this.router.navigateByUrl(url);
+        }
+      }
     });
 
   }
@@ -925,6 +952,8 @@ export class AppService {
   /**
    * Returns root url of the blog domain
    * @param domain blog domain
+   * @return blog domain url
+   * @example https://abc.sonub.com
    */
   getBlogDomainUrl(domain: string): string {
     let url = '';
@@ -1045,8 +1074,12 @@ export class AppService {
   }
 
 
-  alert(data: AlertData) {
-    this.dialog.alert(data);
+  async alert(data: AlertData) {
+    return await this.dialog.alert(data);
+  }
+
+  async confirm(data: ConfirmData) {
+    return await this.dialog.confirm(data);
   }
 
 }

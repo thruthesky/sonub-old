@@ -54,7 +54,9 @@ export class BlogPushNotificationsComponent implements OnInit {
 
     this.form.topic = this.a.pushDomain;
     this.form.icon = this.blog.url_favicon;
-    this.form.click_action = this.a.getBlogViewUrl(this.idx);
+    this.form.click_action = this.a.getBlogViewUrl( this.post, true );
+    // console.log(this.form);
+
     this.a.philgo.sendPushMessage(this.form).subscribe(res => {
       console.log('sendPushMessage: ', res);
     });

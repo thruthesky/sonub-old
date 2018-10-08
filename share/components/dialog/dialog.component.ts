@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { AlertData } from './dialog-interfaces';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dialog',
@@ -10,9 +10,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class DialogComponent implements OnInit {
 
   constructor(
+    domSanitizer: DomSanitizer,
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: AlertData
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    data['content'] = domSanitizer.bypassSecurityTrustHtml(data['content']);
+  }
+
 
   ngOnInit() {
   }
