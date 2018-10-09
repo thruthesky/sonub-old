@@ -272,7 +272,7 @@
 }
 
 .text-link{
-  color: #365899;
+  color: #365899!important;
 }
 
 .text-darkgreen{
@@ -294,6 +294,16 @@
 .mx-minus-2px{
   margin-left: -2px!important;
   margin-right: -2px!important;
+}
+
+
+.mx-minus-1{
+  margin-left: -.25rem;
+  margin-right: -.25rem;
+}
+.mx-minus-2{
+  margin-left: -.5rem;
+  margin-right: -.5rem;
 }
 
 
