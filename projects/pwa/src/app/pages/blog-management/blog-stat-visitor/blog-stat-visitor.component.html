@@ -2,7 +2,15 @@
     <h1 class="px-md-2 fw-light">Statistics</h1>
 </mat-toolbar>
 
-<div class="d-md-flex bg-white px-3 px-md-4 pt-4">
+<section class="bg-white p-3 px-md-4">
+
+  <div class="mb-3">
+    <button class="mr-1 bg-green" mat-flat-button (click)="loadStat('uniqueVisitor')">Visitor</button>
+    <button mat-flat-button color="primary" (click)="loadStat('pageView')">Page View</button>
+  </div>
+
+
+  <div class="d-md-flex">
     <mat-form-field class="w-100 mr-md-3 border-box" appearance="outline">
       <mat-label>Date From</mat-label>
       <input matInput [matDatepicker]="from_date_picker" disabled [(ngModel)]=" from_date " (dateChange)="loadStat()">
@@ -16,26 +24,26 @@
       <mat-datepicker-toggle matSuffix [for]="to_date_picker"></mat-datepicker-toggle>
       <mat-datepicker #to_date_picker disabled="false"></mat-datepicker>
     </mat-form-field>
-</div>
-
-<section class="bg-white px-3 px-md-4 pt-0">
+  </div>
 
   <div class="of-scroll">
-    <div class="button-row">
-      <button class="mr-1" mat-raised-button color="primary" (click)="loadStat('uniqueVisitor')">Visitor</button>
-      <button mat-raised-button color="accent" (click)="loadStat('pageView')">Page View</button>
-    </div>
-    <div class="bar-stats position-relative" *ngIf="data && data[selectedStats]?.stats">
-      <div class="bar-content" *ngFor="let k of _.keys(data[selectedStats]['stats'])">
-        <div class="bar-items">
-          <div class="bar-item bg-gray" *ngIf="data[selectedStats]['stats']" [style.height.px]=" barHeight(data[selectedStats]['stats'][k] , data[selectedStats].total)"></div>
+    <div class="bar-graph" *ngIf="a.isDesktop">
+      <div class="bar-graph-header">
+        <h2 class="bar-graph-title">{{selectedTitle[selectedStats]}}</h2>
+        <div class="bar-graph-subtitle" *ngIf=" data && data[selectedStats]?.stats">
+          <span><b>Total:</b> {{ data[selectedStats]?.total }}</span>
         </div>
-        <div class="bar-date text-center">
-          {{ formatDate( k )}}
+      </div>
+      <div class="bar-graph-content" *ngIf=" a.isDesktop && data && data[selectedStats]?.stats">
+        <div *ngFor="let k of _.keys(data[selectedStats]['stats'])">
+          <div class="bar-item" *ngIf="data[selectedStats]['stats']" [style.height.px]=" barHeight(data[selectedStats]['stats'][k] , data[selectedStats].total)">
+            <div class="bar-item-no">{{data[selectedStats]['stats'][k] }}</div>
+            <div class="bar-item-date">{{ formatDate( k )}}</div>
+          </div>
         </div>
       </div>
     </div>
-    <table class="text-center mt-5" border="1" *ngIf=" data[selectedStats] && data[selectedStats]?.stats ">
+    <table class="text-center" border="1" *ngIf=" a.isMobile &&  data[selectedStats] && data[selectedStats]?.stats ">
       <tr>
         <td>Date</td>
         <td bgcolor="gray">{{selectedTitle[selectedStats]}}</td>
@@ -52,10 +60,10 @@
 
   </div>
 
-  <div class="px-2 pt-4 pb-5">
-      <p>Languages(Country) base on browser language</p>
+  <!--<div class="px-2 pt-4 pb-5">-->
+      <!--<p>Languages(Country) base on browser language</p>-->
 
-      <p> Platform stat: Windows, Mac, Android, iOS, etc.</p>
-  </div>
+      <!--<p> Platform stat: Windows, Mac, Android, iOS, etc.</p>-->
+  <!--</div>-->
 
 </section>
