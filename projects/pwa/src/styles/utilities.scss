@@ -57,7 +57,10 @@
 .m-default-spacing{
   margin: $spacing!important;
 }
-
+.my-default-spacing{
+  margin-top: $spacing!important;
+  margin-bottom: $spacing!important;
+}
 
 .p-default-spacing{
   padding: $spacing!important;
