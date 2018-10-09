@@ -70,9 +70,7 @@
   </div>
 
 
-  <div class="border-top">
-    <app-comment-box [root]=" post " [post]=" post "></app-comment-box>
-    
+  <div class="border-top">    
 
     <div class="comments comments-depth bg-white px-3 pt-2" *ngIf=" post?.comments?.length ">
       <div class="comment" *ngFor=" let comment of post.comments " [attr.depth]=" comment.depth ">
@@ -120,6 +118,8 @@
         </div>
       </div>
     </div>
+
+    <app-comment-box [root]=" post " [post]=" post "></app-comment-box>
 
   </div>
 
