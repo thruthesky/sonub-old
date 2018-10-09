@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BlogStatVisitorComponent } from './blog-stat-visitor.component';
 import { RouterModule, Routes } from '@angular/router';
 import {
+  MatButtonModule,
   MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
@@ -30,7 +31,8 @@ const routes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule
   ],
   declarations: [BlogStatVisitorComponent]
 })

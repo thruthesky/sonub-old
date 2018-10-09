@@ -2,7 +2,15 @@
     <h1 class="px-md-2 fw-light">Statistics</h1>
 </mat-toolbar>
 
-<div class="d-md-flex bg-white px-3 px-md-4 pt-4">
+<section class="bg-white p-3 px-md-4">
+
+  <div class="mb-3">
+    <button class="mr-1 bg-green" mat-flat-button (click)="loadStat('uniqueVisitor')">Visitor</button>
+    <button mat-flat-button color="primary" (click)="loadStat('pageView')">Page View</button>
+  </div>
+
+
+  <div class="d-md-flex">
     <mat-form-field class="w-100 mr-md-3 border-box" appearance="outline">
       <mat-label>Date From</mat-label>
       <input matInput [matDatepicker]="from_date_picker" disabled [(ngModel)]=" from_date " (dateChange)="loadStat()">
@@ -16,101 +24,46 @@
       <mat-datepicker-toggle matSuffix [for]="to_date_picker"></mat-datepicker-toggle>
       <mat-datepicker #to_date_picker disabled="false"></mat-datepicker>
     </mat-form-field>
-</div>
-
-<section class="bg-white px-3 px-md-4 pt-0">
+  </div>
 
   <div class="of-scroll">
-    <div>Daily</div>
-    <div class="bar-stats position-relative" *ngIf="data?.uniqueVisitor?.stats">
-      <div class="bar-content" *ngFor="let k of _.keys(data['uniqueVisitor']['stats'])">
-        <div class="bar-items">
-          <div class="bar-item bg-gray" *ngIf="data['uniqueVisitor']['stats']" [style.height.px]=" barHeight(data['uniqueVisitor']['stats'][k] , data?.uniqueVisitor?.total)"></div>
-          <div class="bar-item bg-green" *ngIf="data['pageView']['stats']" [style.height.px]=" barHeight(data['pageView']['stats'][k], data?.pageView?.total)"></div>
+    <div class="bar-graph" *ngIf="a.isDesktop">
+      <div class="bar-graph-header">
+        <h2 class="bar-graph-title">{{selectedTitle[selectedStats]}}</h2>
+        <div class="bar-graph-subtitle" *ngIf=" data && data[selectedStats]?.stats">
+          <span><b>Total:</b> {{ data[selectedStats]?.total }}</span>
         </div>
-        <div class="bar-date text-center">
-          {{ formatDate( k )}}
+      </div>
+      <div class="bar-graph-content" *ngIf=" a.isDesktop && data && data[selectedStats]?.stats">
+        <div *ngFor="let k of _.keys(data[selectedStats]['stats'])">
+          <div class="bar-item" *ngIf="data[selectedStats]['stats']" [style.height.px]=" barHeight(data[selectedStats]['stats'][k] , data[selectedStats].total)">
+            <div class="bar-item-no">{{data[selectedStats]['stats'][k] }}</div>
+            <div class="bar-item-date">{{ formatDate( k )}}</div>
+          </div>
         </div>
       </div>
     </div>
-
-    <table class="text-center" border="1" *ngIf="data?.uniqueVisitor?.stats ">
+    <table class="text-center" border="1" *ngIf=" a.isMobile &&  data[selectedStats] && data[selectedStats]?.stats ">
       <tr>
         <td>Date</td>
-        <td bgcolor="gray">Unique Visitor</td>
-        <td bgcolor="green">Page View</td>
+        <td bgcolor="gray">{{selectedTitle[selectedStats]}}</td>
       </tr>
-      <tr *ngFor="let k of _.keys(data['uniqueVisitor']['stats'])">
-        <td>{{k}}</td>
-        <td *ngIf="data['uniqueVisitor']['stats']" >{{ data['uniqueVisitor']['stats'][k]}}</td>
-        <td *ngIf="data['pageView']['stats']">{{ data['pageView']['stats'][k] }}</td>
+      <tr *ngFor="let k of _.keys(data[selectedStats]['stats'])">
+        <td class="px-5 ">{{k}}</td>
+        <td class="px-5" *ngIf="data[selectedStats]['stats']" >{{ data[selectedStats]['stats'][k]}}</td>
       </tr>
       <tr>
         <td>Total</td>
-        <td *ngIf="data?.uniqueVisitor?.total" >{{ data?.uniqueVisitor?.total }}</td>
-        <td *ngIf="data?.pageView?.total">{{ data?.pageView?.total }}</td>
-
-
-    <!--<table class="stats-table" *ngIf="data?.uniqueVisitor?.stats ">-->
-      <!--<tr>-->
-        <!--<th width="20">Date</th>-->
-        <!--<th class="bg-info white fw-light fs-sm" width="15">Unique Visitor</th>-->
-        <!--<th class="bg-darkgreen white fw-light fs-sm" width="15">Page View</th>-->
-        <!--<th width="50">Graph</th>-->
-      <!--</tr>-->
-      <!--<tr *ngFor="let k of _.keys(data['uniqueVisitor'])">-->
-        <!--<td class="text-nowrap text-center" width="20">{{k | slice: 4: 6}}/{{k | slice: 6: 8}}/{{k | slice: 0: 4}}</td>-->
-        <!--<td width="15">{{ data['uniqueVisitor'][k]}}</td>-->
-        <!--<td width="15">{{ data['pageView'][k] }}</td>-->
-        <!--<td width="50">-->
-          <!--<div class="d-flex align-items-center">-->
-              <!--<span class="mr-1 fs-xs fw-bold text-nowrap">UV</span>-->
-              <!--<span [style.width]=" data['uniqueVisitor'][k]/15+ 'px'" -->
-                   <!--[class.mw-3px]="data['uniqueVisitor'][k]!=0"  class="bar-display bg-info "></span>-->
-          <!--</div>-->
-          <!--<div class="d-flex align-items-center">-->
-              <!--<span  class="mr-1 fs-xs fw-bold text-nowrap"> PV </span>-->
-              <!--<span [style.width]=" data['pageView'][k]/15 + 'px'" -->
-                   <!--[class.mw-3px]="data['pageView'][k]!=0" class="bar-display bg-darkgreen"></span>-->
-          <!--</div>-->
-        <!--</td>-->
+        <td  *ngIf="data[selectedStats]?.total" >{{ data[selectedStats]?.total }}</td>
       </tr>
     </table>
 
   </div>
 
+  <!--<div class="px-2 pt-4 pb-5">-->
+      <!--<p>Languages(Country) base on browser language</p>-->
 
-  <div>
-    <!-- <div>Total no of visitors on selected period</div> -->
-    <!--<table *ngIf=" data['everyHourUniqueVisitor'] ">-->
-      <!--<tr *ngFor="let k of data['everyHourUniqueVisitor']; let i = index;">-->
-        <!--<td>{{ i }} {{ k }}</td>-->
-      <!--</tr>-->
-    <!--</table>-->
-  </div>
-
-  <div>
-    <!-- <div>No of page view on each day</div> -->
-    <!--<table *ngIf="data['pageView']">-->
-      <!--<tr *ngFor="let k of _.keys(data['pageView'])">-->
-        <!--<td>{{k}}</td>-->
-
-      <!--</tr>-->
-    <!--</table>-->
-  </div>
-
-  <div>
-    <!-- <div>Total no of page view on selected period</div> -->
-    <!--<table *ngIf="data['everyHourPageView']">-->
-      <!--<tr *ngFor="let k of data['everyHourPageView']; let i = index;">-->
-        <!--<td>{{ i }} {{ k }}</td>-->
-      <!--</tr>-->
-    <!--</table>-->
-  </div>
-  <div class="px-2 pt-4 pb-5">
-      <p>Languages(Country) base on browser language</p>
-
-      <p> Platform stat: Windows, Mac, Android, iOS, etc.</p>
-  </div>
+      <!--<p> Platform stat: Windows, Mac, Android, iOS, etc.</p>-->
+  <!--</div>-->
 
 </section>

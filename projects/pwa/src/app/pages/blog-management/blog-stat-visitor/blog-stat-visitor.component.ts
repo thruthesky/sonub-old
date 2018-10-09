@@ -11,26 +11,17 @@ import { SimpleLibrary as _ } from 'ng-simple-library';
 export class BlogStatVisitorComponent implements OnInit {
 
 
-  from_date = new Date((new Date()).getTime() - 15 * 24 * 60 * 60 * 1000);
+  from_date = new Date((new Date()).getTime() - 48 * 24 * 60 * 60 * 1000);
   to_date = new Date();
 
-  from_hour = 0;
-  to_hour = 23;
+  // from_hour = 0;
+  // to_hour = 23;
 
-  statsView = 'daily';
+  selectedStats = 'pageView';
 
   data = {
     pageView: null,
-    everyHourPageView: null,
     uniqueVisitor: null,
-    everyHourUniqueVisitor: null
-  };
-
-  total = {
-    pageView: null,
-    everyHourPageView: null,
-    uniqueVisitor: null,
-    everyHourUniqueVisitor: null
   };
 
   /**
@@ -40,6 +31,11 @@ export class BlogStatVisitorComponent implements OnInit {
 
   monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
   'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+
+  selectedTitle = {
+    pageView: 'Page View',
+    uniqueVisitor: 'Visitor'
+  };
 
 
   constructor(public a: AppService,
@@ -58,20 +54,24 @@ export class BlogStatVisitorComponent implements OnInit {
       from_year: this.from_date.getFullYear(),
       from_month: this.from_date.getMonth() + 1,
       from_day: this.from_date.getDate(),
-      from_hour: this.from_hour,
+      // from_hour: this.from_hour,
       to_year: this.to_date.getFullYear(),
       to_month: this.to_date.getMonth() + 1,
       to_day: this.to_date.getDate(),
-      to_hour: this.to_hour
+      // to_hour: this.to_hour
     };
   }
 
-  loadStat() {
+  loadStat(func = null) {
 
-    const req = this.request('statistics');
+    if ( func ) {
+      this.selectedStats = func;
+    }
+
+    const req = this.request(this.selectedStats);
     this.stat.getData(req).subscribe(res => {
-      console.log('statistics: ', res);
-      this.data = res['data'];
+      console.log(`${this.selectedStats}: `, res);
+      this.data[this.selectedStats] = res['data'];
     }, e => {
       this.a.error(e);
     });
@@ -131,14 +131,11 @@ export class BlogStatVisitorComponent implements OnInit {
   }
 
   formatDate( Ymd ) {
-    const year = Ymd.substring(0, 4);
+    const year = Ymd.substring(2, 4);
     const month = Ymd.substring(4, 6) - 1;
     const day  = Ymd.substring(6, 8);
 
-    const d = new Date(year, month, day);
-    if ( this.statsView === 'daily' ) {
-      return day + ' ' + this.monthNames[month];
-    }
+    return this.monthNames[month]  + ' ' +  day + ' ' + year;
   }
 
 
