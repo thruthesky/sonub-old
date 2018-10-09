@@ -1,30 +1,79 @@
-.bar-stats {
-  overflow: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  font-size: .75em;
-}
-.bar-items {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
+@import '../../../../styles/variables';
 
-.bar-content {
-  width: 2em;
-}
+.bar-graph{
+  &-container{
+    margin-bottom: 1.75em;
+    border-radius: 2px;
+    border:1px solid rgba(125, 125, 125, 0.2);
+  }
+  &-header{
+    display: flex;
+    flex-direction: column;
+    padding: .8em 1.25em;
+    border-bottom: 1px solid rgba(125, 125, 125, 0.2);
+    background: #eee;
+    @media (min-width:$md) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      //line-height: 0;
+    }
+    .bar-graph-title{
+      margin: 0;
+      font-size: .9em;
+      color: #0867B0;
+    }
+    .bar-graph-subtitle{
+      font-size: .8em;
+      &>*{
+        display: block;
+        @media (min-width:$md) {
+          display: inline-block;
+        }
+        margin-right: 1em;
+        &:last-child{
+          margin: 0;
+        }
+      }
+    }
+  }
+  &-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 3.2em 1.5em 7em 1em;
+    font-size: .75em;
+    overflow: auto;
 
-.bar-item {
-  position: relative;
-  margin: 0 1px;
-  min-width: 1.2em;
-  min-height: 1px;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
-  border-bottom: .5px solid gray;
-  background-color: gray;
-  text-align: center;
+    .bar-item{
+      position: relative;
+      margin: 0 1px;
+      min-width: .8em;
+      min-height: 1px;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      border-bottom: .5px solid gray;
+      background-color: gray;
+      text-align: center;
+      .bar-item-no{
+        position: relative;
+        bottom: 1.2em;
+        padding: 0 2px;
+      }
+      .bar-item-date{
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        margin-top: 4.5em;
+        transform: rotate(-87deg);
+        white-space: nowrap;
+        &.today {
+          font-weight: bold;
+        }
+      }
+    }
+  }
 }
 
 
