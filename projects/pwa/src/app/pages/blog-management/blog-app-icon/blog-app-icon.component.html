@@ -1,15 +1,15 @@
 <mat-toolbar class="border-top border-top-md-0">
-  <h1 class="px-2 fw-light">Add Blog To Home Screen</h1>
+  <h1 class="px-md-2 fw-light">Add Blog To Home Screen</h1>
 </mat-toolbar>
 
-<div class="px-4 py-3 bg-darkgreen white fs-md">
+<div class="px-3 px-md-4 py-3 bg-darkgreen white fs-md">
   You can install your blog on visitors mobile home screen just like native app.
   This give you great benefit since users can easily access your blog.
   This is very important feature. If you are really serious about running a good blog site, please fill in the form and
   submit.
 </div>
 
-<form class="p-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
+<form class="p-3 p-md-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
 
   <mat-form-field class="mt-1 w-100" appearance="outline">
     <input matInput name="app_name" [(ngModel)]=" blog.app_name ">
