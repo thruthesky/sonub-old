@@ -109,6 +109,9 @@ This is wrong because it makes difficult to understand template design. In fact,
 
 This section describes how developer can develop and test SEO on local computer.
 
+* When SEO is patching index.html, PWA Service Worker offline support will not work.
+  @see [hash mismatch](https://docs.google.com/document/d/1I_0twDp3rDfHStel1oPS9HldnBwx3nVzT8Tz0iXqejg/edit#heading=h.ns7wiwiyvvdh)
+
 * Nginx must listen `https://www.sonub.com` (443 port) so, you can access on `https://www.sonub.com` with port 443 which give you the real production environment while your are testing on local computer.
 
 #### SEO local work and patching index.html
@@ -255,11 +258,21 @@ server {
         ## Warning - change path
         root   /Users/jaehosong/www/sonub-seo;
         index  index.html;
-
         location / {
                 try_files $uri $uri/ /index.html?$args;
         }
-
+        location ~* \.(png|jpg|jpeg|gif|ico)$ {
+                expires 90d;
+                log_not_found off;
+        }
+        location ~* \.(js|json|css)$ {
+                expires 60d;
+                log_not_found off;
+        }
+        location /icon {
+                expires 51d;
+                log_not_found off;
+        }
         location ~ \.php$ {
             fastcgi_pass   127.0.0.1:9000;
             fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
