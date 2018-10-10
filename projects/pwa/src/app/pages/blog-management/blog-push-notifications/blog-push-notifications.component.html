@@ -1,53 +1,57 @@
 <header>
-  <h1>
-    Notifications
-  </h1>
-  <p>
+    <mat-toolbar class="border-top border-top-md-0">  
+        <h1 class="px-md-2 fw-light">Notifications</h1>
+    </mat-toolbar>
+</header>
+
+<main class="p-3 p-md-4 bg-white fs-md">
+
+  <p class="mt-0 mb-3 bg-light p-3 rounded">
     You can send notifications to your blog subscribers.
     A message will be delivered on their mobile or computers.
   </p>
-</header>
-<main>
 
-  <em *ngIf=" !idx ">
+  <em class="d-block p-3 border" *ngIf=" !idx ">
     You have not chosen a post. Please choose a post to send notifications.
-    <dfn>
+    <dfn class="d-block pt-2 text-darkgreen">
       (1) Go to a post. (2) Click menu. (3) click 'Send notifications'
     </dfn>
   </em>
 
   <section *ngIf=" idx ">
 
-    Post No.: {{ idx }}
-    No. of Subscribers: {{ noOfTokens }}
-
-
-    <div class="favicon" *ngIf="blog">
-      <div class="">Favicon</div>
-      <div><img class="size-64px" src="{{ blog.url_favicon }}"></div>
-      <div>Favicon will be used for notification icon.</div>
-    </div>
-
-
-    <form (ngSubmit)=" onSubmit() " *ngIf="post">
-
-        <div>
-
-            Subject:
-            <input name="title" [(ngModel)]="form.title">
+        <div class="d-md-flex justify-content-around text-darkgreen">
+            <div class="py-2 py-md-3"><b class="text-dark">Post No:</b> {{ idx }}</div>
+            <div class="py-2 py-md-3 "><b class="text-dark">No. of Subscribers:</b> {{ noOfTokens }}</div>
         </div>
-      
-        <div>
-
-            Content:
-            <input name="body" [(ngModel)]="form.body">
+    
+        <div class="favicon d-block text-center mt-3 mb-4"  *ngIf="blog" >
+            <span class="d-block mx-auto my-2 size-64px of-hidden rounded"><img class="w-100" src="{{ blog.url_favicon }}"></span>
+            <a class="d-block text-link"  routerLink="{{ a.getBlogSettingsBasicUrl() }}">Current Favicon used for notification icon.</a>
         </div>
+    
+    
+        <form (ngSubmit)=" onSubmit() " *ngIf="post">
+    
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Subject</mat-label>
+                <input matInput name="title" [(ngModel)]="form.title">
+            </mat-form-field>
+          
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Content</mat-label>
+                <input matInput name="body" [(ngModel)]="form.body">
+            </mat-form-field>
+    
+            <div class="mt-4 mb-5 text-center">
+              <button class="flex-center bg-primary white" mat-flat-button type="submit">
+                <span>Send Notifications To Blog subscribers</span>
+                <i class="material-icons ml-2">send</i>
+              </button>
+            </div>
+    
+        </form>
 
-        <div>
-          <button type="submit">Send Notifications To Blog subscribers</button>
-        </div>
-
-    </form>
 
   </section>
 

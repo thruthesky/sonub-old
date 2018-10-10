@@ -228,71 +228,7 @@ This section describes how developer can develop and test SEO on local computer.
 
 ### Nginx & PHP Setup
 
-* Add the following on /etc/php-fpm.d/www.conf
-
-```` text
-security.limit_extensions = .php .html fest.json
-````
-
-* Add the following on nginx conf
-
-```` text
-#### Sonub Nginx Configuration
-# redirection is necessary for PWA. Lighthouse check-up.
-server {
-    listen         80;
-    server_name    .sonub.com;
-    rewrite ^ https://$host$request_uri? permanent;
-}
-
-server {
-        server_name  .sonub.com;
-        listen          443 ssl;
-
-        ## Warning - change paths
-        ssl_certificate       /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.crt;
-        ssl_certificate_key   /Users/jaehosong/apps/sonub/tmp/ssl/star_sonub.key;
-        autoindex on;
-
-
-        ## Warning - change path
-        root   /Users/jaehosong/www/sonub-seo;
-        index  index.html;
-        location / {
-                try_files $uri $uri/ /index.html?$args;
-        }
-        location ~* \.(png|jpg|jpeg|gif|ico)$ {
-                expires 90d;
-                log_not_found off;
-        }
-        location ~* \.(js|json|css)$ {
-                expires 60d;
-                log_not_found off;
-        }
-        location /icon {
-                expires 51d;
-                log_not_found off;
-        }
-        location ~ \.php$ {
-            fastcgi_pass   127.0.0.1:9000;
-            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-            include        fastcgi_params;
-        }
-        # index.html will fall into index.php
-        location /index.html {
-            fastcgi_pass   127.0.0.1:9000;
-            fastcgi_param  SCRIPT_FILENAME  $document_root/index.php;
-            include        fastcgi_params;
-        }
-        # manifest.json will fall into manifest.php
-        location /manifest.json {
-            fastcgi_pass   127.0.0.1:9000;
-            fastcgi_param  SCRIPT_FILENAME  $document_root/manifest.php;
-            include        fastcgi_params;
-        }
-}
-#### EO Sonub
-````
+* @see [Nginx Configuration](https://docs.google.com/document/d/1g_iZtpHxENVPxV5e4ZshIa2LHBxLx5-U5LjOlXdjMOU/edit#heading=h.cppkvht88i2x)
 
 #### PUSH NOTIFICATION
 

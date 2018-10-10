@@ -6,6 +6,7 @@ import { SimpleLibrary as _ } from 'ng-simple-library';
 import { ActivatedRoute } from '@angular/router';
 
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import { CKEditorComponent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 
 @Component({
   selector: 'app-post',
@@ -15,6 +16,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class PostComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('ckeditor') ckeditor;
   public Editor = ClassicEditor;
   // public editorContent = '<p>Hello Editor!</p>';
 
@@ -56,12 +58,14 @@ export class PostComponent implements OnInit, AfterViewInit {
     setTimeout(() => this.initView(), 10);
   }
   get isForumPostCreate(): boolean {
-    return ! this.isBlogPostCreate;
+    return !this.isBlogPostCreate;
   }
   get isBlogPostCreate(): boolean {
     return this.form.post_id === 'blog';
   }
   initView() {
+
+
 
     this.activatedRoute.paramMap.subscribe(params => {
 
@@ -87,7 +91,7 @@ export class PostComponent implements OnInit, AfterViewInit {
         }
       } else {
         console.log('Got no param');
-        if ( this.a.inMyBlog ) {
+        if (this.a.inMyBlog) {
           this.form.post_id = 'blog';
           this.form.category = '';
         }
@@ -135,17 +139,17 @@ export class PostComponent implements OnInit, AfterViewInit {
       if (!this.form.post_id) {
         return this.a.toast(`Forum ID is empty.`);
       }
-      if ( this.form.post_id === 'blog' && ! this.form.category ) {
-        return this.a.toast( this.a.t({ en: 'Please select category', ko: '카테고리를 선택하세요.' }));
+      if (this.form.post_id === 'blog' && !this.form.category) {
+        return this.a.toast(this.a.t({ en: 'Please select category', ko: '카테고리를 선택하세요.' }));
       }
       this.form.group_id = this.a.groupId;
       console.log('post create from: ', this.form);
       this.philgo.postCreate(this.form).subscribe(res => {
         console.log('create res: ', res);
         // this.a.openHome();
-        if ( this.isForumPostCreate ) {
+        if (this.isForumPostCreate) {
           this.a.openForum(this.form.post_id);
-        } else if ( this.isBlogPostCreate ) {
+        } else if (this.isBlogPostCreate) {
           this.a.openBlogView(res);
         } else {
           console.log('What? is it not blog or forum posting?');
@@ -180,39 +184,44 @@ export class PostComponent implements OnInit, AfterViewInit {
 
 
 
-  // onChangeFile(event: Event) {
-  //   this.uploadFile(<any>event.target['files']);
-  // }
+  onChangeFile(event: Event) {
+    this.uploadFile(<any>event.target['files']);
+  }
 
-  // uploadFile(files: FileList) {
+  uploadFile(files: FileList) {
 
-  //   console.log('files: ', files);
-  //   if (files === void 0 || !files.length || files[0] === void 0) {
-  //     const e = { code: -1, message: this.philgo.t({ en: 'Please select a file', ko: '업로드 할 파일을 선택해주세요.' }) };
-  //     // this.componentService.alert(e);
-  //     return;
-  //   }
+    console.log('files: ', files);
+    if (files === void 0 || !files.length || files[0] === void 0) {
+      const e = { code: -1, message: this.philgo.t({ en: 'Please select a file', ko: '업로드 할 파일을 선택해주세요.' }) };
+      // this.componentService.alert(e);
+      return;
+    }
 
-  //   this.philgo.fileUpload(files, { gid: this.form.gid, user_password: this.form.user_password }).subscribe(res => {
-  //     if (typeof res === 'number') {
-  //       console.log('percentage: ', res);
-  //       this.percentage = res;
-  //     } else {
-  //       console.log('file upload success: ', res);
-  //       if (!this.form.files || !this.form.files.length) {
-  //         this.form.files = [];
-  //       }
-  //       this.form.files.push(res);
-  //       // this.editor.insertImage(res.src, res.name, res.idx);
-  //       alert('do something for file upload');
-  //       this.percentage = 0;
-  //     }
-  //   }, e => {
-  //     console.error(e);
-  //     this.percentage = 0;
-  //     this.a.toast(e);
-  //   });
-  // }
+    this.percentage = 1;
+
+    this.philgo.fileUpload(files, { gid: this.form.gid, user_password: this.form.user_password }).subscribe(res => {
+      if (typeof res === 'number') {
+        console.log('percentage: ', res);
+        this.percentage = res;
+      } else {
+        console.log('file upload success: ', res);
+        if (!this.form.files || !this.form.files.length) {
+          this.form.files = [];
+        }
+        this.form.files.push(res);
+        // this.editor.insertImage(res.src, res.name, res.idx);
+        console.log( 'data', this.ckeditor , this.ckeditor.data );
+        // alert('do something for file upload');
+        console.log('content: ', this.form.content);
+        this.form.content = `<img src="${ res.src }">` + this.form.content;
+        this.percentage = 0;
+      }
+    }, e => {
+      console.error(e);
+      this.percentage = 0;
+      this.a.toast(e);
+    });
+  }
 
 
 }

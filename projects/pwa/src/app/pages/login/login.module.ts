@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login.component';
 import { CommonModule } from '@angular/common';
 import { LoginComponentModule } from 'share/philgo-api-components/user/login/login.component.module';
-import { MatToolbarModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule } from '@angular/material';
 
 const routes: Routes = [
     {
@@ -18,7 +18,8 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         LoginComponentModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatButtonModule
     ],
     exports: [],
     declarations: [LoginComponent],

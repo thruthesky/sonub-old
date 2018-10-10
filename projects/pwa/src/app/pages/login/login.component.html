@@ -13,7 +13,7 @@
   <ng-template #login>
 
     <app-login-component (login)=" onLogin() " (error)=" a.toast( $event ) "></app-login-component>
-
+    <a routerLink="/profile" class="bg-success w-100 mb-5 p-1 fs-md" mat-flat-button>Create New Account</a>
   </ng-template>
 </section>
 

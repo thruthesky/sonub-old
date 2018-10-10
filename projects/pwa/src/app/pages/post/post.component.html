@@ -1,35 +1,35 @@
-<section class="p-4 bg-white" page="post">
+<section class="p-3 p-md-4  bg-white" page="post">
 
   <div class="d-md-flex justify-content-between mt-2 pr-md-1">
     <div class=" mb-2 flex-grow-1">
-        <app-avatar class="d-block mb-2" *ngIf=" philgo.isLoggedIn() "></app-avatar>
-        <div class="text-success fs-md">Posting on {{ form.post_id }}</div>
+      <app-avatar class="d-block mb-2" *ngIf=" philgo.isLoggedIn() "></app-avatar>
+      <div class="text-success fs-md">Posting on {{ form.post_id }}</div>
     </div>
     <div class="w-100 w-md-70">
       <div class="fs-sm">Select where you want to post...</div>
       <div class="d-flex flex-wrap flex-md-nowrap">
-          <mat-form-field class="w-100">
-              <mat-select name='post_id' [(ngModel)]="form.post_id">
-                <mat-option value=''>Select Forum </mat-option>
-                <mat-option value='blog'>My Blog</mat-option>
-                <mat-option value='discussion'>Discussion</mat-option>
-                <mat-option value='answer'>Question & Answer</mat-option>
-                <mat-option value='market'>Buy & Sell</mat-option>
-                <mat-option value='media'>News</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <ng-container  *ngIf=" a.blog?.categories ">
-                <mat-form-field class="w-100 ml-md-4"  *ngIf=" form.post_id == 'blog' ">
-                    <mat-select name='category' [(ngModel)]="form.category" placeholder="Select Blog Category">
-                      <ng-container *ngIf=" a.blog.categories?.length ">
-                        <mat-option *ngFor=" let category of a.blog.categories " value='{{ category }}'>{{ category }}</mat-option>
-                      </ng-container>
-                      <ng-container *ngIf=" ! a.blog.categories?.length ">
-                        <mat-option value=''>No category. Please create category.</mat-option>
-                      </ng-container>
-                    </mat-select>
-                  </mat-form-field>
-            </ng-container>
+        <mat-form-field class="w-100">
+          <mat-select name='post_id' [(ngModel)]="form.post_id">
+            <mat-option value=''>Select Forum </mat-option>
+            <mat-option value='blog'>My Blog</mat-option>
+            <mat-option value='discussion'>Discussion</mat-option>
+            <mat-option value='answer'>Question & Answer</mat-option>
+            <mat-option value='market'>Buy & Sell</mat-option>
+            <mat-option value='media'>News</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ng-container *ngIf=" a.blog?.categories ">
+          <mat-form-field class="w-100 ml-md-4" *ngIf=" form.post_id == 'blog' ">
+            <mat-select name='category' [(ngModel)]="form.category" placeholder="Select Blog Category">
+              <ng-container *ngIf=" a.blog.categories?.length ">
+                <mat-option *ngFor=" let category of a.blog.categories " value='{{ category }}'>{{ category }}</mat-option>
+              </ng-container>
+              <ng-container *ngIf=" ! a.blog.categories?.length ">
+                <mat-option value=''>No category. Please create category.</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
       </div>
     </div>
   </div>
@@ -56,12 +56,43 @@
   </mat-form-field>
 
 
-  <ckeditor class='ckeditor' [editor]="Editor" [(ngModel)]=" form.content " (change)="onChangeContent( $event )"
+  <ckeditor class='ckeditor' #ckeditor [editor]="Editor" [(ngModel)]=" form.content " (change)="onChangeContent( $event )"
     [config]="{
-    ckfinder: {uploadUrl: philgo.getFileServerRootUrl() + 'etc/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json' }
+      toolbar: [  'heading', '|',  'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockquote', '|', 'undo', 'redo' ]
+      
+      
   }">
     <div>Write comment</div>
   </ckeditor>
+
+  <div class="flex-center justify-content-between my-3 my-md-4">
+
+    <div class="left d-flex align-items-center flex-grow-1 border bg-light ">
+
+      <div class="camera transparent-cover-wrapper flex-center p-2">
+        <input class="transparent-cover pointer w-100" type="file" name="file" (change)="onChangeFile($event)">
+        <i class="material-icons pointer">camera_alt</i>
+      </div>
+
+      <div class=" mw-180px mr-2 p-1 rounded  border-box bg-success fs-xs white text-center" *ngIf=" percentage  "
+        [style.width]=" percentage + '%'">{{ percentage }}%</div>
+    </div>
+    
+    <div class="right">
+      <button class=" bg-white black bg-light fs-sm" mat-flat-button type="button" routerLink="/menu">
+        <i class="material-icons red">clear</i>
+        <span class="ml-1">Cancel</span>
+      </button>
+      <button class=" bg-primary fs-sm" mat-flat-button type="submit" (click)=" onSubmit() ">
+        <span class="mr-2">Submit</span>
+        <i class="material-icons">send</i>
+      </button>
+    </div>
+  </div>
+
+
+  <app-display-files [post]=" form " [edit]=" true "></app-display-files>
+
 
 
   <section class="admin-options box" *ngIf=" philgo.isAdmin() ">
@@ -74,17 +105,6 @@
     </article>
   </section>
 
-
-  <div class="list-row my-4 text-center">
-    <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/menu">
-      <i class="material-icons red">clear</i>
-      <span class="ml-1">Cancel</span>
-    </button>
-    <button class="mx-2 bg-primary" mat-flat-button type="submit" (click)=" onSubmit() ">
-      <span class="mr-2">Submit</span>
-      <i class="material-icons">send</i>
-    </button>
-  </div>
 
 
 </section>
