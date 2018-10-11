@@ -213,7 +213,7 @@ export class PostComponent implements OnInit, AfterViewInit {
         console.log( 'data', this.ckeditor , this.ckeditor.data );
         // alert('do something for file upload');
         console.log('content: ', this.form.content);
-        this.form.content = `<img src="${ res.src }">` + this.form.content;
+        this.form.content = this.form.content + `<img src="${ res.src }">` + `<p></p>`;
         this.percentage = 0;
       }
     }, e => {
