@@ -2,7 +2,13 @@
 
   <div class="d-md-flex justify-content-between mt-2 pr-md-1">
     <div class=" mb-2 flex-grow-1">
-      <app-avatar class="d-block mb-2" *ngIf=" philgo.isLoggedIn() "></app-avatar>
+
+      <div class="d-flex mb-2" *ngIf=" philgo.isLoggedIn() ">
+        <app-avatar></app-avatar>
+        <div class="user-meta pl-2">
+          <div class="name">{{ a.myName }}</div>
+        </div>  
+      </div>
       <div class="text-success fs-md">Posting on {{ form.post_id }}</div>
     </div>
     <div class="w-100 w-md-70">
@@ -78,7 +84,7 @@
       <div class=" mw-100 mx-md-2 p-1 rounded  border-box bg-success fs-xs white text-center" *ngIf=" percentage  "
         [style.width]=" percentage + '%'">{{ percentage }}%</div>
     </div>
-    
+
     <div class="right">
       <button class=" bg-white black bg-light fs-sm" mat-flat-button type="button" routerLink="/menu">
         <i class="material-icons red">clear</i>

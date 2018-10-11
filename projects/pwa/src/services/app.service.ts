@@ -211,7 +211,7 @@ export class AppService {
 
     this.initLog();
 
-    philgo.weatherMap().subscribe(g => console.log('geo:', g));
+    // philgo.weatherMap().subscribe(g => console.log('geo:', g));
   }
 
   initLanguage() {
@@ -250,15 +250,15 @@ export class AppService {
          * Reloads(Redirects) only if the current url is clicked again.
          * It does not reloads if when different url is clicked but component is the same.
          */
-        if (this.router.url === e.url) {
-          this.router.navigate(['/redirect'], { queryParams: { url: e.url } });
-        }
+        // if (this.router.url === e.url) {
+        //   this.router.navigate(['/redirect'], { queryParams: { url: e.url } });
+        // }
       } else if (e instanceof NavigationEnd) {
-        this.route = this.router.url;
-        this.routeChange.next(this.route);
-        if (this.router.url.indexOf('redirect') === -1) {
-          this.log({ path: this.router.url });
-        }
+        // this.route = this.router.url;
+        // this.routeChange.next(this.route);
+        // if (this.router.url.indexOf('redirect') === -1) {
+        //   this.log({ path: this.router.url });
+        // }
       }
       /**
        * Scroll the page to the top after transitioning into another page.
@@ -359,7 +359,7 @@ export class AppService {
       return;
     }
 
-    console.log('initRootSite()');
+    // console.log('initRootSite()');
     this.philgo.updateWebPushToken(this.pushDomain);
 
     if (this.loggedIn) {
@@ -506,6 +506,9 @@ export class AppService {
   }
   openHome() {
     this.router.navigateByUrl('/');
+  }
+  openProfile() {
+    this.router.navigateByUrl('/profile');
   }
   openRootSiteHomeInNewWindow() {
     window.open(this.urlRootSite, '_blank');
@@ -823,9 +826,8 @@ export class AppService {
       data.title = '[' + this.t({ en: 'Notification', ko: '알림' }) + '] ' + notification['title'];
       data.content = notification['body'];
       data.content += '<div class="mt-3">' + this.t({ en: 'Do you want to read the blog post?', ko: '해당 블로그 글로 이동하시겠습니까?' }) + '</div>';
-      const re = await this.alert(data);
+      const re = await this.confirm(data);
       if (re) {
-
         let url: string = notification['click_action'];
 
         if (url && url.indexOf('bv/')) {
