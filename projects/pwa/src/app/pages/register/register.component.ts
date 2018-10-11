@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../../services/app.service';
 import { PhilGoApiService, ApiRegisterRequest } from 'share/philgo-api/philgo-api.service';
-import { ComponentService } from 'share/philgo-api-components/service/component.service';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +12,7 @@ export class RegisterComponent implements OnInit {
   form: ApiRegisterRequest = <any>{};
   constructor(
     public a: AppService,
-    public philgo: PhilGoApiService,
-    cs: ComponentService
+    public philgo: PhilGoApiService
   ) {
 
 

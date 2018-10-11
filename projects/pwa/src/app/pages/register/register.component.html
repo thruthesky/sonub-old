@@ -1,20 +1,13 @@
+<mat-toolbar class="border-top border-top-md-0">
+  <h1 class="pl-0 pl-md-2">{{ philgo.isLoggedIn() ? a.t({ko: '회원 정보 수정', en: 'Update Profile' }) : a.t({ko: '회원 가입 하기', en: 'Register' }) }}</h1>
+</mat-toolbar>
+<section class="p-3 p-md-4 bg-white">
+  <app-register-component
+    [gender]=" true "
+    [birthday]=" true "
+    (update)=" a.toast( a.t({ en: 'Your profile has been updated!', ko: '회원 정보가 수정되었습니다.' }) ) "></app-register-component>
 
-  <mat-toolbar class="border-top border-top-md-0">
-    <h1 class="pl-0 pl-md-2">Register</h1>
-  </mat-toolbar>
-  <section class="p-3 p-md-4 bg-white">
-  
-    <!-- <div class="form-title flex-center mb-3">
-      <img class="logo" src="../../../../../../src/assets/sonub-logo.webp">
-      <h1>Register</h1>
-    </div> -->
-  
-    <app-register-component
-      [gender]=" true "
-      [birthday]=" true "
-      (update)=" a.toast( a.t({ en: 'Your profile has been updated!', ko: '회원 정보가 수정되었습니다.' }) ) "></app-register-component>
-
-      <a routerLink="/login" class="d-block mb-5 p-1 fs-md text-center text-link">Already have an account?</a>
-  </section>
+    <a routerLink="/login" class="d-block mb-5 p-1 fs-md text-center text-link">{{ a.t({ko: '이미 계정이 있으십니까?', en: 'Already have an account?' })}}</a>
+</section>
 
 

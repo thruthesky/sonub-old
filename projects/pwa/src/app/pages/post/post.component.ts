@@ -43,6 +43,11 @@ export class PostComponent implements OnInit, AfterViewInit {
 
 
   isPostEdit = false;
+
+  loader = {
+    submit: false
+  };
+
   ///
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -103,7 +108,9 @@ export class PostComponent implements OnInit, AfterViewInit {
 
 
   async onSubmit() {
-
+    if ( this.loader.submit ) {
+      return;
+    }
     this.philgo.debug = true;
     if (!this.philgo.isLoggedIn()) {
       const re = await this.philgo.loginOrRegister(<any>this.form).toPromise()
@@ -122,6 +129,8 @@ export class PostComponent implements OnInit, AfterViewInit {
         return;
       }
     }
+
+    this.loader.submit = true;
     /**
     * Edit
     */
@@ -129,8 +138,10 @@ export class PostComponent implements OnInit, AfterViewInit {
       this.philgo.postEdit(this.form).subscribe(res => {
         console.log('post view? load?', res);
         this.a.openPostView(res);
+        this.loader.submit = false;
       }, e => {
         this.a.toast(e);
+        this.loader.submit = false;
       });
     } else {
       /**
@@ -145,6 +156,7 @@ export class PostComponent implements OnInit, AfterViewInit {
       this.form.group_id = this.a.groupId;
       console.log('post create from: ', this.form);
       this.philgo.postCreate(this.form).subscribe(res => {
+        this.loader.submit = false;
         console.log('create res: ', res);
         // this.a.openHome();
         if (this.isForumPostCreate) {
@@ -156,6 +168,7 @@ export class PostComponent implements OnInit, AfterViewInit {
         }
       }, e => {
         this.a.toast(e);
+        this.loader.submit = false;
       });
     }
   }
