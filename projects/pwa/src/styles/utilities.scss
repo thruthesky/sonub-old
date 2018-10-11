@@ -153,7 +153,8 @@
 
   header {
     padding: 1em;
-    background-color: rgb(221, 221, 230);
+    border-bottom: 1px solid rgb(204, 204, 204);
+    color: #1F766A;
     font-weight: bold;
   }
 
@@ -306,4 +307,7 @@
   margin-right: -.5rem;
 }
 
+.line-height-0{
+  line-height: 0;
+}
 
