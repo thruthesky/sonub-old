@@ -108,15 +108,10 @@ export class PostComponent implements OnInit, AfterViewInit {
 
 
   async onSubmit() {
-<<<<<<< HEAD
     if ( this.loader.submit ) {
       return;
     }
-    this.philgo.debug = true;
-=======
-
     // this.philgo.debug = true;
->>>>>>> f8c22877c383dc473484d87cb10cd41883ac05e2
     if (!this.philgo.isLoggedIn()) {
       const re = await this.philgo.loginOrRegister(<any>this.form).toPromise()
         .catch(e => {
