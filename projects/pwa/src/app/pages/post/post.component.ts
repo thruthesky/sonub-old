@@ -197,7 +197,7 @@ export class PostComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.percentage = 1;
+    this.percentage = 10;
 
     this.philgo.fileUpload(files, { gid: this.form.gid, user_password: this.form.user_password }).subscribe(res => {
       if (typeof res === 'number') {
