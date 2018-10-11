@@ -1,11 +1,4 @@
-
-  <div class="d-flex align-items-center">
-    <div class="flex-center size-32px of-hidden rounded">
-      <img class="w-100" *ngIf=" a.philgo.isLoggedOut() " src="{{ a.anonymousPhotoUrl }}">
-      <img class="w-100" *ngIf=" a.philgo.isLoggedIn() "  src="{{ a.myPhotoUrl }}">
-    </div>
-    <div class="meta pl-2">
-      <div class="name">{{ a.myName }}</div>
-      <div class="meta fs-sm">Lv. 100 Fan. 1014</div>
-    </div>
-  </div>
+<div class="size-32px of-hidden rounded">
+  <img class="w-100" *ngIf=" a.philgo.isLoggedOut() " src="{{ a.anonymousPhotoUrl }}">
+  <img class="w-100" *ngIf=" a.philgo.isLoggedIn() " src="{{ a.myPhotoUrl }}">
+</div>

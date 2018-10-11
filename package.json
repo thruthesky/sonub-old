@@ -33,7 +33,7 @@
     "@angular/pwa": "^0.8.4",
     "@angular/router": "^6.1.9",
     "@angular/service-worker": "^6.1.9",
-    "@ckeditor/ckeditor5-angular": "^1.0.0-beta.1",
+    "@ckeditor/ckeditor5-angular": "^1.0.0",
     "@ckeditor/ckeditor5-build-classic": "^11.0.1",
     "@types/socket.io-client": "^1.4.32",
     "bootstrap": "^4.1.3",

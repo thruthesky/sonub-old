@@ -34,6 +34,8 @@ import { CurrencyModule } from './components/currency/currency.module';
 import { WeatherModule } from './components/weather/weather.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { DialogModule } from 'share/components/dialog/dialog.module';
+import { AvatarModule } from 'share/components/avatar/avatar.module';
+import { AdvModule } from 'share/philgo-api-components/adv/adv.module';
 
 
 /**
@@ -75,7 +77,9 @@ firebase.initializeApp(firebaseConfig);
     CurrencyModule,
     WeatherModule,
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
-    DialogModule
+    DialogModule,
+    AvatarModule,
+    AdvModule
   ],
   providers: [],
   bootstrap: [AppComponent]

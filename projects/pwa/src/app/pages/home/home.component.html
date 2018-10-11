@@ -1,106 +1,115 @@
 <div id="home">
-  <app-blog-category-top-menu class="login-user-blog-content" *ngIf=" a.isMobile "></app-blog-category-top-menu>
-  <div class="text-editor d-md-flex align-items-center rounded mt-2 mt-md-0 mb-md-3 p-default-spacing bg-white" 
-      *ngIf=" a.inRootSite " routerLink="{{ a.getBlogPostCreateUrl() }}" >
-      <app-avatar class="mr-md-3"></app-avatar>
-      <div class="editor mt-2 mt-md-0 rounded">
-        What's your story? ---- Text Animation with Hot topics
+  <app-blog-category-top-menu class="login-user-blog-content" *ngIf=" a.isMobile && a.inBlogSite "></app-blog-category-top-menu>
+  <div class="text-editor d-md-flex align-items-center mt-2 mt-md-0 mb-md-default-spacing p-default-spacing bg-white" *ngIf=" a.inRootSite "
+    routerLink="{{ a.getBlogPostCreateUrl() }}">
+    <div class="d-flex align-items-center" *ngIf=" philgo.isLoggedIn() ">
+      <app-avatar></app-avatar>
+      <div class="user-meta px-2">
+        <div class="name fs-md">{{ a.myName }}</div>
       </div>
+    </div>
+    <div class="editor mt-2 mt-md-0 rounded">
+      What's your story? ---- Text Animation with Hot topics
+    </div>
   </div>
 
-  <div id="home-body" class="p-default-spacing bg-white">
+  <div id="home-body">
 
     <app-request-push-notification></app-request-push-notification>
 
-        <!-- show only on rooe site -->
-        <section *ngIf=" a.inRootSite ">
-      
-          <!-- show only if the user logged in -->
+    <!-- show only on rooe site -->
+    <section *ngIf=" a.inRootSite ">
+
+      <!-- show only if the user logged in -->
+      <div class="my-md-default-spacing p-default-spacing bg-white">
           <app-blog-featured-wide-post *ngIf=" a.frontPage?.blog_featured_0 " [post]=" a.frontPage.blog_featured_0 "></app-blog-featured-wide-post>
-      
           <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
-      
-          <div class="login-user-blog-content mb-default-spacing mt-default-spacing" *ngIf=" a.loggedIn && a.frontPage?.latest_blog_posts?.length">
-            <div class="my-blog-posts" *ngFor="let post of a.frontPage.latest_blog_posts">
-              <app-post-line [post]=" post "></app-post-line>
-            </div>
-          </div>
-          <!--/login-user-blog-content-->
-      
-      
-          <div class="community-photos w-100 of-hidden mt-4 mb-1" *ngIf=" a.frontPage?.communityPhotos?.length">
-            <h2 class="my-0 fs-lg text-dark">Community Posts</h2>
-            <div class="row no-gutters mx-minus-1">
-              <div class="col-3 border-box of-hidden my-2 px-1" *ngFor="let post of a.frontPage.communityPhotos">
-                <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
+      </div>
+
+      <div class="login-user-blog-content my-md-default-spacing p-default-spacing bg-white" *ngIf=" a.loggedIn && a.frontPage?.latest_blog_posts?.length">
+        <div class="my-blog-posts" *ngFor="let post of a.frontPage.latest_blog_posts">
+          <app-post-line [post]=" post "></app-post-line>
+        </div>
+      </div>
+      <!--/login-user-blog-content-->
+
+
+      <div class="my-md-default-spacing p-default-spacing bg-white">
+          <div class="community-photos w-100 of-hidden mb-1" *ngIf=" a.frontPage?.communityPhotos?.length">
+              <h2 class="mt-0 mb-1 fs-md text-dark">Community Posts</h2>
+              <div class="row no-gutters mx-minus-1">
+                <div class="col-3 border-box of-hidden my-default-spacing px-1" *ngFor="let post of a.frontPage.communityPhotos">
+                  <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
+                </div>
               </div>
             </div>
-          </div>
-          <!--/community-photos-->
-          
-          <section class="community-posts mb-4" *ngIf=" a.frontPage?.communityPosts ">
-            <div class="row no-gutters">
-              <div class="col-12 col-md-6  pr-md-1 border-box" *ngIf=" a.frontPage.communityPosts['discussion']?.length >= 2 ">
-                <app-post-line [post]="a.frontPage.communityPosts['discussion'][0]"></app-post-line>
-                <app-post-line [post]="a.frontPage.communityPosts['discussion'][1]"></app-post-line>
+            <!--/community-photos-->
+      
+            <section class="community-posts" *ngIf=" a.frontPage?.communityPosts ">
+              <div class="row no-gutters">
+                <div class="col-12 col-md-6  pr-md-1 border-box" *ngIf=" a.frontPage.communityPosts['discussion']?.length >= 2 ">
+                  <app-post-line [post]="a.frontPage.communityPosts['discussion'][0]"></app-post-line>
+                  <app-post-line [post]="a.frontPage.communityPosts['discussion'][1]"></app-post-line>
+                </div>
+                <div class="col-12 col-md-6  pl-md-1 border-box" *ngIf=" a.frontPage.communityPosts['answer']?.length >= 2 ">
+                  <app-post-line [post]="a.frontPage.communityPosts['answer'][0]"></app-post-line>
+                  <app-post-line [post]="a.frontPage.communityPosts['answer'][1]"></app-post-line>
+                </div>
               </div>
-              <div class="col-12 col-md-6  pl-md-1 border-box" *ngIf=" a.frontPage.communityPosts['answer']?.length >= 2 ">
-                <app-post-line [post]="a.frontPage.communityPosts['answer'][0]"></app-post-line>
-                <app-post-line [post]="a.frontPage.communityPosts['answer'][1]"></app-post-line>
+              <div class="row no-gutters">
+                <div class="col-12 col-md-6 pr-md-1 border-box" *ngIf=" a.frontPage.communityPosts['market']?.length >= 2 ">
+                  <app-post-line [post]="a.frontPage.communityPosts['market'][0]"></app-post-line>
+                  <app-post-line [post]="a.frontPage.communityPosts['market'][1]"></app-post-line>
+                </div>
+                <div class="col-12 col-md-6 pl-md-1 border-box" *ngIf=" a.frontPage.communityPosts['media']?.length >= 2 ">
+                  <app-post-line [post]="a.frontPage.communityPosts['media'][0]"></app-post-line>
+                  <app-post-line [post]="a.frontPage.communityPosts['media'][1]"></app-post-line>
+                </div>
               </div>
-            </div>
-            <div class="row no-gutters">
-              <div class="col-12 col-md-6 pr-md-1 border-box" *ngIf=" a.frontPage.communityPosts['market']?.length >= 2 ">
-                <app-post-line [post]="a.frontPage.communityPosts['market'][0]"></app-post-line>
-                <app-post-line [post]="a.frontPage.communityPosts['market'][1]"></app-post-line>
-              </div>
-              <div class="col-12 col-md-6 pl-md-1 border-box" *ngIf=" a.frontPage.communityPosts['media']?.length >= 2 ">
-                <app-post-line [post]="a.frontPage.communityPosts['media'][0]"></app-post-line>
-                <app-post-line [post]="a.frontPage.communityPosts['media'][1]"></app-post-line>
-              </div>
-            </div>
-          </section>
-      
-      
-          <div class="mb-4" *ngIf=" a.frontPage?.news?.length ">
-            <h2 class="my-0 fs-lg text-dark">Sonub News</h2>
-            <app-post-multiline-with-thumbnail *ngFor="let post of a.frontPage.news " [post]=" post "></app-post-multiline-with-thumbnail>
-          </div>
-      
-      
-        </section>
-        <!--/root site-->
-      
-      
-        <!-- show only on blog site -->
-        <div class="user-blog" *ngIf=" a.inBlogSite ">
-      
+            </section>
+      </div>
+
+
+      <div class="my-md-default-spacing p-default-spacing bg-white" *ngIf=" a.frontPage?.news?.length ">
+        <h2 class="my-0 fs-md text-dark">Sonub News</h2>
+        <app-post-multiline-with-thumbnail *ngFor="let post of a.frontPage.news " [post]=" post "></app-post-multiline-with-thumbnail>
+      </div>
+
+
+    </section>
+    <!--/root site-->
+
+
+    <!-- show only on blog site -->
+    <div class="user-blog" *ngIf=" a.inBlogSite ">
+
+      <div class="mb-md-default-spacing p-default-spacing bg-white">
           <app-blog-featured-wide-post *ngIf=" a.frontPage?.blog_featured_0 " [post]=" a.frontPage.blog_featured_0 "></app-blog-featured-wide-post>
-      
           <app-blog-featured-posts [frontPage]=" a.frontPage " *ngIf=" a.frontPage "></app-blog-featured-posts>
-      
-          <div class="one-line-posts mb-default-spacing mt-default-spacing" *ngIf=" a.frontPage?.latest_blog_posts?.length">
-            <div *ngFor="let post of a.frontPage.latest_blog_posts">
-              <app-post-line [post]=" post "></app-post-line>
-            </div>
-          </div>
-      
-          <div class="blog-latest-photos" *ngIf=" a.frontPage?.latest_blog_photos?.length ">
-            <div class="blog-latest-photo" *ngFor="let photo of a.frontPage.latest_blog_photos ">
-              <app-post-multiline-with-thumbnail [post]="photo"></app-post-multiline-with-thumbnail>
-            </div>
-          </div>
-          
-      
-          <!-- <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPhotos?.length">
+      </div>
+
+      <div class="one-line-posts my-md-default-spacing p-default-spacing bg-white" *ngIf=" a.frontPage?.latest_blog_posts?.length">
+        <div *ngFor="let post of a.frontPage.latest_blog_posts">
+          <app-post-line [post]=" post "></app-post-line>
+        </div>
+      </div>
+
+      <div class="blog-latest-photos my-md-default-spacing p-default-spacing bg-white" *ngIf=" a.frontPage?.latest_blog_photos?.length ">
+        <div class="blog-latest-photo" *ngFor="let photo of a.frontPage.latest_blog_photos ">
+          <app-post-multiline-with-thumbnail [post]="photo"></app-post-multiline-with-thumbnail>
+        </div>
+      </div>
+
+
+      <!-- <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPhotos?.length">
             <div class="row no-gutters">
               <div class="col" *ngFor="let post of a.frontPage.communityPhotos">
                 <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
               </div>
             </div>
           </div> -->
-          <!--/community-posts-->
-        </div>
+      <!--/community-posts-->
+    </div>
   </div>
 
 </div>

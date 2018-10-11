@@ -1,7 +1,8 @@
 <mat-toolbar class="pr-0">
   <app-logo></app-logo>
   <h1 class=" fs-md px-3 truncate">{{ title }}</h1>
-  <div class="menu d-flex">
+  <div class="menu d-flex align-items-center">
+    <app-avatar (click)=" a.openProfile() "></app-avatar>
     <a class="flex-center fs-md px-3 truncate" (click)="a.openMyBlog()" *ngIf="  !a.inMyBlog ">
       My Blog
     </a>

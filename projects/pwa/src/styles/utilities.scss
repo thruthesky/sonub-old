@@ -43,6 +43,7 @@
 }
 
 .mb-default-spacing {
+  display: block;
   margin-bottom: $spacing!important;
 }
 .mt-default-spacing {
@@ -60,6 +61,27 @@
 .my-default-spacing{
   margin-top: $spacing!important;
   margin-bottom: $spacing!important;
+}
+@media (min-width:$md){
+  .mb-md-default-spacing {
+    margin-bottom: $spacing!important;
+  }
+  .mt-md-default-spacing {
+    margin-top: $spacing!important;
+  }
+  .ml-md-default-spacing {
+    margin-left: $spacing!important;
+  }
+  .mr-md-default-spacing {
+    margin-right: $spacing!important;
+  }
+  .m-md-default-spacing{
+    margin: $spacing!important;
+  }
+  .my-md-default-spacing{
+    margin-top: $spacing!important;
+    margin-bottom: $spacing!important;
+  }
 }
 
 .p-default-spacing{
@@ -153,8 +175,11 @@
 
   header {
     padding: 1em;
-    border-bottom: 1px solid rgb(204, 204, 204);
-    color: #1F766A;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    background: #f8f9fa !important;
+    // border-bottom: 1px solid rgb(204, 204, 204);
+    color: #6c757d;
     font-weight: bold;
   }
 

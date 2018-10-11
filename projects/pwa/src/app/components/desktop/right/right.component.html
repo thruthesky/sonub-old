@@ -1,6 +1,6 @@
 <section class="stories box mt-0 mb-default-spacing" *ngIf=" a.frontPage?.stories?.length ">
   <header class="d-flex align-items-center">
-      <i class="material-icons mr-2 line-height-0 text-secondary">view_list</i>
+      <i class="material-icons mr-2 line-height-0 text-darkgreen">view_list</i>
       Your stories
   </header>
 
@@ -37,42 +37,12 @@
 
 <app-currency></app-currency>
 <app-weather></app-weather>
-<section class="widgets box">
+<section class="widgets box mb-default-spacing">
   <article class="d-flex align-items-center px-2 py-1">
     <i class="material-icons mx-1">add</i>
     <span>Add New Widget</span>
   </article>
 </section>
 
-<section class="ad-box sonub-adv">
-  <header>Do you want get a job? earn?</header>
-  <article class="pt-3">
-    Or selling or buying?<br>
-    Sonub is a big social hub network where you can grow with.<br>
-  </article>
-  <footer class="text-muted">
-    Live with sonub.com
-  </footer>
-</section>
-
-<section class="ad-box sonub-free-adv">
-  <header>Free Advertisement</header>
-  <article class="pt-3">
-    You can post advertisement free<br>
-    Post now<br>
-  </article>
-  <footer class="text-muted">
-    Free Advertisement
-  </footer>
-</section>
-
-<section class="ad-box sonub-free-adv">
-  <header>Another Advertisement</header>
-  <article>
-    You can post advertisement free<br>
-    Post now<br>
-  </article>
-  <footer>
-    Free Advertisement
-  </footer>
-</section>
+<app-adv class="mb-default-spacing" [code]=" 'job' " [design]=" 'title-up' "></app-adv>
+<app-adv class="mb-default-spacing"></app-adv>

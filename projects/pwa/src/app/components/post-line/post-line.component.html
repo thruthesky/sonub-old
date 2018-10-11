@@ -1,9 +1,9 @@
-<a *ngIf=" post " class="link-list flex-center justify-content-between py-2 px-3 box mt-1" (click)=" a.openPostView( post, $event ) " href="{{ a.getBlogViewListUrl( post ) }}">
+<a *ngIf=" post " class="link-list flex-center justify-content-between mt-1 py-2 px-3 bg-light" (click)=" a.openPostView( post, $event ) " href="{{ a.getBlogViewListUrl( post ) }}">
   <div class=" truncate">
-      <span class="fs-md">{{ post.blog }} - </span>
-      <span class="ml-1 fw-bold fs-sm text-link"> {{ post.subject }} </span>
+      <span class="text-uppercase fs-sm">{{ post.blog }} - </span>
+      <span class="ml-1 text-dark fs-sm fw-bold"> {{ post.subject }} </span>
   </div>
-  <i class="material-icons fs-md text-secondary"> arrow_forward </i>
+  <i class="material-icons fs-md text-secondary"> chevron_right </i>
 </a>
                 
                               

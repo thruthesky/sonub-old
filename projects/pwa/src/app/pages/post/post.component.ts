@@ -108,10 +108,15 @@ export class PostComponent implements OnInit, AfterViewInit {
 
 
   async onSubmit() {
+<<<<<<< HEAD
     if ( this.loader.submit ) {
       return;
     }
     this.philgo.debug = true;
+=======
+
+    // this.philgo.debug = true;
+>>>>>>> f8c22877c383dc473484d87cb10cd41883ac05e2
     if (!this.philgo.isLoggedIn()) {
       const re = await this.philgo.loginOrRegister(<any>this.form).toPromise()
         .catch(e => {
@@ -210,7 +215,7 @@ export class PostComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.percentage = 1;
+    this.percentage = 10;
 
     this.philgo.fileUpload(files, { gid: this.form.gid, user_password: this.form.user_password }).subscribe(res => {
       if (typeof res === 'number') {
@@ -226,7 +231,7 @@ export class PostComponent implements OnInit, AfterViewInit {
         console.log( 'data', this.ckeditor , this.ckeditor.data );
         // alert('do something for file upload');
         console.log('content: ', this.form.content);
-        this.form.content = `<img src="${ res.src }">` + this.form.content;
+        this.form.content = this.form.content + `<img src="${ res.src }">` + `<p></p>`;
         this.percentage = 0;
       }
     }, e => {

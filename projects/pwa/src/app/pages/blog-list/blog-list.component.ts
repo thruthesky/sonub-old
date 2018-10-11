@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { AppService } from '../../../services/app.service';
-import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiPostSearch, ApiForum, ApiPost, ApiBlogSettings, PhilGoApiService } from 'share/philgo-api/philgo-api.service';
 import { InfiniteScrollService } from 'share/philgo-api/infinite-scroll';
 
