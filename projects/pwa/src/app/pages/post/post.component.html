@@ -62,8 +62,8 @@
   <ckeditor class='ckeditor' #ckeditor [editor]="Editor" [(ngModel)]=" form.content " (change)="onChangeContent( $event )"
     [config]="{
       toolbar: [  'heading', '|',  'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockquote', '|', 'undo', 'redo' ]
-      
-      
+
+
   }">
     <div>Write comment</div>
   </ckeditor>
@@ -88,8 +88,10 @@
         <span class="ml-1">Cancel</span>
       </button>
       <button class=" bg-primary fs-sm" mat-flat-button type="submit" (click)=" onSubmit() ">
-        <span class="mr-2">Submit</span>
-        <i class="material-icons">send</i>
+        <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
+        <span class="flex-center" *ngIf="loader.submit">
+          <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{a.t({ko: '로딩...', en: 'Loading...' })}}</span>
+        </span>
       </button>
     </div>
   </div>
