@@ -1,15 +1,15 @@
 <section class="stories box mt-0 mb-default-spacing" *ngIf=" a.frontPage?.stories?.length ">
-  <header class="title d-flex justify-content-between">
-    <b>Your stories</b>
-    <span>Create blog</span>
+  <header class="d-flex align-items-center">
+      <i class="material-icons mr-2 line-height-0 text-secondary">view_list</i>
+      Your stories
   </header>
 
   <article class="posts pr-3 pb-3">
 
     <div class="post d-flex align-items-center mt-2">
-      <div class="left flex-center w-30 p-2px size-48px rounded" style="border: 2px solid rgb(49, 114, 235);">
+      <a class="left flex-center w-30 p-2px size-48px border rounded"  routerLink="/blog-post">
         <i class="material-icons">add</i>
-      </div>
+      </a>
       <div class="right ml-2 w-70">
         <div class="mt-2px fw-bold">Add your story here</div>
         <div class="fs-sm text-muted ">Sonub is free service.</div>
@@ -18,7 +18,7 @@
 
     <div class="post d-flex pointer mt-2" *ngFor="let post of a.frontPage.stories" (click)=" a.openBlogCategory( post.category, post.blog ) ">
       <div class="left w-30">
-          <div class="flex-center p-2px size-48px rounded" style="border: 2px solid rgb(49, 114, 235);">
+          <div class="flex-center p-2px size-48px border rounded">
             <img class="w-100" src="{{ a.getPostPhotoUrl(post, 48, 48) }}">
           </div>
       </div>
