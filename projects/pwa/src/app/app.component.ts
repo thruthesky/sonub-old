@@ -29,7 +29,7 @@ export class AppComponent {
     public a: AppService,
     private swUpdate: SwUpdate
   ) {
-    console.log('AppComponent::constructor()');
+    // console.log('AppComponent::constructor()');
     this.observeRightSidebarScroll();
     this.observeWindowResize();
 
