@@ -8,7 +8,7 @@
       </div>
   </div>
 
-  <div id="home-body" class="p-default-spacing p-md-3 bg-white">
+  <div id="home-body" class="p-default-spacing bg-white">
 
     <app-request-push-notification></app-request-push-notification>
 
@@ -28,7 +28,7 @@
           <!--/login-user-blog-content-->
       
       
-          <div class="community-photos w-100 of-hidden mt-5 mb-1" *ngIf=" a.frontPage?.communityPhotos?.length">
+          <div class="community-photos w-100 of-hidden mt-4 mb-1" *ngIf=" a.frontPage?.communityPhotos?.length">
             <h2 class="my-0 fs-lg text-dark">Community Posts</h2>
             <div class="row no-gutters mx-minus-1">
               <div class="col-3 border-box of-hidden my-2 px-1" *ngFor="let post of a.frontPage.communityPhotos">
@@ -38,7 +38,7 @@
           </div>
           <!--/community-photos-->
           
-          <section class="community-posts mb-5" *ngIf=" a.frontPage?.communityPosts ">
+          <section class="community-posts mb-4" *ngIf=" a.frontPage?.communityPosts ">
             <div class="row no-gutters">
               <div class="col-12 col-md-6  pr-md-1 border-box" *ngIf=" a.frontPage.communityPosts['discussion']?.length >= 2 ">
                 <app-post-line [post]="a.frontPage.communityPosts['discussion'][0]"></app-post-line>
