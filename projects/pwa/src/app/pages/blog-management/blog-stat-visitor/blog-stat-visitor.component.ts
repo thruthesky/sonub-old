@@ -11,7 +11,7 @@ import { SimpleLibrary as _ } from 'ng-simple-library';
 export class BlogStatVisitorComponent implements OnInit {
 
 
-  from_date = new Date((new Date()).getTime() - 48 * 24 * 60 * 60 * 1000);
+  from_date = new Date((new Date()).getTime() - 31 * 24 * 60 * 60 * 1000);
   to_date = new Date();
 
   // from_hour = 0;
@@ -130,13 +130,32 @@ export class BlogStatVisitorComponent implements OnInit {
     return Math.floor(no / div);
   }
 
+  maxCount(selectedStats ) {
+      return selectedStats.max;
+  }
+
   formatDate( Ymd ) {
     const year = Ymd.substring(2, 4);
     const month = Ymd.substring(4, 6) - 1;
     const day  = Ymd.substring(6, 8);
-
     return this.monthNames[month]  + ' ' +  day + ' ' + year;
   }
+
+  shortNumber(n: any) {
+    if (typeof n === 'string') {
+      n = parseInt(n, 10);
+    }
+    if (n < 1000) {
+      return Math.round(n);
+    } else if (n < 1000000) {
+      return (n / 1000).toPrecision(3) + 'K';
+    } else if (n < 1000000000) {
+      return (n / 1000000).toPrecision(3) + 'M';
+    } else if (n < 1000000000000) {
+      return (n / 1000000000).toPrecision(3) + 'B';
+    }
+  }
+
 
 
 }

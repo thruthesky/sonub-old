@@ -36,8 +36,8 @@
       </div>
       <div class="bar-graph-content" *ngIf=" a.isDesktop && data && data[selectedStats]?.stats">
         <div *ngFor="let k of _.keys(data[selectedStats]['stats'])">
-          <div class="bar-item" *ngIf="data[selectedStats]['stats']" [style.height.px]=" barHeight(data[selectedStats]['stats'][k] , data[selectedStats].total)">
-            <div class="bar-item-no">{{data[selectedStats]['stats'][k] }}</div>
+          <div class="bar-item" *ngIf="data[selectedStats]['stats']" [style.height.px]=" barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) )">
+            <div class="bar-item-no">{{ shortNumber(data[selectedStats]['stats'][k]) }}</div>
             <div class="bar-item-date">{{ formatDate( k )}}</div>
           </div>
         </div>

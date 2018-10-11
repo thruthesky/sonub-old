@@ -41,7 +41,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding: 3.2em 1.5em 7em 1em;
+    padding: 3.5em 1.5em 7em 1em;
     font-size: .75em;
     overflow: auto;
 
@@ -56,9 +56,10 @@
       background-color: gray;
       text-align: center;
       .bar-item-no{
-        position: relative;
-        bottom: 1.2em;
-        padding: 0 2px;
+        position: absolute;
+        top: -15px;
+        transform: rotate(-90deg);
+        white-space: nowrap;
       }
       .bar-item-date{
         position: absolute;
