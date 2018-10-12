@@ -417,18 +417,17 @@ export class AppService {
       /**
        * check list
        * required
-       *        app_*
-       *        author
-       *        category must have at leat one
-       *        copyright
-       *        description
-       *        keywords
-       *        name
+       *        app_* - checked
+       *        author - checked
+       *        category must have at least one - checked
+       *        copyright - checked
+       *        description - checked
+       *        keywords - checked
+       *        name - checked
        * optional
-       *      url_favicon is optional
-       *      url_seo_image is optional
+       *      url_favicon is optional - checked
+       *      url_seo_image is optional - checked
        */
-
       // console.log('initBlog', this.blog);
       if ( this.inMyBlog ) {
 

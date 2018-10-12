@@ -15,6 +15,7 @@ export class BlogSettingsBasicComponent implements OnInit {
   blog: ApiBlogSettings = <any>{};
 
   loader = {
+    setting: true,
     submit: false
   };
   constructor(
@@ -23,10 +24,15 @@ export class BlogSettingsBasicComponent implements OnInit {
     public philgo: PhilGoApiService
   ) {
 
+    this.loader.setting = true;
     philgo.blogLoadSettings(philgo.myBlogDomain()).subscribe(res => {
       console.log('res: ', res);
       this.blog = Object.assign({}, res);
-    }, e => this.a.error(e));
+      this.loader.setting = false;
+    }, e => {
+      this.a.error(e);
+      this.loader.setting = false;
+    });
   }
 
   ngOnInit() {
