@@ -376,7 +376,7 @@ export class AppService {
    *      In this case, this method must be re-invoked.
    */
   initBlog() {
-    // console.log('initBlog()');
+    console.log('initBlog()');
     if (this.inBlogSite) {
       this.philgo.blogLoadSettings(this.currentBlogDomain).subscribe(blog => {
         /**
@@ -417,30 +417,72 @@ export class AppService {
       /**
        * check list
        * required
-       *        app_*
-       *        author
-       *        category must have at leat one
-       *        copyright
-       *        description
-       *        keywords
-       *        name
+       *        app_* - checked
+       *        author - checked
+       *        category must have at least one - checked
+       *        copyright - checked
+       *        description - checked
+       *        keywords - checked
+       *        name - checked
        * optional
-       *      url_favicon is optional
-       *      url_seo_image is optional
+       *      url_favicon is optional - checked
+       *      url_seo_image is optional - checked
        */
+      // console.log('initBlog', this.blog);
+      if ( this.inMyBlog ) {
 
-      if (this.inMyBlog) {
+        let content = '';
+        const basicSettings = [];
 
-        console.log('initBlog', this.blog);
+        if ( !blog['name'] ) {
+          basicSettings.push('Blog Name');
+        }
+        if ( !blog['keywords'] ) {
+          basicSettings.push('Keywords');
+        }
+        if ( !blog['author'] ) {
+          basicSettings.push('Author Name');
+        }
+        if ( !blog['description'] ) {
+          basicSettings.push('Description');
+        }
+        if ( !blog['copyright'] ) {
+          basicSettings.push('Copyright');
+        }
 
-        /**
-         * What is abc for?
-         */
-        const content = 'abc';
+        let basicSettingsContent = '';
+
+        if ( basicSettings.length ) {
+          if ( !blog['url_favicon'] ) {
+            basicSettings.push('Blog Favicon ( Optional )');
+          }
+          if ( !blog['url_seo_image'] ) {
+            basicSettings.push('Preview Image ( Optional )');
+          }
+          basicSettings.forEach( v => {
+            basicSettingsContent += `<li>${v}</li>`;
+          });
+        }
+
+        if ( basicSettingsContent.length ) {
+          content += `<h4>Blog Basic Settings</h4>
+                      <ul>${basicSettingsContent}</ul>`;
+        }
 
         if (this.blog.categories.length === 0) {
-          /// error
+          content += `<h4>Blog Category Settings</h4>
+                      <ul>
+                        <li>
+                          Category is empty
+                        </li>
+                      </ul>`;
         }
+
+
+        if ( !content ) {
+          return;
+        }
+
 
 
         const data: AlertData = {
@@ -456,6 +498,8 @@ export class AppService {
         // .catch( e => console.log(e));
 
       }
+
+
     });
 
   }

@@ -6,7 +6,7 @@
         <div class="user-meta px-2 truncate">
           <div class="name fs-md">{{ a.myName }}</div>
           <div class="text-success fs-md">Posting on {{ form.post_id }}</div>
-        </div>  
+        </div>
     </div>
     <div class="w-100" [class.w-md-70]="philgo.isLoggedIn()">
       <!-- <div class="fs-sm">Select where you want to post...</div> -->
@@ -96,7 +96,7 @@
         <i class="material-icons red">clear</i>
         <span class="ml-1">Cancel</span>
       </button>
-      <button class=" bg-primary fs-sm" mat-flat-button type="submit" (click)=" onSubmit() ">
+      <button class="flex-center bg-primary fs-sm" mat-flat-button type="submit" (click)=" onSubmit() ">
         <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
         <span class="flex-center" *ngIf="loader.submit">
           <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{a.t({ko: '로딩...', en: 'Loading...' })}}</span>
