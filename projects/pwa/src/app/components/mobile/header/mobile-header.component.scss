@@ -8,7 +8,9 @@ mat-toolbar {
   height: $header-height !important;
 }
 
-.size-25px{
-  width: 25px!important;
-  height: 25px!important;
+.avatar-child-img-size-10px{
+  .size-32px{
+      height: 24px!important;
+      width: 24px!important;
+  }
 }

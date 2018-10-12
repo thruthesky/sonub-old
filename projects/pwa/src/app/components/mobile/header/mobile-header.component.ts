@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AppService } from '../../../../services/app.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-mobile-header',
   templateUrl: './mobile-header.component.html',
-  styleUrls: ['./mobile-header.component.scss']
+  styleUrls: ['./mobile-header.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent implements OnInit {
 
