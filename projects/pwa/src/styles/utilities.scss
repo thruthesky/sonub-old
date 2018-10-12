@@ -87,7 +87,20 @@
 .p-default-spacing{
   padding: $spacing!important;
 }
-
+.pt-default-spacing{
+  padding-top: $spacing!important;
+}
+.pb-default-spacing{
+  padding-bottom: $spacing!important;
+}
+.px-default-spacing{
+  padding-left: $spacing!important;
+  padding-right: $spacing!important;
+}
+.py-default-spacing{
+  padding-top: $spacing!important;
+  padding-bottom: $spacing!important;
+}
 .relative {
   display: block;
   position: relative;
