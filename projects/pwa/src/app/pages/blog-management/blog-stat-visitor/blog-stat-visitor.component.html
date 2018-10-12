@@ -4,13 +4,7 @@
 
 <section class="bg-white p-3 px-md-4">
 
-  <div class="mb-3">
-    <button class="mr-1 bg-green" mat-flat-button (click)="loadStat('uniqueVisitor')">Visitor</button>
-    <button mat-flat-button color="primary" (click)="loadStat('pageView')">Page View</button>
-  </div>
-
-
-  <div class="d-md-flex">
+  <div class="d-md-flex fs-md">
     <mat-form-field class="w-100 mr-md-3 border-box" appearance="outline">
       <mat-label>Date From</mat-label>
       <input matInput [matDatepicker]="from_date_picker" disabled [(ngModel)]=" from_date " (dateChange)="loadStat()">
@@ -26,39 +20,48 @@
     </mat-form-field>
   </div>
 
-  <div class="of-scroll">
-    <div class="bar-graph" *ngIf="a.isDesktop">
-      <div class="bar-graph-header">
+  <div class="mb-3">
+    <button class="mr-1 bg-info" mat-flat-button (click)=" changeBarColor = true; loadStat('uniqueVisitor');">Visitor</button>
+    <button class="bg-secondary"mat-flat-button (click)=" changeBarColor = false; loadStat('pageView');">Page View</button>
+  </div>
+
+
+    <div class="bar-graph bg-light" *ngIf=" data && data[selectedStats]?.stats">
+      <div class="bar-graph-header border-bottom">
         <h2 class="bar-graph-title">{{selectedTitle[selectedStats]}}</h2>
-        <div class="bar-graph-subtitle" *ngIf=" data && data[selectedStats]?.stats">
+        <div class="bar-graph-subtitle">
           <span><b>Total:</b> {{ data[selectedStats]?.total }}</span>
         </div>
       </div>
-      <div class="bar-graph-content" *ngIf=" a.isDesktop && data && data[selectedStats]?.stats">
+      <div [class.bar-graph-content-desktop]="a.isDesktop" 
+           [class.bar-graph-content-mobile]="a.isMobile">
         <div *ngFor="let k of _.keys(data[selectedStats]['stats'])">
-          <div class="bar-item" *ngIf="data[selectedStats]['stats']" [style.height.px]=" barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) )">
-            <div class="bar-item-no">{{ shortNumber(data[selectedStats]['stats'][k]) }}</div>
+          <div class="bar-item" [class.bar-item-color-page-views]="changeBarColor"  
+              [style.width.px]=" a.isMobile? barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) ) : '' "
+              [style.height.px]=" a.isDesktop? barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) ) : '' ">
+            <div class="bar-item-no" [class.text-primary]=" shortNumber(data[selectedStats]['stats'][k]) ">{{ shortNumber(data[selectedStats]['stats'][k]) }}</div>
             <div class="bar-item-date">{{ formatDate( k )}}</div>
           </div>
         </div>
       </div>
     </div>
-    <table class="text-center" border="1" *ngIf=" a.isMobile &&  data[selectedStats] && data[selectedStats]?.stats ">
+
+    <!-- <table class="stat-table text-dark" *ngIf=" a.isMobile &&  data[selectedStats] && data[selectedStats]?.stats ">
       <tr>
-        <td>Date</td>
-        <td bgcolor="gray">{{selectedTitle[selectedStats]}}</td>
+        <th>Date</th>
+        <th class="bg-light">{{selectedTitle[selectedStats]}}</th>
       </tr>
       <tr *ngFor="let k of _.keys(data[selectedStats]['stats'])">
-        <td class="px-5 ">{{k}}</td>
-        <td class="px-5" *ngIf="data[selectedStats]['stats']" >{{ data[selectedStats]['stats'][k]}}</td>
+        <td>{{ k | slice: 4 : 6}}/{{ k | slice: 6 : 8}}/{{ k | slice: 0 : 4}}</td>
+        <td class="text-center" [class.text-darkgreen]="data[selectedStats]['stats'][k]!=0"  [class.fw-bold]="data[selectedStats]['stats'][k]!=0"
+            *ngIf="data[selectedStats]['stats']" >{{ data[selectedStats]['stats'][k]}}</td>
       </tr>
       <tr>
-        <td>Total</td>
-        <td  *ngIf="data[selectedStats]?.total" >{{ data[selectedStats]?.total }}</td>
+        <td class="p-2 fw-bold text-center">Total</td>
+        <td class="p-2 fw-bold text-center text-darkgreen"  *ngIf="data[selectedStats]?.total" >{{ data[selectedStats]?.total }}</td>
       </tr>
-    </table>
+    </table> -->
 
-  </div>
 
   <!--<div class="px-2 pt-4 pb-5">-->
       <!--<p>Languages(Country) base on browser language</p>-->

@@ -18,6 +18,7 @@ export class BlogStatVisitorComponent implements OnInit {
   // to_hour = 23;
 
   selectedStats = 'pageView';
+  changeBarColor = false;
 
   data = {
     pageView: null,
