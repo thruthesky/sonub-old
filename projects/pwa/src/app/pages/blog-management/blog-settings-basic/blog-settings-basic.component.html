@@ -55,14 +55,14 @@
       </div>
 
       <div class=" mw-180px my-2 p-1 rounded bg-success fs-xs white text-center border-box" *ngIf=" percentage && code == 'blog_favicon' " [style.width]="percentage + '%'">{{percentage}}%</div>
-    
+
       <div class="py-2 px-dot-8rem fs-sm text-muted">
         Upload Favicon.
         Must be PNG image file with 64px width and 64px height.
-        <div class="my-2 text-darkgreen">The Favicon will be used in 3 places. (1) favicon (2) mobile logo (3) desktop logo.</div>  
+        <div class="my-2 text-darkgreen">The Favicon will be used in 3 places. (1) favicon (2) mobile logo (3) desktop logo.</div>
       </div>
     </div>
-      
+
     <div class="blog-seo-image">
       <div class="py-2 px-dot-8rem text-dark fs-md">Preview Image</div>
 
@@ -85,14 +85,16 @@
     </div>
 
 
-  <div class="list-row mt-5 my-md-5 text-center">
+  <div class="flex-center list-row mt-5 my-md-5 text-center">
     <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog">
       <i class="material-icons red">clear</i>
       <span class="ml-1">Cancel</span>
     </button>
-    <button class="mx-2 bg-primary" mat-flat-button type="submit">
-      <span class="mr-2">Submit</span>
-      <i class="material-icons">send</i>
+    <button class="flex-center mx-2 bg-primary" mat-flat-button type="submit">
+      <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
+      <span class="flex-center" *ngIf="loader.submit">
+          <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{a.t({ko: '로딩...', en: 'Loading...' })}}</span>
+      </span>
     </button>
   </div>
 

@@ -51,7 +51,7 @@ export class DialogService {
           data.ok = 'OK';
         }
         const sanitize = this.sanitizeData(data);
-        const dialogRef = this.dialog.open(DialogComponent, sanitize);
+        const dialogRef = await this.dialog.open(DialogComponent, sanitize);
         return dialogRef.afterClosed().toPromise();
     }
 
@@ -72,7 +72,7 @@ export class DialogService {
           data.no = 'No';
         }
         const sanitize = this.sanitizeData(data);
-        const dialogRef = this.dialog.open(DialogComponent, sanitize);
+        const dialogRef = await this.dialog.open(DialogComponent, sanitize);
         return dialogRef.afterClosed().toPromise();
     }
 }

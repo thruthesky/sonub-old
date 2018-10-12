@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlogSettingsBasicComponent } from './blog-settings-basic.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule } from '@angular/material';
+import {
+  MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
@@ -20,7 +23,8 @@ const routes: Routes = [
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   declarations: [BlogSettingsBasicComponent]
 })
