@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DialogComponent } from './dialog.component';
 import { AlertData, ConfirmData } from './dialog-interfaces';
 
@@ -13,6 +13,31 @@ export class DialogService {
 
 
     }
+
+    sanitizeData( data: any ) {
+      const sanitize: MatDialogConfig = {};
+
+      if ( data['width'] ) {
+        sanitize.width = data.width;
+      }
+      if ( data['height'] ) {
+        sanitize.height = data.height;
+      }
+
+      if ( data['minHeight'] ) {
+        sanitize.minHeight = data.minHeight;
+      }
+
+      if ( ! data.maxWidth ) {
+        sanitize.maxWidth = '800px';
+      } else {
+        sanitize.maxWidth = data.maxWidth;
+      }
+      sanitize.data = data;
+
+      return sanitize;
+    }
+
     /**
      * Alerts a dialog
      * @param data alert data
@@ -23,13 +48,10 @@ export class DialogService {
      */
     async alert(data: AlertData): Promise<void> {
         if (!data.ok) {
-            data.ok = 'OK';
+          data.ok = 'OK';
         }
-        const dialogRef = this.dialog.open(DialogComponent, {
-            width: '250px',
-            data: data
-        });
-
+        const sanitize = this.sanitizeData(data);
+        const dialogRef = this.dialog.open(DialogComponent, sanitize);
         return dialogRef.afterClosed().toPromise();
     }
 
@@ -44,15 +66,13 @@ export class DialogService {
      */
     async confirm(data: ConfirmData): Promise<boolean> {
         if (!data.yes) {
-            data.yes = 'YES';
-        }if (!data.no) {
-            data.no = 'NO';
+          data.yes = 'Yes';
         }
-        const dialogRef = this.dialog.open(DialogComponent, {
-            width: '250px',
-            data: data
-        });
-
+        if (!data.no) {
+          data.no = 'No';
+        }
+        const sanitize = this.sanitizeData(data);
+        const dialogRef = this.dialog.open(DialogComponent, sanitize);
         return dialogRef.afterClosed().toPromise();
     }
 }

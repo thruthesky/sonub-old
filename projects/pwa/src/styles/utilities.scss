@@ -187,13 +187,14 @@
   font-size: .85em;
 
   header {
-    padding: 1em;
+    padding: 1em 1em .25em 1em;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
-    background: #f8f9fa !important;
+    // background: #f8f9fa !important;
     // border-bottom: 1px solid rgb(204, 204, 204);
     color: #6c757d;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: .82rem;
   }
 
   article {

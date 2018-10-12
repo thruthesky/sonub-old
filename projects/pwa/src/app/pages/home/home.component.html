@@ -96,6 +96,7 @@
       </div>
 
       <div class="blog-latest-photos my-md-default-spacing px-default-spacing pt-default-spacing bg-white" *ngIf=" a.frontPage?.latest_blog_photos?.length ">
+        <h2 class="mt-0 mb-md-default-spacing fs-md text-dark">Blog Posts</h2>
         <div class="blog-latest-photo" *ngFor="let photo of a.frontPage.latest_blog_photos ">
           <app-post-multiline-with-thumbnail [post]="photo"></app-post-multiline-with-thumbnail>
         </div>

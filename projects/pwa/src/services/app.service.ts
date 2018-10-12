@@ -410,7 +410,7 @@ export class AppService {
           this.blog.categories.push(this.blog['category' + i]);
         }
       }
-
+      
       /**
        * Do something here to your blog whenever blog settings are loaded and changed.
        */
@@ -428,13 +428,30 @@ export class AppService {
        *      url_favicon is optional
        *      url_seo_image is optional
        */
-      if (this.inMyBlog) {
-        // alert('yes, this is your blog');
-        // console.log('blog settings:', this.blog);
+
+      if ( this.inMyBlog ) {
+
+        console.log('initBlog', this.blog);
+
+        let content = 'abc';
 
         if (this.blog.categories.length === 0) {
           /// error
         }
+
+
+        const data: AlertData = {
+          title: this.t({ en: 'Required Blog Settings', ko: '필수 블로그 설정' }),
+          content: `<div class="blog-requirements">${content}</div>`,
+          ok: this.t({ en: 'OK', ko: '확인' }),
+          width: '360px'
+        };
+
+
+        this.dialog.alert(data);
+          // .then(re => console.log(re))
+          // .catch( e => console.log(e));
+
       }
     });
 
