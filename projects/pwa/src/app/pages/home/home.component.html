@@ -70,8 +70,8 @@
       </div>
 
 
-      <div class="my-md-default-spacing p-default-spacing bg-white" *ngIf=" a.frontPage?.news?.length ">
-        <h2 class="my-0 fs-md text-dark">Sonub News</h2>
+      <div class="my-md-default-spacing  px-default-spacing pt-default-spacing bg-white" *ngIf=" a.frontPage?.news?.length ">
+        <h2 class="mt-0 mb-md-default-spacing fs-md text-dark">Sonub News</h2>
         <app-post-multiline-with-thumbnail *ngFor="let post of a.frontPage.news " [post]=" post "></app-post-multiline-with-thumbnail>
       </div>
 
@@ -94,7 +94,7 @@
         </div>
       </div>
 
-      <div class="blog-latest-photos my-md-default-spacing p-default-spacing bg-white" *ngIf=" a.frontPage?.latest_blog_photos?.length ">
+      <div class="blog-latest-photos my-md-default-spacing px-default-spacing pt-default-spacing bg-white" *ngIf=" a.frontPage?.latest_blog_photos?.length ">
         <div class="blog-latest-photo" *ngFor="let photo of a.frontPage.latest_blog_photos ">
           <app-post-multiline-with-thumbnail [post]="photo"></app-post-multiline-with-thumbnail>
         </div>
