@@ -39,7 +39,7 @@
           <div class="bar-item" [class.bar-item-color-page-views]="changeBarColor"  
               [style.width.px]=" a.isMobile? barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) ) : '' "
               [style.height.px]=" a.isDesktop? barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) ) : '' ">
-            <div class="bar-item-no" [class.text-primary]=" shortNumber(data[selectedStats]['stats'][k]) ">{{ shortNumber(data[selectedStats]['stats'][k]) }}</div>
+            <div class="bar-item-no" [class.text-danger]=" shortNumber(data[selectedStats]['stats'][k]) ">{{ shortNumber(data[selectedStats]['stats'][k]) }}</div>
             <div class="bar-item-date">{{ formatDate( k )}}</div>
           </div>
         </div>

@@ -389,6 +389,9 @@ export class AppService {
       // 블로그 사이트가 아니면, 즉, 소너브 메인 페이지이면, 로그인한 사용자의 블로그 정보를 보여준다. 이것은 initRootSite() 를 참고한다.
     }
 
+    /**
+     * Do something when blog settings are loaded or changed.
+     */
     this.philgo.blogChange.subscribe(blog => {
       if (!blog) {
         return;
@@ -407,6 +410,24 @@ export class AppService {
           this.blog.categories.push(this.blog['category' + i]);
         }
       }
+      
+      /**
+       * Do something here to your blog whenever blog settings are loaded and changed.
+       */
+      /**
+       * check list
+       * required
+       *        app_*
+       *        author
+       *        category must have at leat one
+       *        copyright
+       *        description
+       *        keywords
+       *        name
+       * optional
+       *      url_favicon is optional
+       *      url_seo_image is optional
+       */
 
       if ( this.inMyBlog ) {
 
@@ -414,7 +435,9 @@ export class AppService {
 
         let content = 'abc';
 
-
+        if (this.blog.categories.length === 0) {
+          /// error
+        }
 
 
         const data: AlertData = {
@@ -428,6 +451,7 @@ export class AppService {
         this.dialog.alert(data);
           // .then(re => console.log(re))
           // .catch( e => console.log(e));
+
       }
     });
 
@@ -1013,7 +1037,7 @@ export class AppService {
 
 
   /**
-   * Returns URL of post photo
+   * Returns URL of post featured photo
    * @param post Post
    * @param width width
    * @param height height
@@ -1022,7 +1046,7 @@ export class AppService {
     return this.philgo.thumbnailUrl({
       width: width,
       height: height,
-      path: post.path_of_first_image
+      path: post.path_of_featured_image
     });
   }
 
