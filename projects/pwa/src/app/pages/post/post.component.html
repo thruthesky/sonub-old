@@ -39,6 +39,15 @@
 
   <section class="d-md-flex" *ngIf="philgo.isLoggedOut() ">
 
+    <div class="p-3 mb-2 fs-sm bg-light">
+      {{
+        a.t({
+          en: 'You will be automatically registered with the email and password. If you registered already, please login.',
+          ko: '메일 주소와 비밀번호를 입력하면 자동으로 회원 가입을 합니다. 만약 회원 가입을 하였으면 로그인을 해 주세요.'
+        })
+      }}
+    </div>
+
     <mat-form-field appearance="outline" class="w-100 mr-md-3">
       <input matInput type="email" name="email" [(ngModel)]=" form.user_email " (keyup)="onSubjectKeyUp()">
       <mat-label>Email</mat-label>

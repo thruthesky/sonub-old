@@ -495,7 +495,6 @@ export class AppService {
           width: '360px'
         };
 
-
         this.dialog.confirm(data)
           .then(re => console.log(re))
           .catch( e => console.log(e));
@@ -592,13 +591,16 @@ export class AppService {
   /**
    * Returns true if the user is inside his blog site(domain).
    * @desc If the user is under his blog domain, then it returns true.
+   * @desc It compares domain in case-insensitive.
    */
   get inMyBlog(): boolean {
     // console.log(location.hostname);
     if (this.inRootSite) {
       return false;
     }
-    return this.myBlogUrl.indexOf(location.hostname) !== -1;
+    const hostname = location.hostname.toLowerCase();
+    const myBlogUrl = this.myBlogUrl.toLowerCase();
+    return myBlogUrl.indexOf(hostname) !== -1;
   }
   openHome() {
     this.router.navigateByUrl('/');
