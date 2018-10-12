@@ -545,6 +545,7 @@ export class AppService {
   /**
    * Returns true if the user is inside his blog site(domain).
    * @desc If the user is under his blog domain, then it returns true.
+   * @desc It compares domain in case-insensitive.
    */
   get inMyBlog(): boolean {
     // console.log(location.hostname);
