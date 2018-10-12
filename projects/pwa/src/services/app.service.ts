@@ -254,11 +254,11 @@ export class AppService {
         //   this.router.navigate(['/redirect'], { queryParams: { url: e.url } });
         // }
       } else if (e instanceof NavigationEnd) {
-        // this.route = this.router.url;
-        // this.routeChange.next(this.route);
-        // if (this.router.url.indexOf('redirect') === -1) {
-        //   this.log({ path: this.router.url });
-        // }
+        this.route = this.router.url;
+        this.routeChange.next(this.route);
+        if (this.router.url.indexOf('redirect') === -1) {
+          this.log({ path: this.router.url });
+        }
       }
       /**
        * Scroll the page to the top after transitioning into another page.
