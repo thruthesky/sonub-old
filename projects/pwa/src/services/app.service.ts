@@ -410,7 +410,7 @@ export class AppService {
           this.blog.categories.push(this.blog['category' + i]);
         }
       }
-      
+
       /**
        * Do something here to your blog whenever blog settings are loaded and changed.
        */
@@ -429,11 +429,14 @@ export class AppService {
        *      url_seo_image is optional
        */
 
-      if ( this.inMyBlog ) {
+      if (this.inMyBlog) {
 
         console.log('initBlog', this.blog);
 
-        let content = 'abc';
+        /**
+         * What is abc for?
+         */
+        const content = 'abc';
 
         if (this.blog.categories.length === 0) {
           /// error
@@ -449,8 +452,8 @@ export class AppService {
 
 
         this.dialog.alert(data);
-          // .then(re => console.log(re))
-          // .catch( e => console.log(e));
+        // .then(re => console.log(re))
+        // .catch( e => console.log(e));
 
       }
     });
@@ -548,7 +551,9 @@ export class AppService {
     if (this.inRootSite) {
       return false;
     }
-    return this.myBlogUrl.indexOf(location.hostname) !== -1;
+    const hostname = location.hostname.toLowerCase();
+    const myBlogUrl = this.myBlogUrl.toLowerCase();
+    return myBlogUrl.indexOf(hostname) !== -1;
   }
   openHome() {
     this.router.navigateByUrl('/');
