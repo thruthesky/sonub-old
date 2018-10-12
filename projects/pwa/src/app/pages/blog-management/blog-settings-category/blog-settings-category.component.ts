@@ -10,16 +10,24 @@ import { PhilGoApiService, ApiBlogSettings } from 'share/philgo-api/philgo-api.s
 export class BlogSettingsCategoryComponent implements OnInit {
 
   blog: ApiBlogSettings = <any>{};
+
+  loader = {
+    setting: true
+  };
   constructor(
 
     public a: AppService,
     public philgo: PhilGoApiService
   ) {
-
+    this.loader.setting = true;
     philgo.blogLoadSettings(philgo.myBlogDomain()).subscribe(res => {
       console.log('res: ', res);
       this.blog = Object.assign({}, res);
-    }, e => this.a.error(e));
+      this.loader.setting = false;
+    }, e => {
+      this.a.error(e);
+      this.loader.setting = false;
+    });
   }
 
   ngOnInit() {

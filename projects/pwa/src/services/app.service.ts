@@ -466,7 +466,8 @@ export class AppService {
 
         if ( basicSettingsContent.length ) {
           content += `<h4>Blog Basic Settings</h4>
-                      <ul>${basicSettingsContent}</ul>`;
+                      <ul>${basicSettingsContent}</ul>
+                     `;
         }
 
         if (this.blog.categories.length === 0) {
@@ -475,7 +476,8 @@ export class AppService {
                         <li>
                           Category is empty
                         </li>
-                      </ul>`;
+                      </ul>
+                      `;
         }
 
 
@@ -485,17 +487,18 @@ export class AppService {
 
 
 
-        const data: AlertData = {
+        const data: ConfirmData = {
           title: this.t({ en: 'Required Blog Settings', ko: '필수 블로그 설정' }),
           content: `<div class="blog-requirements">${content}</div>`,
-          ok: this.t({ en: 'OK', ko: '확인' }),
+          yes: this.t({ en: 'Update', ko: '최신 정보' }),
+          no: this.t({ en: 'Close', ko: '닫기' }),
           width: '360px'
         };
 
 
-        this.dialog.alert(data);
-          // .then(re => console.log(re))
-          // .catch( e => console.log(e));
+        this.dialog.confirm(data)
+          .then(re => console.log(re))
+          .catch( e => console.log(e));
 
       }
 
