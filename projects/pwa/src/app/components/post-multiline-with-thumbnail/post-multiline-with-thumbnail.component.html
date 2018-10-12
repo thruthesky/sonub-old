@@ -1,6 +1,6 @@
 <a class="post-multi-thumb d-flex pb-default-spacing" *ngIf="post" href="{{ a.getUrlPostView(post) }}" (click)="a.onClickPost( $event, post )">
   <div class="thumbnail rounded of-hidden">
-    <img src="{{ philgo.thumbnailUrl({ width: 140, height: 70, path: post.path_of_first_image }) }}">
+    <img src="{{ philgo.thumbnailUrl({ width: 140, height: 70, path: post.path_of_featured_image }) }}">
   </div>
   <div class="ml-2 of-hidden">
     <div class="text bold text-link truncate" *ngIf=" post.subject ">{{ post.subject }} </div>
