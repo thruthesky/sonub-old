@@ -130,7 +130,6 @@ export class PostComponent implements OnInit, AfterViewInit {
       }
     }
 
-    this.loader.submit = true;
     /**
     * Edit
     */
@@ -138,10 +137,8 @@ export class PostComponent implements OnInit, AfterViewInit {
       this.philgo.postEdit(this.form).subscribe(res => {
         console.log('post view? load?', res);
         this.a.openPostView(res);
-        this.loader.submit = false;
       }, e => {
         this.a.toast(e);
-        this.loader.submit = false;
       });
     } else {
       /**
@@ -153,6 +150,7 @@ export class PostComponent implements OnInit, AfterViewInit {
       if (this.form.post_id === 'blog' && !this.form.category) {
         return this.a.toast(this.a.t({ en: 'Please select category', ko: '카테고리를 선택하세요.' }));
       }
+      this.loader.submit = true;
       this.form.group_id = this.a.groupId;
       console.log('post create from: ', this.form);
       this.philgo.postCreate(this.form).subscribe(res => {

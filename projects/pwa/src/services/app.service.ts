@@ -407,6 +407,28 @@ export class AppService {
           this.blog.categories.push(this.blog['category' + i]);
         }
       }
+
+      if ( this.inMyBlog ) {
+
+        console.log('initBlog', this.blog);
+
+        let content = 'abc';
+
+
+
+
+        const data: AlertData = {
+          title: this.t({ en: 'Required Blog Settings', ko: '필수 블로그 설정' }),
+          content: `<div class="blog-requirements">${content}</div>`,
+          ok: this.t({ en: 'OK', ko: '확인' }),
+          width: '360px'
+        };
+
+
+        this.dialog.alert(data);
+          // .then(re => console.log(re))
+          // .catch( e => console.log(e));
+      }
     });
 
   }
