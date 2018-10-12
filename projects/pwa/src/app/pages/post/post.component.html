@@ -73,7 +73,7 @@
     <div class="left d-flex align-items-center flex-grow-1">
 
       <div class="camera transparent-cover-wrapper flex-center p-2">
-        <input class="transparent-cover pointer w-100" type="file" name="file" (change)="onChangeFile($event)">
+        <input class="transparent-cover pointer w-100" type="file" name="file" (change)="onChangeFile($event)" accept="image/*">
         <i class="material-icons pointer fs-xl text-dark">camera_alt</i>
         <span class="d-none d-md-inline ml-2 fs-md text-muted" *ngIf=" ! percentage  ">Upload Photo</span>
       </div>
