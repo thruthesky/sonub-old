@@ -10,13 +10,13 @@
       </div>
       <div class="ml-3">
         <b>Looking for foreign boss?</b><br>
-        We have a lot of foregin boss who want to hire pinoy workers. 
+        We have a lot of foregin boss who want to hire pinoy workers.
         <a class="link">Sonub Jobs</a>
       </div>
     </div>
   </div>
 
-  
+
   <div class="blog-copyright mt-3 p-3 bg-light text-center" *ngIf="a.blog?.copyright">
     {{ a.blog.copyright }}
   </div>
@@ -27,24 +27,24 @@
       <input class="flex-grow-1 fs-md mx-1 border-0">
       <button>Search</button>
     </div>
-  
+
     <div class="container-fluid my-2">
       <div class="row">
         <div class="col">
-          <a>Blogs</a>
-          <a>Help</a>
-          <a>Seetings & Privacy</a>
+          <a routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'create-your-blog-now' ) }}">Create your blog</a>
+          <a routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'sonub-help') }}">Help</a>
           <a href="https://sonub.com" (click)=" onClickSonub( $event ) ">Sonub</a>
         </div>
         <div class="col">
-          <a>Report a Problem</a>
-          <a>Terms & Policies</a>
-          <a>Logout ({{ a.philgo.myName() }})</a>
+          <a (click)=" a.displayHtml('terms-and-conditions') ">Terms & Conditions</a>
+          <a (click)=" a.displayHtml('privacy') ">Privacy</a>
+          <a (click)=" a.philgo.logout() " *ngIf=" a.loggedIn ">Logout ({{ a.philgo.myName() }})</a>
+          <a (click)=" a.openLogin() " *ngIf=" a.loggedOut ">Login</a>
         </div>
       </div>
     </div>
 
-    <div>
+    <div (click)=" a._.scrollToTop(1) ">
       <div class="p-2 border text-center pointer">Back To Top</div>
     </div>
   </div>
