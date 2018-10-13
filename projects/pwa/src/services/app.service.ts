@@ -153,6 +153,7 @@ export class AppService {
    * 현재 접속 중인 블로그의 정보를 가지고 있다.
    */
   blog: ApiBlogSettings = null;
+  blogSettingChecked = false;
   /**
    * Max no of blog categories
    */
@@ -411,6 +412,8 @@ export class AppService {
           this.blog.categories.push(this.blog['category' + i]);
         }
       }
+
+      this.checkBlogSettings();
     });
 
   }
@@ -1127,7 +1130,7 @@ export class AppService {
    */
   checkBlogSettings() {
     console.log('checkBlogSettings: ', this.blog);
-    if (!this.inMyBlog) {
+    if (!this.inMyBlog || this.blogSettingChecked) {
       return;
     }
     let content = '';
@@ -1202,7 +1205,7 @@ export class AppService {
       }
     }
 
-
+    this.blogSettingChecked = true;
     if (!content) {
       console.log('All settings are set.');
       return;
