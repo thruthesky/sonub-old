@@ -22,12 +22,12 @@ li,
 }
 
 .hover-icon {
-    .material-icons{
+    .hover-icon-toggle{
         opacity: 0;
         font-size: 1.15rem;
     }
     &:hover{
-        .material-icons{
+        .hover-icon-toggle{
             opacity: 1;
         }
     }
