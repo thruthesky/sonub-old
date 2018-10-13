@@ -38,10 +38,10 @@
 * sample domains to test subdomains.
   You must use only these domains as blog domains or the webbrowser will redirect you to reall server and that will cause accessing real site. Not the dev server.
 
+* dev.sonub.com domain is a special domain which will display exactly same as root site.
+
 ```` text
 192.168.0.254   local.philgo.com
-127.0.0.1       sonub.com
-127.0.0.1       www.sonub.com
 127.0.0.1       testuser.sonub.com
 127.0.0.1       thruthesky.sonub.com
 127.0.0.1       dev.sonub.com
