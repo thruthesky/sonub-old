@@ -139,6 +139,7 @@ export class AppService {
 
   // app root domain
   appRootDomain = APP_ROOT_DOMAIN;
+  appDevRootDomain = 'dev.sonub.com';
 
   /**
    * app group id for philgo api.
@@ -611,6 +612,10 @@ export class AppService {
   openRootSiteHomeInNewWindow() {
     window.open(this.urlRootSite, '_blank');
   }
+  /**
+   * Open root site.
+   * If you are in development, then open root.sonub.com
+   */
   openRootSite() {
     window.location.href = this.urlRootSite;
   }
@@ -1040,7 +1045,14 @@ export class AppService {
   }
 
   get urlRootSite(): string {
-    let url = APP_PROTOCOL + this.appRootDomain;
+    let url = APP_PROTOCOL;
+
+
+    if (environment.production) {
+      url += this.appRootDomain;
+    } else {
+      url += this.appDevRootDomain;
+    }
 
     if (APP_PORT) {
       url += ':' + APP_PORT;
@@ -1115,8 +1127,8 @@ export class AppService {
    */
   blogCategories(ex?: string): Array<string> {
     if (this.blog && this.blog.categories && this.blog.categories.length) {
-      if ( ex ) {
-        return this.blog.categories.filter( cat => cat !== ex );
+      if (ex) {
+        return this.blog.categories.filter(cat => cat !== ex);
       } else {
         return this.blog.categories;
       }
