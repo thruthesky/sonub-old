@@ -17,9 +17,8 @@ export class HomeComponent implements OnInit {
   ) {
     // router.events.subscribe((e: any) => {
     //   if (e instanceof NavigationEnd) {
-        this.doInit();
-      // }
-    // });
+    this.doInit();
+    // this.a.checkBlogSettings();
   }
 
   ngOnInit() {
