@@ -20,6 +20,10 @@ export class HomeComponent implements OnInit {
         this.doInit();
       }
     });
+
+    this.a.checkBlogSettings();
+
+
   }
 
   ngOnInit() {

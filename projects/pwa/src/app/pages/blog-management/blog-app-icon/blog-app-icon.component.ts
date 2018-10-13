@@ -11,6 +11,9 @@ export class BlogAppIconComponent implements OnInit {
 
   blog: ApiBlogSettings = <any>{};
   percentage = 0;
+  loader = {
+    submit: false
+  };
   constructor(
     public a: AppService,
     public philgo: PhilGoApiService
@@ -28,6 +31,12 @@ export class BlogAppIconComponent implements OnInit {
 
   onSubmit($event: Event) {
     $event.preventDefault();
+
+    if ( this.loader.submit ) {
+      return;
+    }
+
+    this.loader.submit = true;
 
     console.log('req: ', this.blog);
     const data: ApiBlogSettings = <any>{};
@@ -49,7 +58,11 @@ export class BlogAppIconComponent implements OnInit {
       // this.philgo.profile().subscribe(r => {
       //   console.log('blog save => user local storage updated to restore blog domain: ', r);
       // });
-    }, e => this.a.error(e));
+      this.loader.submit = false;
+    }, e => {
+      this.a.error(e);
+      this.loader.submit = false;
+    });
 
 
     return false;
