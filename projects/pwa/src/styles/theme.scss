@@ -1,13 +1,13 @@
 [route='/menu'] {
     #mobile-header mat-toolbar {
-        color: white;
-        background-color: rgb(122, 122, 138);
+        color: white!important;
+        background-color: rgb(122, 122, 138)!important;
     }
 }
 [route*='/forum'] {
     #mobile-header mat-toolbar {
-        color: white;
-        background-color: rgb(204, 204, 204);
+        color: white!important;
+        background-color: rgb(204, 204, 204)!important;
     }
 }
 
