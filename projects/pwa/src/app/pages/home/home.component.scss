@@ -43,11 +43,11 @@
     .text{
       overflow: hidden; 
       padding-right: .2rem;
-      border-right: 2px solid #343a40;
-      white-space: nowrap;
-      animation: 
-        typing 2s steps(40, end),
-        caret .75s ease-in-out infinite;
+      // border-right: 2px solid #343a40;
+      // white-space: nowrap;
+      // animation: 
+      //   typing 2s steps(40, end),
+      //   caret .75s ease-in-out infinite;
     }
     
     @keyframes typing {
