@@ -64,5 +64,17 @@ export class BlogViewComponent implements OnInit {
       console.log('postUpdateAccessCodeByMember:', post);
     });
   }
+  onClickChangeCategory(post: ApiPost, category: string) {
+    console.log('going to change category: ', post.idx, category);
+    this.philgo.postEdit({ idx: post.idx, category: category }).subscribe(up => {
+      console.log('updated post: ', up);
+      this.a.alert({
+        content: this.a.t({
+          en: 'Category hsa been changed',
+          ko: '카테고리가 변경되었습니다.'
+        })
+      });
+    }, e => this.a.error(e));
+  }
 
 }

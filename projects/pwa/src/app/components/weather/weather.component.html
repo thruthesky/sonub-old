@@ -14,8 +14,8 @@
         </div>
       </div>
 
-      <div class="p-2 my-2 bg-light"> Cloud Cover: {{ map.weather.clouds.all }}%</div>
-      <div class="uv p-2 my-2 bg-light">UV: {{ map.uv.value }} - {{ uvString() }}</div>
+      <div class="p-2 my-2 bg-light"> Cloud Cover: {{ map?.weather?.clouds?.all }}%</div>
+      <div class="uv p-2 my-2 bg-light" *ngIf="map?.uv?.value">UV: {{ map.uv.value }} - {{ uvString() }}</div>
 
     </div>
   </article>

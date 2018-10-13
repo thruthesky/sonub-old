@@ -30,9 +30,9 @@
         <i class="material-icons">thumb_down</i>
         <span> {{ post.bad == '0' ? '' : ' ' + post.bad }}</span>
       </button>
-      <button (click)=" onEdit(post) ">Edit</button>
-      <button (click)=" onDelete( post ) ">Delete</button>
-      <button (click)=" onReport( post ) ">Report</button>
+      <button (click)=" onEdit(post) " *ngIf=" philgo.isMyPost(post) ">Edit</button>
+      <button (click)=" onDelete( post ) " *ngIf=" philgo.isMyPost(post) ">Delete</button>
+      <button (click)=" onReport( post ) " *ngIf=" ! philgo.isMyPost(post) ">Report</button>
 
       <button mat-icon-button [matMenuTriggerFor]="postMenu" *ngIf=" a.inMyBlog && a.philgo.isMyPost(post) ">
         <mat-icon class="text-success">more_vert</mat-icon>
@@ -44,9 +44,13 @@
             <mat-icon>photo_size_select_actual</mat-icon>
             <span>Featured Post</span>
           </button>
-          <button class="flex-center" mat-menu-item [matMenuTriggerFor]="subMenu">
+          <button class="flex-center" mat-menu-item [matMenuTriggerFor]="moreFeature">
             <mat-icon>photo_size_select_actual</mat-icon>
             <span>More Features</span>
+          </button>
+          <button class="flex-center" mat-menu-item [matMenuTriggerFor]="changeCategory">
+            <mat-icon>photo_size_select_actual</mat-icon>
+            <span>Change Categories</span>
           </button>
 
           <button class="flex-center" mat-menu-item (click)=" a.openNotification(post.idx) ">
@@ -57,15 +61,21 @@
         </ng-template>
       </mat-menu>
 
-      <mat-menu #subMenu="matMenu">
-        <ng-template matMenuContent>
-          <button mat-menu-item (click)=" onClickFeature(1) "   routerLink="/">Feature 1</button>
-          <button mat-menu-item (click)=" onClickFeature(2) "   routerLink="/">Feature 2</button>
-          <button mat-menu-item (click)=" onClickFeature(3) "   routerLink="/">Feature 3</button>
-          <button mat-menu-item (click)=" onClickFeature(4) "   routerLink="/">Feature 4</button>
-        </ng-template>
-      </mat-menu>
+      <mat-menu #moreFeature="matMenu">
+          <ng-template matMenuContent>
+            <button mat-menu-item (click)=" onClickFeature(1) "   routerLink="/">Feature 1</button>
+            <button mat-menu-item (click)=" onClickFeature(2) "   routerLink="/">Feature 2</button>
+            <button mat-menu-item (click)=" onClickFeature(3) "   routerLink="/">Feature 3</button>
+            <button mat-menu-item (click)=" onClickFeature(4) "   routerLink="/">Feature 4</button>
+          </ng-template>
+        </mat-menu>
 
+        <mat-menu #changeCategory="matMenu">
+            <ng-template matMenuContent>
+                <button mat-menu-item *ngFor=" let category of a.blogCategories( post.category ) " (click)=" onClickChangeCategory( post, category ) ">{{ category }}</button>
+            </ng-template>
+          </mat-menu>
+      
     </div>
   </div>
 
@@ -108,9 +118,9 @@
               <i class="material-icons">reply</i>
               <span>Reply</span>
             </button>
-            <button (click)=" comment['edit'] = true ">Edit</button>
-            <button (click)=" onDelete( comment ) ">Delete</button>
-            <button (click)=" onReport( comment ) ">Report</button>
+            <button (click)=" comment['edit'] = true " *ngIf=" philgo.isMyPost(comment) ">Edit</button>
+            <button (click)=" onDelete( comment ) " *ngIf=" philgo.isMyPost(comment) ">Delete</button>
+            <button (click)=" onReport( comment ) "*ngIf=" ! philgo.isMyPost(comment) ">Report</button>
 
           </div>
 

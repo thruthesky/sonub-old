@@ -429,42 +429,42 @@ export class AppService {
        *      url_seo_image is optional - checked
        */
       // console.log('initBlog', this.blog);
-      if ( this.inMyBlog ) {
+      if (this.inMyBlog) {
 
         let content = '';
         const basicSettings = [];
 
-        if ( !blog['name'] ) {
+        if (!blog['name']) {
           basicSettings.push('Blog Name');
         }
-        if ( !blog['keywords'] ) {
+        if (!blog['keywords']) {
           basicSettings.push('Keywords');
         }
-        if ( !blog['author'] ) {
+        if (!blog['author']) {
           basicSettings.push('Author Name');
         }
-        if ( !blog['description'] ) {
+        if (!blog['description']) {
           basicSettings.push('Description');
         }
-        if ( !blog['copyright'] ) {
+        if (!blog['copyright']) {
           basicSettings.push('Copyright');
         }
 
         let basicSettingsContent = '';
 
-        if ( basicSettings.length ) {
-          if ( !blog['url_favicon'] ) {
+        if (basicSettings.length) {
+          if (!blog['url_favicon']) {
             basicSettings.push('Blog Favicon ( Optional )');
           }
-          if ( !blog['url_seo_image'] ) {
+          if (!blog['url_seo_image']) {
             basicSettings.push('Preview Image ( Optional )');
           }
-          basicSettings.forEach( v => {
+          basicSettings.forEach(v => {
             basicSettingsContent += `<li>${v}</li>`;
           });
         }
 
-        if ( basicSettingsContent.length ) {
+        if (basicSettingsContent.length) {
           content += `<h4>Blog Basic Settings</h4>
                       <ul>${basicSettingsContent}</ul>
                      `;
@@ -481,23 +481,23 @@ export class AppService {
         }
 
 
-        if ( !content ) {
+        if (!content) {
           return;
         }
 
 
 
         const data: ConfirmData = {
-          title: this.t({ en: 'Required Blog Settings', ko: '필수 블로그 설정' }),
+          title: this.t({ en: 'Ooh..! You have missed required blog settings', ko: '앗! 블로그 설정을 하셔야합니다.' }),
           content: `<div class="blog-requirements">${content}</div>`,
-          yes: this.t({ en: 'Update', ko: '최신 정보' }),
+          yes: this.t({ en: 'Update', ko: '업데이트하기' }),
           no: this.t({ en: 'Close', ko: '닫기' }),
           width: '360px'
         };
 
         this.dialog.confirm(data)
           .then(re => console.log(re))
-          .catch( e => console.log(e));
+          .catch(e => console.log(e));
 
       }
 
@@ -1104,7 +1104,7 @@ export class AppService {
 
 
   /**
-   * Returns categories array of string of current blog.
+   * Returns array of strings of current blog categories.
    *
    * @returns Array of string of the categories
    *  or empty array if there is no category.
@@ -1113,9 +1113,13 @@ export class AppService {
    * blog.categories may not have value by the time you call it.
    * To be sure, use this.blog.categories.
    */
-  blogCategories(): Array<string> {
+  blogCategories(ex?: string): Array<string> {
     if (this.blog && this.blog.categories && this.blog.categories.length) {
-      return this.blog.categories;
+      if ( ex ) {
+        return this.blog.categories.filter( cat => cat !== ex );
+      } else {
+        return this.blog.categories;
+      }
     } else {
       return [];
     }
