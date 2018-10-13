@@ -3,19 +3,19 @@
 </mat-toolbar>
 
   <form class=" p-md-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
-  
+
     <div class="list-row mt-4 mb-5 px-md-4">
       <div class=" flex-center bg-light mb-3 pt-4 border">
           <span>https://</span>
           <mat-form-field class=" mx-2">
-            <input matInput name="domain" [(ngModel)]=" blog.domain " placeholder="Your domain">
+            <input matInput name="domain" [(ngModel)]=" blog.domain " placeholder="Your domain" (keyup)="a.validateInput($event, null, domainRegex)">
           </mat-form-field>
           <span>.sonub.com</span>
       </div>
 
       <div class="flex-center px-3 px-md-0 fs-md">
         <i class="material-icons mr-2 text-danger">warning</i>
-        <span>Becareful when you change your domain. you will loose all your backlinks.</span>
+        <span>Be careful when you change your domain. you will loose all your backlinks.</span>
       </div>
 
     </div>
@@ -25,12 +25,14 @@
         <i class="material-icons red">clear</i>
         <span class="ml-1">Cancel</span>
       </button>
-      <button class="mx-2 bg-primary" mat-flat-button type="submit">
-        <span class="mr-2">Submit</span>
-        <i class="material-icons">send</i>
+      <button class="flex-center mx-2 bg-primary" mat-flat-button type="submit">
+        <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
+        <span class="flex-center" *ngIf="loader.submit">
+          <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{a.t({ko: '로딩...', en: 'Loading...' })}}</span>
+        </span>
       </button>
     </div>
-  
+
   </form>
 
 
