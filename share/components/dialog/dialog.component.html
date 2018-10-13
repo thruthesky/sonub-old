@@ -2,7 +2,9 @@
 <!-- <p matDialogContent [innerHTML]=" data.content "></p> -->
 <mat-dialog-content [innerHTML]=" data.content "></mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-flat-button color="primary" [mat-dialog-close]="true" *ngIf=" data?.ok ">{{ data.ok }}</button>
-    <button mat-flat-button color="primary" [mat-dialog-close]="true" *ngIf=" data?.yes ">{{ data.yes }}</button>
-    <button class="ml-2" mat-flat-button color="warn" [mat-dialog-close]="false" cdkFocusInitial *ngIf=" data?.no ">{{ data.no }}</button>
+    <button class="bg-primary" mat-flat-button color="primary" [mat-dialog-close]="true" *ngIf=" data?.ok ">{{ data.ok }}</button>
+    <button class="bg-primary" mat-flat-button color="primary" [mat-dialog-close]="true" *ngIf=" data?.yes ">{{ data.yes }}</button>
+    <button class="ml-2" mat-button color="warn" [mat-dialog-close]="false" cdkFocusInitial *ngIf=" data?.no ">
+        <span>{{ data.no }}</span>  
+    </button>
 </mat-dialog-actions>

@@ -154,6 +154,7 @@ export class AppService {
    * 현재 접속 중인 블로그의 정보를 가지고 있다.
    */
   blog: ApiBlogSettings = null;
+  blogSettingChecked = false;
   /**
    * Max no of blog categories
    */
@@ -413,97 +414,7 @@ export class AppService {
         }
       }
 
-      /**
-       * Do something here to your blog whenever blog settings are loaded and changed.
-       */
-      /**
-       * check list
-       * required
-       *        app_* - checked
-       *        author - checked
-       *        category must have at least one - checked
-       *        copyright - checked
-       *        description - checked
-       *        keywords - checked
-       *        name - checked
-       * optional
-       *      url_favicon is optional - checked
-       *      url_seo_image is optional - checked
-       */
-      // console.log('initBlog', this.blog);
-      if (this.inMyBlog) {
-
-        let content = '';
-        const basicSettings = [];
-
-        if (!blog['name']) {
-          basicSettings.push('Blog Name');
-        }
-        if (!blog['keywords']) {
-          basicSettings.push('Keywords');
-        }
-        if (!blog['author']) {
-          basicSettings.push('Author Name');
-        }
-        if (!blog['description']) {
-          basicSettings.push('Description');
-        }
-        if (!blog['copyright']) {
-          basicSettings.push('Copyright');
-        }
-
-        let basicSettingsContent = '';
-
-        if (basicSettings.length) {
-          if (!blog['url_favicon']) {
-            basicSettings.push('Blog Favicon ( Optional )');
-          }
-          if (!blog['url_seo_image']) {
-            basicSettings.push('Preview Image ( Optional )');
-          }
-          basicSettings.forEach(v => {
-            basicSettingsContent += `<li>${v}</li>`;
-          });
-        }
-
-        if (basicSettingsContent.length) {
-          content += `<h4>Blog Basic Settings</h4>
-                      <ul>${basicSettingsContent}</ul>
-                     `;
-        }
-
-        if (this.blog.categories.length === 0) {
-          content += `<h4>Blog Category Settings</h4>
-                      <ul>
-                        <li>
-                          Category is empty
-                        </li>
-                      </ul>
-                      `;
-        }
-
-
-        if (!content) {
-          return;
-        }
-
-
-
-        const data: ConfirmData = {
-          title: this.t({ en: 'Ooh..! You have missed required blog settings', ko: '앗! 블로그 설정을 하셔야합니다.' }),
-          content: `<div class="blog-requirements">${content}</div>`,
-          yes: this.t({ en: 'Update', ko: '업데이트하기' }),
-          no: this.t({ en: 'Close', ko: '닫기' }),
-          width: '360px'
-        };
-
-        this.dialog.confirm(data)
-          .then(re => console.log(re))
-          .catch(e => console.log(e));
-
-      }
-
-
+      this.checkBlogSettings();
     });
 
   }
@@ -597,6 +508,11 @@ export class AppService {
    */
   get inMyBlog(): boolean {
     // console.log(location.hostname);
+
+    if (this.loggedOut) {
+      return false;
+    }
+
     if (this.inRootSite) {
       return false;
     }
@@ -1167,7 +1083,7 @@ export class AppService {
     data['id'] = this.philgo.myId();
     data['referrer'] = document.referrer;
     data['lang'] = _.languageCode;
-    console.log('data: ', data);
+    // console.log('data: ', data);
     socket.emit('log', data);
   }
 
@@ -1210,6 +1126,123 @@ export class AppService {
       });
     }, e => this.error(e));
     return false;
+  }
+  /**
+   * Do something here to your blog whenever blog settings are loaded and changed.
+   * required check list
+   *        app_* - checked
+   *        author - checked
+   *        category must have at least one - checked
+   *        copyright - checked
+   *        description - checked
+   *        keywords - checked
+   *        name - checked
+   * optional
+   *      url_favicon is optional - checked
+   *      url_seo_image is optional - checked
+   */
+  checkBlogSettings() {
+    console.log('checkBlogSettings: ', this.blog);
+    if (!this.inMyBlog || this.blogSettingChecked) {
+      return;
+    }
+    let content = '';
+    const basicSettings = [];
+    let settingLink = '';
+
+    if (!this.blog['name']) {
+      basicSettings.push('Blog Name');
+    }
+    if (!this.blog['keywords']) {
+      basicSettings.push('Keywords');
+    }
+    if (!this.blog['author']) {
+      basicSettings.push('Author Name');
+    }
+    if (!this.blog['description']) {
+      basicSettings.push('Description');
+    }
+    if (!this.blog['copyright']) {
+      basicSettings.push('Copyright');
+    }
+
+    if (basicSettings.length) {
+      console.log('checking basic setting');
+      if (!this.blog['url_favicon']) {
+        basicSettings.push('Blog Favicon ( Optional )');
+      }
+      if (!this.blog['url_seo_image']) {
+        basicSettings.push('Preview Image ( Optional )');
+      }
+
+      content += '<h4>Blog Basic Settings</h4>';
+      content += '<ul>';
+      basicSettings.forEach(v => {
+        content += `<li>${v}</li>`;
+      });
+      content += `</ul>`;
+
+      settingLink = '/blog-settings/basic';
+    } else if ( this.blog.categories.length === 0 ) {
+      console.log('checking category setting');
+      content += `<h4>Blog Category Settings</h4>
+                      <ul>
+                        <li>
+                          Category is empty
+                        </li>
+                      </ul>
+                      `;
+      settingLink = '/blog-settings/category';
+    } else if ( ! basicSettings.length && this.blog.categories.length ) {
+      console.log('checking app setting');
+      const appSettings = [];
+      if (!this.blog['app_name']) {
+        appSettings.push('App Name');
+      }
+      if (!this.blog['app_short_name']) {
+        appSettings.push('App Short Name');
+      }
+      if (!this.blog['app_url_icons_src_512']) {
+        appSettings.push('Mobile App Icon');
+      }
+
+      if ( appSettings.length ) {
+        content += '<h4>App Blog Home Screen Settings</h4>';
+        content += '<ul>';
+        appSettings.forEach(v => {
+          content += `<li>${v}</li>`;
+        });
+        content += `</ul>`;
+
+        settingLink = '/blog-settings/app-icon';
+      }
+    }
+
+    this.blogSettingChecked = true;
+    if (!content) {
+      console.log('All settings are set.');
+      return;
+    }
+
+
+    const data: ConfirmData = {
+      title: this.t({en: 'Ooh..! You have missed required blog settings', ko: '앗! 블로그 설정을 하셔야합니다.'}),
+      content: `<div class="blog-requirements">${content}</div>`,
+      yes: this.t({en: 'Update', ko: '업데이트하기'}),
+      no: this.t({en: 'Close', ko: '닫기'}),
+      width: '360px'
+    };
+
+    this.dialog.confirm(data)
+      .then(re => {
+        if (re) {
+          console.log(re);
+          this.router.navigateByUrl(settingLink);
+        }
+      })
+      .catch(e => console.log(e));
+
+
   }
 
 }

@@ -29,13 +29,46 @@
 // }
 
 .text-editor {
+  outline: 0;
   .editor {
+    display: flex;
+    align-items: center;
     flex: 1;
-    padding: .5rem .5rem 1rem;
-    // border: 1px solid #dddfe2;
+    padding: .5rem 1rem 1.1rem 1rem;
     border: 1px solid #d1d2d5;
     background: #fff;
     font-size: .85rem;
-    cursor: text
+    cursor: text;
+
+    .text{
+      overflow: hidden; 
+      padding-right: .2rem;
+      // border-right: 2px solid #343a40;
+      // white-space: nowrap;
+      // animation: 
+      //   typing 2s steps(40, end),
+      //   caret .75s ease-in-out infinite;
+    }
+    
+    // @keyframes typing {
+    //   from { 
+    //     max-width: 0
+    //   }
+    //   to { 
+    //     max-width: 100%;
+    //   }
+    // }
+    
+    // @keyframes caret {
+    //   0% { 
+    //     border-color: transparent
+    //   }
+    //   50% { 
+    //     border-color: #343a40 
+    //   }
+    //   100% { 
+    //     border-color: transparent;
+    //   }
+    // }
   }
 }
