@@ -15,15 +15,10 @@ export class HomeComponent implements OnInit {
     public a: AppService,
     public philgo: PhilGoApiService
   ) {
-    router.events.subscribe((e: any) => {
-      if (e instanceof NavigationEnd) {
-        this.doInit();
-      }
-    });
-
+    // router.events.subscribe((e: any) => {
+    //   if (e instanceof NavigationEnd) {
+    this.doInit();
     this.a.checkBlogSettings();
-
-
   }
 
   ngOnInit() {

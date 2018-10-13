@@ -1,15 +1,35 @@
 
 @import './../../../styles/variables.scss';
-.ck.ck-editor__main>.ck-editor__editable {
-  min-height: 200px !important;
-  max-height: 400px !important;
-}
-
 @media (min-width:$md){
   .w-md-70{
     width: 70%!important
   }
   .flex-md-nowrap{
     flex-wrap: nowrap;
+  }
+}
+
+app-post{
+  mat-form-field{
+    font-size: .82rem!important;
+    @media (min-width:$md){
+      font-size: .9rem!important;
+    }
+  }
+  .ck.ck-editor__main>.ck-editor__editable {
+    min-height: 200px !important;
+    max-height: 400px !important;
+  }
+  .ck.ck-toolbar__separator{
+    display: none
+  }
+  .ck.ck-toolbar{
+    justify-content: center;
+    @media (min-width:$md){
+      justify-content: start;
+    }
+  }
+  mat-form-field[appearance="outline"] .mat-form-field-wrapper {
+    padding-bottom: .5rem!important;
   }
 }

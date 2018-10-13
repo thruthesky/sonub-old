@@ -1,16 +1,18 @@
 @import '../../../../styles/variables';
 
-mat-toolbar {
-  justify-content: space-between;
-}
-
-.mat-toolbar-row, .mat-toolbar-single-row {
-  height: $header-height !important;
-}
-
-.avatar-child-img-size-10px{
-  .size-32px{
-      height: 24px!important;
-      width: 24px!important;
+app-mobile-header{
+  .avatar-child-img-size-10px{
+    .size-32px{
+        height: 24px!important;
+        width: 24px!important;
+    }
   }
+  mat-toolbar {
+    justify-content: space-between;
+  }
+  
+  .mat-toolbar-row, .mat-toolbar-single-row {
+    height: $header-height !important;
+  }
+  
 }
