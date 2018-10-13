@@ -4,8 +4,8 @@
   </div>
   <div class="ml-2 of-hidden">
     <div class="text bold text-link truncate" *ngIf=" post.subject ">{{ post.subject }} </div>
-    <div class="text mt-1 text-muted fs-sm" *ngIf=" a.postContentOnMainPhoto(post) ">
-      {{ a.postContentOnMainPhoto(post) | slice: 0: 150 }}...
+    <div class="text mt-2px text-dark fs-sm" *ngIf=" a.postContentOnMainPhoto(post) ">
+      {{ a.postContentOnMainPhoto(post) }}...
     </div>
   </div>
 

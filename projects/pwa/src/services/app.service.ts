@@ -13,7 +13,6 @@ import { environment } from '../environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { Subject } from 'rxjs';
-import { CookieService } from 'ngx-cookie';
 
 interface Environment {
   production: boolean;
@@ -30,6 +29,8 @@ interface Environment {
 import * as io from 'socket.io-client';
 import { DialogService } from 'share/components/dialog/dialog.service';
 import { AlertData, ConfirmData } from 'share/components/dialog/dialog-interfaces';
+import { HttpClient } from '@angular/common/http';
+
 const socket = io(environment.sonubLogServerUrl);
 
 
@@ -195,7 +196,7 @@ export class AppService {
     private domSanitizer: DomSanitizer,
     private snackBar: MatSnackBar,
     private router: Router,
-    private cookie: CookieService,
+    private http: HttpClient,
     public philgo: PhilGoApiService,
     private dialog: DialogService
   ) {
@@ -731,6 +732,10 @@ export class AppService {
     }
   }
 
+  openLogin() {
+    this.router.navigateByUrl('/login');
+  }
+
   /**
    * Returns (blog post view) url of a blog post.
    * @desc if the input post is not a blog post, then, it will return url of post view.
@@ -1114,6 +1119,14 @@ export class AppService {
     return await this.dialog.confirm(data);
   }
 
+  displayHtml( fileName ) {
+    this.http.get(`/assets/html/${fileName}.html`, { responseType: 'text' }).subscribe(re => {
+      this.alert({
+        content: re
+      });
+    }, e => this.error(e));
+    return false;
+  }
   /**
    * Do something here to your blog whenever blog settings are loaded and changed.
    * required check list

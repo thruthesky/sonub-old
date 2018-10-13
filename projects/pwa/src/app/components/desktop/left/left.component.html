@@ -1,6 +1,8 @@
 <div>
   <a class="hover-effect p-1 d-flex align-items-center fs-md" routerLink="/register">
-    <img class="size-32px mr-2" src="{{ a.myPhotoUrl }}">
+    <div class="size-32px rounded of-hidden mr-2">
+        <img class="w-100" src="{{ a.myPhotoUrl }}">
+    </div>
     {{ a.myName }}
   </a>
 </div>
@@ -75,12 +77,18 @@
   <div class="side-menu mt-0" *ngIf=" a.blog?.categories?.length ">
     <ul>
       <li  class="hover-icon flex-center justify-content-between" *ngFor=" let category of  a.blog.categories; let index = index " routerLink="{{ a.getBlogCategoryUrl(category) }}">
-          <span> {{ category}}</span>
-          <i class="material-icons text-muted">more_horiz</i>
+          <div class="d-flex align-items-center">
+              <i class="material-icons mr-2 text-muted">filter_{{ index+1 }}</i>
+              <span> {{ category}}</span>
+          </div>
+          <i class="hover-icon-toggle material-icons text-muted">more_horiz</i>
       </li>
       <li class="hover-icon flex-center justify-content-between" routerLink="{{ a.getBlogCategoryUrl( 'all' ) }}">
-          <span> All posts</span>
-          <i class="material-icons text-muted">more_horiz</i>
+          <div class="d-flex align-items-center">
+              <i class="material-icons mr-2 text-muted">grid_on</i>
+              <span> All Post</span>
+          </div>
+          <i class="hover-icon-toggle material-icons text-muted">more_horiz</i>
       </li>
     </ul>
     

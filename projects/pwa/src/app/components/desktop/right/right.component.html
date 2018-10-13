@@ -1,33 +1,33 @@
-<section class="stories box mt-0 mb-default-spacing" *ngIf=" a.frontPage?.stories?.length ">
+<section class="stories box" *ngIf=" a.frontPage?.stories?.length ">
   <header class="d-flex align-items-center">
       <i class="material-icons mr-2 line-height-0 text-darkgreen">view_list</i>
       Your stories
   </header>
 
-  <article class="posts pr-3 pb-3">
+  <article class="posts pr-3 pb-3 fs-sm">
 
     <a class="post d-flex align-items-center mt-2" *ngIf=" a.inRootSite "  routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'create-your-blog-now' ) }}">
-      <span class="left flex-center w-30 p-2px size-48px border rounded">
+      <span class="left flex-center w-30 p-2px size-57px border rounded">
         <i class="material-icons">add</i>
       </span>
       <div class="right ml-2 w-70">
         <div class="mt-2px fw-bold">Add your story here</div>
-        <div class="fs-sm text-muted ">Sonub is free service.</div>
+        <div class="text-muted ">Sonub is free service.</div>
       </div>
     </a>
 
     <div class="post d-flex pointer mt-2" *ngFor="let post of a.frontPage.stories" (click)=" a.openBlogCategory( post.category, post.blog ) ">
       <div class="left w-30">
-          <div class="flex-center p-2px size-48px border rounded">
-            <img class="w-100" src="{{ a.getPostPhotoUrl(post, 48, 48) }}">
+          <div class="flex-center p-2px size-57px border rounded">
+            <img class="w-100" src="{{ a.getPostPhotoUrl(post, 57, 57) }}">
           </div>
       </div>
       <div class="right ml-2 w-70">
-        <div class="mt-2px text-link fw-bold truncate">{{ post.subject }}</div>
+        <div class="mt-1 text-link fw-bold truncate">{{ post.subject }}</div>
         <div  class="truncate">{{ post.content }}</div>
-        <div class="d-flex align-items-center text-secondary">
-          <i class="material-icons mr-1 fs-md">tv</i>
-          {{ a.getBlogDomain(post.blog) }}
+        <div class="d-flex align-items-center text-muted">
+          <i class="material-icons mr-1 fs-lg">link</i>
+          <span>{{ a.getBlogDomain(post.blog) }}</span>
         </div>
       </div>
     </div>
@@ -38,5 +38,5 @@
 <app-currency></app-currency>
 <app-weather></app-weather>
 
-<app-adv class="mb-default-spacing" [code]=" 'job' " [design]=" 'title-up' "></app-adv>
-<app-adv class="mb-default-spacing"></app-adv>
+<app-adv [code]=" 'job' " [design]=" 'title-up' "></app-adv>
+<app-adv></app-adv>
