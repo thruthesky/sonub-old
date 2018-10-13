@@ -112,7 +112,8 @@ const routes: Routes = [
     { path: 'job/:category', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job/:category/:idx', loadChildren: './pages/job/job.module#JobModule' },
     { path: 'job/:category/:idx/:subject', loadChildren: './pages/job/job.module#JobModule' },
-    { path: 'redirect', component: RedirectComponent },
+    // { path: 'redirect', component: RedirectComponent },
+    { path: 'contact', loadChildren: './pages/contact/contact.module#ContactModule' },
     { path: '**', component: PageNotFoundComponent },
 ];
 
