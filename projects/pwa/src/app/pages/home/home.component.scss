@@ -50,25 +50,25 @@
       //   caret .75s ease-in-out infinite;
     }
     
-    @keyframes typing {
-      from { 
-        max-width: 0
-      }
-      to { 
-        max-width: 100%;
-      }
-    }
+    // @keyframes typing {
+    //   from { 
+    //     max-width: 0
+    //   }
+    //   to { 
+    //     max-width: 100%;
+    //   }
+    // }
     
-    @keyframes caret {
-      0% { 
-        border-color: transparent
-      }
-      50% { 
-        border-color: #343a40 
-      }
-      100% { 
-        border-color: transparent;
-      }
-    }
+    // @keyframes caret {
+    //   0% { 
+    //     border-color: transparent
+    //   }
+    //   50% { 
+    //     border-color: #343a40 
+    //   }
+    //   100% { 
+    //     border-color: transparent;
+    //   }
+    // }
   }
 }
