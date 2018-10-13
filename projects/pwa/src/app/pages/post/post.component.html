@@ -19,6 +19,7 @@
             <mat-option value='answer'>Question & Answer</mat-option>
             <mat-option value='market'>Buy & Sell</mat-option>
             <mat-option value='media'>News</mat-option>
+            <mat-option value='sonub_help'>Sonub Help</mat-option>
           </mat-select>
         </mat-form-field>
         <ng-container *ngIf=" a.blog?.categories ">
@@ -107,7 +108,6 @@
 
 
   <app-display-files [post]=" form " [edit]=" true "></app-display-files>
-
 
 
   <section class="admin-options box" *ngIf=" philgo.isAdmin() ">

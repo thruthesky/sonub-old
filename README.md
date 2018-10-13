@@ -216,11 +216,7 @@ This section describes how developer can develop and test SEO on local computer.
 
 ## Setup Sonub.com
 
-* Admin needs to write post with acccess code
-  * `create-your-blog-now`
-  * `become-best-blog-writer`
-  * `sonub-help`
-  on `sonub_help` forum. These posts will be linked to sonub site menu.
+* @see [Default Posts](https://docs.google.com/document/d/1QEifBIP7PF6KS6miu4tAlVmEB3Xq3m-BTU6JFYtNXDM/edit#heading=h.arruynklvgwg) to prepare.
 
 * Set admin ids on PhilGo Admin Page.
 
