@@ -11,6 +11,11 @@ export class BlogSettingsDomainComponent implements OnInit {
 
 
   blog: ApiBlogSettings = <any>{};
+  domainRegex = /^[a-zA-Z0-9]+[a-zA-Z0-9-]+[a-zA-Z0-9]+$/;
+
+  loader = {
+    submit: false
+  };
   constructor(
 
     public a: AppService,
@@ -28,18 +33,32 @@ export class BlogSettingsDomainComponent implements OnInit {
 
   onSubmit($event: Event) {
     $event.preventDefault();
+    if (this.loader.submit) {
+      return;
+    }
+
+    if ( !this.domainRegex.test(this.blog.domain)) {
+      this.a.toast( this.a.t({ en: 'Domain should not have special chars except hyphen(-).', ko: '도메인에는 하이픈 (-)을 제외한 특수 문자가 없어야합니다.' }));
+      return;
+    }
+
 
     console.log('req: ', this.blog);
     const data: ApiBlogSettings = <any>{};
     data.domain = this.blog.domain;
+    this.loader.submit = true;
     this.philgo.blogSaveSettings(data).subscribe(res => {
       console.log('blog saved: ', res);
       this.a.toast(this.a.t({ en: 'Blog domain settings have successfully updated.', ko: '블로그 도메인 설정을 저장하였습니다.' }));
+      this.loader.submit = false;
       this.philgo.profile().subscribe(r => {
         console.log('blog save => user local storage updated to restore blog domain: ', r);
         this.a.openMyBlog();
       });
-    }, e => this.a.error(e));
+    }, e => {
+      this.a.error(e);
+      this.loader.submit = false;
+    });
 
     return false;
   }

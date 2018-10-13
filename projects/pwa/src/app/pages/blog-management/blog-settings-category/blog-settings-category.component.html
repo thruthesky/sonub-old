@@ -3,7 +3,7 @@
 </mat-toolbar>
 
 <div class="px-3 px-md-4 py-3 bg-darkgreen white fs-md">
-  You can input category names up to 8 which will appear on your blog menu.
+  You can input category names up to 8 which will appear on your blog menu. Blog categories can not have special chars except space, hyphen. Cant start or end with space or hyphen.
 </div>
 
 <p class="m-3 p-5 flex-center" *ngIf=" loader.setting ">
@@ -17,7 +17,7 @@
 
   <div class="categories d-flex flex-wrap">
     <mat-form-field class="border-box" appearance="outline"  *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]">
-      <input matInput name="category{{ n }}" [(ngModel)]=" blog['category' + n] ">
+      <input matInput name="category{{ n }}"  [(ngModel)]=" blog['category' + n] " (keyup)="a.validateInput($event, null, domainRegex)">
       <mat-label>Category No. {{ n }} Name</mat-label>
       <mat-hint>Input category name</mat-hint>
     </mat-form-field>

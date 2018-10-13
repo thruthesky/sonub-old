@@ -1,5 +1,5 @@
 <header>
-    <mat-toolbar class="border-top border-top-md-0">  
+    <mat-toolbar class="border-top border-top-md-0">
         <h1 class="px-md-2 fw-light">Notifications</h1>
     </mat-toolbar>
 </header>
@@ -24,32 +24,34 @@
             <div class="py-2 py-md-3"><b class="text-dark">Post No:</b> {{ idx }}</div>
             <div class="py-2 py-md-3 "><b class="text-dark">No. of Subscribers:</b> {{ noOfTokens }}</div>
         </div>
-    
+
         <div class="favicon d-block text-center mt-3 mb-4"  *ngIf="blog" >
             <span class="d-block mx-auto my-2 size-64px of-hidden rounded"><img class="w-100" src="{{ blog.url_favicon }}"></span>
             <a class="d-block text-link"  routerLink="{{ a.getBlogSettingsBasicUrl() }}">Current Favicon used for notification icon.</a>
         </div>
-    
-    
+
+
         <form (ngSubmit)=" onSubmit() " *ngIf="post">
-    
+
             <mat-form-field class="w-100" appearance="outline">
                 <mat-label>Subject</mat-label>
-                <input matInput name="title" [(ngModel)]="form.title">
+                <input matInput name="title" [(ngModel)]="form.title" (keyup)="a.validateInput($event, 60)">
             </mat-form-field>
-          
+
             <mat-form-field class="w-100" appearance="outline">
                 <mat-label>Content</mat-label>
-                <input matInput name="body" [(ngModel)]="form.body">
+                <input matInput name="body" [(ngModel)]="form.body" (keyup)="a.validateInput($event, 60)">
             </mat-form-field>
-    
+
             <div class="mt-4 mb-5 text-center">
               <button class="flex-center bg-primary white" mat-flat-button type="submit">
-                <span>Send Notifications To Blog subscribers</span>
-                <i class="material-icons ml-2">send</i>
+                <span class="flex-center" *ngIf="!loader.submit">Send Notifications To Blog subscribers <i class="ml-2 material-icons">send</i></span>
+                <span class="flex-center" *ngIf="loader.submit">
+                    <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{a.t({ko: '로딩...', en: 'Loading...' })}}</span>
+                </span>
               </button>
             </div>
-    
+
         </form>
 
 

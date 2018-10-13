@@ -1232,4 +1232,27 @@ export class AppService {
 
   }
 
+
+  validateInput(event, limit = null, regex = null) {
+      // console.log(event.target);
+      if ( !event.target || !event.target.value ) {
+        return;
+      }
+      if ( limit && event.target.value.length > limit ) {
+        event.target.style.color = 'red';
+        return;
+      }
+
+      if ( regex instanceof RegExp ) {
+        console.log('Invalid input::', regex);
+        if (!regex.test(event.target.value)) {
+          event.target.style.color = 'red';
+          return;
+        }
+      }
+
+
+    event.target.style.color = 'black';
+  }
+
 }

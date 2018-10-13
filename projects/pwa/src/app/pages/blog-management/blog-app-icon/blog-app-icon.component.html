@@ -12,19 +12,23 @@
 <form class="p-3 p-md-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
 
   <mat-form-field class="mt-1 w-100" appearance="outline">
-    <input matInput name="app_name" [(ngModel)]=" blog.app_name ">
+    <input matInput name="app_name" [(ngModel)]=" blog.app_name " (keyup)="a.validateInput($event, 32)">
     <mat-label>App name</mat-label>
-    <mat-hint>Input app name. Ex) Social Network Hub</mat-hint>
+    <mat-hint>Input app name in 32 letters. Ex) Social Network Hub</mat-hint>
   </mat-form-field>
 
   <mat-form-field class="mt-1 w-100" appearance="outline">
-    <input matInput name="app_short_name" [(ngModel)]=" blog.app_short_name ">
+    <input matInput name="app_short_name" [(ngModel)]=" blog.app_short_name " (keyup)="a.validateInput($event, 16)">
     <mat-label>App short name</mat-label>
-    <mat-hint>Input app short name in 8 letters. Ex) Sonub</mat-hint>
+    <mat-hint>Input app short name in 16 letters. Ex) Sonub</mat-hint>
   </mat-form-field>
 
   <mat-form-field class="mt-1 w-100" appearance="outline">
-    <input matInput name="app_theme_color" [(ngModel)]=" blog.app_theme_color ">
+    <mat-select name="app_theme_color" [(ngModel)]=" blog.app_theme_color ">
+      <mat-option *ngFor="let color of ['white', 'silver', 'gray', 'black', 'red', 'maroon', 'yellow', 'olive',
+                                        'lime', 'green', 'aqua', 'teal', 'blue', 'navy', 'fuchsia', 'purple']"
+                  [value]="color">{{ color }}</mat-option>
+    </mat-select>
     <mat-label>App theme color</mat-label>
     <mat-hint>Input app theme color</mat-hint>
   </mat-form-field>
@@ -41,11 +45,12 @@
       <i  *ngIf=" !blog.app_url_icons_src_512 " class="material-icons fs-xxl text-secondary">
         add_a_photo
       </i>
+      <button class="w-180px fs-sm mt-2" mat-flat-button>Upload App Icon</button>
       <input class="transparent-cover w-100 pointer" type="file" name="blog_icon_image" (change)=" onChangeFile($event,  'blog_app_icon' ) ">
+      <div class="text-center">
+        <div class="d-inline-block mw-180px my-2 p-1 rounded bg-success fs-xs white border-box" *ngIf=" percentage && code == 'blog_favicon' " [style.width]="percentage + '%'">{{percentage}}%</div>
+      </div>
     </div>
-
-    <div class=" mw-180px my-2 p-1 rounded bg-success fs-xs white text-center border-box" *ngIf=" percentage  "
-      [style.width]="percentage + '%'">{{ percentage }}%</div>
 
     <div class="my-1 mx-2 p-1 fs-sm text-muted">Upload App Icon.</div>
     <div class="mt-4 mx-2 fs-sm"><span class=" text-danger">Important:</span> The image must be PNG image and width and height must be 512 pixels.</div>

@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {
   MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule, MatSelectModule
 } from '@angular/material';
 
 const routes: Routes = [
@@ -24,7 +24,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   declarations: [BlogAppIconComponent]
 })

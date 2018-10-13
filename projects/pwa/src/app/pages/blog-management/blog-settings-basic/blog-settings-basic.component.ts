@@ -43,8 +43,21 @@ export class BlogSettingsBasicComponent implements OnInit {
     if ( this.loader.submit ) {
       return;
     }
-    this.loader.submit = true;
 
+    if ( this.blog.keywords && this.blog.keywords.length > 255 ) {
+      this.a.toast(this.a.t({ en: 'Keyword is too long. Please shorten it.', ko: '키워드가 너무 깁니다. 그것을 줄이십시오.' }));
+      return;
+    }
+    if ( this.blog.description && this.blog.description.length > 255 ) {
+      this.a.toast(this.a.t({ en: 'Description is too long. Please shorten it.', ko: '설명이 너무 깁니다. 그것을 줄이십시오.' }));
+      return;
+    }
+    if ( this.blog.copyright && this.blog.copyright.length > 80 ) {
+      this.a.toast(this.a.t({ en: 'Copyright is too long. Please shorten it.', ko: '저작권이 너무 깁니다. 그것을 줄이십시오.' }));
+      return;
+    }
+
+    this.loader.submit = true;
     console.log('req: ', this.blog);
     const data: ApiBlogSettings = <any>{};
     data.name = this.blog.name;
@@ -79,11 +92,13 @@ export class BlogSettingsBasicComponent implements OnInit {
       // this.componentService.alert(e);
       return;
     }
-
+    this.percentage = 10;
     this.philgo.fileUpload(files, { gid: this.a.philgo.myIdx(), code: code, finish: '1' }).subscribe(res => {
       if (typeof res === 'number') {
         console.log('percentage: ', res);
-        this.percentage = res;
+        if ( res > 10 ) {
+          this.percentage = res;
+        }
       } else {
         console.log('file success: ', res);
         if ( this.code === 'blog_favicon' ) {
