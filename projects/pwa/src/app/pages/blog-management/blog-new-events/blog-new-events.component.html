@@ -1,1 +1,17 @@
-new event
+<section class="new-messages" *ngIf=" a.loggedIn">
+
+
+  <header *ngIf="blog">
+    <h1>{{ blog.name }} Blog Comments</h1>
+  </header>
+  {{ blog | json }}
+
+
+  <app-loader></app-loader>
+
+
+</section>
+
+<section class="sonub-intro">
+  <app-sonub-intro></app-sonub-intro>
+</section>
