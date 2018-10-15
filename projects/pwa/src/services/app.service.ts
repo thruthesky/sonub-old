@@ -1251,8 +1251,14 @@ export class AppService {
 
   }
 
-
-  validateInput(event, limit = null, regex = null) {
+  /**
+   *
+   * @param event - event element
+   * @param limit - change to color red if it exceed the given number if null then ignore limit check
+   * @param not_allowed_char - string = change to color red if any of the char exist in the input (event.target.value)
+   *                           regex = change to color red if input doesn't match the expression
+   */
+  validateInput(event, limit = null, not_allowed_char = null) {
     // console.log(event.target);
     if (!event.target || !event.target.value) {
       return;
@@ -1262,16 +1268,33 @@ export class AppService {
       return;
     }
 
-    if (regex instanceof RegExp) {
-      console.log('Invalid input::', regex);
-      if (!regex.test(event.target.value)) {
-        event.target.style.color = 'red';
-        return;
+
+    if ( not_allowed_char ) {
+      if (not_allowed_char instanceof RegExp) {
+        if (!not_allowed_char.test(event.target.value)) {
+          event.target.style.color = 'red';
+          return;
+        }
+      } else if ( typeof not_allowed_char === 'string' ) {
+        if ( this.hasNotAllowedChars(event.target.value, not_allowed_char) ) {
+          event.target.style.color = 'red';
+          return;
+        }
       }
     }
 
 
     event.target.style.color = 'black';
+  }
+
+  /**
+   *
+   * @param str - check if the str has not allowed character
+   * @param not_allowed_char - string which will check if exist on str
+   * @returns boolean
+   */
+  hasNotAllowedChars(str: string, not_allowed_char: string = '' ) {
+    return not_allowed_char.split('').findIndex(c => str.indexOf(c) !== -1) !== -1;
   }
 
 

@@ -17,7 +17,7 @@
 
   <div class="categories d-flex flex-wrap">
     <mat-form-field class="border-box" appearance="outline"  *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]">
-      <input matInput name="category{{ n }}"  [(ngModel)]=" blog['category' + n] " (keyup)="a.validateInput($event, null, domainRegex)">
+      <input matInput name="category{{ n }}"  [(ngModel)]=" blog['category' + n] " (keyup)="a.validateInput($event, null, notAllowedChar)">
       <mat-label>Category No. {{ n }} Name</mat-label>
       <mat-hint>Input category name</mat-hint>
     </mat-form-field>
