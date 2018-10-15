@@ -8,9 +8,24 @@ import { AppService } from 'projects/pwa/src/services/app.service';
 })
 export class BlogNewEventsComponent implements OnInit {
 
+  blog;
+  events = {
+    total_no_of_tokens: 0,
+    tokens: []
+  };
   constructor(
     public a: AppService
-  ) { }
+  ) {
+    a.philgo.blogChange.subscribe(blog => {
+      if (blog) {
+        this.blog = blog;
+        this.a.philgo.blogEvents(this.blog.idx).subscribe(res => {
+          this.events = res;
+          console.log('events: ', this.events);
+        }, e => this.a.error(e));
+      }
+    });
+  }
 
   ngOnInit() {
   }
