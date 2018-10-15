@@ -1,3 +1,4 @@
+@import './../../../styles/variables.scss';
 // .post-multi-thumb {
 //   height: 50px !important;
 
@@ -23,6 +24,9 @@
 // }
 
 .thumbnail{
-  height: 120px;
+  height: 90px;
+  @media (min-width:$md) {
+    height: 110px;
+  }
   background: dimgray
 }
