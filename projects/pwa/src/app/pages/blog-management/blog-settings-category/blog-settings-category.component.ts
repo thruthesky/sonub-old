@@ -37,9 +37,7 @@ export class BlogSettingsCategoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  hasNotAllowedChars(str: string) {
-    return this.notAllowedChar.split('').findIndex(c => str.indexOf(c) !== -1) !== -1;
-  }
+
   onSubmit($event: Event) {
     $event.preventDefault();
 
@@ -53,7 +51,7 @@ export class BlogSettingsCategoryComponent implements OnInit {
       if (this.blog[`category${i}`]) {
         this.blog[`category${i}`] = this.blog[`category${i}`].trim();
         data[`category${i}`] = this.blog[`category${i}`];
-        if (this.hasNotAllowedChars(data[`category${i}`])) {
+        if (this.a.hasNotAllowedChars(data[`category${i}`], this.notAllowedChar)) {
           this.a.toast(this.a.t({
             en: `Category No. ${i} should not have special chars except space and hyphen(-).`,
             ko: `카테고리 메뉴 번호 ${i}번에 허용되지 않는 특수 문자있습니다. 특수 문자는 공백과 하이픈(-)만 사용가능합니다.`

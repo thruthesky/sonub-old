@@ -74,8 +74,8 @@
 
       <div class="my-md-default-spacing px-default-spacing pt-default-spacing bg-white" *ngIf=" a.frontPage?.news?.length ">
         <h2 class="mt-0 mb-md-default-spacing fs-md text-dark">Sonub News</h2>
-        <div class="row no-gutters">
-          <div class="col-6 col-md-4 pr-default-spacing border-box" *ngFor="let post of a.frontPage.news " >
+        <div class="row no-gutters mr-minus-default-spacing">
+          <div class="col-6 col-md-4 border-box pr-default-spacing" *ngFor="let post of a.frontPage.news; let index = index " >
               <app-post-multiline-with-thumbnail [post]=" post "></app-post-multiline-with-thumbnail>
           </div>
         </div>
@@ -102,8 +102,10 @@
 
       <div class="blog-latest-photos my-md-default-spacing px-default-spacing pt-default-spacing bg-white" *ngIf=" a.frontPage?.latest_blog_photos?.length ">
         <h2 class="mt-0 mb-md-default-spacing fs-md text-dark">Blog Posts</h2>
-        <div class="blog-latest-photo" *ngFor="let photo of a.frontPage.latest_blog_photos ">
-          <app-post-multiline-with-thumbnail [post]="photo"></app-post-multiline-with-thumbnail>
+        <div class="row no-gutters mr-minus-default-spacing">
+            <div class="col-6 col-md-4 border-box pr-default-spacing" *ngFor="let photo of a.frontPage.latest_blog_photos ">
+              <app-post-multiline-with-thumbnail [post]="photo"></app-post-multiline-with-thumbnail>
+            </div>
         </div>
       </div>
 
