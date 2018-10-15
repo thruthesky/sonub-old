@@ -58,7 +58,7 @@
         <div class="text-center">
           <div class="d-inline-block mw-180px my-2 p-1 rounded bg-success fs-xs white border-box" *ngIf=" percentage && code == 'blog_favicon' " [style.width]="percentage + '%'">{{percentage}}%</div>
         </div>
-        <button class="w-180px fs-sm m-2" mat-flat-button>Upload Favicon</button>
+        <div><button class="w-180px fs-sm m-2" mat-flat-button>Upload Favicon</button></div>
         <input class="transparent-cover w-100 h-100 pointer" type="file" name="favicon" (change)=" onChangeFile($event,  'blog_favicon' ) ">
       </div>
 
@@ -83,7 +83,7 @@
             <div class="d-inline-block mw-180px my-2 p-1 rounded bg-success fs-xs white border-box" *ngIf=" percentage && code == 'blog_seo_image' "
                  [style.width]="percentage + '%'">{{percentage}}%</div>
           </div>
-          <button class="w-180px fs-sm m-2" mat-flat-button>Upload Preview Image</button>
+          <div><button class="w-180px fs-sm m-2" mat-flat-button>Upload Preview Image</button></div>
           <input class="transparent-cover  w-100 h-100 pointer" type="file" name="seoimage" (change)=" onChangeFile($event,  'blog_seo_image' ) ">
         </div>
 

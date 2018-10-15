@@ -75,4 +75,10 @@ export class DialogService {
         const dialogRef = await this.dialog.open(DialogComponent, sanitize);
         return dialogRef.afterClosed().toPromise();
     }
+
+
+    // async preview(): Promise<boolean> {
+    //   const dialogRef = await this.dialog.open(DialogComponent, sanitize);
+    //   return dialogRef.afterClosed().toPromise();
+    // }
 }
