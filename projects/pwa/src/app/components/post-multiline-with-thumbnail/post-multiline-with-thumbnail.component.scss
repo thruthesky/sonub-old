@@ -1,23 +1,28 @@
-.post-multi-thumb {
-  height: 50px !important;
+// .post-multi-thumb {
+//   height: 50px !important;
 
-  @media (min-width: 768px) {
-    height: 70px !important;
-  }
-}
+//   @media (min-width: 768px) {
+//     height: 70px !important;
+//   }
+// }
 
-.thumbnail {
-  min-width: 100px !important;
+// .thumbnail {
+//   min-width: 100px !important;
 
-  @media (min-width: 768px) {
-    min-width: 140px !important;
-  }
+//   @media (min-width: 768px) {
+//     min-width: 140px !important;
+//   }
 
-  img {
-    width: 100px !important;
+//   img {
+//     width: 100px !important;
 
-    @media (min-width: 768px) {
-      width: 140px !important;
-    }
-  }
+//     @media (min-width: 768px) {
+//       width: 140px !important;
+//     }
+//   }
+// }
+
+.thumbnail{
+  height: 120px;
+  background: dimgray
 }

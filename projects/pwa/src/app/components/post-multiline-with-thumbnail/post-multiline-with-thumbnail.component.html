@@ -1,8 +1,8 @@
-<a class="post-multi-thumb d-flex pb-default-spacing" *ngIf="post" href="{{ a.getUrlPostView(post) }}" (click)="a.onClickPost( $event, post )">
-  <div class="thumbnail rounded of-hidden">
-    <img src="{{ philgo.thumbnailUrl({ width: 140, height: 70, path: post.path_of_featured_image }) }}">
+<a class="post-multi-thumb pb-default-spacing" *ngIf="post" href="{{ a.getUrlPostView(post) }}" (click)="a.onClickPost( $event, post )">
+  <div class="thumbnail w-100 flex-center rounded of-hidden">
+    <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 220, height: 130, path: post.path_of_featured_image }) }}">
   </div>
-  <div class="ml-2 of-hidden">
+  <div class="of-hidden">
     <div class="text bold text-link truncate" *ngIf=" post.subject ">{{ post.subject }} </div>
     <div class="text mt-2px text-dark fs-sm" *ngIf=" a.postContentOnMainPhoto(post) ">
       {{ a.postContentOnMainPhoto(post) }}...
