@@ -1,14 +1,14 @@
 <div class="logo" routerLink="/">
-  <span class="d-block position-relative size-24px overflow-hidden">
+  <span class="flex-center position-relative rounded size-24px of-hidden">
     <ng-container *ngIf=" a.inRootSite ">
       <ng-container *ngTemplateOutlet="appLogo"></ng-container>
     </ng-container>
-    <span *ngIf=" a.inBlogSite ">
-      <img src="{{ a.blog?.url_favicon }}" *ngIf=" a.blog?.url_favicon ">
+    <ng-container *ngIf=" a.inBlogSite ">
+      <img class="w-100" src="{{ a.blog?.url_favicon }}" *ngIf=" a.blog?.url_favicon ">
       <ng-container *ngIf=" !a.blog?.url_favicon ">
         <ng-container *ngTemplateOutlet="appLogo"></ng-container>
       </ng-container>
-    </span>
+    </ng-container>
   </span>
 </div>
 

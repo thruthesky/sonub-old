@@ -12,23 +12,40 @@
   height: 100px!important;
 }
 
-@media (min-width:$md){
+.h-75px{
+  height: 75px!important;
+}
 
+@media (min-width:$md){
+  .w-md-45{
+    width: 45%;
+  }
+  .w-md-55{
+    width: 55%;
+  }
   .h-md-150px{
     height: 150px!important;
   }
 }
 .w-170px{
   width: 170px
-} 
+}
+.w-30{
+  width: 30%;
+}
+.w-70{
+  width: 70%;
+}
+
+
 .h-64px{
   height: 64px
 }
 
 
 .size-24px {
-  width: 24px;
-  height: 24px;
+  width: 24px!important;
+  height: 24px!important;
 }
 
 .img-thumbnail {
@@ -42,65 +59,6 @@
   font-weight: 600;
 }
 
-.mb-default-spacing {
-  display: block;
-  margin-bottom: $spacing!important;
-}
-.mt-default-spacing {
-  margin-top: $spacing!important;
-}
-.ml-default-spacing {
-  margin-left: $spacing!important;
-}
-.mr-default-spacing {
-  margin-right: $spacing!important;
-}
-.m-default-spacing{
-  margin: $spacing!important;
-}
-.my-default-spacing{
-  margin-top: $spacing!important;
-  margin-bottom: $spacing!important;
-}
-@media (min-width:$md){
-  .mb-md-default-spacing {
-    margin-bottom: $spacing!important;
-  }
-  .mt-md-default-spacing {
-    margin-top: $spacing!important;
-  }
-  .ml-md-default-spacing {
-    margin-left: $spacing!important;
-  }
-  .mr-md-default-spacing {
-    margin-right: $spacing!important;
-  }
-  .m-md-default-spacing{
-    margin: $spacing!important;
-  }
-  .my-md-default-spacing{
-    margin-top: $spacing!important;
-    margin-bottom: $spacing!important;
-  }
-}
-
-.p-default-spacing{
-  padding: $spacing!important;
-}
-.pt-default-spacing{
-  padding-top: $spacing!important;
-}
-.pb-default-spacing{
-  padding-bottom: $spacing!important;
-}
-.px-default-spacing{
-  padding-left: $spacing!important;
-  padding-right: $spacing!important;
-}
-.py-default-spacing{
-  padding-top: $spacing!important;
-  padding-bottom: $spacing!important;
-}
 .relative {
   display: block;
   position: relative;
@@ -337,6 +295,72 @@
 }
 
 
+.p-default-spacing{
+  padding: $spacing!important;
+}
+.pt-default-spacing{
+  padding-top: $spacing!important;
+}
+.pb-default-spacing{
+  padding-bottom: $spacing!important;
+}
+.pr-default-spacing{
+  padding-right: $spacing!important;
+}
+.px-default-spacing{
+  padding-left: $spacing!important;
+  padding-right: $spacing!important;
+}
+.py-default-spacing{
+  padding-top: $spacing!important;
+  padding-bottom: $spacing!important;
+}
+.mb-default-spacing {
+  display: block;
+  margin-bottom: $spacing!important;
+}
+.mt-default-spacing {
+  margin-top: $spacing!important;
+}
+.ml-default-spacing {
+  margin-left: $spacing!important;
+}
+.mr-default-spacing {
+  margin-right: $spacing!important;
+}
+.m-default-spacing{
+  margin: $spacing!important;
+}
+.my-default-spacing{
+  margin-top: $spacing!important;
+  margin-bottom: $spacing!important;
+}
+@media (min-width:$md){
+  .pr-md-default-spacing{
+    padding-right: $spacing!important;
+  }
+  .mb-md-default-spacing {
+    margin-bottom: $spacing!important;
+  }
+  .mt-md-default-spacing {
+    margin-top: $spacing!important;
+  }
+  .ml-md-default-spacing {
+    margin-left: $spacing!important;
+  }
+  .mr-md-default-spacing {
+    margin-right: $spacing!important;
+  }
+  .m-md-default-spacing{
+    margin: $spacing!important;
+  }
+  .my-md-default-spacing{
+    margin-top: $spacing!important;
+    margin-bottom: $spacing!important;
+  }
+}
+
+
 .mx-minus-1{
   margin-left: -.25rem;
   margin-right: -.25rem;
@@ -348,5 +372,9 @@
 
 .line-height-0{
   line-height: 0;
+}
+
+.radius-1px{
+  border-radius: 1px;
 }
 

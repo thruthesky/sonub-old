@@ -24,24 +24,24 @@
   <div class="bottom-dark-menu p-3">
     <form (ngSubmit)=" a.openSearch( q.value ) ">
         <div class="search d-flex">
-            <app-logo class="mx-1"></app-logo>
+            <app-logo></app-logo>
             <input name="q" #q class="flex-grow-1 fs-md mx-1 border-0">
             <button>Search</button>
           </div>
     </form>
 
-    <div class="container-fluid my-2">
-      <div class="row">
+    <div class="container-fluid  my-2 p-0">
+      <div class="row no-gutters mx-minus-2px">
         <div class="col">
-          <a routerLink="/contact">Contact Us</a>
-          <a routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'sonub-help') }}">Help</a>
-          <a href="https://sonub.com" (click)=" onClickSonub( $event ) ">Sonub</a>
+          <a routerLink="/contact"><i class="material-icons">alternate_email</i>Contact Us</a>
+          <a routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'sonub-help') }}"><i class="material-icons">help_outline</i>Help</a>
+          <a href="https://sonub.com" (click)=" onClickSonub( $event ) "><i class="material-icons">question_answer</i>Sonub</a>
         </div>
         <div class="col">
-          <a (click)=" a.displayHtml('terms-and-conditions') ">Terms & Conditions</a>
-          <a (click)=" a.displayHtml('privacy') ">Privacy</a>
-          <a (click)=" a.philgo.logout() " *ngIf=" a.loggedIn ">Logout ({{ a.philgo.myName() }})</a>
-          <a (click)=" a.openLogin() " *ngIf=" a.loggedOut ">Login</a>
+          <span (click)=" a.displayHtml('terms-and-conditions') "><i class="material-icons">copyright</i>Terms & Conditions</span>
+          <span (click)=" a.displayHtml('privacy') "><i class="material-icons">lock</i>Privacy</span>
+          <span (click)=" a.philgo.logout() " *ngIf=" a.loggedIn "><i class="material-icons">account_circle</i>Logout ({{ a.philgo.myName() }})</span>
+          <span (click)=" a.openLogin() " *ngIf=" a.loggedOut "><i class="material-icons">account_circle</i>Login</span>
         </div>
       </div>
     </div>

@@ -78,14 +78,14 @@
     <ul>
       <li  class="hover-icon flex-center justify-content-between" *ngFor=" let category of  a.blog.categories; let index = index " routerLink="{{ a.getBlogCategoryUrl(category) }}">
           <div class="d-flex align-items-center">
-              <i class="material-icons mr-2 text-muted">filter_{{ index+1 }}</i>
+              <i class="material-icons mr-2 text-muted">stop</i>
               <span> {{ category}}</span>
           </div>
           <i class="hover-icon-toggle material-icons text-muted">more_horiz</i>
       </li>
       <li class="hover-icon flex-center justify-content-between" routerLink="{{ a.getBlogCategoryUrl( 'all' ) }}">
           <div class="d-flex align-items-center">
-              <i class="material-icons mr-2 text-muted">grid_on</i>
+              <i class="material-icons mr-2 text-muted">view_comfy</i>
               <span> All Post</span>
           </div>
           <i class="hover-icon-toggle material-icons text-muted">more_horiz</i>
