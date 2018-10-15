@@ -48,7 +48,7 @@
       <button class="w-180px fs-sm mt-2" mat-flat-button>Upload App Icon</button>
       <input class="transparent-cover w-100 pointer" type="file" name="blog_icon_image" (change)=" onChangeFile($event,  'blog_app_icon' ) ">
       <div class="text-center">
-        <div class="d-inline-block mw-180px my-2 p-1 rounded bg-success fs-xs white border-box" *ngIf=" percentage && code == 'blog_favicon' " [style.width]="percentage + '%'">{{percentage}}%</div>
+        <div class="d-inline-block mw-180px my-2 p-1 rounded bg-success fs-xs white border-box" *ngIf=" percentage " [style.width]="percentage + '%'">{{percentage}}%</div>
       </div>
     </div>
 
