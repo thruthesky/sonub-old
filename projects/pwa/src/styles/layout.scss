@@ -65,6 +65,7 @@
   }
 
   #desktop-center {
+    position: relative;
     padding: 0;
     max-width: $max-width - $left-sidebar-width - $right-sidebar-width;
     overflow: hidden;
