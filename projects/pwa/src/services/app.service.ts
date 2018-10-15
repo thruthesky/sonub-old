@@ -155,6 +155,7 @@ export class AppService {
    */
   blog: ApiBlogSettings = null;
   blogSettingChecked = false;
+  blogSettingIncomplete = '';
   /**
    * Max no of blog categories
    */
@@ -1189,6 +1190,7 @@ export class AppService {
       content += `</ul>`;
 
       settingLink = '/blog-settings/basic';
+      this.blogSettingIncomplete = 'basic';
     } else if (this.blog.categories.length === 0) {
       console.log('checking category setting');
       content += `<h4>Blog Category Settings</h4>
@@ -1199,6 +1201,7 @@ export class AppService {
                       </ul>
                       `;
       settingLink = '/blog-settings/category';
+      this.blogSettingIncomplete = 'category';
     } else if (!basicSettings.length && this.blog.categories.length) {
       console.log('checking app setting');
       const appSettings = [];
@@ -1219,8 +1222,8 @@ export class AppService {
           content += `<li>${v}</li>`;
         });
         content += `</ul>`;
-
         settingLink = '/blog-settings/app-icon';
+        this.blogSettingIncomplete = 'app';
       }
     }
 
@@ -1229,6 +1232,8 @@ export class AppService {
       console.log('All settings are set.');
       return;
     }
+
+    console.log('blogSettingIncomplete', this.blogSettingIncomplete);
 
 
     const data: ConfirmData = {
@@ -1257,14 +1262,16 @@ export class AppService {
    * @param limit - change to color red if it exceed the given number if null then ignore limit check
    * @param not_allowed_char - string = change to color red if any of the char exist in the input (event.target.value)
    *                           regex = change to color red if input doesn't match the expression
+   * @param validColor - Input is valid. CSS Color (default black)
+   * @param invalidColor - Input is invalid. CSS Color (default red)
    */
-  validateInput(event, limit = null, not_allowed_char = null) {
+  validateInput(event, limit = null, not_allowed_char = null, validColor = 'black', invalidColor = 'red') {
     // console.log(event.target);
     if (!event.target || !event.target.value) {
       return;
     }
     if (limit && event.target.value.length > limit) {
-      event.target.style.color = 'red';
+      event.target.style.color = invalidColor;
       return;
     }
 
@@ -1272,19 +1279,19 @@ export class AppService {
     if ( not_allowed_char ) {
       if (not_allowed_char instanceof RegExp) {
         if (!not_allowed_char.test(event.target.value)) {
-          event.target.style.color = 'red';
+          event.target.style.color = invalidColor;
           return;
         }
       } else if ( typeof not_allowed_char === 'string' ) {
         if ( this.hasNotAllowedChars(event.target.value, not_allowed_char) ) {
-          event.target.style.color = 'red';
+          event.target.style.color = invalidColor;
           return;
         }
       }
     }
 
 
-    event.target.style.color = 'black';
+    event.target.style.color = validColor;
   }
 
   /**

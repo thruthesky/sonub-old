@@ -73,6 +73,34 @@
 <!--/inRoot-->
 
 <section class="user-content" *ngIf=" a.inBlogSite ">
+
+  <section class="side-menu blog-site-content fs-80 border p-2" *ngIf=" a.inMyBlog && a.blogSettingIncomplete ">
+    <h3 class="red fs-80">{{a.t({ en: 'Warning: Missing required blog settings', ko: '경고 : 필수 블로그 설정이 누락되었습니다.' })}}</h3>
+    <div *ngIf="a.blogSettingIncomplete == 'basic'" routerLink="/blog-settings/basic">
+      <div class="fw-bold">Blog Category Settings<i class="ml-2 fs-80 material-icons">send</i></div>
+      <ul>
+        <li *ngIf="!a.blog?.name">Blog name</li>
+        <li *ngIf="!a.blog?.keywords">Blog keywords</li>
+        <li *ngIf="!a.blog?.author">Blog author</li>
+        <li *ngIf="!a.blog?.description">Blog description</li>
+        <li *ngIf="!a.blog?.copyright">Blog copyright</li>
+      </ul>
+    </div>
+    <div *ngIf="a.blogSettingIncomplete == 'category'" routerLink="/blog-settings/category">
+      <div class="fw-bold">Blog Category Settings<i class="ml-2 fs-80 material-icons">send</i></div>
+      <ul>
+        <li *ngIf="!a.blog?.categories?.length">Blog Category</li>
+      </ul>
+    </div>
+    <div *ngIf="a.blogSettingIncomplete == 'app'"  routerLink="/blog-settings/app-icon">
+      <div class="fw-bold">App Blog Settings<i class="ml-2 fs-80 material-icons">send</i></div>
+      <ul>
+        <li *ngIf="!a.blog?.app_name">Blog mobile name</li>
+        <li *ngIf="!a.blog?.app_short_name">Blog mobile short name</li>
+        <li *ngIf="!a.blog?.app_url_icons_src_512">Blog mobile url icons.</li>
+      </ul>
+    </div>
+  </section>
   <header class="mt-3 fw-bold fs-md text-dark" *ngIf=" a.blog?.name ">{{ a.blog.name }}</header>
   <div class="side-menu mt-0" *ngIf=" a.blog?.categories?.length ">
     <ul>
@@ -91,23 +119,20 @@
           <i class="hover-icon-toggle material-icons text-muted">more_horiz</i>
       </li>
     </ul>
-    
-  </div>
 
-  <div>
   </div>
 
   <section class="side-menu blog-site-content" *ngIf=" a.inMyBlog ">
-    <header class="pointer text-dark" routerLink="{{ a.getBlogManagementUrl() }}">Blog Managment</header>
+    <header class="pointer text-dark" routerLink="{{ a.getBlogManagementUrl() }}">Blog Management</header>
     <ul>
       <li>
           <a routerLink="/blog-post">
             <i class="material-icons">add</i>
             Post on my blog
-          </a> 
+          </a>
       </li>
       <li>
-        <a routerLink="{{ a.getBlogManagementUrl() }}"> 
+        <a routerLink="{{ a.getBlogManagementUrl() }}">
             <i class="material-icons text-secondary">subject</i>
             Blog dashboard
         </a>
@@ -136,7 +161,7 @@
             Blog Tips
         </a>
       </li>
-            
+
     </ul>
   </section>
 
@@ -145,7 +170,7 @@
       <header class="text-dark">Communities</header>
       <ul>
 
-        
+
         <li>
           <a routerLink="{{ a.getForumUrl( a.NEWS ) }}">
             <i class="material-icons text-secondary">fiber_new</i>
@@ -158,7 +183,7 @@
             Jobs
           </a>
         </li>
-        
+
       </ul>
     </section>
 
