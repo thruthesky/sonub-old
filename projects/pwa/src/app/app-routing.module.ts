@@ -115,6 +115,7 @@ const routes: Routes = [
     // { path: 'redirect', component: RedirectComponent },
     { path: 'contact', loadChildren: './pages/contact/contact.module#ContactModule' },
     { path: 'search', loadChildren: './pages/search/search.module#SearchModule' },
+    { path: 'seo', loadChildren: './pages/seo/seo.module#SeoModule' },
     { path: '**', component: PageNotFoundComponent },
 ];
 

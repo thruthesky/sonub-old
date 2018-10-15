@@ -109,6 +109,10 @@ This is wrong because it makes difficult to understand template design. In fact,
 
 This section describes how developer can develop and test SEO on local computer.
 
+* @todo [Offline Support](https://docs.google.com/document/d/1g_iZtpHxENVPxV5e4ZshIa2LHBxLx5-U5LjOlXdjMOU/edit#heading=h.1jjjvasz3w68)
+
+#### Hash mismatch
+
 * When SEO is patching index.html, PWA Service Worker offline support will not work.
   @see [hash mismatch](https://docs.google.com/document/d/1I_0twDp3rDfHStel1oPS9HldnBwx3nVzT8Tz0iXqejg/edit#heading=h.ns7wiwiyvvdh)
 

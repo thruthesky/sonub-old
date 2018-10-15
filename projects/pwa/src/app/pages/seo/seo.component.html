@@ -1,0 +1,22 @@
+<header>
+  <h1>Meta Tags</h1>
+  <p>
+    You can input HTML and Meta tags to work with 3rd party services.<br>
+    @Notice Please do not input SEO meta tags like title, description, keyword, author, OG Tags, etc. They are inserted automatically by sonub blog system.<br>
+    @Notice The HTML and Meta tags you input here will only be shown to robots and non-browsers.
+  </p>
+</header>
+<app-loader *ngIf=" loader.setting "></app-loader>
+<main *ngIf=" ! loader.setting ">
+  <h2>Input HTML tags</h2>
+  <p>
+    The HTML tags here will be inserted in &lt;head>&lt;/head> tag only when robots and non-browsers are requesting.
+  </p>
+  <form (ngSubmit)="onSubmit()">
+
+    <textarea name="head" [(ngModel)]=" blog.head ">
+
+        </textarea>
+        <button type="submit">Submit</button>
+  </form>
+</main>
