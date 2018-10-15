@@ -5,7 +5,6 @@
     }
 
     .footer-advertisement{
-        // background: #ebedf0;
         border-top: 1px solid #d0d1d5;
     }
 
@@ -15,13 +14,13 @@
 
         .search{
             padding: .2rem;
-            background: #d3d7dc;
+            border-radius: 2px;
+            background: #fff;
             input{
                 background: transparent;
             }
             button{
                 background-color: #4267b2;
-                // border: 1px solid #365899;
                 border: 0;
                 border-radius: 2px;
                 color: #fff;
@@ -33,14 +32,20 @@
         .container-fluid{
             .col{
                 padding: 0;
-                a{
-                    display: block;
-                    padding: .1rem .2rem;
-                    color: inherit;
+                >*{
+                    display: flex;
+                    align-items: center;
+                    margin: 4px 2px;
+                    padding: .35rem;
+                    border-radius: 2px;
+                    color:  #d0d1d5 ;
                     cursor: pointer;
                     &:hover{
-                        background-color: #bec3c9;
-                        color: #000;
+                       color: white
+                    }
+                    .material-icons{
+                        margin-right: .35rem;
+                        font-size: 1rem;
                     }
                 }
             }
