@@ -72,9 +72,13 @@
       </div>
 
 
-      <div class="my-md-default-spacing  px-default-spacing pt-default-spacing bg-white" *ngIf=" a.frontPage?.news?.length ">
+      <div class="my-md-default-spacing px-default-spacing pt-default-spacing bg-white" *ngIf=" a.frontPage?.news?.length ">
         <h2 class="mt-0 mb-md-default-spacing fs-md text-dark">Sonub News</h2>
-        <app-post-multiline-with-thumbnail *ngFor="let post of a.frontPage.news " [post]=" post "></app-post-multiline-with-thumbnail>
+        <div class="row no-gutters">
+          <div class="col-4 pr-md-default-spacing border-box" *ngFor="let post of a.frontPage.news " >
+              <app-post-multiline-with-thumbnail [post]=" post "></app-post-multiline-with-thumbnail>
+          </div>
+        </div>
       </div>
 
 

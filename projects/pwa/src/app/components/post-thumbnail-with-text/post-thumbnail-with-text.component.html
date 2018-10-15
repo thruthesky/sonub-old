@@ -1,5 +1,5 @@
 <a class="of-hidden text-wrap" href="{{ a.getUrlPostView(post) }}" (click)="a.onClickPost( $event, post )" *ngIf=" post ">
-    <div class="flex-center  mb-1 of-hidden h-75px w-100 radius-1px">
+    <div class="flex-center  mb-2 of-hidden h-75px w-100 radius-1px">
         <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 100, height: 100, path: post.path_of_first_image }) }}">
     </div>
     <div class="mb-1 truncate fs-sm" *ngIf=" post.subject ">{{ post.subject }}</div>
