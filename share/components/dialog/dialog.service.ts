@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DialogComponent } from './dialog.component';
-import { AlertData, ConfirmData } from './dialog-interfaces';
+import { AlertData, ConfirmData, PreviewImage } from './dialog-interfaces';
 
 
 @Injectable()
@@ -77,8 +77,12 @@ export class DialogService {
     }
 
 
-    // async preview(): Promise<boolean> {
-    //   const dialogRef = await this.dialog.open(DialogComponent, sanitize);
-    //   return dialogRef.afterClosed().toPromise();
-    // }
+    async previewImage(data: PreviewImage): Promise<boolean> {
+      if (!data.no) {
+        data.no = 'Close';
+      }
+      const sanitize = this.sanitizeData(data);
+      const dialogRef = await this.dialog.open(DialogComponent, sanitize);
+      return dialogRef.afterClosed().toPromise();
+    }
 }

@@ -4,7 +4,7 @@ import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConf
 // import { ERROR_WRONG_IDX_MEMBER, ERROR_WRONG_SESSION_ID } from '../../../../share/philgo-api/philgo-api.service';
 
 import { SimpleLibrary as _ } from 'ng-simple-library';
-import { ApiPost, PhilGoApiService, ApiBlogSettings, ApiError } from 'share/philgo-api/philgo-api.service';
+import { ApiPost, PhilGoApiService, ApiBlogSettings, ApiError, ApiFile } from 'share/philgo-api/philgo-api.service';
 
 
 import * as firebase from 'firebase/app';
@@ -190,8 +190,9 @@ export class AppService {
    * @param domSanitizer .
    * @param snackBar .
    * @param router .
-   * @param cookie .
+   * @param http .
    * @param philgo .
+   * @param dialog .
    */
   constructor(
     private domSanitizer: DomSanitizer,
@@ -1317,6 +1318,27 @@ export class AppService {
 
   openSearch( q ) {
     this.router.navigate(['/search'], { queryParams: { q: q } });
+  }
+
+  openImages( files: Array<ApiFile> ) {
+    console.log('openImages', files );
+    if (!files.length ) {
+      return;
+    }
+    let content = '';
+    files.forEach( (v: ApiFile) => {
+      // if (v.type === 'image/png') {
+        content += `<img style="max-width: 100%" src="${v.src}">`;
+      // }
+    });
+
+    const data: ConfirmData = {
+      content: `<div  class="openImages">${content}</div>`,
+    };
+
+    this.dialog.previewImage(data)
+      .then(() => {})
+      .catch(e => console.log(e));
   }
 
 }
