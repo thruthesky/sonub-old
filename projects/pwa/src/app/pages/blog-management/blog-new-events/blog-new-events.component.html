@@ -1,17 +1,38 @@
-<section class="new-messages" *ngIf=" a.loggedIn">
+<section class="new-messages" *ngIf=" blog ">
 
 
   <header *ngIf="blog">
-    <h1>{{ blog.name }} Blog Comments</h1>
+    <h1>{{ blog.name }} Blog Events</h1>
+    <p>
+      You will see all of your blog events in this page.
+    </p>
   </header>
-  {{ blog | json }}
+  <main>
 
 
-  <app-loader></app-loader>
+  <app-loader *ngIf=" ! events "></app-loader>
 
+  <h2>New Subscribers</h2>
+  <p>
+    Total: {{ events.total_no_of_tokens }}
+  </p>
+    <div class="subscribes" *ngIf="events.tokens">
+      <div class="events" *ngFor="let token of events.tokens">
+        <span>{{ token.idx_member != '0' ? 'Member' : 'Visitor'  }}</span>
+        -
+        {{ a.dateTime( token.stamp ) }}
+      </div>
+    </div>
+  </main>
+
+  <h2>Today Visitors</h2>
+
+  Today's Date time: <br>
+  No of page views: <br>
+  No of visitors: <br>
 
 </section>
 
-<section class="sonub-intro">
+<section class="sonub-intro" *ngIf=" ! blog ">
   <app-sonub-intro></app-sonub-intro>
 </section>
