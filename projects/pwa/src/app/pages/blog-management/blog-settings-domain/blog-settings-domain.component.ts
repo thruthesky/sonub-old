@@ -11,8 +11,7 @@ export class BlogSettingsDomainComponent implements OnInit {
 
 
   blog: ApiBlogSettings = <any>{};
-  domainRegex = /^[a-zA-Z0-9]+[a-zA-Z0-9-]+[a-zA-Z0-9]+$/;
-
+  domainRegex = /^[a-z][a-z0-9-]+[a-z0-9]$/;
   loader = {
     submit: false
   };
