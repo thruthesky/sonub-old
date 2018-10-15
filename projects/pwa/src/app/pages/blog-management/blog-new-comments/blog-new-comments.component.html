@@ -1,1 +1,28 @@
-blog new comments
+<section class="new-messages" *ngIf=" blog ">
+
+
+
+<app-loader *ngIf=" ! comments "></app-loader>
+
+<header *ngIf="blog">
+    <h1>{{ blog.name }} Blog Comments</h1>
+    <p>
+        You will see all of your blog comments in this page.
+    </p>
+</header>
+<main>
+    <div class="new-comments">
+        <div class="comment" *ngFor="let comment of comments">
+            <div class="content">{{ a._.stripTags(comment.content) }}</div>
+            <div class="date-time">{{ a.dateTime( comment.stamp )}}</div>
+        </div>
+    </div>
+</main>
+
+
+
+</section>
+
+<section class="sonub-intro" *ngIf=" ! blog ">
+    <app-sonub-intro></app-sonub-intro>
+</section>

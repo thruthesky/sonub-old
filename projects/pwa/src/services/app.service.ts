@@ -1089,6 +1089,11 @@ export class AppService {
   }
 
 
+
+  dateTime(stamp) {
+    const d = new Date(_.parseNumber(stamp) * 1000);
+    return this.date_hia(stamp) + ', ' + d.toDateString();
+  }
   /**
    * Returns hours and minute in '3:30 pm'.
    * @param stamp stamp of time
