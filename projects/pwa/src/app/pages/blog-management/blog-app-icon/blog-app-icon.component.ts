@@ -37,11 +37,11 @@ export class BlogAppIconComponent implements OnInit {
     }
 
     if ( this.blog.app_name && this.blog.app_name.length > 32 ) {
-      this.a.toast(this.a.t({ en: 'App name is too long. Please shorten it.', ko: '앱 이름이 너무 깁니다. 그것을 줄이십시오.' }));
+      this.a.toast(this.a.t({ en: 'App name is too long. Please shorten it.', ko: '앱 이름이 너무 깁니다.' }));
       return;
     }
     if ( this.blog.app_short_name && this.blog.app_short_name.length > 16 ) {
-      this.a.toast(this.a.t({ en: 'App short name is too long. Please shorten it.', ko: '앱의 짧은 이름이 너무 깁니다. 그것을 줄이십시오.' }));
+      this.a.toast(this.a.t({ en: 'App short name is too long. Please shorten it.', ko: 'Short name 이 너무 깁니다.' }));
       return;
     }
 

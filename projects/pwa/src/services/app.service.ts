@@ -384,6 +384,7 @@ export class AppService {
       this.philgo.blogLoadSettings(this.currentBlogDomain).subscribe(blog => {
         /**
          * When user is in blog site and blog site inofmration have been loaded, then update push tokens.
+         * User's token may be expired/changed or whatsoever, it simply re-register user's token to the blog domain.
          */
         // console.log('blog:', blog);
         this.philgo.updateWebPushToken(this.pushDomain);
@@ -1119,7 +1120,7 @@ export class AppService {
     return await this.dialog.confirm(data);
   }
 
-  displayHtml( fileName ) {
+  displayHtml(fileName) {
     this.http.get(`/assets/html/${fileName}.html`, { responseType: 'text' }).subscribe(re => {
       this.alert({
         content: re
@@ -1183,7 +1184,7 @@ export class AppService {
       content += `</ul>`;
 
       settingLink = '/blog-settings/basic';
-    } else if ( this.blog.categories.length === 0 ) {
+    } else if (this.blog.categories.length === 0) {
       console.log('checking category setting');
       content += `<h4>Blog Category Settings</h4>
                       <ul>
@@ -1193,7 +1194,7 @@ export class AppService {
                       </ul>
                       `;
       settingLink = '/blog-settings/category';
-    } else if ( ! basicSettings.length && this.blog.categories.length ) {
+    } else if (!basicSettings.length && this.blog.categories.length) {
       console.log('checking app setting');
       const appSettings = [];
       if (!this.blog['app_name']) {
@@ -1206,7 +1207,7 @@ export class AppService {
         appSettings.push('Mobile App Icon');
       }
 
-      if ( appSettings.length ) {
+      if (appSettings.length) {
         content += '<h4>App Blog Home Screen Settings</h4>';
         content += '<ul>';
         appSettings.forEach(v => {
@@ -1226,10 +1227,10 @@ export class AppService {
 
 
     const data: ConfirmData = {
-      title: this.t({en: 'Ooh..! You have missed required blog settings', ko: '앗! 블로그 설정을 하셔야합니다.'}),
+      title: this.t({ en: 'Ooh..! You have missed required blog settings', ko: '앗! 블로그 설정을 하셔야합니다.' }),
       content: `<div class="blog-requirements">${content}</div>`,
-      yes: this.t({en: 'Update', ko: '업데이트하기'}),
-      no: this.t({en: 'Close', ko: '닫기'}),
+      yes: this.t({ en: 'Update', ko: '업데이트하기' }),
+      no: this.t({ en: 'Close', ko: '닫기' }),
       width: '360px'
     };
 
@@ -1247,25 +1248,40 @@ export class AppService {
 
 
   validateInput(event, limit = null, regex = null) {
-      // console.log(event.target);
-      if ( !event.target || !event.target.value ) {
-        return;
-      }
-      if ( limit && event.target.value.length > limit ) {
+    // console.log(event.target);
+    if (!event.target || !event.target.value) {
+      return;
+    }
+    if (limit && event.target.value.length > limit) {
+      event.target.style.color = 'red';
+      return;
+    }
+
+    if (regex instanceof RegExp) {
+      console.log('Invalid input::', regex);
+      if (!regex.test(event.target.value)) {
         event.target.style.color = 'red';
         return;
       }
-
-      if ( regex instanceof RegExp ) {
-        console.log('Invalid input::', regex);
-        if (!regex.test(event.target.value)) {
-          event.target.style.color = 'red';
-          return;
-        }
-      }
+    }
 
 
     event.target.style.color = 'black';
+  }
+
+
+  // onSearch(q: string) {
+  //   console.log('going to search: ', q);
+
+  //   this.openSearch(q);
+  //   this.http.get(`https://work.sonub.com/sonub-supporting-server/search.php?q=${q}`).subscribe(res => {
+  //     console.log('search result: ', res);
+  //   });
+  //   return false;
+  // }
+
+  openSearch( q ) {
+    this.router.navigate(['/search'], { queryParams: { q: q } });
   }
 
 }

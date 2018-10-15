@@ -114,6 +114,7 @@ const routes: Routes = [
     { path: 'job/:category/:idx/:subject', loadChildren: './pages/job/job.module#JobModule' },
     // { path: 'redirect', component: RedirectComponent },
     { path: 'contact', loadChildren: './pages/contact/contact.module#ContactModule' },
+    { path: 'search', loadChildren: './pages/search/search.module#SearchModule' },
     { path: '**', component: PageNotFoundComponent },
 ];
 

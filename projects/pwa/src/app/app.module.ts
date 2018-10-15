@@ -36,6 +36,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { DialogModule } from 'share/components/dialog/dialog.module';
 import { AvatarModule } from 'share/components/avatar/avatar.module';
 import { AdvModule } from 'share/philgo-api-components/adv/adv.module';
+import { FormsModule } from '@angular/forms';
 
 
 /**
@@ -63,6 +64,7 @@ firebase.initializeApp(firebaseConfig);
   imports: [
     BrowserModule,
     RouterModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
