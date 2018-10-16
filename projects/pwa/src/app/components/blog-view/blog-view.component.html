@@ -4,7 +4,7 @@
     <div class="thumbnail">
       <img [src]="philgo.primaryPhotoUrl( post?.member?.idx_primary_photo )">
     </div>
-    <div class="post-header-text">
+    <div class="post-header-text of-hidden">
       <h2 class="truncate mr-2">
         {{ post.subject }} <span *ngIf="post.no_of_comment">({{ post.no_of_comment }})</span>
       </h2>
@@ -18,7 +18,8 @@
 
   <div class="post-content ">
     <div>
-      <div class="post-text-content child-image-mw-100 child-image-my-2 child-caption-center-bold child-figure-m-0 pb-2" [innerHTML]=" a.safeHtml( post?.content ) "></div>
+      <div class="post-text-content child-image-mw-100 child-image-my-2 child-caption-center-bold child-figure-m-0 pb-2"
+        [innerHTML]=" a.safeHtml( post?.content ) "></div>
     </div>
 
     <div class="post-buttons border-top">
@@ -40,7 +41,7 @@
 
       <mat-menu #postMenu="matMenu">
         <ng-template matMenuContent>
-          <button class="flex-center" mat-menu-item (click)=" onClickFeature(0) " routerLink="/" >
+          <button class="flex-center" mat-menu-item (click)=" onClickFeature(0) " routerLink="/">
             <mat-icon>photo_size_select_actual</mat-icon>
             <span>Featured Post</span>
           </button>
@@ -62,25 +63,26 @@
       </mat-menu>
 
       <mat-menu #moreFeature="matMenu">
-          <ng-template matMenuContent>
-            <button mat-menu-item (click)=" onClickFeature(1) "   routerLink="/">Feature 1</button>
-            <button mat-menu-item (click)=" onClickFeature(2) "   routerLink="/">Feature 2</button>
-            <button mat-menu-item (click)=" onClickFeature(3) "   routerLink="/">Feature 3</button>
-            <button mat-menu-item (click)=" onClickFeature(4) "   routerLink="/">Feature 4</button>
-          </ng-template>
-        </mat-menu>
+        <ng-template matMenuContent>
+          <button mat-menu-item (click)=" onClickFeature(1) " routerLink="/">Feature 1</button>
+          <button mat-menu-item (click)=" onClickFeature(2) " routerLink="/">Feature 2</button>
+          <button mat-menu-item (click)=" onClickFeature(3) " routerLink="/">Feature 3</button>
+          <button mat-menu-item (click)=" onClickFeature(4) " routerLink="/">Feature 4</button>
+        </ng-template>
+      </mat-menu>
 
-        <mat-menu #changeCategory="matMenu">
-            <ng-template matMenuContent>
-                <button mat-menu-item *ngFor=" let category of a.blogCategories( post.category ) " (click)=" onClickChangeCategory( post, category ) ">{{ category }}</button>
-            </ng-template>
-          </mat-menu>
-      
+      <mat-menu #changeCategory="matMenu">
+        <ng-template matMenuContent>
+          <button mat-menu-item *ngFor=" let category of a.blogCategories( post.category ) " (click)=" onClickChangeCategory( post, category ) ">{{
+            category }}</button>
+        </ng-template>
+      </mat-menu>
+
     </div>
   </div>
 
 
-  <div class="border-top">    
+  <div class="border-top">
 
     <div class="comments comments-depth bg-white px-3 pt-2" *ngIf=" post?.comments?.length ">
       <div class="comment" *ngFor=" let comment of post.comments " [attr.depth]=" comment.depth ">
@@ -120,7 +122,7 @@
             </button>
             <button (click)=" comment['edit'] = true " *ngIf=" philgo.isMyPost(comment) ">Edit</button>
             <button (click)=" onDelete( comment ) " *ngIf=" philgo.isMyPost(comment) ">Delete</button>
-            <button (click)=" onReport( comment ) "*ngIf=" ! philgo.isMyPost(comment) ">Report</button>
+            <button (click)=" onReport( comment ) " *ngIf=" ! philgo.isMyPost(comment) ">Report</button>
 
           </div>
 
@@ -129,7 +131,7 @@
       </div>
     </div>
 
-    <app-comment-box [root]=" post " [post]=" post "></app-comment-box>
+    <app-comment-box [root]=" post " [post]=" post " [group_id]=" 'blog-' + a.blog.idx "></app-comment-box>
 
   </div>
 

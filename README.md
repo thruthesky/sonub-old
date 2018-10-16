@@ -168,6 +168,8 @@ This section describes how developer can develop and test SEO on local computer.
 
 * To test Service worker and A2HS, chagne blog configuration and see if service worker updates and app icons, names are updated.
 
+* `/pwa_app_start` is the starting url of pwa app and it opens home page.
+
 #### Manifest for each blogs
 
 * When `/manifest.json` is accessed, `/manifest.php` will be run. ( This is set by Nginx )
