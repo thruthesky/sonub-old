@@ -16,7 +16,7 @@
         <div class="new-comments">
             <div class="comment my-3 mt-2 pb-1 rounded border-bottom bg-white" *ngFor="let comment of comments">
                 <div class="content">{{ a._.stripTags(comment.content) }}</div>
-                <div class="date-time">{{ a.dateTime( comment.stamp )}}</div>
+                <div class="date-time text-link my-2 fw-bold">{{ a.dateTime( comment.stamp )}}</div>
             </div>
         </div>
     </main>
