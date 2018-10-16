@@ -66,6 +66,8 @@ export class BlogSettingsCategoryComponent implements OnInit {
       console.log('blog saved: ', res);
       this.a.toast(this.a.t({ en: 'Blog settings have successfully updated.', ko: '블로그 설정이 저장되었습니다.' }));
       this.loader.submit = false;
+      this.a.blogSettingChecked = false;
+      this.a.checkBlogSettings();
     }, e => {
       this.a.error(e);
       this.loader.submit = false;

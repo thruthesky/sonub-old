@@ -1,7 +1,7 @@
 <h2 matDialogTitle *ngIf="data?.title">{{ data.title }}</h2>
-<i class="top-right material-icons" *ngIf=" data?.close ">close</i>
+<i class="close-icon top-right material-icons" (click)="close()" *ngIf=" data?.close ">close</i>
 <mat-dialog-content [innerHTML]=" data.content "></mat-dialog-content>
-<mat-dialog-actions align="end" * ngIf="data?.ok || data?.yes || data?.no">
+<mat-dialog-actions align="end" *ngIf="data.ok || data.yes || data.no">
     <button class="bg-primary" mat-flat-button color="primary" [mat-dialog-close]="true" *ngIf=" data?.ok ">{{ data.ok }}</button>
     <button class="bg-primary" mat-flat-button color="primary" [mat-dialog-close]="true" *ngIf=" data?.yes ">{{ data.yes }}</button>
     <button class="ml-2" mat-button color="warn" [mat-dialog-close]="false" cdkFocusInitial *ngIf=" data?.no ">

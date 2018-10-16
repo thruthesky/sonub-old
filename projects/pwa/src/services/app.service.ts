@@ -1237,6 +1237,7 @@ export class AppService {
     this.blogSettingChecked = true;
     if (!content) {
       console.log('All settings are set.');
+      this.blogSettingIncomplete = '';
       return;
     }
 
@@ -1327,20 +1328,13 @@ export class AppService {
   }
 
   openImageModal(img) {
-
-
       console.log('openImages', img );
       if (!img ) {
         return;
       }
-
-      let content = '';
-          content += `<img style="max-width: 100%" src="${img}">`;
-
       const data: ConfirmData = {
-        content: `${content}`,
+        content: `<img style="max-width: 100%" src="${img}">`,
       };
-
       return this.dialog.previewImage(data);
 
   }

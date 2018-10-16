@@ -15,11 +15,16 @@ export class DialogComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    console.log('dialog constructor');
     data['content'] = domSanitizer.bypassSecurityTrustHtml(data['content']);
   }
 
 
   ngOnInit() {
+  }
+
+  close() {
+    this.dialogRef.close('close');
   }
 
 }

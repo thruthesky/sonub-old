@@ -1,7 +1,16 @@
 .previewImage {
   position: relative;
   .mat-dialog-container {
+    position: relative;
     padding: 0;
+    .close-icon {
+      padding: .2em;
+      border-radius: 50%;
+      background-color: #0088ff;
+      color: white;
+      margin: .2em;
+      cursor: pointer;
+    }
     .mat-dialog-content {
       padding: 0;
       margin: 0;

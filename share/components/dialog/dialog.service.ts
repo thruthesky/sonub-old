@@ -81,6 +81,7 @@ export class DialogService {
 
 
     async previewImage(data: PreviewImage): Promise<boolean> {
+      console.log('previewImage');
       data['panelClass'] = 'previewImage';
       data['close'] = 'close';
       data['maxWidth'] = '100%';

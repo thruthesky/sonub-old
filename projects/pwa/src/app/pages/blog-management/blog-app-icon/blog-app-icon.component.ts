@@ -68,6 +68,8 @@ export class BlogAppIconComponent implements OnInit {
       //   console.log('blog save => user local storage updated to restore blog domain: ', r);
       // });
       this.loader.submit = false;
+      this.a.blogSettingChecked = false;
+      this.a.checkBlogSettings();
     }, e => {
       this.a.error(e);
       this.loader.submit = false;
