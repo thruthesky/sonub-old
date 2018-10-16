@@ -340,3 +340,15 @@ This section describes how developer can develop and test SEO on local computer.
 ### User asks why he doesn't see his blog contents on his site
 
 * Answer: It's not his blog. The user may be changed domain and he forget to visit his new domain.
+
+## Jobs
+
+* Jobs functionality is using `wanted` post_id which is the same forum of philgo job forum.
+* So, if any one posts on sonub jobs forum, that will appear on philgo.
+* But if one post jobs on philgo, that will appear on sonub because sonub only shows jobs with `group_id=sonub`.
+
+### porting
+
+* previous house maid and drivers posts are saved in philgo `jobs` forum. it is copied(converted) into `wanted` forum with `group_id=sonub`.
+* previous data in `jobs` forum is being used in other site, so, it should remain as it is.
+
