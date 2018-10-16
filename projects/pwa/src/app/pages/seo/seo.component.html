@@ -8,14 +8,17 @@
   <section class="fs-md" *ngIf=" ! loader.setting ">
 
       <div class="mb-5">
-        <h2 class="fs-lg fw-light">You can input HTML and Meta tags to work with 3rd party services.</h2>
-        <p><b class="text-danger">Notice: </b>  Please do not input SEO meta tags like title, description, keyword, author, OG Tags, etc. They are inserted automatically by sonub blog system.</p>
-        <p><b class="text-danger">Notice: </b> The HTML and Meta tags you input here will only be shown to robots and non-browsers.</p>
+        <h2 class="d-flex align-items-center fs-lg fw-light">
+          <i class="d-none d-md-block material-icons mr-2 fs-xl">storage</i>
+          You can input HTML and Meta tags to work with 3rd party services.
+        </h2>
+        <p class="d-md-flex mt-0 mb-3"><b class="mr-md-2 text-danger">Notice: </b> Do not input SEO meta tags like title, description, keyword, OG Tags, etc. They are inserted automatically by sonub blog system.</p>
+        <p class="d-md-flex my-0"><b class="mr-md-2 text-danger">Notice: </b> HTML and Meta tags you input here will only be shown to robots & non-browsers.</p>
       </div>
       
       <div>
-          <h2 class="fs-lg fw-light text-darkgreen">Input HTML tags</h2>
-          <p class="text-muted">The HTML tags here will be inserted in &lt;head>&lt;/head> tag only when robots and non-browsers are requesting.</p>
+          <h2 class="fs-lg fw-light">Input HTML tags</h2>
+          <p class="">The HTML tags here will be inserted in &lt;head>&lt;/head> tag only when robots and non-browsers are requesting.</p>
     
           <form (ngSubmit)="onSubmit()">
               <mat-form-field appearance="outline" class="w-100">
