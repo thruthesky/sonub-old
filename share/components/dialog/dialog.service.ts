@@ -85,7 +85,7 @@ export class DialogService {
     console.log('previewImage');
     data['panelClass'] = 'previewImage';
     data['close'] = 'close';
-    data['maxWidth'] = '100%';
+    data['maxWidth'] = '95%';
     const sanitize = this.sanitizeData(data);
     const promise = this.dialog.open(DialogComponent, sanitize);
     this.ngZone.run(() => { });

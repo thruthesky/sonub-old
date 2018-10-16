@@ -32,11 +32,13 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     setTimeout(() => {
       if (this.post && this.post.content) {
+        console.log('ngAfterViewInit', this.post);
         let content = this.post.content;
         if (content) {
           content = content.replace(/<img/ig, `<img class="pointer" onclick="showImage(this.src)"`);
           this.content = content;
         }
+        this.a.rerender();
       }
     }, 100);
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 
 // import { ERROR_WRONG_IDX_MEMBER, ERROR_WRONG_SESSION_ID } from '../../../../share/philgo-api/philgo-api.service';
@@ -193,6 +193,7 @@ export class AppService {
    * @param http .
    * @param philgo .
    * @param dialog .
+   * @param ngZone .
    */
   constructor(
     private domSanitizer: DomSanitizer,
@@ -200,7 +201,8 @@ export class AppService {
     private router: Router,
     private http: HttpClient,
     public philgo: PhilGoApiService,
-    private dialog: DialogService
+    private dialog: DialogService,
+    private ngZone: NgZone
   ) {
     window['a'] = this;
     this.initLanguage();
@@ -1337,6 +1339,12 @@ export class AppService {
       };
       return this.dialog.previewImage(data).then( x => {} );
 
+  }
+
+  rerender() {
+    setTimeout(() => {
+      this.ngZone.run(() => {});
+    });
   }
 
 }
