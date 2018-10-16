@@ -216,6 +216,12 @@ export class AppService {
 
     this.initLog();
 
+    // document.addEventListener('click', function (e) {
+    //   if (e.target) {
+    //     console.log('click target; ', e.target);
+    //   }
+    // });
+
     // philgo.weatherMap().subscribe(g => console.log('geo:', g));
   }
 
@@ -1277,14 +1283,14 @@ export class AppService {
     }
 
 
-    if ( not_allowed_char ) {
+    if (not_allowed_char) {
       if (not_allowed_char instanceof RegExp) {
         if (!not_allowed_char.test(event.target.value)) {
           event.target.style.color = invalidColor;
           return;
         }
-      } else if ( typeof not_allowed_char === 'string' ) {
-        if ( this.hasNotAllowedChars(event.target.value, not_allowed_char) ) {
+      } else if (typeof not_allowed_char === 'string') {
+        if (this.hasNotAllowedChars(event.target.value, not_allowed_char)) {
           event.target.style.color = invalidColor;
           return;
         }
@@ -1301,7 +1307,7 @@ export class AppService {
    * @param not_allowed_char - string which will check if exist on str
    * @returns boolean
    */
-  hasNotAllowedChars(str: string, not_allowed_char: string = '' ) {
+  hasNotAllowedChars(str: string, not_allowed_char: string = '') {
     return not_allowed_char.split('').findIndex(c => str.indexOf(c) !== -1) !== -1;
   }
 
@@ -1316,29 +1322,38 @@ export class AppService {
   //   return false;
   // }
 
-  openSearch( q ) {
+  openSearch(q) {
     this.router.navigate(['/search'], { queryParams: { q: q } });
   }
 
-  openImages( files: Array<ApiFile> ) {
-    console.log('openImages', files );
-    if (!files.length ) {
-      return;
-    }
-    let content = '';
-    files.forEach( (v: ApiFile) => {
-      // if (v.type === 'image/png') {
-        content += `<img style="max-width: 100%" src="${v.src}">`;
-      // }
-    });
+  openImages(event, files: Array<ApiFile>) {
+    event.preventDefault();
+    event.stopPropagation();
 
-    const data: ConfirmData = {
-      content: `<div  class="openImages">${content}</div>`,
-    };
+    console.log('event: ', event.target);
+    event['target']['classList'] = 'abc';
 
-    this.dialog.previewImage(data)
-      .then(() => {})
-      .catch(e => console.log(e));
+
+    //   console.log('openImages', files );
+    //   if (!files.length ) {
+    //     return;
+    //   }
+    //   let content = '';
+    //   files.forEach( (v: ApiFile) => {
+    //     // if (v.type === 'image/png') {
+    //       content += `<img style="max-width: 100%" src="${v.src}">`;
+    //     // }
+    //   });
+
+    //   const data: ConfirmData = {
+    //     content: `<div  class="openImages">${content}</div>`,
+    //   };
+
+    //   this.dialog.previewImage(data)
+    //     .then(() => {})
+    //     .catch(e => console.log(e));
+
+    return false;
   }
 
 }
