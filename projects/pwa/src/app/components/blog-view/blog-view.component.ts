@@ -18,19 +18,7 @@ export class BlogViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.activatedRoute.paramMap.subscribe(params => {
-    //   const idx = params.get('idx');
-    //   if ( this.a.getCachePostInMemory() && this.a.getCachePostInMemory().idx === idx) {
-    //     console.log('Get post from memory');
-    //     this.post = this.a.getCachePostInMemory();
-    //   } else {
-    //     console.log('Get post from server');
-    //     this.a.philgo.postLoad(idx).subscribe(post => {
-    //       console.log('post', post);
-    //       this.post = post;
-    //     }, e => this.a.toast(e));
-    //   }
-    // });
+
   }
 
   onVote(post: ApiPost, mode: 'good' | 'bad') {
