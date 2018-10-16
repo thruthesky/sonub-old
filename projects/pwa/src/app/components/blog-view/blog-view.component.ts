@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { AppService } from '../../../services/app.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiPost, PhilGoApiService } from 'share/philgo-api/philgo-api.service';
@@ -8,18 +8,37 @@ import { ApiPost, PhilGoApiService } from 'share/philgo-api/philgo-api.service';
   templateUrl: './blog-view.component.html',
   styleUrls: ['./blog-view.component.scss']
 })
-export class BlogViewComponent implements OnInit {
+export class BlogViewComponent implements OnInit, AfterViewInit {
 
   @Input() post: ApiPost;
+  content;
   constructor(
     public activatedRoute: ActivatedRoute,
     public a: AppService,
     public philgo: PhilGoApiService
-  ) { }
+  ) {
+    window['showImage'] = this.showImage.bind(this);
+  }
 
   ngOnInit() {
 
   }
+
+  showImage(img) {
+    console.log('popup this image:', img);
+    this.a.openImageModal(img);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      let content = this.post.content;
+      if (content) {
+        content = content.replace(/<img/ig, `<img class="pointer" onclick="showImage(this.src)"`);
+        this.content = content;
+      }
+    }, 100);
+  }
+
 
   onVote(post: ApiPost, mode: 'good' | 'bad') {
     this.philgo.postLike({ idx: post.idx, mode: mode }).subscribe(res => {
