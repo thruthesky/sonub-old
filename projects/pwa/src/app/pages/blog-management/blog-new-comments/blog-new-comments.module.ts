@@ -4,6 +4,7 @@ import { BlogNewCommentsComponent } from './blog-new-comments.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoaderModule } from '../../../components/loader/loader.module';
 import { SonubIntroModule } from '../../../components/sonub-intro/sonub-intro.module';
+import { MatToolbarModule } from '@angular/material';
 
 
 
@@ -19,7 +20,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     LoaderModule,
-    SonubIntroModule
+    SonubIntroModule,
+    MatToolbarModule
   ],
   declarations: [BlogNewCommentsComponent]
 })

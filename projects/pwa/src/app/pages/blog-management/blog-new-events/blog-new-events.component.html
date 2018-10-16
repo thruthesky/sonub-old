@@ -1,36 +1,46 @@
 <section class="new-messages" *ngIf=" blog ">
-
-
-  <header *ngIf="blog">
-    <h1>{{ blog.name }} Blog Events</h1>
-    <p>
-      You will see all of your blog events in this page.
-    </p>
+  <header  *ngIf="blog">
+      <mat-toolbar class="border-top border-top-md-0">
+          <h1 class="px-md-2 fw-light">{{ blog.name }} Blog Events</h1>
+      </mat-toolbar>
   </header>
-  <main>
 
-
-  <app-loader *ngIf=" ! events "></app-loader>
-
-  <h2>New Subscribers</h2>
-  <p>
-    Total: {{ events.total_no_of_tokens }}
-  </p>
-    <div class="subscribes" *ngIf="events.tokens">
-      <div class="events" *ngFor="let token of events.tokens">
-        <span>{{ token.idx_member != '0' ? 'Member' : 'Visitor'  }}</span>
-        -
-        {{ a.dateTime( token.stamp ) }}
-      </div>
-    </div>
-  </main>
-
-  <h2>Today Visitors</h2>
-
-  Today's Date time: <br>
-  No of page views: <br>
-  No of visitors: <br>
-
+  <main class="bg-white p-3 px-md-4 fs-md">
+      <app-loader *ngIf=" ! events "></app-loader>
+  
+          <div class="mt-2 text-dark">You will see all of your blog events in this page.</div>
+          
+          <div class="my-4 p-3 bg-light">
+              <h2 class="mb-2 mt-1 fs-md">New Subscribers</h2>
+              <div class="d-flex align-items-center mt-3 mb-1">
+                <i class="material-icons mr-2 text-dark">storage</i>
+                Total: {{ events.total_no_of_tokens }}
+              </div>
+              <div class="subscribes" *ngIf="events.tokens">
+                <div class="py-1 events" *ngFor="let token of events.tokens">
+                  <span class="text-success">{{ token.idx_member != '0' ? 'Member' : 'Visitor'  }}</span> 
+                  / {{ a.dateTime( token.stamp ) }}
+                </div>
+              </div>
+          </div>
+          
+          <div class="my-4 p-3 bg-light">
+              <h2 class="mb-3 mt-1 fs-md">Today Visitors</h2>
+      
+              <div class="d-flex align-items-center mb-2">
+                <i class="material-icons mr-2 text-dark">insert_invitation</i>
+                Today's Date time:
+              </div>
+              <div class="d-flex align-items-center mb-2">
+                <i class="material-icons mr-2 text-dark">visibility</i>
+                  No of page views:
+              </div>
+              <div class="d-flex align-items-center mb-2">
+                <i class="material-icons mr-2 text-dark">how_to_reg</i>
+                No of visitors:
+              </div>
+          </div>
+    </main>
 </section>
 
 <section class="sonub-intro" *ngIf=" ! blog ">

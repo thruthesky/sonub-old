@@ -1,25 +1,25 @@
 <section class="new-messages" *ngIf=" blog ">
+    <header  *ngIf="blog">
+        <mat-toolbar class="border-top border-top-md-0">
+            <h1 class="px-md-2 fw-light">{{ blog.name }} Blog Comments</h1>
+        </mat-toolbar>
+    </header>
 
+    <main class="bg-white p-3 px-md-4 fs-md">
+        <app-loader *ngIf=" ! comments "></app-loader>
+        
+        <h2 class="d-flex align-items-center mb-4 fs-lg fw-light">
+            <i class="material-icons fs-xl mr-3 ml-1 text-darkgreen">textsms</i>
+            You will see all of your blog comments in this page.
+        </h2>
 
-
-<app-loader *ngIf=" ! comments "></app-loader>
-
-<header *ngIf="blog">
-    <h1>{{ blog.name }} Blog Comments</h1>
-    <p>
-        You will see all of your blog comments in this page.
-    </p>
-</header>
-<main>
-    <div class="new-comments">
-        <div class="comment" *ngFor="let comment of comments">
-            <div class="content">{{ a._.stripTags(comment.content) }}</div>
-            <div class="date-time">{{ a.dateTime( comment.stamp )}}</div>
+        <div class="new-comments">
+            <div class="comment my-3 mt-2 pb-1 rounded border-bottom bg-white" *ngFor="let comment of comments">
+                <div class="content">{{ a._.stripTags(comment.content) }}</div>
+                <div class="date-time">{{ a.dateTime( comment.stamp )}}</div>
+            </div>
         </div>
-    </div>
-</main>
-
-
+    </main>
 </section>
 
 <section class="sonub-intro" *ngIf=" ! blog ">

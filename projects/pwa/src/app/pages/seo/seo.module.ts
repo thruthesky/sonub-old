@@ -4,6 +4,7 @@ import { SeoComponent } from './seo.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LoaderModule } from '../../components/loader/loader.module';
+import { MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -12,7 +13,11 @@ import { LoaderModule } from '../../components/loader/loader.module';
       path: '', component: SeoComponent
     }]),
     FormsModule,
-    LoaderModule
+    LoaderModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   declarations: [SeoComponent]
 })

@@ -1,22 +1,39 @@
 <header>
-  <h1>Meta Tags</h1>
-  <p>
-    You can input HTML and Meta tags to work with 3rd party services.<br>
-    @Notice Please do not input SEO meta tags like title, description, keyword, author, OG Tags, etc. They are inserted automatically by sonub blog system.<br>
-    @Notice The HTML and Meta tags you input here will only be shown to robots and non-browsers.
-  </p>
+    <mat-toolbar class="border-top border-top-md-0">
+        <h1 class="px-md-2 fw-light">Meta Tags</h1>
+    </mat-toolbar>
 </header>
-<app-loader *ngIf=" loader.setting "></app-loader>
-<main *ngIf=" ! loader.setting ">
-  <h2>Input HTML tags</h2>
-  <p>
-    The HTML tags here will be inserted in &lt;head>&lt;/head> tag only when robots and non-browsers are requesting.
-  </p>
-  <form (ngSubmit)="onSubmit()">
+<main class="bg-white p-3 px-md-4">
+  <app-loader *ngIf=" loader.setting "></app-loader>
+  <section class="fs-md" *ngIf=" ! loader.setting ">
 
-    <textarea name="head" [(ngModel)]=" blog.head ">
+      <div class="mb-5">
+        <h2 class="fs-lg fw-light">You can input HTML and Meta tags to work with 3rd party services.</h2>
+        <p><b class="text-danger">Notice: </b>  Please do not input SEO meta tags like title, description, keyword, author, OG Tags, etc. They are inserted automatically by sonub blog system.</p>
+        <p><b class="text-danger">Notice: </b> The HTML and Meta tags you input here will only be shown to robots and non-browsers.</p>
+      </div>
+      
+      <div>
+          <h2 class="fs-lg fw-light text-darkgreen">Input HTML tags</h2>
+          <p class="text-muted">The HTML tags here will be inserted in &lt;head>&lt;/head> tag only when robots and non-browsers are requesting.</p>
+    
+          <form (ngSubmit)="onSubmit()">
+              <mat-form-field appearance="outline" class="w-100">
+                <textarea rows="5" name="head" [(ngModel)]=" blog.head " matInput placeholder="Input HTML tags ..."></textarea>
+              </mat-form-field>
+          
+              <div class="list-row my-4 text-center">
+                <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog-dashboard">
+                  <i class="material-icons red">clear</i>
+                  <span class="ml-1">Cancel</span>
+                </button>
+                <button class="mx-2 bg-primary" mat-flat-button type="submit">
+                  <span class="mr-2">Submit</span>
+                  <i class="material-icons">send</i>
+                </button>
+              </div>
+          </form>
+      </div>
 
-        </textarea>
-        <button type="submit">Submit</button>
-  </form>
+  </section>
 </main>
