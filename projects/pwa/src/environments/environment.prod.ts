@@ -10,5 +10,6 @@ export const environment = {
   // sonubLogServerUrl: 'https://www.sonub.com:4431/',
   // sonubLogApiServerUrl: 'https://www.sonub.com/sonub-supporting-server/index.php',
   sonubLogServerUrl: 'https://sss.sonub.com:4431/',
-  sonubLogApiServerUrl: 'https://sss.sonub.com/sonub-supporting-server/index.php'
+  sonubLogApiServerUrl: 'https://sss.sonub.com/sonub-supporting-server/index.php',
+  sonubSearchServerUrl: 'https://sss.sonub.com/sonub-supporting-server/search.php'
 };

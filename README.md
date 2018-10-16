@@ -12,6 +12,28 @@
 
 * [Sonub Development Guide] (https://docs.google.com/document/d/1u2PAHLDYx0-UUbaXQtMnNJsUiAdJkSbE2pzpSPM5_I8/edit#heading=h.eg600u9gre0o)
 
+## Publishing
+
+```` sh
+npm run publish
+````
+
+### Publish servers
+
+* When you publish, it will build and copy the source code into v8.philgo.com.
+  * Sonub is using same server of philgo v8 server.
+  * In v8.philgo.com server, there is `sonub` account.
+  * And all source codes are saved in `www` folder
+  * And `www` folder is link to `sonub-seo` bitbucket repo.
+  * So, when you edit in Angular, you need to run `npm run publish`
+    * And when you edit `sonub-seo`, you need to enter `sonub` account and `git pull` to update `sonub-seo`.
+
+* There is another server for supporting sonub.
+  * https://sss.sonub.com is the server address and it has
+    * logging server and
+    * search functionality.
+
+
 ## Old codes
 
 * [Old Ionic Components](https://github.com/thruthesky/sonub/tree/4542202059203f4d274b1f1a6ebc3958b629adfe)

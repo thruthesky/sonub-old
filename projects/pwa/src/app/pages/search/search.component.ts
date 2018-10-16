@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'projects/pwa/src/environments/environment';
+
 
 @Component({
   selector: 'app-search',
@@ -16,7 +18,7 @@ export class SearchComponent implements OnInit {
     private http: HttpClient
   ) {
 
-    activatedRoute.queryParamMap.subscribe( params => {
+    activatedRoute.queryParamMap.subscribe(params => {
       this.q = params.get('q');
       this.doSearch();
     });
@@ -29,7 +31,7 @@ export class SearchComponent implements OnInit {
 
   doSearch() {
 
-    this.http.get(`https://work.sonub.com/sonub-supporting-server/search.php?q=${this.q}`).subscribe(res => {
+    this.http.get(environment.sonubSearchServerUrl + `?q=${this.q}`).subscribe(res => {
       console.log('search result: ', res);
       this.res = res;
     });

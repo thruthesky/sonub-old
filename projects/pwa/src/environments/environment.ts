@@ -15,7 +15,8 @@ export const environment = {
   philgoFileServerUrl: 'https://local.philgo.com/api.php',
   newFileServerUrl: 'http://192.168.0.254/file-server/index.php',
   sonubLogServerUrl: 'https://work.sonub.com:4431/',
-  sonubLogApiServerUrl: 'https://work.sonub.com/sonub-seo/sonub-supporting-server/index.php'
+  sonubLogApiServerUrl: 'https://work.sonub.com/sonub-seo/sonub-supporting-server/index.php',
+  sonubSearchServerUrl: 'https://work.sonub.com/sonub-supporting-server/search.php'
 };
 
 /*
