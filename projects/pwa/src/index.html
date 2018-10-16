@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-  
+
 
   <meta name="description" content="#description">
   <meta name="keywords" content="#keywords">
@@ -56,7 +56,7 @@
         }
 
         #shell .relative {
-          position: relative!important;
+          position: relative !important;
         }
 
 
@@ -75,27 +75,32 @@
         #shell .px-3 {
           padding: 0 1.5rem;
         }
+
         #shell .py-4 {
           padding: 1.5rem 0;
         }
 
         #shell .mt-5 {
-          margin-top: 3rem
+          margin-top: 4rem
         }
 
 
         #shell .min-h-8vh {
           min-height: 8vh
         }
+
         #shell .min-h-84vh {
           min-height: 84vh
         }
+
         #shell .max-w-1024px {
           max-width: 1024px
         }
+
         #shell .w-100 {
           width: 100%
         }
+
         #shell .h-100 {
           height: 100%
         }
@@ -104,6 +109,7 @@
         #shell .fs-md {
           font-size: 1.2rem
         }
+
         #shell .fw-light {
           font-weight: lighter
         }
@@ -125,7 +131,7 @@
           color: #29487D
         }
 
-        #shell .loader-text{
+        #shell .loader-text {
           position: absolute;
           top: 0;
           left: 0;
@@ -134,30 +140,38 @@
           color: white;
           font-size: .9rem;
         }
-        #shell .description{
+
+        #shell .description {
           max-width: 560px;
-          margin: 2em 1.5em 1em;
+          margin: 3em 1.5em 0.5em;
           padding: 1.5em;
           line-height: 1.5em;
           background-color: white;
           border-radius: 5px;
           font-size: .9rem;
         }
+        @media all and (min-width: 768px) {
+          #shell .description {
+            margin-top: 6em;
+          }
+        }
+
         #shell nav a {
           display: inline-block;
           width: 49%;
           box-sizing: border-box;
-          padding: 1rem 1.5rem;
+          padding: 0.5rem 1rem;
           color: rgb(88, 95, 88);
           font-size: .95rem;
           text-align: center;
         }
-        
+
         @media all and (min-width: 512px) {
           #shell nav {
             width: 512px;
             margin: 0 auto;
           }
+
           #shell nav a {
             max-width: 30%;
           }
