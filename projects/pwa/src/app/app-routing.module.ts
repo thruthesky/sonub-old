@@ -12,6 +12,7 @@ import { RedirectComponent } from './pages/redirect/redirect.component';
  */
 const routes: Routes = [
     { path: '', pathMatch: 'full', loadChildren: './pages/home/home.module#HomeModule' },
+    { path: 'pwa_app_start', loadChildren: './pages/home/home.module#HomeModule' },
     { path: 'help', loadChildren: './pages/help/help.module#HelpModule' },
     { path: 'menu', loadChildren: './pages/menu/menu.module#MenuModule' },
     { path: 'login', loadChildren: './pages/login/login.module#LoginModule' },
