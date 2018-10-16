@@ -19,10 +19,10 @@ export class BlogNewEventsComponent implements OnInit {
     a.philgo.blogChange.subscribe(blog => {
       if (blog) {
         this.blog = blog;
-        // this.a.philgo.blogEvents(this.blog.idx).subscribe(res => {
-        //   this.events = res;
-        //   console.log('events: ', this.events);
-        // }, e => this.a.error(e));
+        this.a.philgo.blogEvents(this.blog.idx).subscribe(res => {
+          this.events = res;
+          console.log('events: ', this.events);
+        }, e => this.a.error(e));
       }
     });
   }

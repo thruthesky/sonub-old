@@ -1326,34 +1326,23 @@ export class AppService {
     this.router.navigate(['/search'], { queryParams: { q: q } });
   }
 
-  openImages(event, files: Array<ApiFile>) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    console.log('event: ', event.target);
-    event['target']['classList'] = 'abc';
+  openImageModal(img) {
 
 
-    //   console.log('openImages', files );
-    //   if (!files.length ) {
-    //     return;
-    //   }
-    //   let content = '';
-    //   files.forEach( (v: ApiFile) => {
-    //     // if (v.type === 'image/png') {
-    //       content += `<img style="max-width: 100%" src="${v.src}">`;
-    //     // }
-    //   });
+      console.log('openImages', img );
+      if (!img ) {
+        return;
+      }
 
-    //   const data: ConfirmData = {
-    //     content: `<div  class="openImages">${content}</div>`,
-    //   };
+      let content = '';
+          content += `<img style="max-width: 100%" src="${img}">`;
 
-    //   this.dialog.previewImage(data)
-    //     .then(() => {})
-    //     .catch(e => console.log(e));
+      const data: ConfirmData = {
+        content: `${content}`,
+      };
 
-    return false;
+      return this.dialog.previewImage(data);
+
   }
 
 }
