@@ -17,6 +17,9 @@ export class DialogService {
     sanitizeData( data: any ) {
       const sanitize: MatDialogConfig = {};
 
+      if ( data['panelClass'] ) {
+        sanitize.panelClass = data.panelClass;
+      }
       if ( data['width'] ) {
         sanitize.width = data.width;
       }
@@ -78,9 +81,9 @@ export class DialogService {
 
 
     async previewImage(data: PreviewImage): Promise<boolean> {
-      if (!data.no) {
-        data.no = 'Close';
-      }
+      data['panelClass'] = 'previewImage';
+      data['close'] = 'close';
+      data['maxWidth'] = '100%';
       const sanitize = this.sanitizeData(data);
       const dialogRef = await this.dialog.open(DialogComponent, sanitize);
       return dialogRef.afterClosed().toPromise();
