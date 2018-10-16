@@ -1335,7 +1335,7 @@ export class AppService {
       const data: ConfirmData = {
         content: `<img style="max-width: 100%" src="${img}">`,
       };
-      return this.dialog.previewImage(data).then();
+      return this.dialog.previewImage(data).then( x => {} );
 
   }
 
