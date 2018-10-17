@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'projects/pwa/src/environments/environment';
 import { AppService } from '../../../services/app.service';
+import { AlertData } from '../../../../../../share/components/dialog/dialog-interfaces';
 
 
 @Component({
@@ -48,5 +49,48 @@ export class SearchComponent implements OnInit {
       this.a.toast(e);
       this.loader.search = false;
     });
+  }
+
+
+  onClickOpenDetail( post ) {
+      console.log('onClickOpenDetail', post);
+      const data: AlertData = {
+        title: post.title,
+        content: ''
+      };
+      let content = '';
+      if ( post.link ) {
+        content += `<div>${post.link}</div>`;
+      }
+      if ( post.author ) {
+        content += `<div>Author: ${post.author}</div>`;
+      }
+      if ( post.stamp ) {
+        content += `<div>Date: ${this.a.philgo.shortDate(post.stamp)}</div>`;
+      }
+      if ( post.content ) {
+        content += `<div>${post.content}</div>`;
+      }
+
+      let image = '';
+
+      if ( post.image_1 ) {
+        image += `<img src="${post.image_1}" style="max-width: 100%" onerror="this.remove()">`;
+      }
+      if ( post.image_2 ) {
+        image += `<img src="${post.image_2}" style="max-width: 100%" onerror="this.remove()">`;
+      }
+      if ( post.image_3 ) {
+        image += `<img src="${post.image_3}" style="max-width: 100%" onerror="this.remove()">`;
+      }
+      if ( post.image_4 ) {
+        image += `<img src="${post.image_4}" style="max-width: 100%" onerror="this.remove()">`;
+      }
+      if ( image ) {
+        content += `<div class="files">${image}</div>`;
+      }
+      data['content'] = content;
+      this.a.alert(data);
+
   }
 }

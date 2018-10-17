@@ -55,7 +55,9 @@ export class DialogService {
       data.ok = 'OK';
     }
     const sanitize = this.sanitizeData(data);
-    const dialogRef = await this.dialog.open(DialogComponent, sanitize);
+    const promise = this.dialog.open(DialogComponent, sanitize);
+    this.ngZone.run(() => { });
+    const dialogRef = await promise;
     return dialogRef.afterClosed().toPromise();
   }
 
@@ -76,7 +78,9 @@ export class DialogService {
       data.no = 'No';
     }
     const sanitize = this.sanitizeData(data);
-    const dialogRef = await this.dialog.open(DialogComponent, sanitize);
+    const promise = this.dialog.open(DialogComponent, sanitize);
+    this.ngZone.run(() => { });
+    const dialogRef = await promise;
     return dialogRef.afterClosed().toPromise();
   }
 
