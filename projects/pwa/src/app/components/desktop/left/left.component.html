@@ -74,16 +74,26 @@
 
 <section class="user-content" *ngIf=" a.inBlogSite ">
 
-  <section class="side-menu blog-site-content fs-80 border p-2" *ngIf=" a.inMyBlog && a.blogSettingIncomplete ">
-    <h3 class="red fs-80">{{a.t({ en: 'Warning: Missing required blog settings', ko: '경고 : 필수 블로그 설정이 누락되었습니다.' })}}</h3>
+  <section class="side-menu blog-site-content fs-small" *ngIf=" a.inMyBlog && a.blogSettingIncomplete ">
+    <h3 class="mb-0 red fs-small fw-light">{{a.t({ en: 'Warning: Missing blog settings', ko: '경고 : 필수 블로그 설정이 누락되었습니다.' })}}</h3>
     <div *ngIf="a.blogSettingIncomplete == 'basic'" routerLink="/blog-settings/basic">
-      <div class="fw-bold">Blog Basic Settings<i class="ml-2 fs-80 material-icons">send</i></div>
+      <!-- <div class="fw-bold">Blog Basic Settings<i class="ml-2 fs-80 material-icons">send</i></div> -->
       <ul>
-        <li *ngIf="!a.blog?.name">Blog name</li>
-        <li *ngIf="!a.blog?.keywords">Blog keywords</li>
-        <li *ngIf="!a.blog?.author">Blog author</li>
-        <li *ngIf="!a.blog?.description">Blog description</li>
-        <li *ngIf="!a.blog?.copyright">Blog copyright</li>
+        <li class="d-flex align-items-center" *ngIf="!a.blog?.name">
+          <i class="material-icons mr-2 fs-lg text-danger">clear</i>
+          Blog name</li>
+        <li class="d-flex align-items-center" *ngIf="!a.blog?.keywords">
+          <i class="material-icons mr-2 fs-lg text-danger">clear</i>
+          Blog keywords</li>
+        <li class="d-flex align-items-center" *ngIf="!a.blog?.author">
+          <i class="material-icons mr-2 fs-lg text-danger">clear</i>
+          Blog author</li>
+        <li class="d-flex align-items-center" *ngIf="!a.blog?.description">
+          <i class="material-icons mr-2 fs-lg text-danger">clear</i>
+          Blog description</li>
+        <li class="d-flex align-items-center" *ngIf="!a.blog?.copyright">
+          <i class="material-icons mr-2 fs-lg text-danger">clear</i>
+          Blog copyright</li>
       </ul>
     </div>
     <div *ngIf="a.blogSettingIncomplete == 'category'" routerLink="/blog-settings/category">
