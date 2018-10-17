@@ -1,8 +1,31 @@
-<section class="search-results bg-white p-2">
-  <div class="result" *ngFor="let result of results">
-    <h3>{{result.title}}</h3>
-    <div class="s-link">{{result.link}}</div>
-    <div class="s-content"><span class="s-author">{{result.author}}</span> - <span class="s-date">{{ a.philgo.shortDate(result.stamp)}}</span> <span>{{result.content}}</span></div>
-  </div>
-</section>
-<!--{{ res | json }}-->
+<header class="bg-white">
+  <h1 class="d-flex align-items-center my-0 mx-3 p-default-spacing fs-md border-bottom text-dark">
+    <i class="material-icons fs-xl mr-2">search</i>
+    Search Result for "{{ res.query['q']}}"
+  </h1>
+</header>
+<main>
+    <section class="search-results p-3 p-md-4 bg-white">
+        <div class="result fs-md mb-4" *ngFor="let result of results">
+
+          <a  href="{{ result.link }}" class="d-flex align-items-center mb-2">
+              <div class="s-image flex-center mr-2 border rounded" *ngIf="result.image_1">
+                  <img class="w-100 fs-sm" src="{{result.image_1}}" alt="{{result.title}}">
+              </div>
+              <div class="d-block of-hidden">
+                  <h3 class="s-title truncate text-link">{{result.title}}</h3>
+                  <div class="s-link truncate ">{{result.link}}</div>
+              </div>
+          </a>
+
+          <div class="s-content">
+            <span class="s-author fw-bold text-dark">{{result.author}}</span>
+            <span class="s-date mx-1 text-secondary">{{ a.philgo.shortDate(result.stamp)}}</span>
+            <span class="mr-1">-</span>
+            <span>{{result.content | slice: 0 : 300 }}...</span>
+          </div>
+
+        </div>
+      </section>
+</main>
+<!-- {{ res | json }} -->
