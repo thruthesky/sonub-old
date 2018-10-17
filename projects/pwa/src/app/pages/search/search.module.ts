@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SearchComponent } from './search.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -10,7 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule.forChild(<Routes>[
       { path: '', component: SearchComponent }
     ]),
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   declarations: [SearchComponent]
 })
