@@ -5,26 +5,30 @@
   </h1>
 </header>
 <main>
-    <section class="search- esults p-3 p-md-4 bg-white">
-        <div class="result fs-md mb-4" *ngFor="let result of results">
+  <section class="search- esults p-3 p-md-4 bg-white">
+    <div class="m-3 p-5 flex-center" *ngIf=" loader.search ">
+      <mat-spinner [diameter]="40"></mat-spinner>
+      <span class="ml-3">Loading ...</span>
+    </div>
+    <div class="result fs-md mb-4" *ngFor="let result of results">
 
-          <a class="d-flex align-items-center mb-2">
-              <div class="s-image flex-center mr-2 border rounded" *ngIf="result.image_1">
-                  <img class="w-100 fs-sm" src="{{result.image_1}}" alt="{{result.title}}" (error)=" result.image_1 = ''">
-              </div>
-              <div class="d-block of-hidden pointer line-effect" (click)="onClickOpenDetail(result)">
-                  <h3 class="s-title truncate text-link line-effect-toggle">{{result.title}}</h3>
-                  <div class="s-link truncate ">{{result.link}}</div>
-              </div>
-          </a>
-
-          <div class="s-content">
-            <span class="s-author fw-bold text-dark">{{result.author}}</span>
-            <span class="s-date mx-1 text-secondary">{{ a.philgo.shortDate(result.stamp)}}</span>
-            <span class="mr-1">-</span>
-            <span>{{result.content | slice: 0 : 300 }}...</span>
+      <a class="d-flex align-items-center mb-2">
+          <div class="s-image flex-center mr-2 border rounded" *ngIf="result.image_1">
+              <img class="w-100 fs-sm" src="{{result.image_1}}" alt="{{result.title}}" (error)=" result.image_1 = ''">
           </div>
+          <div class="d-block of-hidden pointer line-effect" (click)="onClickOpenDetail(result)">
+              <h3 class="s-title truncate text-link line-effect-toggle">{{result.title}}</h3>
+              <div class="s-link truncate ">{{result.link}}</div>
+          </div>
+      </a>
 
-        </div>
-      </section>
+      <div class="s-content">
+        <span class="s-author fw-bold text-dark">{{result.author}}</span>
+        <span class="s-date mx-1 text-secondary">{{ a.philgo.shortDate(result.stamp)}}</span>
+        <span class="mr-1">-</span>
+        <span>{{result.content | slice: 0 : 300 }}...</span>
+      </div>
+
+    </div>
+    </section>
 </main>
