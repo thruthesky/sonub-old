@@ -7,18 +7,24 @@
   <app-loader *ngIf=" loader.setting "></app-loader>
   <section class="fs-md" *ngIf=" ! loader.setting ">
 
-      <div class="mb-5">
-        <h2 class="d-flex align-items-center fs-lg fw-light">
-          <i class="d-none d-md-block material-icons mr-2 fs-xl">storage</i>
+      <div class="mb-3">
+        <h2 class="fs-lg fw-light">
           You can input HTML and Meta tags to work with 3rd party services.
         </h2>
-        <p class="d-md-flex mt-0 mb-3"><b class="mr-md-2 text-danger">Notice: </b> Do not input SEO meta tags like title, description, keyword, OG Tags, etc. They are inserted automatically by sonub blog system.</p>
-        <p class="d-md-flex my-0"><b class="mr-md-2 text-danger">Notice: </b> HTML and Meta tags you input here will only be shown to robots & non-browsers.</p>
+        <div class="p-4 bg-light rounded">
+            <p class="d-md-flex mt-0 mb-3"><b class="mr-md-2 text-danger">Notice: </b> Do not input SEO meta tags like title, description, keyword, OG Tags, etc. They are inserted automatically by sonub blog system.</p>
+            <p class="d-md-flex my-0"><b class="mr-md-2 text-danger">Notice: </b> HTML and Meta tags you input here will only be shown to robots & non-browsers.</p>
+        </div>
       </div>
       
       <div>
-          <h2 class="fs-lg fw-light">Input HTML tags</h2>
-          <p>The HTML tags here will be inserted in &lt;head>&lt;/head> tag only when robots and non-browsers are requesting.</p>
+          <!-- <h2 class=" fs-lg fw-light text-dark">
+            Input HTML tags
+          </h2> -->
+          <p class="d-flex align-items-center mt-0 text-darkgreen">
+            <i class="d-none d-md-block material-icons mr-3 fs-xl text-dark">input</i>
+            The HTML tags here will be inserted in &lt;head>&lt;/head> tag only when robots and non-browsers are requesting.
+          </p>
     
           <form (ngSubmit)="onSubmit()">
               <mat-form-field appearance="outline" class="w-100">
