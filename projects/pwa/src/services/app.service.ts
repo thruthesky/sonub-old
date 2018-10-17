@@ -1178,12 +1178,13 @@ export class AppService {
     if (!this.blog['description']) {
       basicSettings.push('Description');
     }
-    if (!this.blog['copyright']) {
-      basicSettings.push('Copyright');
-    }
+
 
     if (basicSettings.length) {
       console.log('checking basic setting');
+      if (!this.blog['copyright']) {
+        basicSettings.push('Copyright ( Optional )');
+      }
       if (!this.blog['url_favicon']) {
         basicSettings.push('Blog Favicon ( Optional )');
       }
@@ -1345,6 +1346,11 @@ export class AppService {
     setTimeout(() => {
       this.ngZone.run(() => {});
     });
+  }
+
+  onErrorGetAnonymousPhoto(event) {
+    console.log('onErrorGetAnonymousPhoto', event);
+    event.target.src = <any>this.anonymousPhotoUrl;
   }
 
 }

@@ -93,7 +93,13 @@
           Blog description</li>
         <li class="d-flex align-items-center" *ngIf="!a.blog?.copyright">
           <i class="material-icons mr-2 fs-lg text-danger">clear</i>
-          Blog copyright</li>
+          Blog copyright (Optional)</li>
+        <li class="d-flex align-items-center" *ngIf="!a.blog?.url_favicon">
+          <i class="material-icons mr-2 fs-lg text-danger">clear</i>
+          Blog Favicon (Optional)</li>
+        <li class="d-flex align-items-center" *ngIf="!a.blog?.url_seo_image">
+          <i class="material-icons mr-2 fs-lg text-danger">clear</i>
+          Preview Image (Optional)</li>
       </ul>
     </div>
     <div *ngIf="a.blogSettingIncomplete == 'category'" routerLink="/blog-settings/category">
