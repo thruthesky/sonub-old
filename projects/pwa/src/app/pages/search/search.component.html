@@ -1,5 +1,8 @@
-<p>
-  search works!
-</p>
-
-{{ res | json }}
+<section class="search-results bg-white p-2">
+  <div class="result" *ngFor="let result of results">
+    <h3>{{result.title}}</h3>
+    <div class="s-link">{{result.link}}</div>
+    <div class="s-content"><span class="s-author">{{result.author}}</span> - <span class="s-date">{{ a.philgo.shortDate(result.stamp)}}</span> <span>{{result.content}}</span></div>
+  </div>
+</section>
+<!--{{ res | json }}-->
