@@ -31,6 +31,9 @@ export class DialogService {
     if (data['minHeight']) {
       sanitize.minHeight = data.minHeight;
     }
+    if (data['disableClose']) {
+      sanitize.disableClose = data.disableClose;
+    }
 
     if (!data.maxWidth) {
       sanitize.maxWidth = '800px';
