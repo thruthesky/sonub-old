@@ -130,9 +130,9 @@
   <div class="side-menu mt-0" *ngIf=" a.blog?.categories?.length ">
     <ul>
       <li  class="hover-icon flex-center justify-content-between" *ngFor=" let category of  a.blog.categories; let index = index " routerLink="{{ a.getBlogCategoryUrl(category) }}">
-          <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center of-hidden">
               <i class="material-icons mr-2 text-muted">stop</i>
-              <span> {{ category}}</span>
+              <span class="truncate"> {{ category}}</span>
           </div>
           <i class="hover-icon-toggle material-icons text-muted">more_horiz</i>
       </li>
