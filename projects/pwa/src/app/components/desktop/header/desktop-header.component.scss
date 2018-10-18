@@ -1,9 +1,5 @@
 @import '../../../../styles/variables';
 
-// .padding {
-//   padding: $padding;
-// }
-
 .header {
   box-sizing: border-box;
   height: $desktop-header-height;
@@ -17,11 +13,9 @@
     height: 100%;
     max-width: $max-width;
 
-
     .left{
       display: flex;
       align-items: center;
-
 
       .searchbar {
         position: relative;

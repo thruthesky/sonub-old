@@ -3,3 +3,9 @@
 //     background: #fff;
 //     height:2rem;
 // }
+
+.mat-pb-0{
+    .mat-form-field-wrapper {
+        padding-bottom: 0!important;
+    }
+}
