@@ -17,25 +17,28 @@
  * To adjust layout of CKEditor.
  */
 .image-style-side {
+  display: inline-block!important;
   max-width: 50%;
-  float: right;
-  margin-left: var(--ck-image-style-spacing);
+  // float: right;
+  // margin-left: var(--ck-image-style-spacing);
+  padding: 0 2px;
+  box-sizing: border-box;
 
-  margin-block-start:!important;
+  margin-block-start: 0!important;
   margin-block-end:0!important;
   margin-inline-start: 0!important;
   margin-inline-end:0 !important;
-  img {
-    width: 100%;
-  }
+  // img {
+  //   width: 100%;
+  // }
 }
-.post-content .post-text-content {
-  &:after {
-    display: block;
-    clear: both;
-    content: '';
-  }
-}
+// .post-content .post-text-content {
+//   &:after {
+//     display: block;
+//     clear: both;
+//     content: '';
+//   }
+// }
 
 
 
