@@ -60,16 +60,16 @@ export class SearchComponent implements OnInit {
       };
       let content = '';
       if ( post.link ) {
-        content += `<div>${post.link}</div>`;
+        content += `<div style="color: darkgreen">${post.link}</div>`;
       }
       if ( post.author ) {
-        content += `<div>Author: ${post.author}</div>`;
+        content += `<div style="margin-top: .75rem; font-size: .95rem">Author: ${post.author}</div>`;
       }
       if ( post.stamp ) {
-        content += `<div>Date: ${this.a.philgo.shortDate(post.stamp)}</div>`;
+        content += `<div style="margin-top: .75rem; font-size: .95rem">Date: ${this.a.philgo.shortDate(post.stamp)}</div>`;
       }
       if ( post.content ) {
-        content += `<div>${post.content}</div>`;
+        content += `<div style="margin: .75rem 0 1.5rem 0; line-height: 1.4; font-size: .95rem">${post.content}</div>`;
       }
 
       let image = '';

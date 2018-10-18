@@ -30,9 +30,7 @@
 
 
         .container-fluid{
-            .col{
-                padding: 0;
-                >*{
+            .col > *{
                     display: flex;
                     align-items: center;
                     margin: 4px 2px;
@@ -48,7 +46,6 @@
                         font-size: 1rem;
                     }
                 }
-            }
         }
     }
 }

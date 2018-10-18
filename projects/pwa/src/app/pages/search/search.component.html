@@ -1,18 +1,19 @@
 <header class="bg-white">
-  <h1 class="d-flex align-items-center my-0 mx-3 p-default-spacing fs-md border-bottom text-dark">
+  <h1 class="d-flex align-items-center my-0 mx-3 p-default-spacing of-hidden fs-md border-bottom text-dark">
     <i class="material-icons fs-xl mr-2">search</i>
-    <span>Search Result for "{{ res?.query['q']}}"</span>
+    <span class="truncate" *ngIf="results != 0">Showing results for "{{ res?.query['q']}}"</span>
+    <span class="truncate" *ngIf="results == 0">Nothing Found for "{{ res?.query['q']}}"</span>
   </h1>
 </header>
 <main>
-  <section class="search- esults p-3 p-md-4 bg-white">
+  <section class="search-results p-3 p-md-4 bg-white">
     <div class="m-3 p-5 flex-center" *ngIf=" loader.search ">
       <mat-spinner [diameter]="40"></mat-spinner>
       <span class="ml-3">Loading ...</span>
     </div>
     <div class="result fs-md mb-4" *ngFor="let result of results">
 
-      <a class="d-flex align-items-center mb-2">
+      <div class="d-flex align-items-center mb-2">
           <div class="s-image flex-center mr-2 border rounded" *ngIf="result.image_1">
               <img class="w-100 fs-sm" src="{{result.image_1}}" alt="{{result.title}}" (error)=" result.image_1 = ''">
           </div>
@@ -20,7 +21,7 @@
               <h3 class="s-title truncate text-link line-effect-toggle">{{result.title}}</h3>
               <div class="s-link truncate ">{{result.link}}</div>
           </div>
-      </a>
+      </div>
 
       <div class="s-content">
         <span class="s-author fw-bold text-dark">{{result.author}}</span>
