@@ -26,10 +26,10 @@ export class SearchComponent implements OnInit {
     private http: HttpClient
   ) {
 
-    // activatedRoute.queryParamMap.subscribe(params => {
-    //   this.q = params.get('q');
-    //   this.doSearch();
-    // });
+    activatedRoute.queryParamMap.subscribe(params => {
+      this.q = params.get('q');
+      this.doSearch();
+    });
 
   }
 
@@ -37,19 +37,19 @@ export class SearchComponent implements OnInit {
   }
 
 
-  // doSearch() {
+  doSearch() {
 
-  //   this.loader.search = true;
-  //   this.http.get(environment.sonubSearchServerUrl + `?q=${this.q}`).subscribe(res => {
-  //     console.log('search result: ', res);
-  //     this.res = res;
-  //     this.results = res['data'];
-  //     this.loader.search = false;
-  //   }, e => {
-  //     this.a.toast(e);
-  //     this.loader.search = false;
-  //   });
-  // }
+    this.loader.search = true;
+    this.http.get(environment.sonubSearchServerUrl + `?q=${this.q}`).subscribe(res => {
+      console.log('search result: ', res);
+      this.res = res;
+      this.results = res['data'];
+      this.loader.search = false;
+    }, e => {
+      this.a.toast(e);
+      this.loader.search = false;
+    });
+  }
 
 
   onClickOpenDetail( post ) {
