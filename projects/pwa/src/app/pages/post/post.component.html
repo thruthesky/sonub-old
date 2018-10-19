@@ -74,8 +74,7 @@
 
 
   <ckeditor class='ckeditor' #ckeditor [editor]="Editor" [(ngModel)]=" form.content " (change)="onChangeContent( $event )"
-    [config]="{
-      toolbar: [  'heading', '|',  'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockquote', '|', 'undo', 'redo' ]
+    [config]="{toolbar: [  'heading',  'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockquote', 'undo', 'redo' ]
 
 
   }">

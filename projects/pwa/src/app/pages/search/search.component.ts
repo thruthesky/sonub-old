@@ -63,13 +63,13 @@ export class SearchComponent implements OnInit {
         content += `<div style="color: darkgreen">${post.link}</div>`;
       }
       if ( post.author ) {
-        content += `<div style="margin-top: .75rem; font-size: .95rem">Author: ${post.author}</div>`;
+        content += `<div style="display: inline-block; margin: 1.5rem 3rem 1.5rem 0">Author: ${post.author}</div>`;
       }
       if ( post.stamp ) {
-        content += `<div style="margin-top: .75rem; font-size: .95rem">Date: ${this.a.philgo.shortDate(post.stamp)}</div>`;
+        content += `<div style="display: inline-block; margin: 1.5rem 4rem 1.5rem 0">Date: ${this.a.philgo.shortDate(post.stamp)}</div>`;
       }
       if ( post.content ) {
-        content += `<div style="margin: .75rem 0 1.5rem 0; line-height: 1.4; font-size: .95rem">${post.content}</div>`;
+        content += `<div style="margin-bottom:  1.5rem; line-height: 1.45">${post.content}</div>`;
       }
 
       let image = '';

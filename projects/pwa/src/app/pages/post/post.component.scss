@@ -20,9 +20,6 @@ app-post{
     min-height: 200px !important;
     max-height: 400px !important;
   }
-  .ck.ck-toolbar__separator{
-    display: none
-  }
   .ck.ck-toolbar{
     justify-content: center;
     @media (min-width:$md){
