@@ -91,10 +91,15 @@ export class BlogAppIconComponent implements OnInit {
     this.philgo.fileUpload(files, { gid: this.a.philgo.myIdx(), code: code }).subscribe(res => {
       if (typeof res === 'number') {
         console.log('percentage: ', res);
+        if ( res < 11 ) {
+          this.percentage = 10;
+        }
         this.percentage = res;
       } else {
         console.log('file success: ', res);
         this.blog.app_url_icons_src_512 = res.src;
+
+        this.a.rerender();
         this.percentage = 0;
         this.generateAppIconThumbnails(res.path, 0);
       }
@@ -154,6 +159,7 @@ export class BlogAppIconComponent implements OnInit {
         count++;
         this.generateAppIconThumbnails(path, count);
       }
+      this.a.rerender();
     }, e => this.a.error(e));
   }
 
