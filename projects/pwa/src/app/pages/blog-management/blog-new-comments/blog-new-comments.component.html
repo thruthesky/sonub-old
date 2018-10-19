@@ -8,15 +8,15 @@
     <main class="bg-white p-3 px-md-4 fs-md">
         <app-loader *ngIf=" ! comments "></app-loader>
         
-        <h2 class="d-flex align-items-center mb-4 fs-lg fw-light">
-            <i class="material-icons fs-xl mr-3 ml-1 text-darkgreen">textsms</i>
+        <h2 class="d-flex align-items-center mb-4 fs-md text-dark">
+            <i class="material-icons mr-2 text-dark">apps</i>
             You will see all of your blog comments in this page.
         </h2>
 
-        <div class="new-comments border-top">
-            <div class="comment my-3 mt-2 pb-1 rounded border-bottom bg-white" *ngFor="let comment of comments">
+        <div class="new-comments">
+            <div class="comment my-3 mt-2 p-3 rounded bg-light" *ngFor="let comment of comments">
                 <div class="content">{{ a._.stripTags(comment.content) }}</div>
-                <div class="date-time text-link my-2 fw-bold">{{ a.dateTime( comment.stamp )}}</div>
+                <div class="date-time mt-2 text-darkgreen fw-bold fs-sm">{{ a.dateTime( comment.stamp )}}</div>
             </div>
         </div>
     </main>

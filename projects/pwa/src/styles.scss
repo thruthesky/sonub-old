@@ -20,6 +20,8 @@
   max-width: 50%;
   float: right;
   margin-left: var(--ck-image-style-spacing);
+  padding: 0 2px;
+  box-sizing: border-box;
 
   margin-block-start: 0!important;
   margin-block-end:0!important;
@@ -27,6 +29,9 @@
   margin-inline-end:0 !important;
   img {
     width: 100%;
+  }
+  &~p{
+    padding: 0 2px;
   }
 }
 .post-content .post-text-content {
