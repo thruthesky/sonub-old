@@ -25,6 +25,10 @@ export class BlogStatVisitorComponent implements OnInit {
     uniqueVisitor: null,
   };
 
+  loader = {
+    statVisitor: true,
+  };
+
   /**
    * SimpleLibrary
    */
@@ -73,8 +77,10 @@ export class BlogStatVisitorComponent implements OnInit {
     this.stat.getData(req).subscribe(res => {
       console.log(`${this.selectedStats}: `, res);
       this.data[this.selectedStats] = res['data'];
+      this.loader.statVisitor = false;
     }, e => {
       this.a.error(e);
+      this.loader.statVisitor = false;
     });
 
     // req.function = 'pageView';

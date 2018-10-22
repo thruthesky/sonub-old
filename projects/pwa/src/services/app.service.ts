@@ -1226,8 +1226,8 @@ export class AppService {
       }
 
       if (appSettings.length) {
-        content += '<h4>App Blog Home Screen Settings</h4>';
-        content += '<ul>';
+        content += '<h4 style="margin-bottom:.5rem">App Blog Home Screen Settings</h4>';
+        content += '<ul style="margin-top:0">';
         appSettings.forEach(v => {
           content += `<li>${v}</li>`;
         });

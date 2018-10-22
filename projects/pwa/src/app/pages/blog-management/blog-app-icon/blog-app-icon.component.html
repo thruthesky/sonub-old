@@ -1,87 +1,105 @@
-<mat-toolbar class="border-top border-top-md-0">
-  <h1 class="px-md-2 fw-light">Add Blog To Home Screen</h1>
-</mat-toolbar>
+<header>
+    <mat-toolbar class="border-top border-top-md-0">
+      <h1 class="px-md-2 fw-light">Add Blog To Home Screen</h1>
+    </mat-toolbar>
+</header>
 
-<div class="px-3 px-md-4 py-3 bg-darkgreen white fs-md">
-  You can install your blog on visitors mobile home screen just like native app.
-  This give you great benefit since users can easily access your blog.
-  This is very important feature. If you are really serious about running a good blog site, please fill in the form and
-  submit.
-</div>
+<main class="p-3 p-md-4 bg-white">
 
-<form class="p-3 p-md-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
-
-  <mat-form-field class="mt-1 w-100" appearance="outline">
-    <input matInput name="app_name" [(ngModel)]=" blog.app_name " (keyup)="a.validateInput($event, 32)">
-    <mat-label>App name</mat-label>
-    <mat-hint>Input app name in 32 letters. Ex) Social Network Hub</mat-hint>
-  </mat-form-field>
-
-  <mat-form-field class="mt-1 w-100" appearance="outline">
-    <input matInput name="app_short_name" [(ngModel)]=" blog.app_short_name " (keyup)="a.validateInput($event, 16)">
-    <mat-label>App short name</mat-label>
-    <mat-hint>Input app short name in 16 letters. Ex) Sonub</mat-hint>
-  </mat-form-field>
-
-  <mat-form-field class="mt-1 w-100" appearance="outline">
-    <mat-select name="app_theme_color" [(ngModel)]=" blog.app_theme_color ">
-      <mat-option *ngFor="let color of ['white', 'silver', 'gray', 'black', 'red', 'maroon', 'yellow', 'olive',
-                                        'lime', 'green', 'aqua', 'teal', 'blue', 'navy', 'fuchsia', 'purple']"
-                  [value]="color">{{ color }}</mat-option>
-    </mat-select>
-    <mat-label>App theme color</mat-label>
-    <mat-hint>Input app theme color</mat-hint>
-  </mat-form-field>
-
-
-
-  <div class="blog-app-icon-thumbnails mt-3">
-    <div class="my-1 mx-2 text-dark fs-md">Mobile App Icon</div>
-
-    <div class="position-relative p-2 border rounded text-center">
-      <div class="flex-center my-3 mx-auto of-hidden size-200px" *ngIf=" blog.app_url_icons_src_512 ">
-        <img class="w-100" src="{{ blog.app_url_icons_src_512 }}">
-      </div>
-      <div class="p-4" *ngIf=" !blog.app_url_icons_src_512 ">
-          <i class="material-icons fs-xxl text-secondary">
-            add_a_photo
-          </i>
-      </div>
-      <button class="mb-3 w-180px fs-sm mt-2" mat-flat-button>Upload App Icon</button>
-      <input class="transparent-cover w-100 pointer" type="file" name="blog_icon_image" (change)=" onChangeFile($event,  'blog_app_icon' ) ">
-      <div class="text-center">
-        <div class="d-inline-block mw-180px my-2 p-1 rounded bg-success fs-xs white border-box" *ngIf=" percentage " [style.width]="percentage + '%'">{{percentage}}%</div>
-      </div>
-    </div>
-
-    <div class="my-1 mx-2 p-1 fs-sm text-muted">Upload App Icon.</div>
-    <div class="mt-4 mx-2 fs-sm"><span class=" text-danger">Important:</span> The image must be PNG image and width and height must be 512 pixels.</div>
-
-
-    <div class="generated-thumbnails py-4">
-      <img *ngIf="blog.app_url_icons_src_72"  src="{{ blog.app_url_icons_src_72 }}">
-      <img *ngIf="blog.app_url_icons_src_96"  src="{{ blog.app_url_icons_src_96 }}">
-      <img *ngIf="blog.app_url_icons_src_128"  src="{{ blog.app_url_icons_src_128 }}">
-      <img *ngIf="blog.app_url_icons_src_144"  src="{{ blog.app_url_icons_src_144 }}">
-      <img *ngIf="blog.app_url_icons_src_152"  src="{{ blog.app_url_icons_src_152 }}">
-      <img *ngIf="blog.app_url_icons_src_192"  src="{{ blog.app_url_icons_src_192 }}">
-      <img *ngIf="blog.app_url_icons_src_384"  src="{{ blog.app_url_icons_src_384 }}">
-    </div>
-  </div>
-
-
-
-  <div class="list-row mt-4 mb-5 text-center">
-    <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog-dashboard">
-      <i class="material-icons red">clear</i>
-      <span class="ml-1">Cancel</span>
-    </button>
-    <button class="flex-center mx-2 bg-primary" mat-flat-button type="submit">
-      <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
-      <span class="flex-center" *ngIf="loader.submit">
-          <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{a.t({ko: '로딩...', en: 'Loading...' })}}</span>
-      </span>
-    </button>
-  </div>
-
-</form>
+    <p class="flex-center" *ngIf=" loader.appIcon ">
+      <mat-spinner [diameter]="30"></mat-spinner>
+      <b class="ml-3">Loading ...</b>
+    </p>
+    
+    <section *ngIf=" !loader.appIcon ">
+        <div class="mb-3 mt-1 fs-md text-darkgreen">
+            You can install your blog on visitors mobile home screen just like native app.
+            This give you great benefit since users can easily access your blog.
+          </div>
+          <div class="mb-4 fs-md">
+            <span class="text-danger">Note:</span>
+            This is very important feature. If you are really serious about running a good blog site, please fill in the form and
+            submit.
+        </div>
+        
+        <form (ngSubmit)=" onSubmit( $event ) ">
+        
+          <mat-form-field class="mt-1 w-100" appearance="outline">
+            <input matInput name="app_name" [(ngModel)]=" blog.app_name " (keyup)="a.validateInput($event, 32)">
+            <mat-label>App name</mat-label>
+            <mat-hint>Input app name in 32 letters. Ex) Social Network Hub</mat-hint>
+          </mat-form-field>
+        
+          <mat-form-field class="mt-1 w-100" appearance="outline">
+            <input matInput name="app_short_name" [(ngModel)]=" blog.app_short_name " (keyup)="a.validateInput($event, 16)">
+            <mat-label>App short name</mat-label>
+            <mat-hint>Input app short name in 16 letters. Ex) Sonub</mat-hint>
+          </mat-form-field>
+        
+          <mat-form-field class="mt-1 w-100" appearance="outline">
+            <mat-select name="app_theme_color" [(ngModel)]=" blog.app_theme_color ">
+              <mat-option *ngFor="let color of ['white', 'silver', 'gray', 'black', 'red', 'maroon', 'yellow', 'olive',
+                                                'lime', 'green', 'aqua', 'teal', 'blue', 'navy', 'fuchsia', 'purple']"
+                          [value]="color">{{ color }}</mat-option>
+            </mat-select>
+            <mat-label>App theme color</mat-label>
+            <mat-hint>Input app theme color</mat-hint>
+          </mat-form-field>
+        
+        
+        
+          <div class="blog-app-icon-thumbnails mt-3">
+            <div class="my-1 mx-2 text-dark fs-md">Mobile App Icon</div>
+        
+            <div class="position-relative p-2 border rounded text-center">
+              <div class="flex-center my-3 mx-auto of-hidden size-200px" *ngIf=" blog.app_url_icons_src_512 ">
+                <img class="w-100" src="{{ blog.app_url_icons_src_512 }}">
+              </div>
+              <div class="p-4" *ngIf=" !blog.app_url_icons_src_512 ">
+                  <i class="material-icons fs-xxl text-secondary">
+                    add_a_photo
+                  </i>
+              </div>
+              <button class="mb-3 w-180px fs-sm mt-2" mat-flat-button>Upload App Icon</button>
+              <input class="transparent-cover w-100 pointer" type="file" name="blog_icon_image" (change)=" onChangeFile($event,  'blog_app_icon' ) ">
+              <div class="text-center">
+                <div class="d-inline-block mw-180px my-2 p-1 rounded bg-success fs-xs white border-box" *ngIf=" percentage " [style.width]="percentage + '%'">{{percentage}}%</div>
+              </div>
+            </div>
+        
+            <div class="my-1 mx-2 p-1 fs-sm text-muted">Upload App Icon.</div>
+            <div class="mt-4 mx-2 fs-sm"><span class=" text-danger">Important:</span> The image must be PNG image and width and height must be 512 pixels.</div>
+        
+        
+            <div class="generated-thumbnails py-4">
+              <img *ngIf="blog.app_url_icons_src_72"  src="{{ blog.app_url_icons_src_72 }}">
+              <img *ngIf="blog.app_url_icons_src_96"  src="{{ blog.app_url_icons_src_96 }}">
+              <img *ngIf="blog.app_url_icons_src_128"  src="{{ blog.app_url_icons_src_128 }}">
+              <img *ngIf="blog.app_url_icons_src_144"  src="{{ blog.app_url_icons_src_144 }}">
+              <img *ngIf="blog.app_url_icons_src_152"  src="{{ blog.app_url_icons_src_152 }}">
+              <img *ngIf="blog.app_url_icons_src_192"  src="{{ blog.app_url_icons_src_192 }}">
+              <img *ngIf="blog.app_url_icons_src_384"  src="{{ blog.app_url_icons_src_384 }}">
+            </div>
+          </div>
+        
+        
+        
+          <div class="flex-center mt-4 mb-5 text-center">
+            <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog-dashboard">
+              <i class="material-icons red">clear</i>
+              <span class="ml-1">Cancel</span>
+            </button>
+            <button class="flex-center mx-2 bg-primary" mat-flat-button type="submit">
+              <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
+              <span class="flex-center" *ngIf="loader.submit">
+                  <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{a.t({ko: '로딩...', en: 'Loading...' })}}</span>
+              </span>
+            </button>
+          </div>
+        
+        </form>
+        
+        
+    </section>
+      
+</main>

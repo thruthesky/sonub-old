@@ -1,38 +1,48 @@
-<mat-toolbar  class="border-top border-top-md-0">
-  <h1 class="px-md-2 fw-light">Blog Domain Settings</h1>
-</mat-toolbar>
-
-  <form class=" p-md-4 bg-white" (ngSubmit)=" onSubmit( $event ) ">
-
-    <div class="list-row mt-4 mb-5 px-md-4">
-      <div class=" flex-center bg-light mb-3 pt-4 border">
-          <span>https://</span>
-          <mat-form-field class=" mx-2">
-            <input matInput name="domain" [(ngModel)]=" blog.domain " placeholder="Your domain" (keyup)="a.validateInput($event, null, domainRegex)">
-          </mat-form-field>
-          <span>.sonub.com</span>
-      </div>
-
-      <div class="flex-center px-3 px-md-0 fs-md">
-        <i class="material-icons mr-2 text-danger">warning</i>
-        <span>Be careful when you change your domain. you will loose all your backlinks.</span>
-      </div>
-
-    </div>
-
-    <div class="list-row my-4 text-center">
-      <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog-dashboard">
-        <i class="material-icons red">clear</i>
-        <span class="ml-1">Cancel</span>
-      </button>
-      <button class="flex-center mx-2 bg-primary" mat-flat-button type="submit">
-        <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
-        <span class="flex-center" *ngIf="loader.submit">
-          <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{a.t({ko: '로딩...', en: 'Loading...' })}}</span>
-        </span>
-      </button>
-    </div>
-
-  </form>
+<header>
+    <mat-toolbar  class="border-top border-top-md-0">
+      <h1 class="px-md-2 fw-light">Blog Domain Settings</h1>
+    </mat-toolbar>
+</header>
 
 
+<main class="p-md-4 bg-white">
+
+    <p class="flex-center" *ngIf=" loader.domainSettings ">
+        <mat-spinner [diameter]="30"></mat-spinner>
+        <b class="ml-3">Loading ...</b>
+      </p>
+      
+      <form  (ngSubmit)=" onSubmit( $event ) " *ngIf=" !loader.domainSettings ">
+      
+          <div class="mt-4 mb-5">
+            <div class=" flex-center bg-light mb-3 pt-4 border">
+                <span>https://</span>
+                <mat-form-field class=" mx-2">
+                  <input matInput name="domain" [(ngModel)]=" blog.domain " placeholder="Your domain" (keyup)="a.validateInput($event, null, domainRegex)">
+                </mat-form-field>
+                <span>.sonub.com</span>
+            </div>
+      
+            <div class="flex-center px-3 px-md-0 fs-md">
+              <i class="material-icons mr-2 text-danger">warning</i>
+              <span>Be careful when you change your domain. you will loose all your backlinks.</span>
+            </div>
+      
+          </div>
+      
+          <div class="flex-center my-4 text-center">
+            <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog-dashboard">
+              <i class="material-icons red">clear</i>
+              <span class="ml-1">Cancel</span>
+            </button>
+            <button class="flex-center mx-2 bg-primary" mat-flat-button type="submit">
+              <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
+              <span class="flex-center" *ngIf="loader.submit">
+                <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{a.t({ko: '로딩...', en: 'Loading...' })}}</span>
+              </span>
+            </button>
+          </div>
+      
+        </form>
+      
+</main>
