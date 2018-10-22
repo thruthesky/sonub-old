@@ -1,4 +1,4 @@
-<h2 matDialogTitle *ngIf="data?.title">{{ data.title }}</h2>
+<h2 class="mb-1 text-link fw-light" matDialogTitle *ngIf="data?.title">{{ data.title }}</h2>
 <i class="close-icon top-right material-icons" (click)="close()" *ngIf=" data?.close ">close</i>
 <mat-dialog-content [innerHTML]=" data.content "></mat-dialog-content>
 <mat-dialog-actions align="end" *ngIf="data.ok || data.yes || data.no">

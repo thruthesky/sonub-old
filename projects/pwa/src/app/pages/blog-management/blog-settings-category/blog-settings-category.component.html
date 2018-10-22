@@ -1,37 +1,48 @@
-<mat-toolbar class="border-top border-top-md-0">
-  <h1 class="px-0 px-md-2 fw-light">Blog Category Settings</h1>
-</mat-toolbar>
+<header>
+    <mat-toolbar class="border-top border-top-md-0">
+      <h1 class="px-0 px-md-2 fw-light">Blog Category Settings</h1>
+    </mat-toolbar>
+</header>
 
-<div class="px-3 px-md-4 py-3 bg-darkgreen white fs-md">
-  You can input category names up to 8 which will appear on your blog menu. Blog categories can not have special chars except space, hyphen. Cant start or end with space or hyphen.
-</div>
 
-<p class="m-3 p-5 flex-center" *ngIf=" loader.setting ">
-  <mat-spinner [diameter]="30"></mat-spinner>
-  <b class="ml-3">Loading ...</b>
-</p>
+<main class=" p-3 p-md-4 bg-white" >
 
-<form  class="bg-white p-3 p-md-4" (ngSubmit)=" onSubmit( $event ) " *ngIf=" !loader.setting ">
-
-  <!-- <h3 class="mt-0">Category Settings</h3> -->
-
-  <div class="categories d-flex flex-wrap">
-    <mat-form-field class="border-box" appearance="outline"  *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]">
-      <input matInput name="category{{ n }}"  [(ngModel)]=" blog['category' + n] " (keyup)="a.validateInput($event, null, notAllowedChar)">
-      <mat-label>Category No. {{ n }} Name</mat-label>
-      <mat-hint>Input category name</mat-hint>
-    </mat-form-field>
-  </div>
-
-  <div class="flex-center my-4 text-center">
-    <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog-dashboard">
-      <i class="material-icons red">clear</i>
-      <span class="ml-1">Cancel</span>
-    </button>
-    <button class="mx-2 bg-primary" mat-flat-button type="submit">
-      <span class="mr-2">Submit</span>
-      <i class="material-icons">send</i>
-    </button>
-  </div>
-
-</form>
+    <p class="m-3 p-5 flex-center" *ngIf=" loader.setting ">
+        <mat-spinner [diameter]="30"></mat-spinner>
+        <b class="ml-3">Loading ...</b>
+      </p>
+      
+      <section  *ngIf=" !loader.setting ">
+          <div class="mb-3 mt-1 fs-md text-darkgreen">
+            You can input category names up to 8 which will appear on your blog menu. 
+          </div>
+          <div class="mb-4 fs-md">
+              <span class="text-danger">Note:</span>
+              Blog categories can not have special chars except space, hyphen. Cant start or end with space or hyphen.
+          </div>
+          
+          <form (ngSubmit)=" onSubmit( $event ) ">
+          
+            <div class="categories d-flex flex-wrap">
+              <mat-form-field class="border-box mb-3" appearance="outline"  *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]">
+                <input matInput name="category{{ n }}"  [(ngModel)]=" blog['category' + n] " (keyup)="a.validateInput($event, null, notAllowedChar)">
+                <mat-label>Category No. {{ n }} Name</mat-label>
+                <mat-hint>Input category name</mat-hint>
+              </mat-form-field>
+            </div>
+          
+            <div class="flex-center my-4 text-center">
+              <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog-dashboard">
+                <i class="material-icons red">clear</i>
+                <span class="ml-1">Cancel</span>
+              </button>
+              <button class="mx-2 bg-primary" mat-flat-button type="submit">
+                <span class="mr-2">Submit</span>
+                <i class="material-icons">send</i>
+              </button>
+            </div>
+          
+          </form>
+      </section>
+      
+</main>

@@ -5,7 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   MatButtonModule,
   MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatSelectModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { ComponentServiceModule } from '../../../../../../../share/philgo-api-components/service/component.service.module';
@@ -32,7 +33,8 @@ const routes: Routes = [
     MatNativeDateModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   declarations: [BlogStatVisitorComponent]
 })

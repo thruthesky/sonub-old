@@ -1,72 +1,59 @@
-<mat-toolbar  class="border-top border-top-md-0">
-    <h1 class="px-md-2 fw-light">Statistics</h1>
-</mat-toolbar>
+<header>
+    <mat-toolbar  class="border-top border-top-md-0">
+        <h1 class="px-md-2 fw-light">Statistics</h1>
+    </mat-toolbar>
+</header>
 
-<section class="bg-white p-3 px-md-4">
+<main  class="bg-white p-3 px-md-4">
 
-  <div class="d-md-flex fs-md">
-    <mat-form-field class="w-100 mr-md-3 border-box" appearance="outline">
-      <mat-label>Date From</mat-label>
-      <input matInput [matDatepicker]="from_date_picker" disabled [(ngModel)]=" from_date " (dateChange)="loadStat()">
-      <mat-datepicker-toggle matSuffix [for]="from_date_picker"></mat-datepicker-toggle>
-      <mat-datepicker #from_date_picker disabled="false"></mat-datepicker>
-    </mat-form-field>
+    <p class="flex-center" *ngIf=" loader.statVisitor ">
+      <mat-spinner [diameter]="30"></mat-spinner>
+      <b class="ml-3">Loading ...</b>
+    </p>
 
-    <mat-form-field class="w-100 ml-md-3 border-box" appearance="outline">
-      <mat-label>Date To</mat-label>
-      <input matInput [matDatepicker]="to_date_picker" disabled [(ngModel)]=" to_date " (dateChange)="loadStat()">
-      <mat-datepicker-toggle matSuffix [for]="to_date_picker"></mat-datepicker-toggle>
-      <mat-datepicker #to_date_picker disabled="false"></mat-datepicker>
-    </mat-form-field>
-  </div>
+    <section *ngIf=" !loader.statVisitor">
 
-  <div class="mb-3">
-    <button class="mr-1 bg-info" mat-flat-button (click)=" changeBarColor = true; loadStat('uniqueVisitor');">Visitor</button>
-    <button class="bg-secondary"mat-flat-button (click)=" changeBarColor = false; loadStat('pageView');">Page View</button>
-  </div>
-
-
-    <div class="bar-graph bg-light" *ngIf=" data && data[selectedStats]?.stats">
-      <div class="bar-graph-header border-bottom">
-        <h2 class="bar-graph-title">{{selectedTitle[selectedStats]}}</h2>
-        <div class="bar-graph-subtitle">
-          <span><b>Total:</b> {{ data[selectedStats]?.total }}</span>
+        <div class="d-md-flex fs-md">
+          <mat-form-field class="w-100 mr-md-3 border-box" appearance="outline">
+            <mat-label>Date From</mat-label>
+            <input matInput [matDatepicker]="from_date_picker" disabled [(ngModel)]=" from_date " (dateChange)="loadStat()">
+            <mat-datepicker-toggle matSuffix [for]="from_date_picker"></mat-datepicker-toggle>
+            <mat-datepicker #from_date_picker disabled="false"></mat-datepicker>
+          </mat-form-field>
+      
+          <mat-form-field class="w-100 ml-md-3 border-box" appearance="outline">
+            <mat-label>Date To</mat-label>
+            <input matInput [matDatepicker]="to_date_picker" disabled [(ngModel)]=" to_date " (dateChange)="loadStat()">
+            <mat-datepicker-toggle matSuffix [for]="to_date_picker"></mat-datepicker-toggle>
+            <mat-datepicker #to_date_picker disabled="false"></mat-datepicker>
+          </mat-form-field>
         </div>
-      </div>
-      <div [class.bar-graph-content-desktop]="a.isDesktop" 
-           [class.bar-graph-content-mobile]="a.isMobile">
-        <div *ngFor="let k of _.keys(data[selectedStats]['stats'])">
-          <div class="bar-item" [class.bar-item-color-page-views]="changeBarColor"  
-              [style.width.px]=" a.isMobile? barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) ) : '' "
-              [style.height.px]=" a.isDesktop? barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) ) : '' ">
-            <div class="bar-item-no" [class.text-danger]=" shortNumber(data[selectedStats]['stats'][k]) ">{{ shortNumber(data[selectedStats]['stats'][k]) }}</div>
-            <div class="bar-item-date">{{ formatDate( k )}}</div>
+      
+        <div class="mb-3">
+          <button class="mr-1 bg-info" mat-flat-button (click)=" changeBarColor = true; loadStat('uniqueVisitor');">Visitor</button>
+          <button class="bg-secondary"mat-flat-button (click)=" changeBarColor = false; loadStat('pageView');">Page View</button>
+        </div>
+      
+      
+          <div class="bar-graph bg-light" *ngIf=" data && data[selectedStats]?.stats">
+            <div class="bar-graph-header border-bottom">
+              <h2 class="bar-graph-title">{{selectedTitle[selectedStats]}}</h2>
+              <div class="bar-graph-subtitle">
+                <span><b>Total:</b> {{ data[selectedStats]?.total }}</span>
+              </div>
+            </div>
+            <div [class.bar-graph-content-desktop]="a.isDesktop" 
+                 [class.bar-graph-content-mobile]="a.isMobile">
+              <div *ngFor="let k of _.keys(data[selectedStats]['stats'])">
+                <div class="bar-item" [class.bar-item-color-page-views]="changeBarColor"  
+                    [style.width.px]=" a.isMobile? barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) ) : '' "
+                    [style.height.px]=" a.isDesktop? barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) ) : '' ">
+                  <div class="bar-item-no" [class.text-danger]=" shortNumber(data[selectedStats]['stats'][k]) ">{{ shortNumber(data[selectedStats]['stats'][k]) }}</div>
+                  <div class="bar-item-date">{{ formatDate( k )}}</div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- <table class="stat-table text-dark" *ngIf=" a.isMobile &&  data[selectedStats] && data[selectedStats]?.stats ">
-      <tr>
-        <th>Date</th>
-        <th class="bg-light">{{selectedTitle[selectedStats]}}</th>
-      </tr>
-      <tr *ngFor="let k of _.keys(data[selectedStats]['stats'])">
-        <td>{{ k | slice: 4 : 6}}/{{ k | slice: 6 : 8}}/{{ k | slice: 0 : 4}}</td>
-        <td class="text-center" [class.text-darkgreen]="data[selectedStats]['stats'][k]!=0"  [class.fw-bold]="data[selectedStats]['stats'][k]!=0"
-            *ngIf="data[selectedStats]['stats']" >{{ data[selectedStats]['stats'][k]}}</td>
-      </tr>
-      <tr>
-        <td class="p-2 fw-bold text-center">Total</td>
-        <td class="p-2 fw-bold text-center text-darkgreen"  *ngIf="data[selectedStats]?.total" >{{ data[selectedStats]?.total }}</td>
-      </tr>
-    </table> -->
-
-
-  <!--<div class="px-2 pt-4 pb-5">-->
-      <!--<p>Languages(Country) base on browser language</p>-->
-
-      <!--<p> Platform stat: Windows, Mac, Android, iOS, etc.</p>-->
-  <!--</div>-->
-
-</section>
+      
+      </section>
+</main>

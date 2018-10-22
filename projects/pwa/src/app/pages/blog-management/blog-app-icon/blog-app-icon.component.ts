@@ -12,17 +12,24 @@ export class BlogAppIconComponent implements OnInit {
   blog: ApiBlogSettings = <any>{};
   percentage = 0;
   loader = {
+    appIcon: true,
     submit: false
   };
   constructor(
     public a: AppService,
     public philgo: PhilGoApiService
   ) {
-
+    this.loader.appIcon = true;
     philgo.blogLoadSettings(philgo.myBlogDomain()).subscribe(res => {
       console.log('res: ', res);
       this.blog = Object.assign({}, res);
-    }, e => this.a.error(e));
+      this.loader.appIcon = false;
+    }, e => {
+      this.a.error(e),
+      this.loader.appIcon = false;
+    });
+
+
   }
 
   ngOnInit() {

@@ -13,6 +13,7 @@ export class BlogSettingsDomainComponent implements OnInit {
   blog: ApiBlogSettings = <any>{};
   domainRegex = /^[a-z][a-z0-9-]+[a-z0-9]$/;
   loader = {
+    domainSettings: true,
     submit: false
   };
   constructor(
@@ -20,11 +21,15 @@ export class BlogSettingsDomainComponent implements OnInit {
     public a: AppService,
     public philgo: PhilGoApiService
   ) {
-
+    this.loader.domainSettings = true;
     philgo.blogLoadSettings(philgo.myBlogDomain()).subscribe(res => {
       console.log('res: ', res);
       this.blog = Object.assign({}, res);
-    }, e => this.a.error(e));
+      this.loader.domainSettings = false;
+    }, e => {
+      this.a.error(e),
+      this.loader.domainSettings = false;
+    } );
   }
 
   ngOnInit() {

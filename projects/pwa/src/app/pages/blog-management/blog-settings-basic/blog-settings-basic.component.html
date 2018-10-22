@@ -1,111 +1,117 @@
-<mat-toolbar class="border-top border-top-md-0">
-  <h1 class="p-md-2 fw-light">Blog Basic Settings</h1>
-</mat-toolbar>
+<header>
+    <mat-toolbar class="border-top border-top-md-0">
+      <h1 class="p-md-2 fw-light">Blog Basic Settings</h1>
+    </mat-toolbar>
+</header>
 
-<p class="m-3 p-5 flex-center" *ngIf=" loader.setting ">
-  <mat-spinner [diameter]="30"></mat-spinner>
-  <b class="ml-3">Loading ...</b>
-</p>
+<main class="bg-white p-3 p-md-4">
 
-<form class="p-3 p-md-4 bg-white" (ngSubmit)=" onSubmit( $event ) "  *ngIf=" !loader.setting ">
-
-  <mat-form-field class="mt-1 w-100" appearance="outline">
-    <input matInput name="name" [(ngModel)]=" blog.name ">
-    <mat-label>Your blog name</mat-label>
-    <mat-hint>Input your blog name.</mat-hint>
-  </mat-form-field>
-
-  <mat-form-field class="mt-2 w-100" appearance="outline">
-    <input matInput name="keywords" [(ngModel)]=" blog.keywords " (keyup)="a.validateInput($event, 255)">
-    <mat-label>Keywords</mat-label>
-    <mat-hint>Input your sites keywords. This keywords will be used in SEO. You can add many keywords separating by
-      comma(,). But not exceeding 255 chars over all.</mat-hint>
-  </mat-form-field>
-
-
-  <mat-form-field class="mt-5 mt-md-3 w-100" appearance="outline">
-    <input matInput name="author" [(ngModel)]=" blog.author ">
-    <mat-label>Author Name</mat-label>
-    <mat-hint>Input your blog author name. This may be a person's name or company name.</mat-hint>
-  </mat-form-field>
-
-  <mat-form-field class="mt-4 mt-md-3 w-100" appearance="outline">
-    <textarea rows="10" matInput name="description" [(ngModel)]=" blog.description " (keyup)="a.validateInput($event, 255)"></textarea>
-    <mat-label>Describe your blogs</mat-label>
-    <mat-hint>Describe your blog in 255 letters.</mat-hint>
-  </mat-form-field>
-
-  <mat-form-field class="mt-4 mb-5 mt-md-3 w-100" appearance="outline">
-    <input matInput name="copyright" [(ngModel)]=" blog.copyright " (keyup)="a.validateInput($event, 80)">
-    <mat-label>Copyright</mat-label>
-    <mat-hint>
-      This is a good place to put your company name, mobile number, email. But keep it short. 60 letters are recommended.
-     <div class="my-2 text-darkgreen">Example). (C) Sonub, Inc. Contact: 000-0000-0000 admin@sonub.com.</div>
-    </mat-hint>
-  </mat-form-field>
-
-
-    <div class="blog-favicon mt-4">
-      <div class="py-2 px-dot-8rem text-dark fs-md">Favicon</div>
-
-      <div class="position-relative border rounded text-center">
-        <div class="flex-center my-2 mx-auto size-64px of-hidden">
-          <img *ngIf="blog.url_favicon" class="w-100" src="{{ blog.url_favicon }}">
-          <i *ngIf="!blog.url_favicon" class="material-icons fs-xxl text-secondary">
-              add_a_photo
-            </i>
-        </div>
-        <div class="text-center">
-          <div class="d-inline-block mw-180px my-2 p-1 rounded bg-success fs-xs white border-box" *ngIf=" percentage && code == 'blog_favicon' " [style.width]="percentage + '%'">{{percentage}}%</div>
-        </div>
-        <div><button class="w-180px fs-sm mx-2 mb-3" mat-flat-button>Upload Favicon</button></div>
-        <input class="transparent-cover w-100 h-100 pointer" type="file" name="favicon" (change)=" onChangeFile($event,  'blog_favicon' ) ">
-      </div>
-
-      <div class="py-2 px-dot-8rem fs-sm text-muted">
-        Upload Favicon.
-        Must be PNG image file with 64px width and 64px height.
-        <div class="my-2 text-darkgreen">The Favicon will be used in 3 places. (1) favicon (2) mobile logo (3) desktop logo.</div>
-      </div>
-    </div>
-
-    <div class="blog-seo-image">
-      <div class="py-2 px-dot-8rem text-dark fs-md">Preview Image</div>
-
-        <div class="position-relative  p-2 border rounded text-center">
-          <div class="flex-center of-hidden w-100 h-200px">
-            <img *ngIf="blog.url_seo_image" class="w-100" src="{{ blog.url_seo_image }}">
-            <i *ngIf=" !blog.url_seo_image " class="material-icons fs-xxl text-secondary">
-                add_a_photo
-              </i>
+    <p class="flex-center" *ngIf=" loader.setting ">
+      <mat-spinner [diameter]="30"></mat-spinner>
+      <b class="ml-3">Loading ...</b>
+    </p>
+      
+      <form (ngSubmit)=" onSubmit( $event ) "  *ngIf=" !loader.setting ">
+      
+        <mat-form-field class="mt-1 w-100" appearance="outline">
+          <input matInput name="name" [(ngModel)]=" blog.name ">
+          <mat-label>Your blog name</mat-label>
+          <mat-hint>Input your blog name.</mat-hint>
+        </mat-form-field>
+      
+        <mat-form-field class="mt-2 w-100" appearance="outline">
+          <input matInput name="keywords" [(ngModel)]=" blog.keywords " (keyup)="a.validateInput($event, 255)">
+          <mat-label>Keywords</mat-label>
+          <mat-hint>Input your sites keywords. This keywords will be used in SEO. You can add many keywords separating by
+            comma(,). But not exceeding 255 chars over all.</mat-hint>
+        </mat-form-field>
+      
+      
+        <mat-form-field class="mt-5 mt-md-3 w-100" appearance="outline">
+          <input matInput name="author" [(ngModel)]=" blog.author ">
+          <mat-label>Author Name</mat-label>
+          <mat-hint>Input your blog author name. This may be a person's name or company name.</mat-hint>
+        </mat-form-field>
+      
+        <mat-form-field class="mt-4 mt-md-3 w-100" appearance="outline">
+          <textarea rows="10" matInput name="description" [(ngModel)]=" blog.description " (keyup)="a.validateInput($event, 255)"></textarea>
+          <mat-label>Describe your blogs</mat-label>
+          <mat-hint>Describe your blog in 255 letters.</mat-hint>
+        </mat-form-field>
+      
+        <mat-form-field class="mt-4 mb-5 mt-md-3 w-100" appearance="outline">
+          <input matInput name="copyright" [(ngModel)]=" blog.copyright " (keyup)="a.validateInput($event, 80)">
+          <mat-label>Copyright</mat-label>
+          <mat-hint>
+            This is a good place to put your company name, mobile number, email. But keep it short. 60 letters are recommended.
+           <div class="my-2 text-darkgreen">Example). (C) Sonub, Inc. Contact: 000-0000-0000 admin@sonub.com.</div>
+          </mat-hint>
+        </mat-form-field>
+      
+      
+          <div class="blog-favicon mt-4">
+            <div class="py-2 px-dot-8rem text-dark fs-md">Favicon</div>
+      
+            <div class="position-relative border rounded text-center">
+              <div class="flex-center my-2 mx-auto size-64px of-hidden">
+                <img *ngIf="blog.url_favicon" class="w-100" src="{{ blog.url_favicon }}">
+                <i *ngIf="!blog.url_favicon" class="material-icons fs-xxl text-secondary">
+                    add_a_photo
+                  </i>
+              </div>
+              <div class="text-center">
+                <div class="d-inline-block mw-180px my-2 p-1 rounded bg-success fs-xs white border-box" *ngIf=" percentage && code == 'blog_favicon' " [style.width]="percentage + '%'">{{percentage}}%</div>
+              </div>
+              <div><button class="w-180px fs-sm mx-2 mb-3" mat-flat-button>Upload Favicon</button></div>
+              <input class="transparent-cover w-100 h-100 pointer" type="file" name="favicon" (change)=" onChangeFile($event,  'blog_favicon' ) ">
+            </div>
+      
+            <div class="py-2 px-dot-8rem fs-sm text-muted">
+              Upload Favicon.
+              Must be PNG image file with 64px width and 64px height.
+              <div class="my-2 text-darkgreen">The Favicon will be used in 3 places. (1) favicon (2) mobile logo (3) desktop logo.</div>
+            </div>
           </div>
-          <div class="text-center">
-            <div class="d-inline-block mw-180px my-2 p-1 rounded bg-success fs-xs white border-box" *ngIf=" percentage && code == 'blog_seo_image' "
-                 [style.width]="percentage + '%'">{{percentage}}%</div>
+      
+          <div class="blog-seo-image">
+            <div class="py-2 px-dot-8rem text-dark fs-md">Preview Image</div>
+      
+              <div class="position-relative  p-2 border rounded text-center">
+                <div class="flex-center of-hidden w-100 h-200px">
+                  <img *ngIf="blog.url_seo_image" class="w-100" src="{{ blog.url_seo_image }}">
+                  <i *ngIf=" !blog.url_seo_image " class="material-icons fs-xxl text-secondary">
+                      add_a_photo
+                    </i>
+                </div>
+                <div class="text-center">
+                  <div class="d-inline-block mw-180px my-2 p-1 rounded bg-success fs-xs white border-box" *ngIf=" percentage && code == 'blog_seo_image' "
+                       [style.width]="percentage + '%'">{{percentage}}%</div>
+                </div>
+                <div><button class="w-180px fs-sm m-2" mat-flat-button>Upload Preview Image</button></div>
+                <input class="transparent-cover  w-100 h-100 pointer" type="file" name="seoimage" (change)=" onChangeFile($event,  'blog_seo_image' ) ">
+              </div>
+      
+      
+      
+            <div class="py-2 px-dot-8rem fs-sm text-muted">
+              Site Preview Image. Recommend in 1024px pixels of width and 512 pixels of height. This image will be used in SEO and site previews.
+            </div>
           </div>
-          <div><button class="w-180px fs-sm m-2" mat-flat-button>Upload Preview Image</button></div>
-          <input class="transparent-cover  w-100 h-100 pointer" type="file" name="seoimage" (change)=" onChangeFile($event,  'blog_seo_image' ) ">
+      
+      
+        <div class="flex-center mt-5 my-md-5 text-center">
+          <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog-dashboard">
+            <i class="material-icons red">clear</i>
+            <span class="ml-1">Cancel</span>
+          </button>
+          <button class="flex-center mx-2 bg-primary" mat-flat-button type="submit">
+            <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
+            <span class="flex-center" *ngIf="loader.submit">
+                <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{a.t({ko: '로딩...', en: 'Loading...' })}}</span>
+            </span>
+          </button>
         </div>
-
-
-
-      <div class="py-2 px-dot-8rem fs-sm text-muted">
-        Site Preview Image. Recommend in 1024px pixels of width and 512 pixels of height. This image will be used in SEO and site previews.
-      </div>
-    </div>
-
-
-  <div class="flex-center mt-5 my-md-5 text-center">
-    <button class="mx-2 bg-white black bg-light" mat-flat-button type="button" routerLink="/blog-dashboard">
-      <i class="material-icons red">clear</i>
-      <span class="ml-1">Cancel</span>
-    </button>
-    <button class="flex-center mx-2 bg-primary" mat-flat-button type="submit">
-      <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
-      <span class="flex-center" *ngIf="loader.submit">
-          <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{a.t({ko: '로딩...', en: 'Loading...' })}}</span>
-      </span>
-    </button>
-  </div>
-
-</form>
+      
+      </form>
+      
+</main>
