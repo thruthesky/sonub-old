@@ -1,32 +1,9 @@
-<div class="bg-white p-3 mb-md-default-spacing text-center" *ngIf="  !a._.isWebPushPermissionRequested() ">
-    <div class="flex-center">
-        <i class="material-icons mr-2 fs-36px">notifications_active</i>
-        <div class="fs-lg">{{ a.t({ko: '채팅 알림을 허용해주세요.', en: 'Please accept Notification'}) }}</div>
-    </div>
-
-    <p class="text-muted fs-md">{{ a.t({ko: '채팅 알림을 허용 해 주셔야 새로운 채팅이 있을 시 알림을 받을 수 있습니다.', en: 'Please allow notification. So we can notify
-      you when your friends talk to you.'}) }}</p>
-    <button class="fs-lg py-2 px-5" mat-flat-button (click)=" requestWebPushPermission() ">
+<div class="p-4 mb-md-default-spacing text-center bg-white" *ngIf="  !a._.isWebPushPermissionRequested() ">
+    <div class="mt-2">{{ a.t({ko: '채팅 알림을 허용 해 주셔야 새로운 채팅이 있을 시 알림을 받을 수 있습니다.', en: 'Please allow notification. So we can notify
+            you when your friends talk to you.'}) }}</div>
+    <button class="flex-center mt-3 py-1 px-4 rounded bg-darkgreen fw-light fs-md" mat-flat-button (click)=" requestWebPushPermission() ">
+      <i class="material-icons mr-2">notifications_active</i>
       <span>{{ a.t({ko: '채팅 알림 허용하기', en: 'Allow Notification'}) }}</span>
     </button>
 
 </div>
-
-
-
-
-<!-- <mat-card class="example-card" *ngIf=" a._.isWebPushPermissionDenied() ">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{ a.t({ko: '채팅앱 설치', en: 'Install Chat App'}) }}</mat-card-title>
-    <mat-card-subtitle>{{ a.t({ko: '채팅앱을 설치 해 주세요.', en: 'Please install chat app'}) }}</mat-card-subtitle>
-  </mat-card-header>
-
-  <mat-card-content>
-    <p>
-      {{ a.t({ko: '채팅 알림을 거절하신 경우 반드시 채팅앱을 사용하시기 바랍니다.', en: 'You have denied chat notification. Please install Chat
-      App to be notified.'}) }}
-    </p>
-
-  </mat-card-content>
-</mat-card> -->
