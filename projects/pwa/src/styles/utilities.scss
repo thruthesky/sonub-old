@@ -144,7 +144,8 @@
     padding: 1em 1em .25em 1em;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
-    color: #6c757d;
+    // color: #6c757d;
+    color: #1F766A;
     font-weight: 600;
     font-size: .82rem;
   }
@@ -341,6 +342,9 @@
 
 .line-height-0{
   line-height: 0;
+}
+.line-height-1-dot-45{
+  line-height: 1.45!important
 }
 .fw-bold {
   font-weight: 600;

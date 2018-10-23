@@ -36,7 +36,6 @@
     flex: 1;
     padding: .5rem 1rem 1.1rem 1rem;
     border: 1px solid #d1d2d5;
-    background: #fff;
     font-size: .85rem;
     cursor: text;
 
@@ -48,7 +47,8 @@
 }
 
 
-.login-user-blog-content, .one-line-posts{
+.login-user-blog-content, 
+.one-line-posts{
   padding-bottom: 0!important
 }
 

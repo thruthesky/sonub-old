@@ -3,8 +3,8 @@
     <img class="w-100" src="{{ philgo.thumbnailUrl({ width: 650, height: 650, path: post.path_of_featured_image }) }}">
   </div>
   <div class="of-hidden">
-    <div class="text  mb-1 text-link bold truncate fs-md" *ngIf=" post.subject ">{{ post.subject }} </div>
-    <div class="text mt-2px text-dark fs-sm" *ngIf=" a.postContentOnMainPhoto(post) ">
+    <div class="text  mb-2 mt-1 text-link bold truncate fs-md" *ngIf=" post.subject ">{{ post.subject }} </div>
+    <div class="text mt-2px line-height-1-dot-45 text-dark fs-sm" *ngIf=" a.postContentOnMainPhoto(post) ">
       {{ a.postContentOnMainPhoto(post) }}...
     </div>
   </div>

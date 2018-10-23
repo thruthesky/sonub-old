@@ -1,7 +1,8 @@
 <a class="flex-center justify-content-between pb-default-spacing of-hidden fs-sm" *ngIf=" post " (click)=" a.openPostView( post, $event ) " href="{{ a.getBlogViewListUrl( post ) }}">
-  <div class="truncate">
-      <span class="text-darkgreen">{{ post.blog }} - </span>
-      <span class="ml-1 text-dark"> {{ post.subject }} </span>
+  <div class="flex-center of-hidden">
+      <i class="material-icons mr-1 fs-lg text-warning">whatshot</i>
+      <span class="text-darkgreen mr-2 line-height mt-2px">{{ post.blog }}</span>
+      <span class="text-dark line-height mt-2px truncate">{{ post.subject }}</span>
   </div>
   <i class="material-icons fs-md text-secondary"> chevron_right </i>
 </a>
