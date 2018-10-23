@@ -151,7 +151,7 @@
   </div>
 
   <section class="side-menu blog-site-content" *ngIf=" a.inMyBlog ">
-    <header class="pointer text-dark" routerLink="{{ a.getBlogManagementUrl() }}">Blog Management</header>
+    <header class="pointer text-dark" routerLink="{{ a.getBlogManagementUrl() }}">{{ a.t({'en': 'Blog Management', 'ko': '블로그 관리'})}}</header>
     <ul>
       <li>
           <a routerLink="/blog-post">

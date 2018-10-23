@@ -229,6 +229,7 @@ export class AppService {
 
   initLanguage() {
     _.languageCode = _.getUserLanguage();
+    // _.languageCode = 'ko';
   }
 
   initFirebase() {
