@@ -34,26 +34,30 @@
           <button class="bg-secondary"mat-flat-button (click)=" changeBarColor = false; loadStat('pageView');">Page View</button>
         </div>
       
-      
-          <div class="bar-graph bg-light" *ngIf=" data && data[selectedStats]?.stats">
-            <div class="bar-graph-header border-bottom">
-              <h2 class="bar-graph-title">{{selectedTitle[selectedStats]}}</h2>
-              <div class="bar-graph-subtitle">
-                <span><b>Total:</b> {{ data[selectedStats]?.total }}</span>
-              </div>
+        <p class="flex-center m-3 p-5" *ngIf="  !data[selectedStats]?.stats" >
+          <mat-spinner [diameter]="30"></mat-spinner>
+          <b class="ml-3">Loading ...</b>
+        </p>
+
+        <div class="bar-graph bg-light" *ngIf=" data && data[selectedStats]?.stats">
+          <div class="bar-graph-header border-bottom">
+            <h2 class="bar-graph-title">{{selectedTitle[selectedStats]}}</h2>
+            <div class="bar-graph-subtitle">
+              <span><b>Total:</b> {{ data[selectedStats]?.total }}</span>
             </div>
-            <div [class.bar-graph-content-desktop]="a.isDesktop" 
-                 [class.bar-graph-content-mobile]="a.isMobile">
-              <div *ngFor="let k of _.keys(data[selectedStats]['stats'])">
-                <div class="bar-item" [class.bar-item-color-page-views]="changeBarColor"  
-                    [style.width.px]=" a.isMobile? barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) ) : '' "
-                    [style.height.px]=" a.isDesktop? barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) ) : '' ">
-                  <div class="bar-item-no" [class.text-danger]=" shortNumber(data[selectedStats]['stats'][k]) ">{{ shortNumber(data[selectedStats]['stats'][k]) }}</div>
-                  <div class="bar-item-date">{{ formatDate( k )}}</div>
-                </div>
+          </div>
+          <div [class.bar-graph-content-desktop]="a.isDesktop" 
+                [class.bar-graph-content-mobile]="a.isMobile">
+            <div *ngFor="let k of _.keys(data[selectedStats]['stats'])">
+              <div class="bar-item" [class.bar-item-color-page-views]="changeBarColor"  
+                  [style.width.px]=" a.isMobile? barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) ) : '' "
+                  [style.height.px]=" a.isDesktop? barHeight(data[selectedStats]['stats'][k] , maxCount(data[selectedStats]) ) : '' ">
+                <div class="bar-item-no" [class.text-danger]=" shortNumber(data[selectedStats]['stats'][k]) ">{{ shortNumber(data[selectedStats]['stats'][k]) }}</div>
+                <div class="bar-item-date">{{ formatDate( k )}}</div>
               </div>
             </div>
           </div>
+        </div>
       
       </section>
 </main>

@@ -16,7 +16,7 @@
             You can install your blog on visitors mobile home screen just like native app.
             This give you great benefit since users can easily access your blog.
           </div>
-          <div class="mb-4 fs-md">
+          <div class="mb-4 p-3 bg-light fs-md">
             <span class="text-danger">Note:</span>
             This is very important feature. If you are really serious about running a good blog site, please fill in the form and
             submit.
@@ -24,19 +24,19 @@
         
         <form (ngSubmit)=" onSubmit( $event ) ">
         
-          <mat-form-field class="mt-1 w-100" appearance="outline">
+          <mat-form-field class="mt-2 w-100" appearance="outline">
             <input matInput name="app_name" [(ngModel)]=" blog.app_name " (keyup)="a.validateInput($event, 32)">
             <mat-label>App name</mat-label>
             <mat-hint>Input app name in 32 letters. Ex) Social Network Hub</mat-hint>
           </mat-form-field>
         
-          <mat-form-field class="mt-1 w-100" appearance="outline">
+          <mat-form-field class="mt-2 w-100" appearance="outline">
             <input matInput name="app_short_name" [(ngModel)]=" blog.app_short_name " (keyup)="a.validateInput($event, 16)">
             <mat-label>App short name</mat-label>
             <mat-hint>Input app short name in 16 letters. Ex) Sonub</mat-hint>
           </mat-form-field>
         
-          <mat-form-field class="mt-1 w-100" appearance="outline">
+          <mat-form-field class="mt-2 w-100" appearance="outline">
             <mat-select name="app_theme_color" [(ngModel)]=" blog.app_theme_color ">
               <mat-option *ngFor="let color of ['white', 'silver', 'gray', 'black', 'red', 'maroon', 'yellow', 'olive',
                                                 'lime', 'green', 'aqua', 'teal', 'blue', 'navy', 'fuchsia', 'purple']"
