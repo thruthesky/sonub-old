@@ -1,7 +1,7 @@
 <section class="new-messages" *ngIf=" blog ">
     <header  *ngIf="blog">
         <mat-toolbar class="border-top border-top-md-0">
-            <h1 class="px-md-2 fw-light">{{ blog.name }} Blog Comments</h1>
+            <h1 class="px-md-2 fw-light">{{ blog.name }} {{ a.t({ en:"Blog Comments", ko:'블로그 댓글' }) }}</h1>
         </mat-toolbar>
     </header>
 
@@ -11,7 +11,7 @@
         <section *ngIf="comments">
             <h2 class="d-flex align-items-center mb-4 fs-md text-dark">
                 <i class="material-icons mr-2 text-dark">apps</i>
-                You will see all of your blog comments in this page.
+                {{ a.t({ en:"You will see all of your blog comments in this page.", ko:'이 페이지에서 모든 블로그 댓글을 볼 수 있습니다.' }) }}
             </h2>
     
             <div class="new-comments">

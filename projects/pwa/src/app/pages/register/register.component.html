@@ -9,9 +9,14 @@
   <section class="desc bg-white px-3 pt-4 px-md-4 pt-md-5 fs-md" *ngIf="a.loggedOut">
     <div class="d-md-flex align-items-center text-dark">
       <i class="d-none d-md-block material-icons ml-1 mr-2 text-darkgreen">verified_user</i>
-      You are about to register sonub.com. Please read 
-      <span class="mx-1 text-link pointer" (click)=" a.displayHtml('terms-and-conditions') ">'terms & conditions'</span>
-       and <span class="mx-1 text-link pointer" (click)=" a.displayHtml('privacy') ">privacy</span>.
+      {{ a.t({ko: 'sonub.com을 등록하려고합니다. 읽어주세요', en: 'You are about to register sonub.com. Please read ' })}}
+      <span class="mx-1 text-link pointer" (click)=" a.displayHtml('terms-and-conditions') ">
+        {{ a.t({ko: "'이용 약관'", en: "'terms & conditions'" })}}
+      </span>
+        {{ a.t({ko: "과", en: "and" })}}
+       <span class="mx-1 text-link pointer" (click)=" a.displayHtml('privacy') ">
+          {{ a.t({ko: "개인 정보 정책", en: "privacy" })}}
+        </span>.
     </div>
   </section>
   <section class="p-3 p-md-4 bg-white">

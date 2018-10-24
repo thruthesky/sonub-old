@@ -7,7 +7,7 @@
           <a class="flex-center mr-1" routerLink="/">
             <app-logo></app-logo>
           </a>
-          <input name="q" #q placeholder="Search">
+          <input name="q" #q placeholder="{{ a.t({ en:'Search', ko: '수색'}) }}">
           <i class="searchbar-button material-icons" (click)=" a.openSearch( q.value ) ">search</i>
         </div>
       </form>
@@ -19,8 +19,8 @@
         {{ a.myName }}
       </a>
 
-      <span class="white" (click)=" a.openMyBlog() " *ngIf=" ! a.inMyBlog ">My Blog</span>
-      <a routerLink="/post">Create</a>
+      <span class="white" (click)=" a.openMyBlog() " *ngIf=" ! a.inMyBlog "> {{ a.t({ en:'My Blog', ko: '내 블로그 '}) }}</span>
+      <a routerLink="/post"> {{ a.t({ en:'Create', ko: ' 몹시 떠들어 대다'}) }}</a>
 
       <i class="material-icons" routerLink="{{ a.getBlogNewCommentsUrl() }}">
         chat

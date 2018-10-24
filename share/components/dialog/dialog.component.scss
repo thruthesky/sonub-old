@@ -1,20 +1,22 @@
-.previewImage {
-  position: relative;
-  .mat-dialog-container {
+app-dialog{
+  .previewImage {
     position: relative;
-    padding: 0;
-    .close-icon {
-      padding: .2em;
-      border-radius: 50%;
-      background-color: #0088ff;
-      color: white;
-      margin: .2em;
-      cursor: pointer;
-    }
-    .mat-dialog-content {
-      display: flex;
+    .mat-dialog-container {
+      position: relative;
       padding: 0;
-      margin: 0;
+      .close-icon {
+        padding: .2em;
+        border-radius: 50%;
+        background-color: #0088ff;
+        color: white;
+        margin: .2em;
+        cursor: pointer;
+      }
+      .mat-dialog-content {
+        display: flex;
+        padding: 0;
+        margin: 0;
+      }
     }
   }
 }

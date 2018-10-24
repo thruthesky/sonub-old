@@ -1,9 +1,9 @@
 
 <mat-list class="bg-white border py-3">
-  <h3 matSubheader>Menu</h3>
+  <h3 matSubheader>{{ a.t({ en:'Menu', ko: '메뉴'}) }}</h3>
   <mat-list-item routerLink="/">
     <i class="material-icons">home</i>
-    <h4 matLine>Home</h4>
+    <h4 matLine>{{ a.t({ en:'Home', ko: '집'}) }}</h4>
   </mat-list-item>
 
 
@@ -11,41 +11,41 @@
     <i class="material-icons">
       crop_original
     </i>
-    <h4 matLine>My Blog</h4>
+    <h4 matLine>{{ a.t({ en:'My Blog', ko: '내 블로그'}) }}</h4>
   </mat-list-item>
   <mat-list-item (click)=" a.openBlogSettings() " *ngIf=" a.inMyBlog ">
     <i class="material-icons">
       subject
     </i>
-    <h4 matLine>Blog dashboard</h4>
+    <h4 matLine>{{ a.t({ en:'Blog dashboard', ko: ' 블로그 대시 보드'}) }}</h4>
   </mat-list-item>
 
   <mat-list-item routerLink="/forum/{{ a.DISCUSSION }}">
     <i class="material-icons">chat</i>
-    <h4 matLine>Discussion</h4>
+    <h4 matLine>{{ a.t({ en:'Discussion', ko: '토론'}) }}</h4>
   </mat-list-item>
 
   <mat-list-item routerLink="/forum/{{ a.QNA }}">
     <i class="material-icons">help</i>
-    <h4 matLine>QnA</h4>
+    <h4 matLine> {{ a.t({ en:'QnA', ko: '질문과 답변'}) }}</h4>
   </mat-list-item>
 
   <mat-list-item routerLink="/forum/{{ a.NEWS }}">
     <i class="material-icons">fiber_new</i>
-    <h4 matLine>News</h4>
+    <h4 matLine> {{ a.t({ en:'News', ko: '뉴스'}) }}</h4>
   </mat-list-item>
 
 
   <mat-list-item routerLink="/job">
     <i class="material-icons">work</i>
-    <h4 matLine>Jobs</h4>
+    <h4 matLine> {{ a.t({ en:'Jobs', ko: '일자리'}) }}</h4>
   </mat-list-item>
 
 
 
   <mat-list-item routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'sonub-help') }}">
     <i class="material-icons">help</i>
-    <h4 matLine>Help</h4>
+    <h4 matLine>{{ a.t({ en:'Help', ko: '도움'}) }}</h4>
   </mat-list-item>
 
 
@@ -54,13 +54,13 @@
     <i class="material-icons">
       arrow_forward_ios
     </i>
-    <h4 matLine>Login</h4>
+    <h4 matLine> {{ a.t({ en:'Login', ko: ' 로그인'}) }}</h4>
   </mat-list-item>
   <mat-list-item (click)=" philgo.logout(); a.openHome() " *ngIf=" philgo.isLoggedIn() ">
     <i class="material-icons">
       arrow_forward_ios
     </i>
-    <h4 matLine>Logout</h4>
+    <h4 matLine> {{ a.t({ en:'Logout', ko: '로그 아웃'}) }}</h4>
   </mat-list-item>
 
   <mat-list-item routerLink="/register" *ngIf=" philgo.isLoggedOut() ">

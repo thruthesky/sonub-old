@@ -5,63 +5,63 @@
     <i class="material-icons">
       assignment
     </i>
-    <h4 matLine>Blog Basic Information</h4>
+    <h4 matLine>{{ a.t({ en:'Blog Basic Information', ko:'블로그 기본 정보' }) }}</h4>
   </mat-list-item>
   <mat-list-item routerLink="{{ a.getBlogSettingsDomainUrl() }}">
     <i class="material-icons">
       create
     </i>
-    <h4 matLine>Change Your Blog Domain</h4>
+    <h4 matLine>{{ a.t({ en:'Change Your Blog Domain', ko:'블로그 도메인 변경' }) }}</h4>
   </mat-list-item>
 
   <mat-list-item routerLink="{{ a.getBlogSettingsCategoryUrl() }}">
     <i class="material-icons">category</i>
-    <h4 matLine>Blog Categories</h4>
+    <h4 matLine> {{ a.t({ en:'Blog Categories', ko:' 블로그 카테고리' }) }}</h4>
   </mat-list-item>
 
 
 
   <mat-list-item routerLink="/seo">
     <i class="material-icons">settings_ethernet</i>
-    <h4 matLine>Meta Tags</h4>
+    <h4 matLine> {{ a.t({ en:'Meta Tags', ko:'메타 태그' }) }}</h4>
   </mat-list-item>
 
   
 
   <mat-list-item routerLink="{{ a.getBlogStatVisitorUrl() }}">
     <i class="material-icons">equalizer</i>
-    <h4 matLine>Visitor Statistics</h4>
+    <h4 matLine> {{ a.t({ en:'Visitor Statistics', ko:'방문자 통계' }) }}</h4>
   </mat-list-item>
 
   <mat-list-item routerLink="{{ a.getBlogSettingsSitemapUrl() }}">
     <i class="material-icons">transform</i>
-    <h4 matLine>Sitemap</h4>
+    <h4 matLine> {{ a.t({ en:'Sitemap', ko:' 사이트 맵' }) }}</h4>
   </mat-list-item>
 
 
   <mat-list-item routerLink="{{ a.getBlogSettingsAppIconUrl() }}">
     <i class="material-icons">mobile_friendly</i>
-    <h4 matLine>Mobile Application Setup</h4>
+    <h4 matLine>  {{ a.t({ en:'Mobile Application Setup', ko:'모바일 애플리케이션 설정' }) }}</h4>
   </mat-list-item>
 
   <mat-list-item routerLink="{{ a.getBlogPushNotificationsUrl() }}">
     <i class="material-icons">add_alert</i>
-    <h4 matLine>Notifications</h4>
+    <h4 matLine>{{ a.t({ en:'Notifications', ko:'알림' }) }}</h4>
   </mat-list-item>
 
   <mat-list-item routerLink="/blog-new-comments">
     <i class="material-icons">textsms</i>
-    <h4 matLine>New Comments</h4>
+    <h4 matLine>{{ a.t({ en:'New Comments', ko:'새로운 댓글' }) }}</h4>
   </mat-list-item>
 
   <mat-list-item routerLink="/blog-new-events">
     <i class="material-icons">event_note</i>
-    <h4 matLine>Blog Events</h4>
+    <h4 matLine>{{ a.t({ en:'Blog Events', ko:'블로그 이벤트' }) }}</h4>
   </mat-list-item>
 
   <mat-list-item (click)=" a.openBlogTips() ">
     <i class="material-icons">contact_support</i>
-    <h4 matLine>Blog Tips</h4>
+    <h4 matLine>{{ a.t({ en:'Blog Tips', ko:'블로그 자습서' }) }}</h4>
   </mat-list-item>
 
 

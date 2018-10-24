@@ -11,7 +11,7 @@
     </div>
     <div class="editor d-flex align-items-center justify-content-between mt-md-0 rounded" [class.mt-2]="philgo.isLoggedIn()">
       <div class="text">
-        <span class="text-dark fw-bold">What's your story?</span>
+        <span class="text-dark fw-bold">{{ a.t({ en:"What's your story?", ko: '네 이야기는 뭐야?'}) }}</span>
       </div>
       <i class="material-icons ml-2 text-secondary">all_inbox</i>
     </div>
@@ -38,7 +38,7 @@
       <!--/login-user-blog-content-->
 
       <div class=" my-md-default-spacing p-default-spacing bg-white">
-          <h2 class="mt-0 mb-default-spacing fs-md text-dark">Community Posts</h2>
+          <h2 class="mt-0 mb-default-spacing fs-md text-dark"> {{ a.t({ en:"Community Posts", ko: '커뮤니티 게시물'}) }}</h2>
           <div class="d-md-flex align-items-stretch">
               <div class="community-photos of-hidden w-md-45" *ngIf=" a.frontPage?.communityPhotos?.length">
                   <div class="row no-gutters mx-minus-2px">
@@ -72,7 +72,7 @@
 
 
       <div class="my-md-default-spacing px-default-spacing pt-default-spacing bg-white" *ngIf=" a.frontPage?.news?.length ">
-        <h2 class="mt-0 mb-md-default-spacing fs-md text-dark">Sonub News</h2>
+        <h2 class="mt-0 mb-md-default-spacing fs-md text-dark">{{ a.t({ en:'Sonub News', ko: '소누브 뉴스'}) }}</h2>
         <div class="row no-gutters mr-minus-default-spacing">
           <div class="col-6 col-md-4 border-box pr-default-spacing" *ngFor="let post of a.frontPage.news; let index = index " >
               <app-post-multiline-with-thumbnail [post]=" post "></app-post-multiline-with-thumbnail>
@@ -100,7 +100,7 @@
       </div>
 
       <div class="blog-latest-photos my-md-default-spacing px-default-spacing pt-default-spacing bg-white" *ngIf=" a.frontPage?.latest_blog_photos?.length ">
-        <h2 class="mt-0 mb-md-default-spacing fs-md text-dark">Blog Posts</h2>
+        <h2 class="mt-0 mb-md-default-spacing fs-md text-dark">{{ a.t({ en:'Blog Posts', ko: '블로그 게시물'}) }}</h2>
         <div class="row no-gutters mr-minus-default-spacing">
             <div class="col-6 col-md-4 border-box pr-default-spacing" *ngFor="let photo of a.frontPage.latest_blog_photos ">
               <app-post-multiline-with-thumbnail [post]="photo"></app-post-multiline-with-thumbnail>
@@ -108,15 +108,6 @@
         </div>
       </div>
 
-
-      <!-- <div class="community-posts w-100 overflow-hidden" *ngIf=" a.frontPage?.communityPhotos?.length">
-            <div class="row no-gutters">
-              <div class="col" *ngFor="let post of a.frontPage.communityPhotos">
-                <app-post-thumbnail-with-text [post]="  post "></app-post-thumbnail-with-text>
-              </div>
-            </div>
-          </div> -->
-      <!--/community-posts-->
     </div>
   </div>
 

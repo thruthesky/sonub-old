@@ -1,20 +1,22 @@
 <section class="new-messages" *ngIf=" blog ">
   <header  *ngIf="blog">
       <mat-toolbar class="border-top border-top-md-0">
-          <h1 class="px-md-2 fw-light">{{ blog.name }} Blog Events</h1>
+          <h1 class="px-md-2 fw-light">{{ blog.name }} {{ a.t({ en:'Blog Events', ko:'블로그 이벤트' }) }}</h1>
       </mat-toolbar>
   </header>
 
   <main class="bg-white p-3 px-md-4 fs-md">
       <app-loader *ngIf=" ! events "></app-loader>
 
-          <div class="mt-2 text-dark">You will see all of your blog events in this page.</div>
+          <div class="mt-2 text-dark">
+              {{ a.t({ en:' You will see all of your blog events in this page.', ko:'이 페이지에서 모든 블로그 이벤트를 볼 수 있습니다.' }) }}
+          </div>
 
           <div class="my-4 p-3 bg-light">
-              <h2 class="mb-2 mt-1 fs-md">New Subscribers</h2>
+              <h2 class="mb-2 mt-1 fs-md"> {{ a.t({ en:'New Subscribers ', ko:'신규 구독자' }) }}</h2>
               <div class="d-flex align-items-center mt-3 mb-1">
                 <i class="material-icons mr-2 text-dark">storage</i>
-                Total: {{ events.total_no_of_tokens }}
+                {{ a.t({ en:'Total', ko:'합계' }) }}: {{ events.total_no_of_tokens }}
               </div>
               <div class="subscribes" *ngIf="events.tokens">
                 <div class="py-1 events" *ngFor="let token of events.tokens">
@@ -25,19 +27,19 @@
           </div>
 
           <div class="my-4 p-3 bg-light">
-              <h2 class="mb-3 mt-1 fs-md">Today Visitors</h2>
+              <h2 class="mb-3 mt-1 fs-md"> {{ a.t({ en:'Today Visitors', ko:'오늘 방문자' }) }}</h2>
 
               <div class="d-flex align-items-center mb-2">
                 <i class="material-icons mr-2 text-dark">insert_invitation</i>
-                Today's Date time:
+                {{ a.t({ en:"Today's Date time", ko:'오늘 날짜' }) }}:
               </div>
               <div class="d-flex align-items-center mb-2">
                 <i class="material-icons mr-2 text-dark">visibility</i>
-                  No of page views:
+                {{ a.t({ en:"No of page views", ko:'페이지 조회 수' }) }}:
               </div>
               <div class="d-flex align-items-center mb-2">
                 <i class="material-icons mr-2 text-dark">how_to_reg</i>
-                No of visitors:
+                {{ a.t({ en:"No of visitors", ko:'방문자 수' }) }}: 
               </div>
           </div>
     </main>

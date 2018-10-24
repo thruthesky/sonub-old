@@ -11,7 +11,7 @@
       <div class="ml-3">
         <b>Looking for foreign boss?</b><br>
         We have a lot of foregin boss who want to hire pinoy workers.
-        <a class="link">Sonub Jobs</a>
+        <a href="/job" class="link">Sonub Jobs</a>
       </div>
     </div>
   </div>
@@ -26,28 +26,28 @@
         <div class="search d-flex">
             <app-logo></app-logo>
             <input name="q" #q class="flex-grow-1 fs-md mx-1 border-0">
-            <button>Search</button>
+            <button> {{ a.t({ en:'Search', ko: ' 수색'}) }}</button>
           </div>
     </form>
 
     <div class="container-fluid  my-2 p-0">
       <div class="row no-gutters mx-minus-2px">
         <div class="col">
-          <a routerLink="/contact"><i class="material-icons">alternate_email</i>Contact Us</a>
-          <a routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'sonub-help') }}"><i class="material-icons">help_outline</i>Help</a>
+          <a routerLink="/contact"><i class="material-icons">alternate_email</i> {{ a.t({ en:'Contact Us', ko: '문의하기 '}) }}</a>
+          <a routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'sonub-help') }}"><i class="material-icons">help_outline</i>{{ a.t({ en:'Help', ko: '도움'}) }}</a>
           <a href="https://sonub.com" (click)=" onClickSonub( $event ) "><i class="material-icons">question_answer</i>Sonub</a>
         </div>
         <div class="col">
-          <span (click)=" a.displayHtml('terms-and-conditions') "><i class="material-icons">copyright</i>Terms & Conditions</span>
-          <span (click)=" a.displayHtml('privacy') "><i class="material-icons">lock</i>Privacy</span>
-          <span (click)=" a.philgo.logout() " *ngIf=" a.loggedIn "><i class="material-icons">account_circle</i>Logout ({{ a.philgo.myName() }})</span>
-          <span (click)=" a.openLogin() " *ngIf=" a.loggedOut "><i class="material-icons">account_circle</i>Login</span>
+          <span (click)=" a.displayHtml('terms-and-conditions') "><i class="material-icons">copyright</i>{{ a.t({ en:'Terms & Conditions', ko: '이용 약관'}) }}</span>
+          <span (click)=" a.displayHtml('privacy') "><i class="material-icons">lock</i>{{ a.t({ en:'Privacy ', ko: '개인 정보 정책 '}) }}</span>
+          <span (click)=" a.philgo.logout() " *ngIf=" a.loggedIn "><i class="material-icons">account_circle</i>{{ a.t({ en:'Logout', ko: '로그 아웃'}) }} ({{ a.philgo.myName() }})</span>
+          <span (click)=" a.openLogin() " *ngIf=" a.loggedOut "><i class="material-icons">account_circle</i>{{ a.t({ en:'Login', ko: ' 로그인'}) }}</span>
         </div>
       </div>
     </div>
 
     <div (click)=" a._.scrollToTop(1) ">
-      <div class="p-2 border text-center pointer">Back To Top</div>
+      <div class="p-2 border text-center pointer">{{ a.t({ en:'Back To Top', ko: ' 맨 위로 '}) }}</div>
     </div>
   </div>
 

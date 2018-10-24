@@ -5,43 +5,79 @@
 </header>
 <main  class="bg-white p-3 px-md-4 fs-md">
   <div class="mt-2 mb-5 text-darkgreen">
-      <p class="my-3">The only goal to open a blog is to get more clients or visitors and PWA does the best.</p>
-      <p class="my-3">Sonub PWA Blog is the only blog service that gives you PWA specialized blog in the world.</p>
+      <p class="my-3">
+        {{ a.t({ 
+          en:"The only goal to open a blog is to get more clients or visitors and PWA does the best.",
+          ko:'블로그를 여는 유일한 목적은 더 많은 고객이나 방문객을 확보하는 것이고 PWA가 최선입니다.' }) 
+        }}
+      </p>
+      <p class="my-3">
+          {{ a.t({ 
+            en:"Sonub PWA Blog is the only blog service that gives you PWA specialized blog in the world.",
+            ko:'Sonub PWA 블로그는 전 세계에서 PWA 전문 블로그를 제공하는 유일한 블로그 서비스입니다.' }) 
+          }}
+      </p>
   </div>
       
      <section class="mt-4">
-        <h2 class="fs-lg">How PWA gets more clients and visitors?</h2>
+        <h2 class="fs-lg"> {{ a.t({ en:"How PWA gets more clients and visitors?", ko:'PWA가 더 많은 고객과 방문자를 얻는 방법?' }) }}</h2>
       
         <p class="mb-4">
-          Please search internet to know more about it. 
+          {{ a.t({ en:"Please search internet to know more about it.", ko:'그것에 대해 더 많이 알기 위해 인터넷을 검색하십시오.' }) }}
           <a class="d-inline-flex align-items-center text-primary" href="https://en.wikipedia.org/wiki/Progressive_Web_Apps" target="_blank">
-            See Wikipedia PWA documentation
+            {{ a.t({ en:"See Wikipedia PWA documentation.", ko:'Wikipedia PWA 문서보기' }) }}
             <i class="material-icons mx-1 fs-lg">open_in_new</i>
           </a>
         </p>
         
         <p class="d-flex align-items-center">
           <i class="material-icons mr-3 fs-icon">important_devices</i>
-          Once visitors visited your blog, you can bring them back to your blog by sending Push Notification.
+          (1)
+          {{ a.t({ 
+            en:"Once visitors visited your blog, you can bring them back to your blog by sending Push Notification.", 
+            ko:'방문자가 블로그를 방문하면 푸시 알림을 보내 블로그로 다시 가져올 수 있습니다.' }) 
+          }}
         </p>
         
         <p class="d-flex align-items-center">
           <i class="material-icons mr-3 fs-icon">how_to_reg</i>
-          (2) Sonub PWA blog will make visitors to participate into your blog.
+          (2)
+          {{ a.t({ 
+            en:" Sonub PWA blog will make visitors to participate into your blog.", 
+            ko:' Sonub PWA 블로그는 방문자가 귀하의 블로그에 참여하도록합니다.' }) 
+          }}
         </p>
         
         <p class="d-flex align-items-center">
           <i class="material-icons mr-3 fs-icon">tablet_android</i>
-          (3) Sonub PWA blog will install an app on visitors mobile. So visitors can reach your blog by one touch.
+          (3)
+          {{ a.t({ 
+            en:" Sonub PWA blog will install an app on visitors mobile. So visitors can reach your blog by one touch.", 
+            ko:' Sonub PWA 블로그는 방문객 모바일에 앱을 설치합니다. 방문자는 원터치로 블로그에 접속할 수 있습니다.' }) 
+          }}
         </p>
         
         <p class="d-flex align-items-center">
           <i class="material-icons mr-3 fs-icon">portable_wifi_off</i>
-          (4) Your blog app will work on offline without internet connection.
+          (4)
+          {{ a.t({ 
+            en: "Your blog app will work on offline without internet connection.", 
+            ko:' 블로그 앱은 인터넷 연결없이 오프라인에서도 작동합니다.' }) 
+          }}
         </p>
         
-        <p>And PWA can do much more!</p>
+        <p>
+          {{ a.t({ 
+            en: "And PWA can do much more!", 
+            ko:'그리고 PWA는 훨씬 더 많은 것을 할 수 있습니다!' }) 
+          }}
+        </p>
         
-        <p class="mt-5 mb-3 text-muted">Create world first PWA blog at sonub.com</p>
+        <p class="mt-5 mb-3 text-muted">
+            {{ a.t({ 
+              en: "Create world first PWA blog at sonub.com", 
+              ko:'PWA는 더 이상은 없습니다!' }) 
+            }}
+        </p>
      </section> 
 </main>

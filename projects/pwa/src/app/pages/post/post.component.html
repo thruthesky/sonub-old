@@ -12,26 +12,26 @@
       <!-- <div class="fs-sm">Select where you want to post...</div> -->
       <div class="d-flex flex-wrap flex-md-nowrap">
         <mat-form-field  appearance="outline" class="w-100">
-          <mat-label> Select where you want to post...</mat-label>
+          <mat-label> {{ a.t({ en:'Select where you want to post', ko: '게시 할 위치를 선택하십시오'}) }}...</mat-label>
           <mat-select name='post_id' [(ngModel)]="form.post_id">
-            <mat-option value=''>Select Forum </mat-option>
-            <mat-option value='blog'>My Blog</mat-option>
-            <mat-option value='discussion'>Discussion</mat-option>
-            <mat-option value='answer'>Question & Answer</mat-option>
-            <mat-option value='market'>Buy & Sell</mat-option>
-            <mat-option value='media'>News</mat-option>
-            <mat-option value='sonub_help' *ngIf=" philgo.isAdmin() ">Sonub Help</mat-option>
+            <mat-option value=''>{{ a.t({ en:'Select Forum', ko: '포럼 선택'}) }}</mat-option>
+            <mat-option value='blog'> {{ a.t({ en:'My Blog', ko: '내 블로그'}) }}</mat-option>
+            <mat-option value='discussion'>{{ a.t({ en:'Discussion', ko: '토론'}) }}</mat-option>
+            <mat-option value='answer'>{{ a.t({ en:'Question & Answer', ko: '질문 답변'}) }}</mat-option>
+            <mat-option value='market'>{{ a.t({ en:'Buy & Sell', ko: '시장'}) }}</mat-option>
+            <mat-option value='media'>{{ a.t({ en:'News', ko: '뉴스'}) }}</mat-option>
+            <mat-option value='sonub_help' *ngIf=" philgo.isAdmin() ">{{ a.t({ en:'Sonub Help', ko: '소누브 도움말'}) }}</mat-option>
           </mat-select>
         </mat-form-field>
         <ng-container *ngIf=" a.blog?.categories ">
           <mat-form-field appearance="outline" class="w-100 ml-md-3" *ngIf=" form.post_id == 'blog' ">
-            <mat-label>Select Blog Category</mat-label>
+            <mat-label>{{ a.t({ en:'Select Blog Category', ko: '블로그 카테고리 선택'}) }}</mat-label>
             <mat-select name='category' [(ngModel)]="form.category">
               <ng-container *ngIf=" a.blog.categories?.length ">
                 <mat-option *ngFor=" let category of a.blog.categories " value='{{ category }}'>{{ category }}</mat-option>
               </ng-container>
               <ng-container *ngIf=" ! a.blog.categories?.length ">
-                <mat-option value=''>No category. Please create category.</mat-option>
+                <mat-option value=''> {{ a.t({ en:'No category. Please create category.', ko: '카테고리 없음. 카테고리를 생성하십시오.'}) }}</mat-option>
               </ng-container>
             </mat-select>
           </mat-form-field>
@@ -55,13 +55,13 @@
     
         <mat-form-field appearance="outline" class="w-100 mr-md-2">
           <input matInput type="email" name="email" [(ngModel)]=" form.user_email " (keyup)="onSubjectKeyUp()">
-          <mat-label>Email</mat-label>
+          <mat-label>{{ a.t({ en:'Email', ko: '이메일'}) }}</mat-label>
         </mat-form-field>
     
     
         <mat-form-field appearance="outline" class="w-100 ml-md-2">
           <input matInput type="password" name="password" [(ngModel)]=" form.user_password " (keyup)="onSubjectKeyUp()">
-          <mat-label>Password</mat-label>
+          <mat-label>{{ a.t({ en:'Password', ko: '암호'}) }}</mat-label>
         </mat-form-field>
     
       </section>
@@ -69,7 +69,7 @@
 
   <mat-form-field appearance="outline" class="mb-2 w-100">
     <input class="w-100" matInput name="subject" [(ngModel)]=" form.subject " (keyup)="onSubjectKeyUp()">
-    <mat-label>Title</mat-label>
+    <mat-label>{{ a.t({ en:'Title', ko: ' 표제 '}) }}</mat-label>
   </mat-form-field>
 
 
@@ -78,7 +78,7 @@
 
 
   }">
-    <div>Write comment</div>
+    <div> {{ a.t({ en:'Write comment', ko: '코멘트 쓰기 '}) }}</div>
   </ckeditor>
 
   <div class="flex-center justify-content-between my-2">
@@ -88,7 +88,7 @@
       <div class="camera transparent-cover-wrapper flex-center p-2">
         <input class="transparent-cover pointer w-100" type="file" name="file" (change)="onChangeFile($event)" accept="image/*">
         <i class="material-icons pointer fs-xl text-dark">camera_alt</i>
-        <span class="d-none d-md-inline ml-2 fs-md text-muted" *ngIf=" ! percentage  ">Upload Photo</span>
+        <span class="d-none d-md-inline ml-2 fs-md text-muted" *ngIf=" ! percentage  ">{{ a.t({ en:'Upload Photo', ko: '사진 업로드'}) }}</span>
       </div>
 
       <div class=" mw-100 mx-md-2 p-1 rounded  border-box bg-success fs-xs white text-center" *ngIf=" percentage  "
@@ -98,10 +98,10 @@
     <div class="right">
       <button class=" bg-white black bg-light fs-sm" mat-flat-button type="button" routerLink="/menu">
         <i class="material-icons red">clear</i>
-        <span class="ml-1">Cancel</span>
+        <span class="ml-1"> {{ a.t({ en:'Cancel', ko: '취소'}) }}</span>
       </button>
       <button class="flex-center bg-primary fs-sm" mat-flat-button type="submit" (click)=" onSubmit() ">
-        <span class="flex-center" *ngIf="!loader.submit">Submit <i class="ml-2 material-icons">send</i></span>
+        <span class="flex-center" *ngIf="!loader.submit">  {{ a.t({ en:'Cancel', ko: '제출'}) }} <i class="ml-2 material-icons">send</i></span>
         <span class="flex-center" *ngIf="loader.submit">
           <mat-spinner class="d-inline-block loader-white" [diameter]="24"></mat-spinner><span class="ml-2">{{a.t({ko: '로딩...', en: 'Loading...' })}}</span>
         </span>

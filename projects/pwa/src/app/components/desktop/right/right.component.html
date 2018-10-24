@@ -1,7 +1,7 @@
 <section class="stories box border-0" *ngIf=" a.frontPage?.stories?.length ">
   <header class="d-flex align-items-center">
       <i class="material-icons mr-2 line-height-0 text-darkgreen">view_list</i>
-      Your stories
+      {{ a.t({ en:'Your stories ', ko: '당신의 이야기'}) }}
   </header>
 
   <article class="posts pr-3 pb-3 fs-sm">
@@ -11,8 +11,8 @@
         <i class="material-icons">add</i>
       </span>
       <div class="right ml-2 w-70">
-        <div class="mt-2px fw-bold">Add your story here</div>
-        <div class="text-muted ">Sonub is free service.</div>
+        <div class="mt-2px fw-bold">{{ a.t({ en:'Add your story here', ko: '여기에 기사를 추가하십시오.'}) }} </div>
+        <div class="text-muted ">{{ a.t({ en:'Sonub is free service.', ko: 'Sonub는 무료 서비스입니다.'}) }}</div>
       </div>
     </a>
 

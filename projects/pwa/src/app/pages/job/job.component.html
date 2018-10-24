@@ -2,21 +2,21 @@
 
     <div class="flex-center flex-md-row flex-column p-default-spacing fs-md">
         <div class="text-center">
-            I am looking for 
+             {{ a.t({ en: 'I am looking for', ko: '내가 찾고 있어요' }) }}
             <mat-form-field appearance="outline" class="mx-1 mt-2 mt-md-0 mat-pb-0 fs-80">
-                <mat-label>Choose Occupation</mat-label>
+                <mat-label> {{ a.t({ en: 'Choose Occupation', ko: '직업 선택' }) }}</mat-label>
                 <mat-select name="category" [(ngModel)]="category">
-                    <mat-option value="housemaid">Housemaid</mat-option>
-                    <mat-option value="driver">Driver</mat-option>
-                    <mat-option value="englishtutor">English Tutor</mat-option>
-                    <mat-option value="carpenter">Carpenter</mat-option>
+                    <mat-option value="housemaid"> {{ a.t({ en: 'Housemaid', ko: '하녀' }) }}</mat-option>
+                    <mat-option value="driver">{{ a.t({ en: 'Driver', ko: '운전사' }) }}</mat-option>
+                    <mat-option value="englishtutor"> {{ a.t({ en: 'English Tutor', ko: '영어 교사' }) }}</mat-option>
+                    <mat-option value="carpenter">{{ a.t({ en: 'Carpenter ', ko: '목수' }) }}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="m-2">or</div> 
+        <div class="m-2">{{ a.t({ en: 'or', ko: '또는' }) }}</div> 
         <button class="mx-2 flex-center rounded border bg-primary py-1 px-3 white pointer" routerLink="/job-post">
             <i class="material-icons mr-1">how_to_reg</i>
-            <span>Apply for a job</span>
+            <span> {{ a.t({ en: 'Apply for a job', ko: '직업을 신청하다 ' }) }}</span>
         </button> 
 
     </div>

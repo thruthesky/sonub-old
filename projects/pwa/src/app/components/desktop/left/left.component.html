@@ -9,18 +9,18 @@
 
 <section class="root-site-content mt-3" *ngIf=" a.inRootSite ">
   <section class="side-menu">
-    <b class="text-dark">Sonub Network Hub</b>
+    <b class="text-dark">{{ a.t({ en: 'Sonub Network Hub', ko: '소누브 네트워크 허브'}) }}</b>
     <ul>
       <li>
         <a routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'become-best-blog-writer' ) }}">
           <i class="material-icons text-secondary">star</i>
-          Become Best Blog Writer
+          {{ a.t({ en: 'Become Best Blog Writer ', ko: '최고의 블로그 작가가되다.'}) }}
         </a>
       </li>
       <li>
         <a routerLink="{{ a.getUrlPostViewByAccessCode( a.HELP, 'create-your-blog-now' ) }}">
           <i class="material-icons text-secondary">format_bold</i>
-          Create your blog now
+           {{ a.t({ en: 'Create your blog now', ko: '지금 블로그 만들기'}) }}
         </a>
       </li>
     </ul>
@@ -28,42 +28,42 @@
   </section>
 
   <section class="side-menu root-site-content mt-3">
-    <header class="text-dark">Communities</header>
+    <header class="text-dark">{{ a.t({ en: 'Communities', ko: ' 커뮤니티'}) }}</header>
     <ul>
       <li>
         <a routerLink="{{ a.getForumUrl( a.DISCUSSION ) }}">
           <i class="material-icons text-secondary">question_answer</i>
-          Discussion
+          {{ a.t({ en: 'Discussion', ko: '토론'}) }}
         </a>
       </li>
       <li>
         <a routerLink="{{ a.getForumUrl( a.QNA ) }}">
           <i class="material-icons text-secondary">help</i>
-          QnA
+          {{ a.t({ en:'QnA', ko: '질문과 답변'}) }}
         </a>
       </li>
       <li>
         <a routerLink="{{ a.getForumUrl( a.BUYANDSELL ) }}">
           <i class="material-icons text-secondary">shopping_cart</i>
-          Buy and Sell
+          {{ a.t({ en:'Buy and Sell', ko: '시장'}) }}
         </a>
       </li>
       <li>
         <a routerLink="{{ a.getForumUrl( a.NEWS ) }}">
           <i class="material-icons text-secondary">fiber_new</i>
-          News
+          {{ a.t({ en:'News', ko: '뉴스'}) }}
         </a>
       </li>
       <li>
         <a routerLink="/job">
           <i class="material-icons text-secondary">work</i>
-          Jobs
+          {{ a.t({ en:'Jobs', ko: '일자리'}) }}
         </a>
       </li>
       <li *ngIf=" a.philgo.isAdmin() ">
         <a routerLink="{{ a.getForumUrl( a.HELP ) }}">
           <i class="material-icons text-secondary">help</i>
-          Managment Forum
+          {{ a.t({ en:'Managment Forum', ko: '관리 포럼'}) }}
         </a>
       </li>
     </ul>
@@ -77,58 +77,59 @@
   <section class="side-menu blog-site-content fs-small" *ngIf=" a.inMyBlog && a.blogSettingIncomplete ">
     <h3 class="mb-0 red fs-small fw-light">{{a.t({ en: 'Warning: Missing blog settings', ko: '경고 : 필수 블로그 설정이 누락되었습니다.' })}}</h3>
     <div class="pointer" *ngIf="a.blogSettingIncomplete == 'basic'" routerLink="/blog-settings/basic">
-      <div class="fw-bold mt-2">Blog Basic Settings</div>
+      <div class="fw-bold mt-2">{{ a.t({ en:'Blog Basic Settings', ko: '블로그 기본 설정'}) }}</div>
       <ul>
         <li class="d-flex align-items-center" *ngIf="!a.blog?.name">
           <i class="material-icons mr-2 fs-lg text-danger">clear</i>
-          Blog name (Required)</li>
+           {{ a.t({ en:'Blog name (Required)', ko: '블로그 이름 (필수) '}) }}</li>
         <li class="d-flex align-items-center" *ngIf="!a.blog?.keywords">
           <i class="material-icons mr-2 fs-lg text-danger">clear</i>
-          Blog keywords (Required)</li>
+          {{ a.t({ en:'Blog keywords (Required)', ko: '블로그 키워드 (필수)'}) }}</li>
         <li class="d-flex align-items-center" *ngIf="!a.blog?.author">
           <i class="material-icons mr-2 fs-lg text-danger">clear</i>
-          Blog author (Required)</li>
+          {{ a.t({ en:'Blog author (Required)', ko: '블로그 작성자 (필수)'}) }}</li>
         <li class="d-flex align-items-center" *ngIf="!a.blog?.description">
           <i class="material-icons mr-2 fs-lg text-danger">clear</i>
-          Blog description (Required)</li>
+          {{ a.t({ en:'Blog description (Required)', ko: '블로그 설명 (필수)'}) }}</li>
         <li class="d-flex align-items-center" *ngIf="!a.blog?.copyright">
           <i class="material-icons mr-2 fs-lg text-dark">indeterminate_check_box</i>
-          Blog copyright (Optional)</li>
+         {{ a.t({ en:'Blog copyright (Optional)', ko: '블로그 저작권 (선택 사항)'}) }}</li>
         <li class="d-flex align-items-center" *ngIf="!a.blog?.url_favicon">
           <i class="material-icons mr-2 fs-lg text-dark">indeterminate_check_box</i>
-          Blog Favicon (Optional)</li>
+          {{ a.t({ en:'Blog Favicon (Optional)', ko: '블로그 favicon (선택 사항)'}) }}</li>
         <li class="d-flex align-items-center" *ngIf="!a.blog?.url_seo_image">
           <i class="material-icons mr-2 fs-lg text-dark">indeterminate_check_box</i>
-          Preview Image (Optional)</li>
+         {{ a.t({ en:'Preview Image (Optional)', ko: '이미지 미리보기 (선택 사항)'}) }}</li>
       </ul>
     </div>
     <div *ngIf="a.blogSettingIncomplete == 'category'" routerLink="/blog-settings/category">
-      <div class="fw-bold mt-2">Blog Category Settings</div>
+      <div class="fw-bold mt-2">{{ a.t({ en:'Blog Category Settings', ko: '블로그 카테고리 설정'}) }}</div>
       <ul>
         <li class="d-flex align-items-center" >
           <i class="material-icons mr-2 fs-lg text-dark">clear</i>
-          Blog Category Missing
+          {{ a.t({ en:'Blog Category Missing', ko: '블로그 카테고리가 누락되었습니다.'}) }}
         </li>
       </ul>
     </div>
     <div *ngIf="a.blogSettingIncomplete == 'app'"  routerLink="/blog-settings/app-icon">
-      <div class="fw-bold mt-2">App Blog Settings</div>
+      <div class="fw-bold mt-2">{{ a.t({ en:'App Blog Settings', ko: '앱 블로그 설정'}) }}</div>
       <ul>
         <li class="d-flex align-items-center" *ngIf="!a.blog?.app_name">
           <i class="material-icons mr-2 fs-lg text-danger">clear</i>
-          Blog mobile name</li>
+          {{ a.t({ en:'Blog mobile name', ko: '블로그 모바일 이름'}) }}</li>
         <li class="d-flex align-items-center truncate" *ngIf="!a.blog?.app_short_name">
           <i class="material-icons mr-2 fs-lg text-danger">clear</i>
-          Blog mobile short name</li>
+           {{ a.t({ en:'Blog mobile short name', ko: ' 블로그 모바일 짧은 이름'}) }}</li>
         <li class="d-flex align-items-center truncate" *ngIf="!a.blog?.app_url_icons_src_512">
           <i class="material-icons mr-2 fs-lg text-danger">clear</i>
-          Blog mobile url icons.</li>
+          {{ a.t({ en:'Blog mobile url icons.', ko: '블로그 모바일 URL 아이콘.'}) }}
+          </li>
       </ul>
     </div>
   </section>
   <header class="mt-3 fw-bold fs-md text-dark" *ngIf=" a.blog?.categories?.length ">
     <span *ngIf=" a.blog?.name ">{{ a.blog.name }}</span>
-    <span class="text-muted" *ngIf=" !a.blog?.name ">No Blog Name</span>
+    <span class="text-muted" *ngIf=" !a.blog?.name ">{{ a.t({ en:'No Blog Name', ko: '블로그 이름 없음'}) }} </span>
   </header>
   <div class="side-menu mt-0" *ngIf=" a.blog?.categories?.length ">
     <ul>
@@ -142,7 +143,7 @@
       <li class="hover-icon flex-center justify-content-between" routerLink="{{ a.getBlogCategoryUrl( 'all' ) }}">
           <div class="d-flex align-items-center">
               <i class="material-icons mr-2 text-muted">view_comfy</i>
-              <span> All Post</span>
+              <span>{{ a.t({ en:'All Post', ko: '모든 게시물'}) }}</span>
           </div>
           <i class="hover-icon-toggle material-icons text-muted">more_horiz</i>
       </li>
@@ -156,37 +157,37 @@
       <li>
           <a routerLink="/blog-post">
             <i class="material-icons">add</i>
-            Post on my blog
+            {{ a.t({ en:' Post on my blog', ko: '내 블로그에 올리기 '}) }}
           </a>
       </li>
       <li>
         <a routerLink="{{ a.getBlogManagementUrl() }}">
             <i class="material-icons text-secondary">subject</i>
-            Blog dashboard
+            {{ a.t({ en:'Blog dashboard ', ko: '블로그 대시 보드'}) }}
         </a>
       </li>
       <li>
         <a routerLink="{{ a.getBlogSettingsCategoryUrl() }}">
             <i class="material-icons text-secondary">category</i>
-            Categories
+           {{ a.t({ en:'Categories', ko: '카테고리'}) }}
         </a>
       </li>
       <li>
         <a routerLink="{{ a.getBlogStatVisitorUrl() }}">
             <i class="material-icons text-secondary">equalizer</i>
-            Statistics
+            {{ a.t({ en:'Statistics', ko: '통계'}) }}
         </a>
       </li>
       <li>
         <a  routerLink="{{ a.getBlogSettingsSitemapUrl() }}">
             <i class="material-icons text-secondary">transform</i>
-            Sitemap
+            {{ a.t({ en:'Sitemap ', ko: '사이트 맵'}) }}
         </a>
       </li>
       <li *ngIf=" a.inMyBlog ">
         <a  (click)=" a.openBlogTips() ">
             <i class="material-icons text-secondary">contact_support</i>
-            Blog Tips
+             {{ a.t({ en:'Blog Tips', ko: '블로그 팁'}) }}
         </a>
       </li>
 
@@ -195,21 +196,21 @@
 
 
   <section class="side-menu root-site-content mt-3">
-      <header class="text-dark">Communities</header>
+      <header class="text-dark">{{ a.t({ en:'Communities', ko: '커뮤니티 '}) }}</header>
       <ul>
 
 
         <li>
           <a routerLink="{{ a.getForumUrl( a.NEWS ) }}">
             <i class="material-icons text-secondary">fiber_new</i>
-            News
+             {{ a.t({ en:'News', ko: '뉴스 '}) }}
           </a>
         </li>
         <li>
           <a routerLink="/job">
             <i class="material-icons text-secondary">work</i>
-            Jobs
-          </a>
+            {{ a.t({ en:'Jobs', ko: '채용 정보'}) }}
+          </a> 
         </li>
 
       </ul>
